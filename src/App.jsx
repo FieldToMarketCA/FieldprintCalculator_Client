@@ -51,7 +51,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Minimal MVP</h1>
+      <h1 className="text-red-500">Minimal MVP</h1>
       <input ref={param1Ref} type="text" placeholder="Param 1" />
       <input ref={param2Ref} type="text" placeholder="Param 2" />
 
