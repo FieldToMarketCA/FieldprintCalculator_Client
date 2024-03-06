@@ -1,4 +1,4 @@
-import ftmcLogo from "../../Assets/Images/ftmc_logo.jpg";
+import ftmcLogo from "../Assets/Images/ftmc_logo.jpg";
 import IconButton from "@mui/material/IconButton";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 export default function NavBar() {
