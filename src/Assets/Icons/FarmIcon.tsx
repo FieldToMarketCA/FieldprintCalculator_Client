@@ -34,8 +34,8 @@ const FarmIcon = ({
       y2="30.6099"
       fill="none"
       stroke="#949494"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     ></line>
     <line
       x1="28.1245"
@@ -44,8 +44,8 @@ const FarmIcon = ({
       y2="30.6099"
       fill="none"
       stroke="#949494"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     ></line>
     <line
       x1="19.1245"

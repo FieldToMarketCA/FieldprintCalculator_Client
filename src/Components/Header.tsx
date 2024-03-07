@@ -7,7 +7,7 @@ export default function Header() {
     <Paper
       style={{ backgroundColor: "rgb(241,93,34)", borderRadius: "0" }}
       elevation={3}
-      className="flex w-full h-[64px] px-4 md:px-6 justify-between shadow-2xl"
+      className="flex w-full h-[64px] px-4 md:px-6 justify-between shadow-2xl z-50"
     >
       <div>
         <img className="h-full" src={ftmcLogo} alt="fmtc logo" />
