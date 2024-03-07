@@ -17,39 +17,39 @@ export default function SideNav() {
     setIsCollapsed((prev) => !prev);
   };
 
-  if (isCollapsed) console.log("yes");
   return (
-    <Collapse
-      style={{ width: "325px" }}
-      // style={{ width: "325px", minWidth: isCollapsed ? "min-w-[325px]" : "" }}
-      orientation="horizontal"
-      in={isCollapsed}
-      collapsedSize={56}
-    >
-      <div
-        style={{ background: "rgb(36, 39, 41)" }}
-        className={`w-[325px] h-full flex flex-col`}
+    <div className="max-w-[325px] bg-[rgb(36,39,41)]">
+      <Collapse
+        style={{ width: "325px" }}
+        orientation="horizontal"
+        in={isCollapsed}
+        collapsedSize={56}
       >
-        <SideNavButton
-          isCollapsed={isCollapsed}
-          text={"Dashboard"}
-          borderColor="#00ADEE"
-          icon={"dashBoardIcon"}
-          onClick={() => console.log("Dashboard")}
-        />
-        <FieldLibraryButton isCollapsed={isCollapsed} />
-        <SideNavButton
-          isCollapsed={isCollapsed}
-          text={"Support"}
-          borderColor="rgb(170,170,170)"
-          icon={"supportIcon"}
-          onClick={() => console.log("suppport")}
-        />
-        <SideNavCollapseButton
-          isCollapsed={isCollapsed}
-          onClick={handleCollapse}
-        />
-      </div>
-    </Collapse>
+        <div
+          style={{ background: "rgb(36, 39, 41)" }}
+          className={`w-[325px] h-full flex flex-col`}
+        >
+          <SideNavButton
+            isCollapsed={isCollapsed}
+            text={"Dashboard"}
+            borderColor="#00ADEE"
+            icon={"dashBoardIcon"}
+            onClick={() => console.log("Dashboard")}
+          />
+          <FieldLibraryButton isCollapsed={isCollapsed} />
+          <SideNavButton
+            isCollapsed={isCollapsed}
+            text={"Support"}
+            borderColor="rgb(170,170,170)"
+            icon={"supportIcon"}
+            onClick={() => console.log("suppport")}
+          />
+          <SideNavCollapseButton
+            isCollapsed={isCollapsed}
+            onClick={handleCollapse}
+          />
+        </div>
+      </Collapse>
+    </div>
   );
 }

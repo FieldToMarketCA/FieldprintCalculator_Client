@@ -10,7 +10,7 @@ export default function Page({ title, headerBorderColor, children }) {
 
       <div className="flex grow">
         <SideNav />
-        <div className="flex flex-col grow">
+        <div className="flex flex-col  grow">
           {/* PAGE HEADER */}
           <header
             className={` border-b-[3px] ${headerBorderColor} bg-[#eeeeee] text-[#666666] text-[34px] font-light py-[19px] px-[29px] `}
