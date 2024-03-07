@@ -5,8 +5,9 @@ import SideNav from "../SideNav";
 
 export default function Page({ title, headerBorderColor, children }) {
   return (
-    <div className="w-screen h-screen flex flex-col">
+    <div className="w-screen h-screen flex flex-col ">
       <Header />
+
       <div className="flex grow">
         <SideNav />
         <div className="flex flex-col grow">
@@ -18,7 +19,7 @@ export default function Page({ title, headerBorderColor, children }) {
           </header>
 
           {/* PAGE BODY */}
-          <main className="flex  flex-col h-full p-[32px]">
+          <main className="flex flex-col h-full p-[32px] ">
             {Children.map(children, (child) => (
               <div className="Row">{child}</div>
             ))}

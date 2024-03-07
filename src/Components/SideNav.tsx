@@ -17,16 +17,18 @@ export default function SideNav() {
     setIsCollapsed((prev) => !prev);
   };
 
+  if (isCollapsed) console.log("yes");
   return (
     <Collapse
       style={{ width: "325px" }}
+      // style={{ width: "325px", minWidth: isCollapsed ? "min-w-[325px]" : "" }}
       orientation="horizontal"
       in={isCollapsed}
       collapsedSize={56}
     >
       <div
         style={{ background: "rgb(36, 39, 41)" }}
-        className="w-[325px] h-full flex flex-col "
+        className={`w-[325px] h-full flex flex-col`}
       >
         <SideNavButton
           isCollapsed={isCollapsed}
