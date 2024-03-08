@@ -1,7 +1,6 @@
 // import logo from "./logo.svg";
 // import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import ComponentGlossary from "./ComponentGlossary";
 import AddFarmPage from "./Pages/AddFarmPage";

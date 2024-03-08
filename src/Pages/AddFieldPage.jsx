@@ -7,7 +7,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
+import env from "react-dotenv";
 import {
   SurfaceFormTypes,
   SlopeClassTypes,
@@ -131,17 +131,16 @@ export default function AddFieldPage() {
         </div>
 
         {/* MAP  */}
-        <div className="bg-red-500 w-full h-full">
+        <div className="w-full h-full">
           <iframe
             title="Map"
-            width="600"
-            height="450"
-            style={{ border: 0 }}
+            width="100%"
+            height="100%"
+            style={{ bborder: "none!important" }}
             loading="lazy"
-            allowfullscreen
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/place?key=API_KEY
-    &q=Space+Needle,Seattle+WA"
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_API_KEY}&q=Serecon Inc,Edmonton,+AB&maptype=satellite`}
           ></iframe>
         </div>
       </div>
