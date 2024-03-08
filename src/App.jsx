@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import ComponentGlossary from "./ComponentGlossary";
 import AddFarmPage from "./Pages/AddFarmPage";
 import AddFieldPage from "./Pages/AddFieldPage";
+import AddCropYear from "./Pages/AddCropYear";
 
 const theme = createTheme({
   palette: {
@@ -32,11 +33,12 @@ function App() {
       <div className="App">
         <Router>
           <Routes>
-            <Route exact path="/" element={<AddFarmPage />}>
-              <Route exact path="/farm" element={<AddFarmPage />} />
-              <Route path="/cropyear" element={<AddFarmPage />} />
-            </Route>
+            <Route exact path="/" element={<AddFarmPage />} />
+            {/* <Route exact path="/farm" element={<AddFarmPage />} /> */}
+
+            {/* </Route> */}
             <Route path="/field" element={<AddFieldPage />} />
+            <Route path="/cropyear" element={<AddCropYear />} />
           </Routes>
         </Router>
       </div>

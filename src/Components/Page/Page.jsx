@@ -18,7 +18,7 @@ export default function Page({
         <div className="flex flex-col  grow">
           {/* PAGE HEADER */}
           <header
-            className={` border-b-[3px] ${headerBorderColor} bg-[#eeeeee] text-[#666666] text-[34px] font-light py-[19px] px-[29px] `}
+            className={` border-b-[3px] ${headerBorderColor} bg-[#eeeeee] text-[#666666] text-[34px] font-light py-[19px] px-[29px] truncate`}
           >
             {title}
           </header>
