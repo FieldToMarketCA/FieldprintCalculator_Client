@@ -15,6 +15,7 @@ export default function FormSelectField({
       <TextField
         id="outlined-select-currency"
         select
+        sx={{ width: "100%", maxWidth: "300px" }}
         label={fieldLabel}
         defaultValue={fieldValue}
         helperText={helperText}

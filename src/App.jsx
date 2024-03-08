@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import ComponentGlossary from "./ComponentGlossary";
 import AddFarmPage from "./Pages/AddFarmPage";
+import AddFieldPage from "./Pages/AddFieldPage";
 
 const theme = createTheme({
   palette: {
@@ -34,9 +35,9 @@ function App() {
           <Routes>
             <Route exact path="/" element={<AddFarmPage />}>
               <Route exact path="/farm" element={<AddFarmPage />} />
-              <Route path="/field" element={<AddFarmPage />} />
               <Route path="/cropyear" element={<AddFarmPage />} />
             </Route>
+            <Route path="/field" element={<AddFieldPage />} />
           </Routes>
         </Router>
       </div>

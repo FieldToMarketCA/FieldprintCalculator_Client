@@ -3,7 +3,12 @@ import Header from "../Header";
 import Footer from "../Footer";
 import SideNav from "../SideNav";
 
-export default function Page({ title, headerBorderColor, children }) {
+export default function Page({
+  title,
+  headerBorderColor,
+  children,
+  padding = "p-[32px]",
+}) {
   return (
     <div className="w-screen h-screen flex flex-col ">
       <Header />
@@ -19,9 +24,10 @@ export default function Page({ title, headerBorderColor, children }) {
           </header>
 
           {/* PAGE BODY */}
-          <main className="flex flex-col h-full p-[32px] ">
+          <main className={`flex flex-col h-full w-full ${padding} `}>
             {Children.map(children, (child) => (
-              <div className="Row">{child}</div>
+              // <child />
+              <div className="flex h-full w-full">{child}</div>
             ))}
           </main>
         </div>
