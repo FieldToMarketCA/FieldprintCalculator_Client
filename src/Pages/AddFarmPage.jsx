@@ -2,16 +2,23 @@ import Page from "../Components/Page/Page";
 import FormTextField from "../Components/FormInputElements/FormTextField";
 import FormSelectField from "../Components/FormInputElements/FormSelectField";
 import MainButton from "../Components/Buttons/MainButton";
-
+import { useNavigate } from "react-router-dom";
 import { CanadianProvinces } from "../Assets/DataTypes";
+import { useState } from "react";
 
 export default function AddFarmPage() {
+  const [farmName, setFarmName] = useState("");
+  const navigate = useNavigate();
+  function handleNameChange(target) {
+    setFarmName(target);
+  }
   return (
     <Page title={"New Farm"} headerBorderColor={"border-[#34a853]"}>
       {/* FARM NAME FIELD  */}
       <div className="w-full h-full">
         <FormTextField
-          fieldValue={""}
+          fieldValue={farmName}
+          onChange={handleNameChange}
           fieldLabel={"Farm Name"}
           modalTitle={"Farm Name"}
           modalDescription={
@@ -40,7 +47,10 @@ export default function AddFarmPage() {
         {/* CONTROLS */}
         <div className="w-full flex">
           <div>
-            <MainButton text={"Save and Add Field"} onClick={console.log} />
+            <MainButton
+              text={"Save and Add Field"}
+              onClick={() => navigate("/field")}
+            />
           </div>
           <div className="ml-4">
             <MainButton text={"Cancel"} onClick={console.log} />

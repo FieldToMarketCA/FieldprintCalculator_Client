@@ -6,6 +6,7 @@ export default function FormTextField({
   fieldLabel,
   modalTitle,
   modalDescription,
+  onChange,
 }) {
   return (
     <div className="w-full flex items-center mb-6">
@@ -13,6 +14,9 @@ export default function FormTextField({
         sx={{ color: "#666666" }}
         id="outlined-basic"
         label={fieldLabel}
+        onChange={(event) => {
+          onChange(event.target.value);
+        }}
         variant="outlined"
         value={fieldValue}
       />

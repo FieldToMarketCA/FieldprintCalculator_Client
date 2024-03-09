@@ -16,7 +16,7 @@ export default function Header() {
         <IconButton aria-label="delete" size="large">
           <AccountCircleIcon className="text-white" fontSize="inherit" />
         </IconButton>
-        <p className="text-white mr-10 text-[18px]">Hi, Leonidas</p>
+        <p className="text-white mr-10 text-[18px]">Hi, Guest</p>
       </div>
     </Paper>
   );
