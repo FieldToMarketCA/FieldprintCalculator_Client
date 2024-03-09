@@ -66,8 +66,30 @@ export default function HorizontalNonLinearStepper({ steps }) {
         alternativeLabel
       >
         {steps.map((step, index) => (
-          <Step key={step.label} completed={completed[index]}>
-            <StepButton color="inherit" onClick={handleStep(index)}>
+          <Step
+            key={step.label}
+            completed={completed[index]}
+            sx={{
+              "& .MuiStepLabel-root .Mui-completed": {
+                color: "rgb(241,93,34)",
+              },
+              "& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel":
+                {
+                  color: "#666666",
+                },
+              "& .MuiStepLabel-root .Mui-active": {
+                color: "rgb(241,93,34)",
+              },
+              "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel":
+                {
+                  color: "#666666",
+                },
+              "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
+                fill: "white",
+              },
+            }}
+          >
+            <StepButton sx={{ color: "#FF0000" }} onClick={handleStep(index)}>
               {step.label}
             </StepButton>
           </Step>
@@ -101,7 +123,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
             </Typography>
 
             {/* LOWER PANEL */}
-            {/* <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
                 color="inherit"
                 disabled={activeStep === 0}
@@ -129,7 +151,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
                       : "Complete Step"}
                   </Button>
                 ))}
-            </Box> */}
+            </Box>
           </React.Fragment>
         )}
       </div>

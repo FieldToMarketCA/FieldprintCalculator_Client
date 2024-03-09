@@ -9,6 +9,7 @@ export default function FormSelectField({
   helperText,
   modalTitle,
   modalDescription,
+  modalOff = false,
 }) {
   return (
     <div className="w-full flex mb-6">
@@ -27,9 +28,11 @@ export default function FormSelectField({
         ))}
       </TextField>
 
-      <div className="mt-3">
-        <HelpIconButton title={modalTitle} description={modalDescription} />
-      </div>
+      {!modalOff && (
+        <div className="mt-3">
+          <HelpIconButton title={modalTitle} description={modalDescription} />
+        </div>
+      )}
     </div>
   );
 }

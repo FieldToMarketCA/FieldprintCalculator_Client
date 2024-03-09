@@ -7,6 +7,7 @@ export default function FormTextField({
   modalTitle,
   modalDescription,
   onChange,
+  modalOff = false,
 }) {
   return (
     <div className="w-full flex items-center mb-6">
@@ -20,7 +21,10 @@ export default function FormTextField({
         variant="outlined"
         value={fieldValue}
       />
-      <HelpIconButton title={modalTitle} description={modalDescription} />
+
+      {!modalOff && (
+        <HelpIconButton title={modalTitle} description={modalDescription} />
+      )}
     </div>
   );
 }

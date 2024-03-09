@@ -115,9 +115,36 @@ const SurfaceSoilTextureTypes = [
 const TillageRegimeTypes = [
   { value: 0, label: "Zero Till" },
   { value: 1, label: "Minimum Till" },
-  { value: 3, label: "Conventional Till" },
+  { value: 2, label: "Conventional Till" },
 ];
+
+const CropYearCropTypes = [
+  { value: 0, label: "Winter Wheat" },
+  { value: 1, label: "Soybeans" },
+  { value: 2, label: "Corn" },
+  { value: 3, label: "Rye" },
+];
+
+const CropYearCropFrequencyTypes = [
+  { value: 0, label: "Continuous" },
+  { value: 1, label: "Every 5 years" },
+  { value: 2, label: "Every 4 years" },
+  { value: 3, label: "Every 3 years" },
+  { value: 4, label: "Every 2 years" },
+  { value: 5, label: "Two out of 3 years" },
+  { value: 6, label: "Two out of 5 years" },
+];
+
+const CropYearCropYieldUnitTypes = [
+  { value: 0, label: "bu/ac" },
+  { value: 1, label: "tonne/ac" },
+  { value: 2, label: "tonne/ha" },
+];
+
 export {
+  CropYearCropTypes,
+  CropYearCropFrequencyTypes,
+  CropYearCropYieldUnitTypes,
   CanadianProvinces,
   SurfaceFormTypes,
   SlopeClassTypes,
