@@ -60,7 +60,11 @@ export default function HorizontalNonLinearStepper({ steps }) {
   return (
     <Box sx={{ width: "100%", height: "100%", padding: 3 }}>
       <Stepper
-        sx={{ overflow: "hidden" }}
+        sx={{
+          overflow: "hidden",
+          backgroundColor: "rgb(238,238,238)",
+          padding: "8px",
+        }}
         nonLinear
         activeStep={activeStep}
         alternativeLabel
