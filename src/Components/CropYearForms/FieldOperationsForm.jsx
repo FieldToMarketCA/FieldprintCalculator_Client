@@ -1,11 +1,15 @@
 import { Divider } from "@mui/material";
 import BooleanQuestion from "../FormInputElements/BooleanQuestion";
+import MultiChoiceQuestion from "../FormInputElements/MultiChoiceQuestion";
 import NumberQuestion from "../FormInputElements/NumberQuestion";
 import { useState, useEffect } from "react";
 import FormSelectTractorField from "../FormInputElements/FormSelectTractorField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { FertilizerTypes } from "../../Assets/DataTypes";
+
+import FertilizerTableField from "../../Components/FormInputElements/FertilizerTableField";
 
 const cultivationOperationType = { machineId: "", hoursOfOperation: 0 };
 
@@ -29,7 +33,15 @@ export default function FieldOperationsForm() {
     { ...cultivationOperationType },
   ]);
 
+  const [fertilizersUsed, setFertilizerUsed] = useState({});
   useEffect(() => {}, [numberOfCultivation]);
+
+  function handleCheckmark(event, key) {
+    let entry = {};
+    entry[key] = event.target.checked;
+
+    setFertilizerUsed({ ...fertilizersUsed, ...entry });
+  }
 
   return (
     <div className=" w-full h-full">
@@ -122,6 +134,31 @@ export default function FieldOperationsForm() {
         <h4 className="text-[rgb(102,102,102)] font-extralight text-[36px]">
           Fertilizer Rates (lbs/acre)
         </h4>
+        <MultiChoiceQuestion
+          valuesArray={FertilizerTypes}
+          handleCheckmark={handleCheckmark}
+          questionText={
+            "Which Fertilizers did you apply during this Crop Year?"
+          }
+          modalTitle={"Fertilizer Rates"}
+          modalDescription={
+            "Please select the fertilizers applied to your field during this crop year and specifiy the corresponding rates."
+          }
+        />
+
+        <ul>
+          {FertilizerTypes.map((fertilizer, index) => {
+            var key = fertilizer.value;
+            var isChecked = fertilizersUsed[key];
+
+            if (isChecked)
+              return (
+                <li key={key}>
+                  <FertilizerTableField fertilizerName={fertilizer.label} />
+                </li>
+              );
+          })}
+        </ul>
       </section>
     </div>
   );

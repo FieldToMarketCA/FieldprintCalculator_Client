@@ -140,8 +140,15 @@ const CropYearCropYieldUnitTypes = [
   { value: 1, label: "tonne/ac" },
   { value: 2, label: "tonne/ha" },
 ];
-
+const FertilizerTypes = [
+  { value: "N", label: "Nitrogen (N)" },
+  { value: "P", label: "Phosphorus (P)" },
+  { value: "K", label: "Potassium (K)" },
+  { value: "S", label: "Sulphur (S)" },
+  { value: "M", label: "Micronutrients" },
+];
 export {
+  FertilizerTypes,
   CropYearCropTypes,
   CropYearCropFrequencyTypes,
   CropYearCropYieldUnitTypes,
