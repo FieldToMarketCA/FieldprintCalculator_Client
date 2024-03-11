@@ -4,6 +4,7 @@ import MultiChoiceQuestion from "../FormInputElements/MultiChoiceQuestion";
 import NumberQuestion from "../FormInputElements/NumberQuestion";
 import { useState, useEffect } from "react";
 import FormSelectTractorField from "../FormInputElements/FormSelectTractorField";
+import FormSelectSprayerField from "../FormInputElements/FormSelectSprayerField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -22,10 +23,26 @@ const TRACTORS = [
     defaultAcreHour: 2,
   },
 ];
-
+const SPRAYERS = [
+  {
+    type: "SPRAYER",
+    name: "Mosquito",
+    HP: 150,
+    fuelUse: null,
+    defaultAcreHour: 30,
+  },
+];
 export default function FieldOperationsForm() {
   const [numberOfCultivation, setNumberOfCultivation] = useState(1);
   const [cultivationOperations, setCultivationOperations] = useState([
+    { ...cultivationOperationType },
+    { ...cultivationOperationType },
+    { ...cultivationOperationType },
+    { ...cultivationOperationType },
+    { ...cultivationOperationType },
+  ]);
+  const [numberOfPesticide, setNumberOfPesticide] = useState(0);
+  const [pesticideOperations, setPesticideOperations] = useState([
     { ...cultivationOperationType },
     { ...cultivationOperationType },
     { ...cultivationOperationType },
@@ -157,6 +174,39 @@ export default function FieldOperationsForm() {
                   <FertilizerTableField fertilizerName={fertilizer.label} />
                 </li>
               );
+          })}
+        </ul>
+      </section>
+
+      <section className="pb-5">
+        <h4 className="text-[rgb(102,102,102)] font-extralight text-[36px]">
+          Pesticide
+        </h4>
+
+        <NumberQuestion
+          min={0}
+          max={5}
+          fieldValue={numberOfPesticide}
+          questionText={
+            "How many pesticide operations this field had this crop year?"
+          }
+          modalTitle={"Number of Pesticide Operations"}
+          modalDescription={
+            "Please provide the number of pesticide operations you had in this year for this specific field."
+          }
+          onChange={setNumberOfPesticide}
+        />
+
+        <ul className="transition-all duration-500">
+          {cultivationOperations.map((cultivation, index) => {
+            if (index > numberOfPesticide - 1) return;
+            return (
+              <FormSelectSprayerField
+                key={cultivation}
+                fieldLabel={"Sprayer in Fumigation #" + (index + 1)}
+                sprayersArray={SPRAYERS}
+              />
+            );
           })}
         </ul>
       </section>
