@@ -15,7 +15,7 @@ export default function Page({
 
       <div className="flex overflow-auto grow">
         <SideNav />
-        <div className="flex flex-col  grow overflow-auto">
+        <div id="scrollableDiv" className="flex flex-col  grow overflow-auto">
           {/* PAGE HEADER */}
           <header
             className={` border-b-[3px] min-h-[101px] ${headerBorderColor} bg-[#eeeeee] text-[#666666] text-[34px] font-light py-[19px] px-[29px] truncate`}

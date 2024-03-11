@@ -1,16 +1,10 @@
 import { Divider, TextField } from "@mui/material";
-import BooleanQuestion from "../FormInputElements/BooleanQuestion";
-import MultiChoiceQuestion from "../FormInputElements/MultiChoiceQuestion";
-import NumberQuestion from "../FormInputElements/NumberQuestion";
+// import BooleanQuestion from "../FormInputElements/BooleanQuestion";
+// import MultiChoiceQuestion from "../FormInputElements/MultiChoiceQuestion";
+// import NumberQuestion from "../FormInputElements/NumberQuestion";
 import { useState, useEffect } from "react";
 import FormSelectMachineField from "../FormInputElements/FormSelectMachineField";
 
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { FertilizerTypes } from "../../Assets/DataTypes";
-
-import FertilizerTableField from "../../Components/FormInputElements/FertilizerTableField";
 import FormSelectField from "../FormInputElements/FormSelectField";
 import FormTextField from "../FormInputElements/FormTextField";
 import {

@@ -52,7 +52,13 @@ export default function FieldOperationsForm() {
   ]);
 
   const [fertilizersUsed, setFertilizerUsed] = useState({});
+
   useEffect(() => {}, [numberOfCultivation]);
+
+  useEffect(() => {
+    const element = document.getElementById("scrollableDiv");
+    element.scrollBy({ top: 100, left: 0, behavior: "smooth" });
+  }, [numberOfPesticide]);
 
   function handleCheckmark(event, key) {
     let entry = {};
@@ -218,7 +224,7 @@ export default function FieldOperationsForm() {
             if (index > numberOfPesticide - 1) return;
             return (
               <FormSelectSprayerField
-                key={pesticide}
+                key={index}
                 fieldLabel={"Sprayer in Fumigation #" + (index + 1)}
                 sprayersArray={SPRAYERS}
               />
