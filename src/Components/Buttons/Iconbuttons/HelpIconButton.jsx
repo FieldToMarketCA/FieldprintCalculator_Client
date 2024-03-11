@@ -9,7 +9,7 @@ export default function HelpIconButton({ title, description }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div>
+    <div className="flex items-start">
       <Tooltip title="Help">
         <IconButton
           style={{}}

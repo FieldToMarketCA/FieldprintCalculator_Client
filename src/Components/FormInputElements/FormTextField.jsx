@@ -7,6 +7,7 @@ export default function FormTextField({
   modalTitle,
   modalDescription,
   onChange,
+  onBlur,
   modalOff = false,
 }) {
   return (
@@ -19,6 +20,9 @@ export default function FormTextField({
           onChange(event.target.value);
         }}
         variant="outlined"
+        onBlur={(event) => {
+          onBlur(event.target.value);
+        }}
         value={fieldValue}
       />
 

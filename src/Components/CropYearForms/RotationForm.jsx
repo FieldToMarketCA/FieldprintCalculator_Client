@@ -54,13 +54,7 @@ export default function RotationForm() {
       <label>Yield</label>
       <div className="flex justify-start">
         <div>
-          <FormTextField
-            fieldValue={""}
-            fieldLabel={""}
-            // modalTitle={"Yield"}
-            // modalDescription={"Some helpful description."}
-            modalOff={true}
-          />
+          <FormTextField fieldValue={""} fieldLabel={""} modalOff={true} />
         </div>
         <div className="w-28 ml-4">
           <FormSelectField

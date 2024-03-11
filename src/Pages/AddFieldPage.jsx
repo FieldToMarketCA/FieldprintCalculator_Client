@@ -3,7 +3,7 @@ import MainButton from "../Components/Buttons/MainButton";
 import FormTextField from "../Components/FormInputElements/FormTextField";
 import FormSelectField from "../Components/FormInputElements/FormSelectField";
 import Divider from "@mui/material/Divider";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -15,8 +15,12 @@ import {
   SurfaceSoilTextureTypes,
   TillageRegimeTypes,
 } from "../Assets/DataTypes";
+import { useState } from "react";
 
 export default function AddFieldPage() {
+  const [fieldAddress, setFieldAddress] = useState("Serecon Inc,Edmonton,+AB");
+  const [addressQuery, setAddressQuery] = useState("Serecon Inc,Edmonton,+AB");
+
   return (
     <Page
       title={"New Field"}
@@ -50,12 +54,14 @@ export default function AddFieldPage() {
               }
             />
             <FormTextField
-              fieldValue={""}
+              fieldValue={fieldAddress}
+              onChange={setFieldAddress}
               fieldLabel={"Field Address"}
               modalTitle={"Field Address"}
               modalDescription={
                 "Enter the address  of your field. Please use the format [Street, City, Postal Code, Province]."
               }
+              onBlur={setAddressQuery}
             />
             {/* DIVIDER */}
             <Divider sx={{ marginBottom: 3 }} />
@@ -140,7 +146,8 @@ export default function AddFieldPage() {
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
-            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_API_KEY}&q=Serecon Inc,Edmonton,+AB&maptype=satellite`}
+            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_API_KEY}&q=${addressQuery}&maptype=satellite`}
+            // src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_API_KEY}&q=Serecon Inc,Edmonton,+AB&maptype=satellite`}
           ></iframe>
         </div>
       </div>

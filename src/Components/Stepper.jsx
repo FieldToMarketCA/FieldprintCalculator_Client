@@ -112,22 +112,13 @@ export default function HorizontalNonLinearStepper({ steps }) {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Typography
-              sx={{
-                mt: 2,
-                mb: 1,
-                py: 1,
-                // backgroundColor: "purple",
-                height: "100%",
-                width: "100%",
-              }}
-            >
-              {/* FORM */}
+            {/* FORM */}
+            <div className="mt-2 mb-1 py-1 w-full h-full">
               <CurrentForm />
-            </Typography>
+            </div>
 
             {/* LOWER PANEL */}
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            {/* <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
                 color="inherit"
                 disabled={activeStep === 0}
@@ -155,7 +146,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
                       : "Complete Step"}
                   </Button>
                 ))}
-            </Box>
+            </Box> */}
           </React.Fragment>
         )}
       </div>

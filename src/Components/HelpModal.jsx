@@ -32,13 +32,6 @@ function HelpModal({ title, description, open, handleClose }) {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-          Welcome to GeeksforGeeks
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          A computer science portal for geeks
-        </Typography> */}
-
         {/*  */}
         <div className="flex items-center justify-center relative bg-[#00abec] px-[24px] py-[16px] h-[101px] w-full">
           <SupportIcon color={"#FFFFFF"} width="60px" height="60px" />

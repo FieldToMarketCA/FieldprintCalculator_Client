@@ -31,10 +31,10 @@ export default function QuickFacts({ sectionColor }) {
         }}
         className="w-full h-[145px]  transition-all duration-300  overflow-hidden"
       >
-        <div class="w-full grid grid-cols-3 gap-4 p-4">
+        <div className="w-full grid grid-cols-3 gap-4 p-4">
           {QuickFactsDummyData.map((cellData) => {
             return (
-              <div>
+              <div key={cellData.label}>
                 <p className="text-[#666666]  truncate border-b border-dotted border-[#666666]">
                   <span className="font-bold">{cellData.label}:</span>{" "}
                   <span>{cellData.value}</span>
