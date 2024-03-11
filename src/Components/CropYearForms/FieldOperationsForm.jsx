@@ -33,6 +33,7 @@ const SPRAYERS = [
   },
 ];
 export default function FieldOperationsForm() {
+  const [usedFertilizer, setUsedFertilizer] = useState(false);
   const [numberOfCultivation, setNumberOfCultivation] = useState(1);
   const [cultivationOperations, setCultivationOperations] = useState([
     { ...cultivationOperationType },
@@ -60,6 +61,9 @@ export default function FieldOperationsForm() {
     setFertilizerUsed({ ...fertilizersUsed, ...entry });
   }
 
+  function handleBooleanQuestion(e) {
+    setFertilizerUsed(e.target.value === "true");
+  }
   return (
     <div className=" w-full h-full">
       <h3 className="text-[rgb(102,102,102)] text-[30px]">Field Operations</h3>
@@ -102,6 +106,7 @@ export default function FieldOperationsForm() {
           Fertilizer Application
         </h4>
         <BooleanQuestion
+          handleChange={handleBooleanQuestion}
           fieldValue={0}
           modalTitle={"Fertilizer"}
           modalDescription={
@@ -111,43 +116,54 @@ export default function FieldOperationsForm() {
             "Did you apply fertilizer (either organic or inorganic source) this crop year?"
           }
         />
-        <p className="text-[#666666] mb-2">Tractor Used</p>
-        <div className="flex jusitify-start">
-          <div className="w-[450px] mr-[25px]">
-            <FormSelectTractorField
-              fieldLabel={"Pre Seed Tractor"}
-              tractorsArray={TRACTORS}
-            />
+        <div
+          style={{ height: fertilizersUsed ? "272px" : "0" }}
+          className={`transition-all duration-300  w-full  overflow-hidden`}
+        >
+          <p className="text-[#666666] mb-2">Tractors Used</p>
+          <div className="flex jusitify-start">
+            <div className="w-[450px] mr-[25px]">
+              <FormSelectTractorField
+                fieldLabel={"Pre Seed Tractor"}
+                tractorsArray={TRACTORS}
+              />
+            </div>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker label="Date" />
+            </LocalizationProvider>
           </div>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker label="Date" />
-          </LocalizationProvider>
-        </div>
-        <div className="flex jusitify-start">
-          <div className="w-[450px] mr-[25px]">
-            <FormSelectTractorField
-              fieldLabel={"Seed Tractor"}
-              tractorsArray={TRACTORS}
-            />
+          <div className="flex jusitify-start">
+            <div className="w-[450px] mr-[25px]">
+              <FormSelectTractorField
+                fieldLabel={"Seed Tractor"}
+                tractorsArray={TRACTORS}
+              />
+            </div>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker label="Date" />
+            </LocalizationProvider>
           </div>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker label="Date" />
-          </LocalizationProvider>
-        </div>
-        <div className="flex jusitify-start">
-          <div className="w-[450px] mr-[25px]">
-            <FormSelectTractorField
-              fieldLabel={"Post Seed Tractor"}
-              tractorsArray={TRACTORS}
-            />
+          <div className="flex jusitify-start">
+            <div className="w-[450px] mr-[25px]">
+              <FormSelectTractorField
+                fieldLabel={"Post Seed Tractor"}
+                tractorsArray={TRACTORS}
+              />
+            </div>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker label="Date" />
+            </LocalizationProvider>
           </div>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker label="Date" />
-          </LocalizationProvider>
         </div>
       </section>
 
-      <section className="pb-5">
+      <section
+        style={{
+          height: fertilizersUsed ? "auto" : "0",
+          padingBottom: fertilizersUsed ? "20px" : "0",
+        }}
+        className={`transition-all duration-300  w-full  overflow-hidden`}
+      >
         <h4 className="text-[rgb(102,102,102)] font-extralight text-[36px]">
           Fertilizer Rates (lbs/acre)
         </h4>
@@ -198,11 +214,11 @@ export default function FieldOperationsForm() {
         />
 
         <ul className="transition-all duration-500">
-          {cultivationOperations.map((cultivation, index) => {
+          {pesticideOperations.map((pesticide, index) => {
             if (index > numberOfPesticide - 1) return;
             return (
               <FormSelectSprayerField
-                key={cultivation}
+                key={pesticide}
                 fieldLabel={"Sprayer in Fumigation #" + (index + 1)}
                 sprayersArray={SPRAYERS}
               />

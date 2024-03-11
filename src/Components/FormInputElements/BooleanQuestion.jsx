@@ -8,7 +8,7 @@ export default function BooleanQuestion({
   fieldLabel,
   modalTitle,
   modalDescription,
-  onChange,
+  handleChange,
   modalOff = false,
 }) {
   return (
@@ -20,9 +20,10 @@ export default function BooleanQuestion({
           aria-labelledby="demo-radio-buttons-group-label"
           defaultValue={fieldValue}
           name="radio-buttons-group"
+          onChange={handleChange}
         >
           <FormControlLabel
-            value={1}
+            value={true}
             control={
               <Radio
                 sx={{
@@ -35,7 +36,7 @@ export default function BooleanQuestion({
             label="Yes"
           />
           <FormControlLabel
-            value={0}
+            value={false}
             control={
               <Radio
                 sx={{

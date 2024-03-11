@@ -147,7 +147,23 @@ const FertilizerTypes = [
   { value: "S", label: "Sulphur (S)" },
   { value: "M", label: "Micronutrients" },
 ];
+
+const CropYearCropDryingType = [
+  { value: 0, label: "Batch-in-Bin" },
+  { value: 1, label: "High Temperature with Air" },
+  { value: 2, label: "High Temperature without Air" },
+  { value: 3, label: "Low Temperature" },
+  { value: 4, label: "Natural Air" },
+];
+
+const CropYearCropDryingFuel = [
+  { value: 0, label: "Natural Gas" },
+  { value: 1, label: "Propane" },
+];
+
 export {
+  CropYearCropDryingType,
+  CropYearCropDryingFuel,
   FertilizerTypes,
   CropYearCropTypes,
   CropYearCropFrequencyTypes,
