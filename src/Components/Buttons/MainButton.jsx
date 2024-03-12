@@ -1,24 +1,27 @@
 import Button from "@mui/material/Button";
 
-type MainButtonProps = {
-  text: string;
-  onClick?: () => void;
-  grow?: boolean;
-  secondary?: boolean;
-};
-
 export default function MainButton({
   text,
   onClick,
   grow = false,
   secondary = false,
-}: MainButtonProps) {
+  disabled = false,
+}) {
   const backGroundColor = secondary ? "rgb(224,224,224)" : "rgb(241,93,34)";
   const fontColor = secondary ? "#666666" : "rgb(255,255,255)";
+
+  if (disabled) {
+    return (
+      <Button variant="contained" disabled>
+        {text}{" "}
+      </Button>
+    );
+  }
   return (
     <Button
       onClick={onClick}
       variant="contained"
+      disabled={disabled}
       style={{
         backgroundColor: backGroundColor,
         textTransform: "none",

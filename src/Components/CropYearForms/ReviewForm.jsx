@@ -20,6 +20,7 @@ export default function ReviewForm() {
           <div className="pl-[40px] pb-[24px] mt-4">
             <p className="text-[18px]">Current Data Status: Final</p>
             <MainButton
+              disabled={true}
               text={"Click To Make Your Data Provisional"}
               onClick={console.log}
             />
