@@ -1,4 +1,4 @@
-import Page from "../Components/Page/Page";
+import Page from "../Components/Page";
 import MainButton from "../Components/Buttons/MainButton";
 import FormTextField from "../Components/FormInputElements/FormTextField";
 import FormSelectField from "../Components/FormInputElements/FormSelectField";

@@ -6,6 +6,7 @@ import ComponentGlossary from "./ComponentGlossary";
 import AddFarmPage from "./Pages/AddFarmPage";
 import AddFieldPage from "./Pages/AddFieldPage";
 import AddCropYear from "./Pages/AddCropYear";
+import AnalysisPage from "./Pages/AnalysisPage";
 
 const theme = createTheme({
   palette: {
@@ -14,6 +15,9 @@ const theme = createTheme({
     },
     white: {
       main: "#AAAAAA",
+    },
+    mainOrange: {
+      main: "rgb(241,93,34)",
     },
   },
   typography: {
@@ -39,6 +43,7 @@ function App() {
             {/* </Route> */}
             <Route path="/field" element={<AddFieldPage />} />
             <Route path="/cropyear" element={<AddCropYear />} />
+            <Route path="/analysis" element={<AnalysisPage />} />
           </Routes>
         </Router>
       </div>
