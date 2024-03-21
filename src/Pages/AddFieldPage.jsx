@@ -7,7 +7,8 @@ import Divider from "@mui/material/Divider";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import env from "react-dotenv";
+import { useNavigate } from "react-router-dom";
+
 import {
   SurfaceFormTypes,
   SlopeClassTypes,
@@ -20,6 +21,7 @@ import { useState } from "react";
 export default function AddFieldPage() {
   const [fieldAddress, setFieldAddress] = useState("Serecon Inc,Edmonton,+AB");
   const [addressQuery, setAddressQuery] = useState("Serecon Inc,Edmonton,+AB");
+  const navigate = useNavigate();
 
   return (
     <Page
@@ -127,7 +129,10 @@ export default function AddFieldPage() {
           </div>
 
           <div className=" p-[14px] flex flex-col justify-between w-full h-[124.5px] border-t border-[rgb(211,211,211)]">
-            <MainButton text={"Save Field"} onClick={console.log} />
+            <MainButton
+              text={"Save Field"}
+              onClick={() => navigate("/cropyear")}
+            />
             <MainButton
               text={"Cancel"}
               onClick={console.log}

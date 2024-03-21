@@ -36,7 +36,9 @@ export default function SideNav() {
             icon={"dashBoardIcon"}
             onClick={() => console.log("Dashboard")}
           />
+
           <FieldLibraryButton isCollapsed={isCollapsed} />
+
           <SideNavButton
             isCollapsed={isCollapsed}
             text={"Support"}
@@ -44,6 +46,7 @@ export default function SideNav() {
             icon={"supportIcon"}
             onClick={() => console.log("suppport")}
           />
+
           <SideNavCollapseButton
             isCollapsed={isCollapsed}
             onClick={handleCollapse}

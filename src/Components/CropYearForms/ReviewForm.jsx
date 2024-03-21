@@ -1,7 +1,10 @@
 import { Divider } from "@mui/material";
 import MainButton from "../Buttons/MainButton";
+import { useNavigate } from "react-router-dom";
 
 export default function ReviewForm() {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full  text-[rgb(102,102,102)] h-full">
       <div>
@@ -36,7 +39,7 @@ export default function ReviewForm() {
           <div className="pl-[40px] pb-[24px] mt-4">
             <MainButton
               text={"Generate Your Fieldprint Analysis"}
-              onClick={console.log}
+              onClick={() => navigate("/analysis")}
             />
           </div>
         </div>

@@ -16,7 +16,7 @@ const steps = [
   { label: "Rotation", formComponent: RotationForm },
   { label: "Field Operations", formComponent: FieldOperationsForm },
   { label: "Harvest", formComponent: HarvestForm },
-  { label: "Review", formComponent: ReviewForm },
+  // { label: "Review", formComponent: ReviewForm },
 ];
 
 export default function AddCropYear({}) {

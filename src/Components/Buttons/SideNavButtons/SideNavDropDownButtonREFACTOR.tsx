@@ -15,6 +15,7 @@ import DashBoardIcon from "../../../Assets/Icons/DashBoardIcon";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import SideNavButton from "./SideNavButton";
+import { useNavigate } from "react-router-dom";
 
 export default function SideNavDropDownButton({
   isHorizontallyCollapsed,
@@ -30,6 +31,7 @@ export default function SideNavDropDownButton({
   borderColor?: string;
 }) {
   const [isHover, setIsHover] = useState(false);
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setIsHover(true);
@@ -120,7 +122,7 @@ export default function SideNavDropDownButton({
               isCollapsed={true}
               text="Add Farm"
               icon={"addFarmFieldIcon"}
-              onClick={() => console.log("x")}
+              onClick={() => navigate("/")}
             />
           </li>
         </ul>
