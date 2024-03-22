@@ -1,0 +1,98 @@
+[
+  {
+    "_TYPE": "FARM",
+    "id": "UUID",
+    "name": "string",
+    "ownerId": "UUID",
+    "province": "code",
+    "fields": ["FIELD", "..."]
+  },
+
+  {
+    "_TYPE": "FIELD",
+    "id": "UUID",
+    "farmId": "UUID",
+    "name": "string",
+    "surfaceForm": "Enum[String]",
+    "slopeClass": "Enum[String]",
+    "soilType": "Enum[String]",
+    "surfaceSoilTexture": "Enum[String]",
+    "tillageRegime": "Enum[String]",
+    "previousTillageRegime": "Enum[String]",
+    "regimeChangeDate": "Date",
+    "cropYears": ["CROPYEAR", "..."]
+  },
+
+  {
+    "_TYPE": "CULTIVATION_OPERATION",
+    "machineId": "UUID",
+    "hoursUsed": "Float"
+  },
+
+  {
+    "_TYPE": "FERTILIZER_OPERATION",
+    "machineId": "UUID",
+    "hoursUsed": "Float",
+    "date": "DATE"
+  },
+
+  {
+    "_TYPE": "PESTICIDE_OPERATION",
+    "machineId": "UUID",
+    "hoursUsed": "Float"
+  },
+
+  {
+    "_TYPE": "FERTILIZER_RATE",
+    "preSeed": "Float",
+    "withSeed": "Float",
+    "postSeed": "Float"
+  },
+
+  {
+    "_TYPE": "CROPYEAR",
+    "id": "UUID",
+    "fieldId": "UUID",
+    "crop": {
+      "cropYear": "DATE[YYYY]",
+      "cropThisYear": "Enum[String]",
+      "cropFrequency": "Enum[String]",
+      "yield": "Float",
+      "yieldUnits": "Enum[String]",
+      "previousCrop": "Enum[String]"
+    },
+    "fieldOperations": {
+      "cultivations": ["type[CULTIVATION_OPERATION]", "..."],
+      "fertilizerApplications": {
+        "preSeed": "type[FERTILIZER_OPERATION]",
+        "seed": "type[FERTILIZER_OPERATION]",
+        "postSeed": "type[FERTILIZER_OPERATION]"
+      },
+      "fertilizerRates": {
+        "N": "type[FERTILIZER_RATE]",
+        "P": "type[FERTILIZER_RATE]",
+        "K": "type[FERTILIZER_RATE]",
+        "S": "type[FERTILIZER_RATE]",
+        "M": "type[FERTILIZER_RATE]"
+      },
+      "pesticidesApplications": ["type[PESTICIDE_OPERATION]", "..."]
+    },
+    "harvest": {
+      "swather": {
+        "machineId": "UUID",
+        "hoursUsed": "Float"
+      },
+      "combine": {
+        "machineId": "UUID",
+        "hoursUsed": "Float",
+        "avgSpeed": "Float"
+      },
+      "cropDryingType": "Enum[String]",
+      "cropDryingFuel": "Enum[String]",
+      "moisture": {
+        "beforeDrying": "Float",
+        "afterDrying": "Float"
+      }
+    }
+  }
+]
