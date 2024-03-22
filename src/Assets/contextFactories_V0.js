@@ -13,7 +13,6 @@ function FARM_CREATOR(name, ownerId, province) {
     },
   };
 }
-export { FARM_CREATOR, FIELD_CREATOR };
 
 function FIELD_CREATOR() {
   return {
@@ -95,3 +94,4 @@ function CROPYEAR_CREATOR(fieldId, crop) {
     },
   };
 }
+export { FARM_CREATOR, FIELD_CREATOR, CROPYEAR_CREATOR };

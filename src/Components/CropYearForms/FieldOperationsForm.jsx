@@ -12,6 +12,8 @@ import { FertilizerTypes } from "../../Assets/DataTypes";
 
 import FertilizerTableField from "../../Components/FormInputElements/FertilizerTableField";
 
+import { CropYearContext } from "../../App";
+import { useContext } from "react";
 const cultivationOperationType = { machineId: "", hoursOfOperation: 0 };
 
 const TRACTORS = [
@@ -33,6 +35,8 @@ const SPRAYERS = [
   },
 ];
 export default function FieldOperationsForm() {
+  const cropyearContext = useContext(CropYearContext);
+
   const [usedFertilizer, setUsedFertilizer] = useState(false);
   const [numberOfCultivation, setNumberOfCultivation] = useState(1);
   const [cultivationOperations, setCultivationOperations] = useState([

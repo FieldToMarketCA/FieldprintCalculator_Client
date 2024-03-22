@@ -16,7 +16,6 @@ const steps = [
   { label: "Rotation", formComponent: RotationForm },
   { label: "Field Operations", formComponent: FieldOperationsForm },
   { label: "Harvest", formComponent: HarvestForm },
-  // { label: "Review", formComponent: ReviewForm },
 ];
 
 export default function AddCropYear({}) {
@@ -29,7 +28,6 @@ export default function AddCropYear({}) {
       <div className="h-full w-full ">
         <QuickFacts sectionColor={"#34a853"} />
 
-        {/* <div className="h-full w-full">h</div> */}
         <Stepper steps={steps} />
       </div>
     </Page>

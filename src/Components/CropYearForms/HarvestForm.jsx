@@ -1,37 +1,19 @@
 import { Divider, TextField } from "@mui/material";
-// import BooleanQuestion from "../FormInputElements/BooleanQuestion";
-// import MultiChoiceQuestion from "../FormInputElements/MultiChoiceQuestion";
-// import NumberQuestion from "../FormInputElements/NumberQuestion";
-import { useState, useEffect } from "react";
 import FormSelectMachineField from "../FormInputElements/FormSelectMachineField";
 
 import FormSelectField from "../FormInputElements/FormSelectField";
 import FormTextField from "../FormInputElements/FormTextField";
+
 import {
   CropYearCropDryingType,
   CropYearCropDryingFuel,
 } from "../../Assets/DataTypes";
-const SWATHERS = [
-  {
-    type: "SWATHER",
-    name: "Mantis",
-    HP: 800,
-    fuelUse: null,
-    defaultAcreHour: 2,
-  },
-];
 
-const COMBINES = [
-  {
-    type: "COMBINE",
-    name: "Simba",
-    HP: 800,
-    fuelUse: null,
-    defaultAcreHour: 2,
-  },
-];
+import { CropYearContext } from "../../App";
+import { useContext } from "react";
 
 export default function HarvestForm() {
+  const cropyearContext = useContext(CropYearContext);
   return (
     <div className=" w-full h-full ">
       <h3 className="text-[rgb(102,102,102)] text-[30px]">Harvest</h3>
@@ -117,3 +99,23 @@ export default function HarvestForm() {
     </div>
   );
 }
+
+const SWATHERS = [
+  {
+    type: "SWATHER",
+    name: "Mantis",
+    HP: 800,
+    fuelUse: null,
+    defaultAcreHour: 2,
+  },
+];
+
+const COMBINES = [
+  {
+    type: "COMBINE",
+    name: "Simba",
+    HP: 800,
+    fuelUse: null,
+    defaultAcreHour: 2,
+  },
+];

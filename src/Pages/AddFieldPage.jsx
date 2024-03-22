@@ -50,7 +50,7 @@ export default function AddFieldPage() {
             style={{
               height: "calc(100% - 124.5px)",
             }}
-            className="flex absolute flex-col  top-0 left-0 overflow-auto w-full   p-4 "
+            className="flex absolute flex-col  top-0 left-0 overflow-auto w-full p-4 "
           >
             <FormTextField
               fieldValue={fieldContext.state.name}
