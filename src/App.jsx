@@ -10,7 +10,7 @@ import AnalysisPage from "./Pages/AnalysisPage";
 
 import { createContext, useContext, useState } from "react";
 
-import { FARM_CREATOR } from "./Assets/contextFactories_V0";
+import { FARM_CREATOR, FIELD_CREATOR } from "./Assets/contextFactories_V0";
 
 const theme = createTheme({
   palette: {
@@ -40,7 +40,7 @@ const FieldContext = createContext();
 
 function App() {
   const [farmState, setFarmState] = useState(FARM_CREATOR());
-  const [fieldState, setFieldState] = useState(null);
+  const [fieldState, setFieldState] = useState(FIELD_CREATOR());
 
   return (
     <ThemeProvider theme={theme}>

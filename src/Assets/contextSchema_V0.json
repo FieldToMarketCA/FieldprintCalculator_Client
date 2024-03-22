@@ -14,6 +14,8 @@
     "id": "UUID",
     "farmId": "UUID",
     "name": "string",
+    "fieldSize": "Float",
+    "fieldAddress": "String",
     "surfaceForm": "Enum[String]",
     "slopeClass": "Enum[String]",
     "soilType": "Enum[String]",

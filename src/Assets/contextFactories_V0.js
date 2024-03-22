@@ -9,34 +9,26 @@ function FARM_CREATOR(name, ownerId, province) {
     fields: [],
     partner: "",
     addField() {
-      this.fields.append(FIELD_CREATOR());
+      this.fields.push(FIELD_CREATOR());
     },
   };
 }
-export { FARM_CREATOR };
+export { FARM_CREATOR, FIELD_CREATOR };
 
-function FIELD_CREATOR(
-  farmId,
-  name,
-  surfaceForm,
-  slopeClass,
-  soilType,
-  surfaceSoilTexture,
-  tillageRegime,
-  previousTillageRegime,
-  regimeChangeDate
-) {
+function FIELD_CREATOR() {
   return {
     id: uuidv4(),
-    farmId: farmId,
-    name: name,
-    surfaceForm: surfaceForm,
-    slopeClass: slopeClass,
-    soilType: soilType,
-    surfaceSoilTexture: surfaceSoilTexture,
-    tillageRegime: tillageRegime,
-    previousTillageRegime: previousTillageRegime,
-    regimeChangeDate: regimeChangeDate,
+    farmId: "",
+    name: "",
+    fieldSize: 0,
+    fieldAddress: "",
+    surfaceForm: "",
+    slopeClass: "",
+    soilType: "",
+    surfaceSoilTexture: "",
+    tillageRegime: "",
+    previousTillageRegime: "",
+    regimeChangeDate: "",
     cropYears: [], //"CROPYEAR"
   };
 }

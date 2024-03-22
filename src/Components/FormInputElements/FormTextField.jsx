@@ -7,7 +7,8 @@ export default function FormTextField({
   modalTitle,
   modalDescription,
   onChange,
-  onBlur,
+  isNumber = false,
+  onBlur = () => null,
   modalOff = false,
 }) {
   return (
@@ -24,6 +25,7 @@ export default function FormTextField({
           onBlur(event.target.value);
         }}
         value={fieldValue}
+        type={isNumber ? "number" : "text"}
       />
 
       {!modalOff && (

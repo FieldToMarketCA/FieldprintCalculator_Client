@@ -23,11 +23,18 @@ import { FieldContext } from "../App";
 import { useContext } from "react";
 
 export default function AddFieldPage() {
-  const [fieldAddress, setFieldAddress] = useState("Serecon Inc,Edmonton,+AB");
   const [addressQuery, setAddressQuery] = useState("Serecon Inc,Edmonton,+AB");
   const navigate = useNavigate();
 
   const fieldContext = useContext(FieldContext);
+
+  function handleStateChange(target, key) {
+    const newValue = {};
+    newValue[key] = target;
+
+    console.log(fieldContext);
+    fieldContext.setter({ ...fieldContext.state, ...newValue });
+  }
 
   return (
     <Page
@@ -46,24 +53,27 @@ export default function AddFieldPage() {
             className="flex absolute flex-col  top-0 left-0 overflow-auto w-full   p-4 "
           >
             <FormTextField
-              fieldValue={""}
+              fieldValue={fieldContext.state.name}
               fieldLabel={"Field Name"}
               modalTitle={"Field Name"}
+              onChange={(t) => handleStateChange(t, "name")}
               modalDescription={
                 "Enter the name of your field. Use a name you will recognize."
               }
             />
             <FormTextField
-              fieldValue={""}
+              fieldValue={fieldContext.state.fieldSize}
               fieldLabel={"Field Size [Acres]"}
               modalTitle={"Field Size"}
+              onChange={(t) => handleStateChange(t, "fieldSize")}
+              isNumber={true}
               modalDescription={
                 "Enter the size of your field. Please use Acres as a unit of measurement, since the system will expects this unit to compute the analysis."
               }
             />
             <FormTextField
-              fieldValue={fieldAddress}
-              onChange={setFieldAddress}
+              fieldValue={fieldContext.state.fieldAddress}
+              onChange={(t) => handleStateChange(t, "fieldAddress")}
               fieldLabel={"Field Address"}
               modalTitle={"Field Address"}
               modalDescription={
@@ -75,6 +85,7 @@ export default function AddFieldPage() {
             <Divider sx={{ marginBottom: 3 }} />
             <FormSelectField
               valuesArray={SurfaceFormTypes}
+              onChange={(e) => handleStateChange(e.target.value, "surfaceForm")}
               fieldLabel={"Surface Form"}
               fieldValue={""}
               helperText={""}
@@ -87,6 +98,7 @@ export default function AddFieldPage() {
               valuesArray={SlopeClassTypes}
               fieldLabel={"Slope Class"}
               fieldValue={""}
+              onChange={(e) => handleStateChange(e.target.value, "slopeClass")}
               helperText={""}
               modalTitle={"Slope Class"}
               modalDescription={
@@ -97,6 +109,7 @@ export default function AddFieldPage() {
               valuesArray={SoilTypes}
               fieldLabel={"Soil Type"}
               fieldValue={""}
+              onChange={(e) => handleStateChange(e.target.value, "soilType")}
               helperText={""}
               modalTitle={"Soil Type"}
               modalDescription={"Some helpful description."}
@@ -105,6 +118,9 @@ export default function AddFieldPage() {
               valuesArray={SurfaceSoilTextureTypes}
               fieldLabel={"Surface Soil Texture"}
               fieldValue={""}
+              onChange={(e) =>
+                handleStateChange(e.target.value, "surfaceSoilTexture")
+              }
               helperText={""}
               modalTitle={"Surface Soil Texture"}
               modalDescription={
@@ -117,6 +133,9 @@ export default function AddFieldPage() {
               valuesArray={TillageRegimeTypes}
               fieldLabel={"Tillage Regime"}
               fieldValue={""}
+              onChange={(e) =>
+                handleStateChange(e.target.value, "tillageRegime")
+              }
               helperText={""}
               modalTitle={"Tillage Regime"}
               modalDescription={"Some helpful description."}
@@ -125,12 +144,21 @@ export default function AddFieldPage() {
               valuesArray={TillageRegimeTypes}
               fieldLabel={"Previous Tillage Regime"}
               fieldValue={""}
+              onChange={(e) =>
+                handleStateChange(e.target.value, "previousTillageRegime")
+              }
               helperText={""}
               modalTitle={"Previous Tillage Regime"}
               modalDescription={"Some helpful description."}
             />
+
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker label="Regime Change Date" />
+              <DatePicker
+                onChange={(e) =>
+                  handleStateChange(e.$d.toISOString(), "regimeChangeDate")
+                }
+                label="Regime Change Date"
+              />
             </LocalizationProvider>
           </div>
 

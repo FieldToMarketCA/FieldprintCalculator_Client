@@ -24,9 +24,6 @@ export default function AddFarmPage() {
   }
 
   function handleSaveAndAddFIeld() {
-    farmContext.state.addField();
-    let len = farmContext.state.fields.length;
-    fieldContext.setter(farmContext.state.fields[len - 1]);
     navigate("/field");
   }
 
@@ -39,7 +36,7 @@ export default function AddFarmPage() {
           onChange={(t) => handleStateChange(t, "name")}
           fieldLabel={"Farm Name"}
           modalTitle={"Farm Name"}
-          onBlur={console.log}
+          // onBlur={console.log}
           modalDescription={
             "A farm or farm operation is used as a way to group fields in a way that is useful to the user.If you have multiple fields you can use farms to logically group them. Use a name that is recognizable to you."
           }
@@ -49,7 +46,7 @@ export default function AddFarmPage() {
           fieldLabel={"Partner Name"}
           modalTitle={"Partner Name"}
           onChange={(t) => handleStateChange(t, "partner")}
-          onBlur={console.log}
+          // onBlur={console.log}
           modalDescription={
             "Enter the name of the partner you're associated with. This will allow them to associate your data in their project while keeping your privacy. They will only have access to aggregated data of many farmers, your data will be anonymized."
           }
