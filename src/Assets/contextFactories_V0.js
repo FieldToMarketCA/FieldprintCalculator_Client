@@ -1,17 +1,19 @@
 import { v4 as uuidv4 } from "uuid";
 
-function FARM_CREATOR(name, ownerId, province, fields) {
+function FARM_CREATOR(name, ownerId, province) {
   return {
     id: uuidv4(),
     name: name,
     ownerId: ownerId,
     province: province,
     fields: [],
+    partner: "",
     addField() {
       this.fields.append(FIELD_CREATOR());
     },
   };
 }
+export { FARM_CREATOR };
 
 function FIELD_CREATOR(
   farmId,

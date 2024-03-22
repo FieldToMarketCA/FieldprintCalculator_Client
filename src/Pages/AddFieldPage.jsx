@@ -18,10 +18,16 @@ import {
 } from "../Assets/DataTypes";
 import { useState } from "react";
 
+import { FieldContext } from "../App";
+
+import { useContext } from "react";
+
 export default function AddFieldPage() {
   const [fieldAddress, setFieldAddress] = useState("Serecon Inc,Edmonton,+AB");
   const [addressQuery, setAddressQuery] = useState("Serecon Inc,Edmonton,+AB");
   const navigate = useNavigate();
+
+  const fieldContext = useContext(FieldContext);
 
   return (
     <Page

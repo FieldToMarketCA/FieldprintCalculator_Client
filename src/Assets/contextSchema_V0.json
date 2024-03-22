@@ -4,6 +4,7 @@
     "id": "UUID",
     "name": "string",
     "ownerId": "UUID",
+    "partner": "String",
     "province": "code",
     "fields": ["FIELD", "..."]
   },

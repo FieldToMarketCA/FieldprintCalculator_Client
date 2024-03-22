@@ -8,6 +8,10 @@ import AddFieldPage from "./Pages/AddFieldPage";
 import AddCropYear from "./Pages/AddCropYear";
 import AnalysisPage from "./Pages/AnalysisPage";
 
+import { createContext, useContext, useState } from "react";
+
+import { FARM_CREATOR } from "./Assets/contextFactories_V0";
+
 const theme = createTheme({
   palette: {
     info: {
@@ -31,24 +35,36 @@ const theme = createTheme({
   },
 });
 
+const FarmContext = createContext();
+const FieldContext = createContext();
+
 function App() {
+  const [farmState, setFarmState] = useState(FARM_CREATOR());
+  const [fieldState, setFieldState] = useState(null);
+
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <Router>
-          <Routes>
-            <Route exact path="/" element={<AddFarmPage />} />
-            {/* <Route exact path="/farm" element={<AddFarmPage />} /> */}
+      <FarmContext.Provider value={{ state: farmState, setter: setFarmState }}>
+        <FieldContext.Provider
+          value={{ state: fieldState, setter: setFieldState }}
+        >
+          <div className="App">
+            <Router>
+              <Routes>
+                <Route exact path="/" element={<AddFarmPage />} />
+                {/* <Route exact path="/farm" element={<AddFarmPage />} /> */}
 
-            {/* </Route> */}
-            <Route path="/field" element={<AddFieldPage />} />
-            <Route path="/cropyear" element={<AddCropYear />} />
-            <Route path="/analysis" element={<AnalysisPage />} />
-          </Routes>
-        </Router>
-      </div>
+                {/* </Route> */}
+                <Route path="/field" element={<AddFieldPage />} />
+                <Route path="/cropyear" element={<AddCropYear />} />
+                <Route path="/analysis" element={<AnalysisPage />} />
+              </Routes>
+            </Router>
+          </div>
+        </FieldContext.Provider>
+      </FarmContext.Provider>
     </ThemeProvider>
   );
 }
-
+export { FarmContext, FieldContext };
 export default App;

@@ -8,6 +8,7 @@ export default function FormSelectField({
   fieldValue,
   helperText,
   modalTitle,
+  onChange,
   modalDescription,
   modalOff = false,
 }) {
@@ -20,6 +21,7 @@ export default function FormSelectField({
         label={fieldLabel}
         defaultValue={fieldValue}
         helperText={helperText}
+        onChange={onChange}
       >
         {valuesArray.map((option) => (
           <MenuItem key={option.value} value={option.value}>

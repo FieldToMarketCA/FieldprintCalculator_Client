@@ -6,19 +6,37 @@ import { useNavigate } from "react-router-dom";
 import { CanadianProvinces } from "../Assets/DataTypes";
 import { useState } from "react";
 
+import { useContext } from "react";
+import { FarmContext } from "../App";
+import { FieldContext } from "../App";
+
 export default function AddFarmPage() {
-  const [farmName, setFarmName] = useState("");
+  const farmContext = useContext(FarmContext);
+  const fieldContext = useContext(FieldContext);
+
   const navigate = useNavigate();
-  function handleNameChange(target) {
-    setFarmName(target);
+
+  function handleStateChange(target, key) {
+    const newValue = {};
+    newValue[key] = target;
+
+    farmContext.setter({ ...farmContext.state, ...newValue });
   }
+
+  function handleSaveAndAddFIeld() {
+    farmContext.state.addField();
+    let len = farmContext.state.fields.length;
+    fieldContext.setter(farmContext.state.fields[len - 1]);
+    navigate("/field");
+  }
+
   return (
     <Page title={"New Farm"} headerBorderColor={"border-[#34a853]"}>
       {/* FARM NAME FIELD  */}
       <div className="w-full h-full">
         <FormTextField
-          fieldValue={farmName}
-          onChange={handleNameChange}
+          fieldValue={farmContext.state.name}
+          onChange={(t) => handleStateChange(t, "name")}
           fieldLabel={"Farm Name"}
           modalTitle={"Farm Name"}
           onBlur={console.log}
@@ -27,9 +45,10 @@ export default function AddFarmPage() {
           }
         />
         <FormTextField
-          fieldValue={""}
+          fieldValue={farmContext.state.partner}
           fieldLabel={"Partner Name"}
           modalTitle={"Partner Name"}
+          onChange={(t) => handleStateChange(t, "partner")}
           onBlur={console.log}
           modalDescription={
             "Enter the name of the partner you're associated with. This will allow them to associate your data in their project while keeping your privacy. They will only have access to aggregated data of many farmers, your data will be anonymized."
@@ -40,6 +59,7 @@ export default function AddFarmPage() {
           fieldLabel={"Province Name"}
           fieldValue={""}
           helperText={"Please select your province"}
+          onChange={(e) => handleStateChange(e.target.value, "province")}
           modalTitle={"Province"}
           modalDescription={
             "Please Select the province where you have the majority of your business operations."
@@ -51,7 +71,7 @@ export default function AddFarmPage() {
           <div>
             <MainButton
               text={"Save and Add Field"}
-              onClick={() => navigate("/field")}
+              onClick={handleSaveAndAddFIeld}
             />
           </div>
           <div className="ml-4">
