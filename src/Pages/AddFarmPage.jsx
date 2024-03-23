@@ -32,7 +32,7 @@ export default function AddFarmPage() {
       {/* FARM NAME FIELD  */}
       <div className="w-full h-full">
         <FormTextField
-          fieldValue={farmContext.state.name}
+          fieldState={farmContext.state.name}
           onChange={(t) => handleStateChange(t, "name")}
           fieldLabel={"Farm Name"}
           modalTitle={"Farm Name"}
@@ -42,7 +42,7 @@ export default function AddFarmPage() {
           }
         />
         <FormTextField
-          fieldValue={farmContext.state.partner}
+          fieldState={farmContext.state.partner}
           fieldLabel={"Partner Name"}
           modalTitle={"Partner Name"}
           onChange={(t) => handleStateChange(t, "partner")}
@@ -54,7 +54,7 @@ export default function AddFarmPage() {
         <FormSelectField
           valuesArray={CanadianProvinces}
           fieldLabel={"Province Name"}
-          fieldValue={""}
+          fieldState={farmContext.state.province}
           helperText={"Please select your province"}
           onChange={(e) => handleStateChange(e.target.value, "province")}
           modalTitle={"Province"}

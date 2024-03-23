@@ -32,7 +32,6 @@ export default function AddFieldPage() {
     const newValue = {};
     newValue[key] = target;
 
-    console.log(fieldContext);
     fieldContext.setter({ ...fieldContext.state, ...newValue });
   }
 
@@ -53,7 +52,7 @@ export default function AddFieldPage() {
             className="flex absolute flex-col  top-0 left-0 overflow-auto w-full p-4 "
           >
             <FormTextField
-              fieldValue={fieldContext.state.name}
+              fieldState={fieldContext.state.name}
               fieldLabel={"Field Name"}
               modalTitle={"Field Name"}
               onChange={(t) => handleStateChange(t, "name")}
@@ -62,7 +61,7 @@ export default function AddFieldPage() {
               }
             />
             <FormTextField
-              fieldValue={fieldContext.state.fieldSize}
+              fieldState={fieldContext.state.fieldSize}
               fieldLabel={"Field Size [Acres]"}
               modalTitle={"Field Size"}
               onChange={(t) => handleStateChange(t, "fieldSize")}
@@ -72,7 +71,7 @@ export default function AddFieldPage() {
               }
             />
             <FormTextField
-              fieldValue={fieldContext.state.fieldAddress}
+              fieldState={fieldContext.state.fieldAddress}
               onChange={(t) => handleStateChange(t, "fieldAddress")}
               fieldLabel={"Field Address"}
               modalTitle={"Field Address"}
@@ -87,7 +86,7 @@ export default function AddFieldPage() {
               valuesArray={SurfaceFormTypes}
               onChange={(e) => handleStateChange(e.target.value, "surfaceForm")}
               fieldLabel={"Surface Form"}
-              fieldValue={""}
+              fieldState={fieldContext.state.surfaceForm}
               helperText={""}
               modalTitle={"Surface Form"}
               modalDescription={
@@ -97,7 +96,7 @@ export default function AddFieldPage() {
             <FormSelectField
               valuesArray={SlopeClassTypes}
               fieldLabel={"Slope Class"}
-              fieldValue={""}
+              fieldState={fieldContext.state.slopeClass}
               onChange={(e) => handleStateChange(e.target.value, "slopeClass")}
               helperText={""}
               modalTitle={"Slope Class"}
@@ -108,7 +107,7 @@ export default function AddFieldPage() {
             <FormSelectField
               valuesArray={SoilTypes}
               fieldLabel={"Soil Type"}
-              fieldValue={""}
+              fieldState={fieldContext.state.soilType}
               onChange={(e) => handleStateChange(e.target.value, "soilType")}
               helperText={""}
               modalTitle={"Soil Type"}
@@ -117,7 +116,7 @@ export default function AddFieldPage() {
             <FormSelectField
               valuesArray={SurfaceSoilTextureTypes}
               fieldLabel={"Surface Soil Texture"}
-              fieldValue={""}
+              fieldState={fieldContext.state.surfaceSoilTexture}
               onChange={(e) =>
                 handleStateChange(e.target.value, "surfaceSoilTexture")
               }
@@ -132,7 +131,7 @@ export default function AddFieldPage() {
             <FormSelectField
               valuesArray={TillageRegimeTypes}
               fieldLabel={"Tillage Regime"}
-              fieldValue={""}
+              fieldState={fieldContext.state.tillageRegime}
               onChange={(e) =>
                 handleStateChange(e.target.value, "tillageRegime")
               }
@@ -143,7 +142,7 @@ export default function AddFieldPage() {
             <FormSelectField
               valuesArray={TillageRegimeTypes}
               fieldLabel={"Previous Tillage Regime"}
-              fieldValue={""}
+              fieldState={fieldContext.state.previousTillageRegime}
               onChange={(e) =>
                 handleStateChange(e.target.value, "previousTillageRegime")
               }
