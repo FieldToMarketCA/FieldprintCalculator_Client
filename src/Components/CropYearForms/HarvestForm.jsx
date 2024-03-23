@@ -49,7 +49,7 @@ export default function HarvestForm() {
     });
   }
 
-  function handleStateChange(target, key) {
+  function handleMouistureChange(target, key) {
     const newValue = {};
     newValue[key] = target;
 
@@ -66,7 +66,7 @@ export default function HarvestForm() {
       ...cropyearContext.state,
       harvest: updatedHarvest,
     });
-    console.log("mamichula", cropyearContext.state.harvest);
+    // console.log("mamichula", cropyearContext.state.harvest);
   }
 
   return (
@@ -86,6 +86,7 @@ export default function HarvestForm() {
               machineType={"swather"}
               machinesArray={SWATHERS}
               onChange={handleMachineOperation}
+              fieldState={cropyearContext.state.harvest.swather}
             />
           </div>
         </div>
@@ -97,6 +98,7 @@ export default function HarvestForm() {
               machineType={"combine"}
               machinesArray={COMBINES}
               onChange={handleMachineOperation}
+              fieldState={cropyearContext.state.harvest.combine}
             />
           </div>
           <TextField
@@ -105,6 +107,7 @@ export default function HarvestForm() {
             sx={{ width: 200 }}
             InputProps={{ inputProps: { min: 0 } }}
             onChange={(e) => handleMachineOperation(e, "combine", "avgSpeed")}
+            value={cropyearContext.state.harvest.avgSpeed}
           />
         </div>
       </section>
@@ -118,6 +121,7 @@ export default function HarvestForm() {
           modalTitle={"Crop Drying -- Type"}
           modalDescription={"Some Really helpful description"}
           onChange={(e) => handleCropDrying(e.target.value, "cropDryingType")}
+          fieldState={cropyearContext.state.harvest.cropDryingType}
         />
         <FormSelectField
           valuesArray={CropYearCropDryingFuel}
@@ -125,6 +129,7 @@ export default function HarvestForm() {
           modalTitle={"Crop Drying -- Fuel"}
           modalDescription={"Some Really helpful description"}
           onChange={(e) => handleCropDrying(e.target.value, "cropDryingFuel")}
+          fieldState={cropyearContext.state.harvest.cropDryingFuel}
         />
       </section>
       <section className="pb-8">
@@ -134,20 +139,22 @@ export default function HarvestForm() {
         <FormTextField
           fieldLabel={"% Before Drying"}
           isNumber={true}
-          onChange={(t) => handleStateChange(t, "beforeDrying")}
+          onChange={(t) => handleMouistureChange(t, "beforeDrying")}
           modalTitle={"Moisture Content Before Drying"}
           modalDescription={
             "Please Enter the Percentage amount of Moisture in the soil before drying."
           }
+          fieldState={cropyearContext.state.harvest.beforeDrying}
         />
         <FormTextField
           fieldLabel={"% After Drying"}
           isNumber={true}
-          onChange={(t) => handleStateChange(t, "afterDrying")}
+          onChange={(t) => handleMouistureChange(t, "afterDrying")}
           modalTitle={"Moisture Content After Drying"}
           modalDescription={
             "Please Enter the Percentage amount of Moisture in the soil after drying."
           }
+          fieldState={cropyearContext.state.harvest.afterDrying}
         />
       </section>
     </div>

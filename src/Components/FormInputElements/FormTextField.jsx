@@ -2,7 +2,7 @@ import HelpIconButton from "../../Components/Buttons/Iconbuttons/HelpIconButton"
 import TextField from "@mui/material/TextField";
 
 export default function FormTextField({
-  fieldValue,
+  fieldState,
   fieldLabel,
   modalTitle,
   modalDescription,
@@ -24,7 +24,7 @@ export default function FormTextField({
         onBlur={(event) => {
           onBlur(event.target.value);
         }}
-        value={fieldValue}
+        value={fieldState}
         type={isNumber ? "number" : "text"}
       />
 

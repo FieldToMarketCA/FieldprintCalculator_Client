@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from "uuid";
 function FARM_CREATOR(name, ownerId, province) {
   return {
     id: uuidv4(),
-    name: name,
-    ownerId: ownerId,
-    province: province,
+    name: "",
+    ownerId: "",
+    province: "",
     fields: [],
     partner: "",
     addField() {
@@ -34,21 +34,21 @@ function FIELD_CREATOR() {
 
 function CULTIVATION_OPERATION_CREATOR(machineId, hoursUsed) {
   return {
-    machineId: machineId,
-    hoursUsed: hoursUsed,
+    machineId: "",
+    hoursUsed: "",
   };
 }
 
-function FERTILIZER_OPERATION_CREATOR(machineId, hoursUsed, date) {
-  return { machineId: machineId, hoursUsed: hoursUsed, date: date };
+function FERTILIZER_OPERATION_CREATOR() {
+  return { machineId: "", hoursUsed: "", date: "" };
 }
 
-function PESTICIDE_OPERATION_CREATOR(machineId, hoursUsed) {
-  return { machineId: machineId, hoursUsed: hoursUsed };
+function PESTICIDE_OPERATION_CREATOR() {
+  return { machineId: "", hoursUsed: "" };
 }
 
-function FERTILIZER_RATE_CREATOR(preSeed, withSeed, postSeed) {
-  return { preSeed: preSeed, withSeed: withSeed, postSeed: postSeed };
+function FERTILIZER_RATE_CREATOR() {
+  return { preSeed: "", withSeed: "", postSeed: "" };
 }
 
 function CROPYEAR_CREATOR(fieldId, crop) {

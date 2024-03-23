@@ -102,11 +102,6 @@ export default function FieldOperationsForm() {
       ...cropyearContext.state,
       fieldOperations: updatedFieldOperations,
     });
-    console.log(
-      cropyearContext.state.fieldOperations.fertilizerApplications,
-      seedStage,
-      "watamami"
-    );
   }
 
   function handleFertilizerRate(target, key, seedStage) {
@@ -136,23 +131,20 @@ export default function FieldOperationsForm() {
       ...cropyearContext.state,
       fieldOperations: updatedFieldOperations,
     });
-    console.log(
-      cropyearContext.state.fieldOperations.fertilizerRates,
-      key,
-      "watamami"
-    );
   }
 
   function handlePesticideOperation(event, key, index) {
     const newValue = {};
     newValue[key] = event.target.value;
 
+    // console.log("watauba", event);
     // Create a copy with updated value for the corresponding pesticide operation
     const updatedPesticideOperation = {
       ...cropyearContext.state.fieldOperations.pesticidesApplications[index],
       ...newValue,
     };
 
+    console.log("watauba", updatedPesticideOperation);
     // Create a copy of the pesticides array and override data inplace
     const updatedPesticideApplicationsArray = [
       ...cropyearContext.state.fieldOperations.pesticidesApplications,
@@ -170,6 +162,7 @@ export default function FieldOperationsForm() {
       ...cropyearContext.state,
       fieldOperations: updatedFieldOperations,
     });
+    console.log(cropyearContext.state.fieldOperations.pesticidesApplications);
   }
 
   useEffect(() => {
@@ -215,11 +208,14 @@ export default function FieldOperationsForm() {
             if (index > numberOfCultivation - 1) return;
             return (
               <FormSelectCultivationTractorField
-                key={cultivation}
+                key={index}
                 fieldLabel={"Tractor Used in Cultivation #" + (index + 1)}
                 tractorsArray={TRACTORS}
                 onChange={handleCultivationOperation}
                 index={index}
+                fieldState={
+                  cropyearContext.state.fieldOperations.cultivations[index]
+                }
               />
             );
           })}
@@ -268,7 +264,6 @@ export default function FieldOperationsForm() {
           })}
         </div>
       </section>
-
       <section
         style={{
           height: fertilizersUsed ? "auto" : "0",
@@ -304,13 +299,17 @@ export default function FieldOperationsForm() {
                     onChange={handleFertilizerRate}
                     fertilizerName={fertilizer.label}
                     elementCode={fertilizer.value}
+                    fieldState={
+                      cropyearContext.state.fieldOperations.fertilizerRates[
+                        fertilizer.value
+                      ]
+                    }
                   />
                 </li>
               );
           })}
         </ul>
       </section>
-
       <section className="pb-5">
         <h4 className="text-[rgb(102,102,102)] font-extralight text-[36px]">
           Pesticide
@@ -338,8 +337,13 @@ export default function FieldOperationsForm() {
                 key={index}
                 fieldLabel={"Sprayer in Fumigation #" + (index + 1)}
                 sprayersArray={SPRAYERS}
-                onChange={handleCultivationOperation}
+                onChange={handlePesticideOperation}
                 index={index}
+                fieldState={
+                  cropyearContext.state.fieldOperations.pesticidesApplications[
+                    index
+                  ]
+                }
               />
             );
           })}

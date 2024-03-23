@@ -5,7 +5,7 @@ import HelpIconButton from "../../Components/Buttons/Iconbuttons/HelpIconButton"
 export default function FormSelectField({
   valuesArray,
   fieldLabel,
-  fieldValue,
+  fieldState,
   helperText,
   modalTitle,
   onChange,
@@ -19,7 +19,7 @@ export default function FormSelectField({
         select
         sx={{ width: "100%", maxWidth: "300px" }}
         label={fieldLabel}
-        defaultValue={fieldValue}
+        value={fieldState}
         helperText={helperText}
         onChange={onChange}
       >

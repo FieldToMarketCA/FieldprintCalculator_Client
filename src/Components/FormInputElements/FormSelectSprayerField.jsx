@@ -10,6 +10,7 @@ export default function FormSelectSprayerField({
   fieldLabel,
   onChange,
   index,
+  fieldState,
 }) {
   const [isSprayerModalOpen, setIsSprayerModalOpen] = useState(false);
 
@@ -23,8 +24,9 @@ export default function FormSelectSprayerField({
         id="outlined-select-currency"
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
-        onChange={(t) => onChange(t, "machineId", index)}
+        onChange={(e) => onChange(e, "machineId", index)}
         label={fieldLabel}
+        value={fieldState.machineId}
       >
         {sprayersArray.map((option) => (
           <MenuItem key={option.name} value={option.name}>
@@ -34,7 +36,6 @@ export default function FormSelectSprayerField({
         <MenuItem
           key={"addSprayer"}
           onClick={() => setIsSprayerModalOpen(true)}
-          value={""}
         >
           <p>Add New Sprayer</p>
         </MenuItem>
@@ -49,6 +50,7 @@ export default function FormSelectSprayerField({
           shrink: true,
         }}
         variant="outlined"
+        value={fieldState.hoursUsed}
       />
 
       {isSprayerModalOpen && (

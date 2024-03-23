@@ -25,9 +25,8 @@ export default function RotationForm() {
     const updatedCrop = { ...cropyearContext.state.crop, ...newValue };
 
     cropyearContext.setter({ ...cropyearContext.state, crop: updatedCrop });
-    console.log("mariel", cropyearContext.state.crop);
   }
-
+  // console.log("xxx", cropyearContext.state.crop.cropThisYear);
   return (
     <div className=" w-full h-full">
       <h3 className="text-[rgb(102,102,102)] text-[30px]">
@@ -47,7 +46,7 @@ export default function RotationForm() {
       <FormSelectField
         valuesArray={CropYearCropTypes}
         fieldLabel={"Crop This year"}
-        fieldValue={""}
+        fieldState={cropyearContext.state.crop.cropThisYear}
         onChange={(e) => handleStateChange(e.target.value, "cropThisYear")}
         helperText={""}
         modalTitle={"Crop This Year"}
@@ -57,18 +56,18 @@ export default function RotationForm() {
       <FormSelectField
         valuesArray={CropYearCropFrequencyTypes}
         fieldLabel={"Crop Frequency"}
-        fieldValue={""}
         onChange={(e) => handleStateChange(e.target.value, "cropFrequency")}
         helperText={"Frequency of this crop in rotation"}
         modalTitle={"Crop Frequency"}
         modalDescription={"Some Helpful description."}
+        fieldState={cropyearContext.state.crop.cropFrequency}
       />
       <label>Yield</label>
       <div className="flex justify-start">
         <div>
           <FormTextField
             isNumber={true}
-            fieldValue={cropyearContext.state.crop.yield}
+            fieldState={cropyearContext.state.crop.yield}
             fieldLabel={""}
             modalOff={true}
             onChange={(t) => handleStateChange(t, "yield")}
@@ -78,22 +77,22 @@ export default function RotationForm() {
           <FormSelectField
             valuesArray={CropYearCropYieldUnitTypes}
             fieldLabel={"Units"}
-            fieldValue={""}
             onChange={(e) => handleStateChange(e.target.value, "yieldUnits")}
             helperText={""}
             modalTitle={"Crop Prior Year"}
             modalDescription={"The crop for the previous year."}
+            fieldState={cropyearContext.state.crop.yieldUnits}
           />
         </div>
       </div>
       <FormSelectField
         valuesArray={CropYearCropTypes}
         fieldLabel={"Crop Prior year"}
-        fieldValue={""}
         onChange={(e) => handleStateChange(e.target.value, "previousCrop")}
         helperText={""}
         modalTitle={"Crop Prior Year"}
         modalDescription={"The crop for the previous year."}
+        fieldState={cropyearContext.state.crop.previousCrop}
       />
     </div>
   );

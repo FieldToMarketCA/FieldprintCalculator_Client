@@ -10,6 +10,7 @@ export default function FormSelectCultivationTractorField({
   fieldLabel,
   onChange,
   index,
+  fieldState,
 }) {
   const [selectedTractor, setSelectedTractor] = useState("");
   const [hoursUsed, setHoursUsed] = useState(0);
@@ -27,6 +28,7 @@ export default function FormSelectCultivationTractorField({
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
         label={fieldLabel}
         onChange={(t) => onChange(t, "machineId", index)}
+        value={fieldState.machineId}
       >
         {tractorsArray.map((option) => (
           <MenuItem key={option.name} value={option.name}>
@@ -36,7 +38,6 @@ export default function FormSelectCultivationTractorField({
         <MenuItem
           key={"addTractor"}
           onClick={() => setIsTractorModalOpen(true)}
-          value={""}
         >
           <p>Add New Tractor</p>
         </MenuItem>
@@ -51,6 +52,7 @@ export default function FormSelectCultivationTractorField({
           shrink: true,
         }}
         variant="outlined"
+        value={fieldState.hoursUsed}
       />
 
       {isTractorModalOpen && (

@@ -31,7 +31,7 @@ export default function FormSelectFertilizerTractorField({
           select
           sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
           label={fieldLabel}
-          defaultValue={fieldState.machineId}
+          value={fieldState.machineId}
           onChange={(t) => onChange(t, "machineId", seedStage)}
         >
           {tractorsArray.map((option) => (
@@ -42,7 +42,6 @@ export default function FormSelectFertilizerTractorField({
           <MenuItem
             key={"addTractor"}
             onClick={() => setIsTractorModalOpen(true)}
-            value={""}
           >
             <p>Add New Tractor</p>
           </MenuItem>

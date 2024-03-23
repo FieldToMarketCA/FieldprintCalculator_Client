@@ -9,10 +9,9 @@ import { useState } from "react";
 export default function FormSelectMachineField({
   machinesArray,
   fieldLabel,
-  fieldValue,
   machineType,
-
   onChange,
+  fieldState,
 }) {
   const [selectedMachine, setSelectedMachine] = useState("");
   const [hoursUsed, setHoursUsed] = useState(0);
@@ -30,7 +29,7 @@ export default function FormSelectMachineField({
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
         label={fieldLabel}
-        defaultValue={fieldValue}
+        value={fieldState.machineId}
       >
         {machinesArray.map((option) => (
           <MenuItem key={option.name} value={option.name}>
@@ -40,7 +39,6 @@ export default function FormSelectMachineField({
         <MenuItem
           key={"addMachine"}
           onClick={() => setIsMachineModalOpen(true)}
-          value={""}
         >
           <p>
             Add New{" "}
@@ -59,6 +57,7 @@ export default function FormSelectMachineField({
           shrink: true,
         }}
         variant="outlined"
+        value={fieldState.hoursUsed}
       />
 
       {isMachineModalOpen && (
