@@ -23,8 +23,7 @@ export default function RotationForm() {
 
     // create a copy of crop obj
     const updatedCrop = { ...cropyearContext.state.crop, ...newValue };
-    console.log(updatedCrop);
-    // console.log(cropyearContext);
+
     cropyearContext.setter({ ...cropyearContext.state, crop: updatedCrop });
   }
 

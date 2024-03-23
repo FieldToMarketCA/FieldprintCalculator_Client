@@ -5,10 +5,11 @@ import NewTractorModal from "../NewTractorModal";
 
 import { useState } from "react";
 
-export default function FormSelectTractorField({
+export default function FormSelectCultivationTractorField({
   tractorsArray,
   fieldLabel,
-  fieldValue,
+  onChange,
+  index,
 }) {
   const [selectedTractor, setSelectedTractor] = useState("");
   const [hoursUsed, setHoursUsed] = useState(0);
@@ -25,7 +26,7 @@ export default function FormSelectTractorField({
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
         label={fieldLabel}
-        defaultValue={fieldValue}
+        onChange={(t) => onChange(t, "machineId", index)}
       >
         {tractorsArray.map((option) => (
           <MenuItem key={option.name} value={option.name}>
@@ -42,9 +43,7 @@ export default function FormSelectTractorField({
       </TextField>
       <TextField
         sx={{ color: "#666666", maxWidth: 130 }}
-        onChange={(event) => {
-          setHoursUsed(event.target.value);
-        }}
+        onChange={(t) => onChange(t, "hoursUsed", index)}
         label={"Hours Used"}
         InputProps={{ inputProps: { min: 0 } }}
         type="number"
@@ -52,7 +51,6 @@ export default function FormSelectTractorField({
           shrink: true,
         }}
         variant="outlined"
-        value={hoursUsed}
       />
 
       {isTractorModalOpen && (

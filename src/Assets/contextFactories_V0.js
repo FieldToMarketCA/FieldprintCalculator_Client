@@ -66,11 +66,17 @@ function CROPYEAR_CREATOR(fieldId, crop) {
     },
 
     fieldOperations: {
-      cultivations: [], // CULTIVATION_OPERATION, "..."
+      cultivations: [
+        CULTIVATION_OPERATION_CREATOR(),
+        CULTIVATION_OPERATION_CREATOR(),
+        CULTIVATION_OPERATION_CREATOR(),
+        CULTIVATION_OPERATION_CREATOR(),
+        CULTIVATION_OPERATION_CREATOR(),
+      ],
       fertilizerApplications: {
-        preSeed: FERTILIZER_OPERATION_CREATOR(0, 0, 0),
-        seed: FERTILIZER_OPERATION_CREATOR(0, 0, 0),
-        postSeed: FERTILIZER_OPERATION_CREATOR(0, 0, 0),
+        preSeed: FERTILIZER_OPERATION_CREATOR(),
+        seed: FERTILIZER_OPERATION_CREATOR(),
+        postSeed: FERTILIZER_OPERATION_CREATOR(),
       },
       fertilizerRates: {
         N: FERTILIZER_RATE_CREATOR(),
@@ -79,7 +85,13 @@ function CROPYEAR_CREATOR(fieldId, crop) {
         S: FERTILIZER_RATE_CREATOR(),
         M: FERTILIZER_RATE_CREATOR(),
       },
-      pesticidesApplications: [PESTICIDE_OPERATION_CREATOR(), "..."],
+      pesticidesApplications: [
+        PESTICIDE_OPERATION_CREATOR(),
+        PESTICIDE_OPERATION_CREATOR(),
+        PESTICIDE_OPERATION_CREATOR(),
+        PESTICIDE_OPERATION_CREATOR(),
+        PESTICIDE_OPERATION_CREATOR(),
+      ],
     },
 
     harvest: {

@@ -8,10 +8,9 @@ import { useState } from "react";
 export default function FormSelectSprayerField({
   sprayersArray,
   fieldLabel,
-  fieldValue,
+  onChange,
+  index,
 }) {
-  const [selectedSprayer, setSelectedSprayer] = useState("");
-  const [hoursUsed, setHoursUsed] = useState(0);
   const [isSprayerModalOpen, setIsSprayerModalOpen] = useState(false);
 
   function handleAddNewSprayer(newSprayer) {
@@ -24,8 +23,8 @@ export default function FormSelectSprayerField({
         id="outlined-select-currency"
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
+        onChange={(t) => onChange(t, "machineId", index)}
         label={fieldLabel}
-        defaultValue={fieldValue}
       >
         {sprayersArray.map((option) => (
           <MenuItem key={option.name} value={option.name}>
@@ -42,9 +41,7 @@ export default function FormSelectSprayerField({
       </TextField>
       <TextField
         sx={{ color: "#666666", maxWidth: 130 }}
-        onChange={(event) => {
-          setHoursUsed(event.target.value);
-        }}
+        onChange={(t) => onChange(t, "hoursUsed", index)}
         label={"Hours Used"}
         InputProps={{ inputProps: { min: 0 } }}
         type="number"
@@ -52,7 +49,6 @@ export default function FormSelectSprayerField({
           shrink: true,
         }}
         variant="outlined"
-        value={hoursUsed}
       />
 
       {isSprayerModalOpen && (

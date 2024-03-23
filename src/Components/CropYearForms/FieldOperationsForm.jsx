@@ -3,37 +3,19 @@ import BooleanQuestion from "../FormInputElements/BooleanQuestion";
 import MultiChoiceQuestion from "../FormInputElements/MultiChoiceQuestion";
 import NumberQuestion from "../FormInputElements/NumberQuestion";
 import { useState, useEffect } from "react";
-import FormSelectTractorField from "../FormInputElements/FormSelectTractorField";
+import FormSelectCultivationTractorField from "../FormInputElements/FormSelectCultivationTractorField";
+import FormSelectFertilizerTractorField from "../FormInputElements/FormSelectFertilizerTractorField";
 import FormSelectSprayerField from "../FormInputElements/FormSelectSprayerField";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 import { FertilizerTypes } from "../../Assets/DataTypes";
 
 import FertilizerTableField from "../../Components/FormInputElements/FertilizerTableField";
 
 import { CropYearContext } from "../../App";
 import { useContext } from "react";
+
 const cultivationOperationType = { machineId: "", hoursOfOperation: 0 };
 
-const TRACTORS = [
-  {
-    type: "TRACTOR",
-    name: "Mate",
-    HP: 800,
-    fuelUse: null,
-    defaultAcreHour: 2,
-  },
-];
-const SPRAYERS = [
-  {
-    type: "SPRAYER",
-    name: "Mosquito",
-    HP: 150,
-    fuelUse: null,
-    defaultAcreHour: 30,
-  },
-];
 export default function FieldOperationsForm() {
   const cropyearContext = useContext(CropYearContext);
 
@@ -57,7 +39,138 @@ export default function FieldOperationsForm() {
 
   const [fertilizersUsed, setFertilizerUsed] = useState({});
 
-  useEffect(() => {}, [numberOfCultivation]);
+  function handleCultivationOperation(event, key, index) {
+    const newValue = {};
+    newValue[key] = event.target.value;
+
+    // Create a copy with updated value for the corresponding cultivation operation
+    const updatedCultivationOperation = {
+      ...cropyearContext.state.fieldOperations.cultivations[index],
+      ...newValue,
+    };
+
+    // Create a copy of the cultivations array and override data inplace
+    const updatedCultivationsArray = [
+      ...cropyearContext.state.fieldOperations.cultivations,
+    ];
+    updatedCultivationsArray[index] = updatedCultivationOperation;
+
+    // Create copy of current state fieldOperations and assign new cultivations array
+    const updatedFieldOperations = {
+      ...cropyearContext.state.fieldOperations,
+      cultivations: updatedCultivationsArray,
+    };
+
+    // Update cropyearContext with new cultivations Array Data
+    cropyearContext.setter({
+      ...cropyearContext.state,
+      fieldOperations: updatedFieldOperations,
+    });
+  }
+
+  function handleFertilizerOperation(event, key, seedStage) {
+    let newValue = {};
+
+    if (key === "date") {
+      newValue[key] = event.$d.toISOString();
+    } else {
+      newValue[key] = event.target.value;
+    }
+
+    // Create a copy with updated value for the corresponding Fertilizer operation
+    const updatedFertilizerOperation = {
+      ...cropyearContext.state.fieldOperations.fertilizerApplications[
+        seedStage
+      ],
+      ...newValue,
+    };
+
+    // Create a copy of the fertilizerOperations Object and override data inplace
+    const updatedFertilizerOperationObj = {
+      ...cropyearContext.state.fieldOperations.fertilizerApplications,
+    };
+    updatedFertilizerOperationObj[seedStage] = updatedFertilizerOperation;
+
+    // Create copy of current state fieldOperations and assign new cultivations array
+    const updatedFieldOperations = {
+      ...cropyearContext.state.fieldOperations,
+      fertilizerApplications: updatedFertilizerOperationObj,
+    };
+
+    // Update cropyearContext with new fertilizerApplications object
+    cropyearContext.setter({
+      ...cropyearContext.state,
+      fieldOperations: updatedFieldOperations,
+    });
+    console.log(
+      cropyearContext.state.fieldOperations.fertilizerApplications,
+      seedStage,
+      "watamami"
+    );
+  }
+
+  function handleFertilizerRate(target, key, seedStage) {
+    const newValue = {};
+    newValue[seedStage] = target;
+
+    // Create a copy with updated value for the corresponding Fertilizer Rate Update
+    const updatedFertilizerRate = {
+      ...cropyearContext.state.fieldOperations.fertilizerRates[key],
+      ...newValue,
+    };
+
+    // Create a copy of the fertilizerRate Object and override data inplace
+    const updatedFertilizerRateObj = {
+      ...cropyearContext.state.fieldOperations.fertilizerRates,
+    };
+    updatedFertilizerRateObj[key] = updatedFertilizerRate;
+
+    // Create copy of current state fieldOperations and assign new fertilizerRate Object
+    const updatedFieldOperations = {
+      ...cropyearContext.state.fieldOperations,
+      fertilizerRates: updatedFertilizerRateObj,
+    };
+
+    // Update cropyearContext with new fertilizerRates object
+    cropyearContext.setter({
+      ...cropyearContext.state,
+      fieldOperations: updatedFieldOperations,
+    });
+    console.log(
+      cropyearContext.state.fieldOperations.fertilizerRates,
+      key,
+      "watamami"
+    );
+  }
+
+  function handlePesticideOperation(event, key, index) {
+    const newValue = {};
+    newValue[key] = event.target.value;
+
+    // Create a copy with updated value for the corresponding pesticide operation
+    const updatedPesticideOperation = {
+      ...cropyearContext.state.fieldOperations.pesticidesApplications[index],
+      ...newValue,
+    };
+
+    // Create a copy of the pesticides array and override data inplace
+    const updatedPesticideApplicationsArray = [
+      ...cropyearContext.state.fieldOperations.pesticidesApplications,
+    ];
+    updatedPesticideApplicationsArray[index] = updatedPesticideOperation;
+
+    // Create copy of current state fieldOperations and assign new pesticides array
+    const updatedFieldOperations = {
+      ...cropyearContext.state.fieldOperations,
+      pesticidesApplications: updatedPesticideApplicationsArray,
+    };
+
+    // Update cropyearContext with new pesticides Array Data
+    cropyearContext.setter({
+      ...cropyearContext.state,
+      fieldOperations: updatedFieldOperations,
+    });
+  }
 
   useEffect(() => {
     const element = document.getElementById("scrollableDiv");
@@ -101,10 +214,12 @@ export default function FieldOperationsForm() {
           {cultivationOperations.map((cultivation, index) => {
             if (index > numberOfCultivation - 1) return;
             return (
-              <FormSelectTractorField
+              <FormSelectCultivationTractorField
                 key={cultivation}
                 fieldLabel={"Tractor Used in Cultivation #" + (index + 1)}
                 tractorsArray={TRACTORS}
+                onChange={handleCultivationOperation}
+                index={index}
               />
             );
           })}
@@ -131,39 +246,26 @@ export default function FieldOperationsForm() {
           className={`transition-all duration-300  w-full  overflow-hidden`}
         >
           <p className="text-[#666666] mb-2">Tractors Used</p>
-          <div className="flex jusitify-start">
-            <div className="w-[450px] mr-[25px]">
-              <FormSelectTractorField
-                fieldLabel={"Pre Seed Tractor"}
-                tractorsArray={TRACTORS}
-              />
-            </div>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker label="Date" />
-            </LocalizationProvider>
-          </div>
-          <div className="flex jusitify-start">
-            <div className="w-[450px] mr-[25px]">
-              <FormSelectTractorField
-                fieldLabel={"Seed Tractor"}
-                tractorsArray={TRACTORS}
-              />
-            </div>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker label="Date" />
-            </LocalizationProvider>
-          </div>
-          <div className="flex jusitify-start">
-            <div className="w-[450px] mr-[25px]">
-              <FormSelectTractorField
-                fieldLabel={"Post Seed Tractor"}
-                tractorsArray={TRACTORS}
-              />
-            </div>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker label="Date" />
-            </LocalizationProvider>
-          </div>
+          {[
+            { seedStage: "preSeed", label: "Pre Seed Tractor" },
+            { seedStage: "seed", label: "Seed Tractor" },
+            { seedStage: "postSeed", label: "Post Seed Tractor" },
+          ].map((operation, index) => {
+            return (
+              <li className="flex " key={operation.seedStage}>
+                <FormSelectFertilizerTractorField
+                  fieldLabel={operation.label}
+                  tractorsArray={TRACTORS}
+                  fieldState={
+                    cropyearContext.state.fieldOperations
+                      .fertilizerApplications[operation.seedStage]
+                  }
+                  seedStage={operation.seedStage}
+                  onChange={handleFertilizerOperation}
+                />
+              </li>
+            );
+          })}
         </div>
       </section>
 
@@ -192,12 +294,17 @@ export default function FieldOperationsForm() {
         <ul>
           {FertilizerTypes.map((fertilizer, index) => {
             var key = fertilizer.value;
+
             var isChecked = fertilizersUsed[key];
 
             if (isChecked)
               return (
                 <li key={key}>
-                  <FertilizerTableField fertilizerName={fertilizer.label} />
+                  <FertilizerTableField
+                    onChange={handleFertilizerRate}
+                    fertilizerName={fertilizer.label}
+                    elementCode={fertilizer.value}
+                  />
                 </li>
               );
           })}
@@ -231,6 +338,8 @@ export default function FieldOperationsForm() {
                 key={index}
                 fieldLabel={"Sprayer in Fumigation #" + (index + 1)}
                 sprayersArray={SPRAYERS}
+                onChange={handleCultivationOperation}
+                index={index}
               />
             );
           })}
@@ -239,3 +348,22 @@ export default function FieldOperationsForm() {
     </div>
   );
 }
+
+const TRACTORS = [
+  {
+    type: "TRACTOR",
+    name: "Mate",
+    HP: 800,
+    fuelUse: null,
+    defaultAcreHour: 2,
+  },
+];
+const SPRAYERS = [
+  {
+    type: "SPRAYER",
+    name: "Mosquito",
+    HP: 150,
+    fuelUse: null,
+    defaultAcreHour: 30,
+  },
+];
