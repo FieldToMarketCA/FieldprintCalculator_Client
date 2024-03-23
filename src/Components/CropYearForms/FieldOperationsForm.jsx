@@ -137,14 +137,12 @@ export default function FieldOperationsForm() {
     const newValue = {};
     newValue[key] = event.target.value;
 
-    // console.log("watauba", event);
     // Create a copy with updated value for the corresponding pesticide operation
     const updatedPesticideOperation = {
       ...cropyearContext.state.fieldOperations.pesticidesApplications[index],
       ...newValue,
     };
 
-    console.log("watauba", updatedPesticideOperation);
     // Create a copy of the pesticides array and override data inplace
     const updatedPesticideApplicationsArray = [
       ...cropyearContext.state.fieldOperations.pesticidesApplications,
@@ -162,7 +160,6 @@ export default function FieldOperationsForm() {
       ...cropyearContext.state,
       fieldOperations: updatedFieldOperations,
     });
-    console.log(cropyearContext.state.fieldOperations.pesticidesApplications);
   }
 
   useEffect(() => {

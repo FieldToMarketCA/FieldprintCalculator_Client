@@ -1,10 +1,23 @@
 import { Divider } from "@mui/material";
 import MainButton from "../Buttons/MainButton";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+
+import { FarmContext, FieldContext, CropYearContext } from "../../App";
 
 export default function ReviewForm() {
   const navigate = useNavigate();
 
+  const farmContext = useContext(FarmContext);
+  const fieldContext = useContext(FieldContext);
+  const cropYearContext = useContext(CropYearContext);
+
+  function handleGenerateAnalysis() {
+    console.log("farmContext: ", farmContext.state);
+    console.log("fieldContext: ", fieldContext.state);
+    console.log("cropYearContext: ", cropYearContext.state);
+    navigate("/analysis");
+  }
   return (
     <div className="w-full  text-[rgb(102,102,102)] h-full">
       <div>
@@ -39,7 +52,7 @@ export default function ReviewForm() {
           <div className="pl-[40px] pb-[24px] mt-4">
             <MainButton
               text={"Generate Your Fieldprint Analysis"}
-              onClick={() => navigate("/analysis")}
+              onClick={handleGenerateAnalysis}
             />
           </div>
         </div>
