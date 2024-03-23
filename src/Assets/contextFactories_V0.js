@@ -95,13 +95,13 @@ function CROPYEAR_CREATOR(fieldId, crop) {
     },
 
     harvest: {
-      swather: { machineId: "UUID", hoursUsed: "Float" },
-      combine: { machineId: "UUID", hoursUsed: "Float", avgSpeed: "Float" },
-      cropDryingType: "Enum[String]",
-      cropDryingFuel: "Enum[String]",
+      swather: { machineId: "", hoursUsed: "" },
+      combine: { machineId: "", hoursUsed: "", avgSpeed: "" },
+      cropDryingType: "",
+      cropDryingFuel: "",
       moisture: {
-        beforeDrying: "Float",
-        afterDrying: "Float",
+        beforeDrying: "",
+        afterDrying: "",
       },
     },
   };

@@ -11,6 +11,8 @@ export default function FormSelectMachineField({
   fieldLabel,
   fieldValue,
   machineType,
+
+  onChange,
 }) {
   const [selectedMachine, setSelectedMachine] = useState("");
   const [hoursUsed, setHoursUsed] = useState(0);
@@ -23,6 +25,7 @@ export default function FormSelectMachineField({
   return (
     <div className="w-full flex mb-6">
       <TextField
+        onChange={(t) => onChange(t, machineType, "machineId")}
         id="outlined-select-currency"
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
@@ -47,10 +50,8 @@ export default function FormSelectMachineField({
         </MenuItem>
       </TextField>
       <TextField
+        onChange={(t) => onChange(t, machineType, "hoursUsed")}
         sx={{ color: "#666666", maxWidth: 130 }}
-        onChange={(event) => {
-          setHoursUsed(event.target.value);
-        }}
         label={"Hours Used"}
         InputProps={{ inputProps: { min: 0 } }}
         type="number"
@@ -58,7 +59,6 @@ export default function FormSelectMachineField({
           shrink: true,
         }}
         variant="outlined"
-        value={hoursUsed}
       />
 
       {isMachineModalOpen && (

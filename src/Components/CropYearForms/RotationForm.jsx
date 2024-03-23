@@ -25,6 +25,7 @@ export default function RotationForm() {
     const updatedCrop = { ...cropyearContext.state.crop, ...newValue };
 
     cropyearContext.setter({ ...cropyearContext.state, crop: updatedCrop });
+    console.log("mariel", cropyearContext.state.crop);
   }
 
   return (

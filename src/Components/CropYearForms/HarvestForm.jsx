@@ -14,6 +14,61 @@ import { useContext } from "react";
 
 export default function HarvestForm() {
   const cropyearContext = useContext(CropYearContext);
+
+  function handleMachineOperation(event, machineType, key) {
+    const newValue = {};
+    newValue[key] = event.target.value;
+
+    const updatedMachine = {
+      ...cropyearContext.state.harvest[machineType],
+      ...newValue,
+    };
+
+    // Create a copy with updated value for the corresponding Fertilizer Rate Update
+    const updatedHarvestOperation = { ...cropyearContext.state.harvest };
+    updatedHarvestOperation[machineType] = updatedMachine;
+
+    cropyearContext.setter({
+      ...cropyearContext.state,
+      harvest: updatedHarvestOperation,
+    });
+
+    console.log(cropyearContext.state.harvest, "watamami");
+  }
+
+  function handleCropDrying(target, key) {
+    const newValue = {};
+    newValue[key] = target;
+
+    // create a copy of crop obj
+    const updatedHarvest = { ...cropyearContext.state.harvest, ...newValue };
+
+    cropyearContext.setter({
+      ...cropyearContext.state,
+      harvest: updatedHarvest,
+    });
+  }
+
+  function handleStateChange(target, key) {
+    const newValue = {};
+    newValue[key] = target;
+
+    const updatedMoisture = {
+      ...cropyearContext.state.harvest.moisture,
+      ...newValue,
+    };
+
+    const updatedHarvest = {
+      ...cropyearContext.state.harvest,
+      moisture: updatedMoisture,
+    };
+    cropyearContext.setter({
+      ...cropyearContext.state,
+      harvest: updatedHarvest,
+    });
+    console.log("mamichula", cropyearContext.state.harvest);
+  }
+
   return (
     <div className=" w-full h-full ">
       <h3 className="text-[rgb(102,102,102)] text-[30px]">Harvest</h3>
@@ -28,8 +83,9 @@ export default function HarvestForm() {
           <div className="w-[450px] mr-[25px]">
             <FormSelectMachineField
               fieldLabel={"Select Swather"}
-              machineType={"SWATHERS"}
+              machineType={"swather"}
               machinesArray={SWATHERS}
+              onChange={handleMachineOperation}
             />
           </div>
         </div>
@@ -38,8 +94,9 @@ export default function HarvestForm() {
           <div className="w-[450px] mr-[25px]">
             <FormSelectMachineField
               fieldLabel={"Select Combine"}
-              machineType={"COMBINE"}
+              machineType={"combine"}
               machinesArray={COMBINES}
+              onChange={handleMachineOperation}
             />
           </div>
           <TextField
@@ -47,6 +104,7 @@ export default function HarvestForm() {
             label="Avg Speed Miles/Hr"
             sx={{ width: 200 }}
             InputProps={{ inputProps: { min: 0 } }}
+            onChange={(e) => handleMachineOperation(e, "combine", "avgSpeed")}
           />
         </div>
       </section>
@@ -57,18 +115,16 @@ export default function HarvestForm() {
         <FormSelectField
           valuesArray={CropYearCropDryingType}
           fieldLabel={"Crop drying -- type"}
-          // fieldValue={}
-          // helperText={"Crop Drying -- Type"}
           modalTitle={"Crop Drying -- Type"}
           modalDescription={"Some Really helpful description"}
+          onChange={(e) => handleCropDrying(e.target.value, "cropDryingType")}
         />
         <FormSelectField
           valuesArray={CropYearCropDryingFuel}
           fieldLabel={"Crop drying -- fuel"}
-          // fieldValue={}
-          // helperText={"Crop Drying -- Fuel"}
           modalTitle={"Crop Drying -- Fuel"}
           modalDescription={"Some Really helpful description"}
+          onChange={(e) => handleCropDrying(e.target.value, "cropDryingFuel")}
         />
       </section>
       <section className="pb-8">
@@ -78,8 +134,7 @@ export default function HarvestForm() {
         <FormTextField
           fieldLabel={"% Before Drying"}
           isNumber={true}
-          onChange={console.log}
-          onBlur={console.log}
+          onChange={(t) => handleStateChange(t, "beforeDrying")}
           modalTitle={"Moisture Content Before Drying"}
           modalDescription={
             "Please Enter the Percentage amount of Moisture in the soil before drying."
@@ -88,8 +143,7 @@ export default function HarvestForm() {
         <FormTextField
           fieldLabel={"% After Drying"}
           isNumber={true}
-          onChange={console.log}
-          onBlur={console.log}
+          onChange={(t) => handleStateChange(t, "afterDrying")}
           modalTitle={"Moisture Content After Drying"}
           modalDescription={
             "Please Enter the Percentage amount of Moisture in the soil after drying."
