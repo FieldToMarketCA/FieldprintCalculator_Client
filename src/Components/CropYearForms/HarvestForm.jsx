@@ -32,8 +32,6 @@ export default function HarvestForm() {
       ...cropyearContext.state,
       harvest: updatedHarvestOperation,
     });
-
-    console.log(cropyearContext.state.harvest, "watamami");
   }
 
   function handleCropDrying(target, key) {
