@@ -1,12 +1,14 @@
 import { Divider } from "@mui/material";
 import MainButton from "../Buttons/MainButton";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { FarmContext, FieldContext, CropYearContext } from "../../App";
+import { generateResults } from "../WorkBookRequest";
 
 export default function ReviewForm() {
   const navigate = useNavigate();
+  const [reportData, setReportData] = useState(null);
 
   const farmContext = useContext(FarmContext);
   const fieldContext = useContext(FieldContext);
@@ -16,6 +18,12 @@ export default function ReviewForm() {
     // console.log("farmContext: ", farmContext.state);
     // console.log("fieldContext: ", fieldContext.state);
     // console.log("cropYearContext: ", cropYearContext.state);
+    generateResults(
+      farmContext.state,
+      fieldContext.state,
+      cropYearContext.state,
+      setReportData
+    );
     navigate("/analysis");
   }
   return (
