@@ -24,13 +24,13 @@ export default function FormSelectSprayerField({
         id="outlined-select-currency"
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
-        onChange={(e) => onChange(e, "machineId", index)}
+        onChange={(e) => onChange(e, "machineObj", index)}
         label={fieldLabel}
-        value={fieldState.machineId}
+        value={fieldState.machineObj}
       >
-        {sprayersArray.map((option) => (
-          <MenuItem key={option.name} value={option.name}>
-            <p>{option.name}</p>
+        {sprayersArray.map((sprayerOption) => (
+          <MenuItem key={sprayerOption.name} value={sprayerOption}>
+            <p>{sprayerOption.name}</p>
           </MenuItem>
         ))}
         <MenuItem

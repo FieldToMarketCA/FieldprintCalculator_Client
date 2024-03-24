@@ -14,7 +14,7 @@ import FertilizerTableField from "../../Components/FormInputElements/FertilizerT
 import { CropYearContext } from "../../App";
 import { useContext } from "react";
 
-const cultivationOperationType = { machineId: "", hoursOfOperation: 0 };
+const cultivationOperationType = { machineObj: "", hoursOfOperation: 0 };
 
 export default function FieldOperationsForm() {
   const cropyearContext = useContext(CropYearContext);

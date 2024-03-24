@@ -24,16 +24,16 @@ export default function FormSelectMachineField({
   return (
     <div className="w-full flex mb-6">
       <TextField
-        onChange={(t) => onChange(t, machineType, "machineId")}
+        onChange={(t) => onChange(t, machineType, "machineObj")}
         id="outlined-select-currency"
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
         label={fieldLabel}
-        value={fieldState.machineId}
+        value={fieldState.machineObj}
       >
-        {machinesArray.map((option) => (
-          <MenuItem key={option.name} value={option.name}>
-            <p>{option.name}</p>
+        {machinesArray.map((machineOption) => (
+          <MenuItem key={machineOption.name} value={machineOption}>
+            <p>{machineOption.name}</p>
           </MenuItem>
         ))}
         <MenuItem

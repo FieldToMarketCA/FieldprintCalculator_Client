@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-function FARM_CREATOR(name, ownerId, province) {
+function FARM_CREATOR() {
   return {
     id: uuidv4(),
     name: "",
@@ -32,19 +32,19 @@ function FIELD_CREATOR() {
   };
 }
 
-function CULTIVATION_OPERATION_CREATOR(machineId, hoursUsed) {
+function CULTIVATION_OPERATION_CREATOR() {
   return {
-    machineId: "",
+    machineObj: "",
     hoursUsed: "",
   };
 }
 
 function FERTILIZER_OPERATION_CREATOR() {
-  return { machineId: "", hoursUsed: "", date: "" };
+  return { machineObj: "", hoursUsed: "", date: "" };
 }
 
 function PESTICIDE_OPERATION_CREATOR() {
-  return { machineId: "", hoursUsed: "" };
+  return { machineObj: "", hoursUsed: "" };
 }
 
 function FERTILIZER_RATE_CREATOR() {
@@ -94,8 +94,8 @@ function CROPYEAR_CREATOR(fieldId, crop) {
     },
 
     harvest: {
-      swather: { machineId: "", hoursUsed: "" },
-      combine: { machineId: "", hoursUsed: "", avgSpeed: "" },
+      swather: { machineObj: "", hoursUsed: "" },
+      combine: { machineObj: "", hoursUsed: "", avgSpeed: "" },
       cropDryingType: "",
       cropDryingFuel: "",
       moisture: {

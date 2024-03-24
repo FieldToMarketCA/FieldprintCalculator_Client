@@ -19,29 +19,47 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
     [CropyearState.crop.yield, "Yield"],
     [CropyearState.crop.yieldUnits, "Yield_Units"],
     [CropyearState.crop.previousCrop, "Prior_Crop"],
-    ["addHereMachineHP", "Cult1_Size"],
+    [CropyearState.fieldOperations.cultivations[0].machineObj.HP, "Cult1_Size"],
     [defaultUnit, "Cult1_Units"],
     [CropyearState.fieldOperations.cultivations[0].hoursUsed, "Cult1_Hrs"],
-    ["addHereAvgMachineACHR", "Cult1_AcHr"],
-    ["addHereMachineHP", "Cult2_Size"],
+    [
+      CropyearState.fieldOperations.cultivations[0].machineObj.defaultAcreHour,
+      "Cult1_AcHr",
+    ],
+    [CropyearState.fieldOperations.cultivations[1].machineObj.HP, "Cult2_Size"],
     [defaultUnit, "Cult2_Units"],
     [CropyearState.fieldOperations.cultivations[1].hoursUsed, "Cult2_Hrs"],
-    ["addHereAvgMachineACHR", "Cult2_AcHr"],
-    ["addHereMachineHP", "Cult3_Size"],
+    [
+      CropyearState.fieldOperations.cultivations[0].machineObj.defaultAcreHour,
+      "Cult2_AcHr",
+    ],
+    [CropyearState.fieldOperations.cultivations[2].machineObj.HP, "Cult3_Size"],
     [defaultUnit, "Cult3_Units"],
     [CropyearState.fieldOperations.cultivations[2].hoursUsed, "Cult3_Hrs"],
-    ["addHereAvgMachineACHR", "Cult3_AcHr"],
-    ["addHereMachineHP", "Cult4_Size"],
+    [
+      CropyearState.fieldOperations.cultivations[0].machineObj.defaultAcreHour,
+      "Cult3_AcHr",
+    ],
+    [CropyearState.fieldOperations.cultivations[3].machineObj.HP, "Cult4_Size"],
     [defaultUnit, "Cult4_Units"],
     [CropyearState.fieldOperations.cultivations[3].hoursUsed, "Cult4_Hrs"],
-    ["addHereAvgMachineACHR", "Cult4_AcHr"],
-    ["addHereMachineHP", "Seed_Size"],
+    [
+      CropyearState.fieldOperations.cultivations[0].machineObj.defaultAcreHour,
+      "Cult4_AcHr",
+    ],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.seed.machineObj.HP,
+      "Seed_Size",
+    ],
     [defaultUnit, "Seed_Units"],
     [
       CropyearState.fieldOperations.fertilizerApplications.seed.hoursUsed,
       "Seed_Hrs",
     ],
-    ["addHereAvgMachineACHR", "Seed_AcHr"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.seed.defaultAcreHour,
+      "Seed_AcHr",
+    ],
     [
       CropyearState.fieldOperations.fertilizerApplications.seed.date,
       "Seed_FertDate",
@@ -54,13 +72,21 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
       CropyearState.fieldOperations.fertilizerRates.M.withSeed,
       "Seed_OtherFert",
     ],
-    ["addHereMachineHP", "PreSeed_Size"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.preSeed.machineObj
+        .HP,
+      "PreSeed_Size",
+    ],
     [defaultUnit, "PreSeed_Units"],
     [
       CropyearState.fieldOperations.fertilizerApplications.preSeed.hoursUsed,
       "PreSeed_Hrs",
     ],
-    ["addHereAvgMachineACHR", "PreSeed_AcHr"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.preSeed
+        .defaultAcreHour,
+      "PreSeed_AcHr",
+    ],
     [
       CropyearState.fieldOperations.fertilizerApplications.preSeed.date,
       "PreSeed_FertDate",
@@ -73,13 +99,21 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
       CropyearState.fieldOperations.fertilizerRates.M.preSeed,
       "PreSeed_OtherFert",
     ],
-    ["addHereMachineHP", "PostSeed_Size"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.postSeed.machineObj
+        .HP,
+      "PostSeed_Size",
+    ],
     [defaultUnit, "PostSeed_Units"],
     [
       CropyearState.fieldOperations.fertilizerApplications.postSeed.hoursUsed,
       "PostSeed_Hrs",
     ],
-    ["addHereAvgMachineACHR", "PostSeed_AcHr"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.postSeed
+        .defaultAcreHour,
+      "PostSeed_AcHr",
+    ],
     [
       CropyearState.fieldOperations.fertilizerApplications.postSeed.date,
       "PostSeed_FertDate",
@@ -92,49 +126,84 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
       CropyearState.fieldOperations.fertilizerRates.M.postSeed,
       "PostSeed_OtherFert",
     ],
-    ["addHereMachineHP", "Pest1_Size"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[0].machineObj.HP,
+      "Pest1_Size",
+    ],
     [defaultUnit, "Pest1_Units"],
     [
       CropyearState.fieldOperations.pesticidesApplications[0].hoursUsed,
       "Pest1_Hrs",
     ],
-    ["addHereAvgMachineACHR", "Pest1_AcHr"],
-    ["addHereMachineHP", "Pest2_Size"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[0].machineObj
+        .defaultAcreHour,
+      "Pest1_AcHr",
+    ],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[1].machineObj.HP,
+      "Pest2_Size",
+    ],
     [defaultUnit, "Pest2_Units"],
     [
       CropyearState.fieldOperations.pesticidesApplications[1].hoursUsed,
       "Pest2_Hrs",
     ],
-    ["addHereAvgMachineACHR", "Pest2_AcHr"],
-    ["addHereMachineHP", "Pest3_Size"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[1].machineObj
+        .defaultAcreHour,
+      "Pest2_AcHr",
+    ],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[2].machineObj.HP,
+      "Pest3_Size",
+    ],
     [defaultUnit, "Pest3_Units"],
     [
       CropyearState.fieldOperations.pesticidesApplications[2].hoursUsed,
       "Pest3_Hrs",
     ],
-    ["addHereAvgMachineACHR", "Pest3_AcHr"],
-    ["addHereMachineHP", "Pest4_Size"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[2].machineObj
+        .defaultAcreHour,
+      "Pest3_AcHr",
+    ],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[3].machineObj.HP,
+      "Pest4_Size",
+    ],
     [defaultUnit, "Pest4_Units"],
     [
       CropyearState.fieldOperations.pesticidesApplications[3].hoursUsed,
       "Pest4_Hrs",
     ],
-    ["addHereAvgMachineACHR", "Pest4_AcHr"],
-    ["addHereMachineHP", "Pest5_Size"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[3].machineObj
+        .defaultAcreHour,
+      "Pest4_AcHr",
+    ],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[4].machineObj.HP,
+      "Pest5_Size",
+    ],
     [defaultUnit, "Pest5_Units"],
     [
       CropyearState.fieldOperations.pesticidesApplications[4].hoursUsed,
       "Pest5_Hrs",
     ],
-    ["addHereAvgMachineACHR", "Pest5_AcHr"],
-    ["addHereMachineHP", "Swath_Size"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[4].machineObj
+        .defaultAcreHour,
+      "Pest5_AcHr",
+    ],
+    [CropyearState.harvest.swather.machineObj.HP, "Swath_Size"],
     [defaultUnit, "Swath_Units"],
     [CropyearState.harvest.swather.hoursUsed, "Swath_Hrs"],
-    ["addHereAvgMachineACHR", "Swath_AcHr"],
-    ["addHereMachineHP", "Comb_Size"],
+    [CropyearState.harvest.swather.machineObj.defaultAcreHour, "Swath_AcHr"],
+    [CropyearState.harvest.combine.machineObj.HP, "Comb_Size"],
     [defaultUnit, "Comb_Units"],
     [CropyearState.harvest.combine.hoursUsed, "Comb_Hrs"],
-    ["addHereAvgMachineACHR", "Comb_AcHr"],
+    [CropyearState.harvest.combine.machineObj.defaultAcreHour, "Comb_AcHr"],
     [CropyearState.harvest.combine.avgSpeed, "Comb_Speed"],
     ["", "NULL"], //
     ["", "NULL"], //

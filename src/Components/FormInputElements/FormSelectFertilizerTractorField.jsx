@@ -31,12 +31,12 @@ export default function FormSelectFertilizerTractorField({
           select
           sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
           label={fieldLabel}
-          value={fieldState.machineId}
-          onChange={(t) => onChange(t, "machineId", seedStage)}
+          value={fieldState.machineObj}
+          onChange={(t) => onChange(t, "machineObj", seedStage)}
         >
-          {tractorsArray.map((option) => (
-            <MenuItem key={option.name} value={option.name}>
-              <p>{option.name}</p>
+          {tractorsArray.map((tractorOption) => (
+            <MenuItem key={tractorOption.name} value={tractorOption}>
+              <p>{tractorOption.name}</p>
             </MenuItem>
           ))}
           <MenuItem

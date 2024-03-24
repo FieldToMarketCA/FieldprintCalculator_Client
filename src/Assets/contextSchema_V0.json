@@ -28,20 +28,38 @@
 
   {
     "_TYPE": "CULTIVATION_OPERATION",
-    "machineId": "UUID",
+    "machineObj": {
+      "type": "Enum[String]",
+      "name": "String",
+      "HP": "Integer",
+      "fuelUse": "null",
+      "defaultAcreHour": "Integer"
+    },
     "hoursUsed": "Float"
   },
 
   {
     "_TYPE": "FERTILIZER_OPERATION",
-    "machineId": "UUID",
+    "machineObj": {
+      "type": "Enum[String]",
+      "name": "String",
+      "HP": "Integer",
+      "fuelUse": "null",
+      "defaultAcreHour": "Integer"
+    },
     "hoursUsed": "Float",
     "date": "DATE"
   },
 
   {
     "_TYPE": "PESTICIDE_OPERATION",
-    "machineId": "UUID",
+    "machineObj": {
+      "type": "Enum[String]",
+      "name": "String",
+      "HP": "Integer",
+      "fuelUse": "null",
+      "defaultAcreHour": "Integer"
+    },
     "hoursUsed": "Float"
   },
 
@@ -82,11 +100,23 @@
     },
     "harvest": {
       "swather": {
-        "machineId": "UUID",
+        "machineObj": {
+          "type": "Enum[String]",
+          "name": "String",
+          "HP": "Integer",
+          "fuelUse": "null",
+          "defaultAcreHour": "Integer"
+        },
         "hoursUsed": "Float"
       },
       "combine": {
-        "machineId": "UUID",
+        "machineObj": {
+          "type": "Enum[String]",
+          "name": "String",
+          "HP": "Integer",
+          "fuelUse": "null",
+          "defaultAcreHour": "Integer"
+        },
         "hoursUsed": "Float",
         "avgSpeed": "Float"
       },

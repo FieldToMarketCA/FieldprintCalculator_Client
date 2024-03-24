@@ -27,12 +27,12 @@ export default function FormSelectCultivationTractorField({
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
         label={fieldLabel}
-        onChange={(t) => onChange(t, "machineId", index)}
-        value={fieldState.machineId}
+        onChange={(t) => onChange(t, "machineObj", index)}
+        value={fieldState.machineObj}
       >
-        {tractorsArray.map((option) => (
-          <MenuItem key={option.name} value={option.name}>
-            <p>{option.name}</p>
+        {tractorsArray.map((tractorOption) => (
+          <MenuItem key={tractorOption.name} value={tractorOption}>
+            <p>{tractorOption.name}</p>
           </MenuItem>
         ))}
         <MenuItem
