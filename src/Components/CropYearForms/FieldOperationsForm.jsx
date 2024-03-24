@@ -188,7 +188,7 @@ export default function FieldOperationsForm() {
         </h4>
         <NumberQuestion
           min={1}
-          max={5}
+          max={4}
           fieldValue={numberOfCultivation}
           questionText={
             "How many cultivation operations this field had this crop year?"

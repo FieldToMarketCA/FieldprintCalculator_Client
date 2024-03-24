@@ -87,58 +87,58 @@ const SlopeClassTypes = [
 
 const ObservedWindErosionTypes = [
   { value: null, label: "None" },
-  { value: 0, label: "Very Slight" },
-  { value: 1, label: "Slight" },
-  { value: 2, label: "Moderate" },
-  { value: 3, label: "Severe" },
+  { value: "Very Slight", label: "Very Slight" },
+  { value: "Slight", label: "Slight" },
+  { value: "Moderate", label: "Moderate" },
+  { value: "Severe", label: "Severe" },
 ];
 const SoilTypes = [
-  { value: 0, label: "Brown" },
-  { value: 1, label: "Dark Brown" },
-  { value: 2, label: "Black" },
+  { value: "Brown", label: "Brown" },
+  { value: "Dark Brown", label: "Dark Brown" },
+  { value: "Black", label: "Black" },
 ];
 
 const SurfaceSoilTextureTypes = [
-  { value: 0, label: "Clay" },
-  { value: 1, label: "Sand" },
-  { value: 2, label: "Loam" },
-  { value: 3, label: "Sandy Loam" },
-  { value: 4, label: "Silty Clay" },
-  { value: 5, label: "Sandy Clay Loam" },
-  { value: 6, label: "Silty Clay Loam" },
-  { value: 7, label: "Clay Loam" },
-  { value: 8, label: "Silt Loam" },
-  { value: 9, label: "Sandy Loam" },
-  { value: 10, label: "Loamy Sand" },
+  { value: "Clay", label: "Clay" },
+  { value: "Sand", label: "Sand" },
+  { value: "Loam", label: "Loam" },
+  { value: "Sandy Loam", label: "Sandy Loam" },
+  { value: "Silty Clay", label: "Silty Clay" },
+  { value: "Sandy Clay Loam", label: "Sandy Clay Loam" },
+  { value: "Silty Clay Loam", label: "Silty Clay Loam" },
+  { value: "Clay Loam", label: "Clay Loam" },
+  { value: "Silt Loam", label: "Silt Loam" },
+  { value: "Sandy Loam", label: "Sandy Loam" },
+  { value: "Loamy Sand", label: "Loamy Sand" },
 ];
 
 const TillageRegimeTypes = [
-  { value: 0, label: "Zero Till" },
-  { value: 1, label: "Minimum Till" },
-  { value: 2, label: "Conventional Till" },
+  { value: "Zero Till", label: "Zero Till" },
+  { value: "Minimum Till", label: "Minimum Till" },
+  { value: "Conventional Till", label: "Conventional Till" },
 ];
 
 const CropYearCropTypes = [
-  { value: 0, label: "Winter Wheat" },
-  { value: 1, label: "Soybeans" },
-  { value: 2, label: "Corn" },
-  { value: 3, label: "Rye" },
+  { value: "Winter Wheat", label: "Winter Wheat" },
+  { value: "Soybeans", label: "Soybeans" },
+  { value: "Corn", label: "Corn" },
+  { value: "Rye", label: "Rye" },
 ];
 
 const CropYearCropFrequencyTypes = [
-  { value: 0, label: "Continuous" },
-  { value: 1, label: "Every 5 years" },
-  { value: 2, label: "Every 4 years" },
-  { value: 3, label: "Every 3 years" },
-  { value: 4, label: "Every 2 years" },
-  { value: 5, label: "Two out of 3 years" },
-  { value: 6, label: "Two out of 5 years" },
+  { value: "Continuous", label: "Continuous" },
+  { value: "Every 5 years", label: "Every 5 years" },
+  { value: "Every 4 years", label: "Every 4 years" },
+  { value: "Every 3 years", label: "Every 3 years" },
+  { value: "Every 2 years", label: "Every 2 years" },
+  { value: "Two out of 3 years", label: "Two out of 3 years" },
+  { value: "Two out of 5 years", label: "Two out of 5 years" },
 ];
 
 const CropYearCropYieldUnitTypes = [
-  { value: 0, label: "bu/ac" },
-  { value: 1, label: "tonne/ac" },
-  { value: 2, label: "tonne/ha" },
+  { value: "bu/ac", label: "bu/ac" },
+  { value: "tonne/ac", label: "tonne/ac" },
+  { value: "tonne/ha", label: "tonne/ha" },
 ];
 const FertilizerTypes = [
   { value: "N", label: "Nitrogen (N)" },
@@ -149,16 +149,19 @@ const FertilizerTypes = [
 ];
 
 const CropYearCropDryingType = [
-  { value: 0, label: "Batch-in-Bin" },
-  { value: 1, label: "High Temperature with Air" },
-  { value: 2, label: "High Temperature without Air" },
-  { value: 3, label: "Low Temperature" },
-  { value: 4, label: "Natural Air" },
+  { value: "Batch-in-Bin", label: "Batch-in-Bin" },
+  { value: "High Temperature with Air", label: "High Temperature with Air" },
+  {
+    value: "High Temperature without Air",
+    label: "High Temperature without Air",
+  },
+  { value: "Low Temperature", label: "Low Temperature" },
+  { value: "Natural Air", label: "Natural Air" },
 ];
 
 const CropYearCropDryingFuel = [
-  { value: 0, label: "Natural Gas" },
-  { value: 1, label: "Propane" },
+  { value: "Natural Gas", label: "Natural Gas" },
+  { value: "Propane", label: "Propane" },
 ];
 
 export {

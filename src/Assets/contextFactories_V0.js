@@ -71,7 +71,6 @@ function CROPYEAR_CREATOR(fieldId, crop) {
         CULTIVATION_OPERATION_CREATOR(),
         CULTIVATION_OPERATION_CREATOR(),
         CULTIVATION_OPERATION_CREATOR(),
-        CULTIVATION_OPERATION_CREATOR(),
       ],
       fertilizerApplications: {
         preSeed: FERTILIZER_OPERATION_CREATOR(),

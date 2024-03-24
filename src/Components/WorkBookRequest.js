@@ -1,153 +1,196 @@
 import axios from "axios";
-
-function convertContextToRow(
-  FarmContextState,
-  FieldContextState,
-  CropyearContextState
-) {
+var defaultUnit = "horsepower";
+function convertContextToRow(FarmState, FieldState, CropyearState) {
+  //   console.log(FarmState, FieldState, CropyearState);
+  //   console.log(CropyearState.crop.yieldUnits, "watauba");
+  //   return;
   const RowValues = [
-    "12511:Home east:2021:Winter Wheat",
-    "12511",
-    "Home east",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "2021",
-    "Winter Wheat",
-    "every 4 years",
-    "111",
-    "bu/ac",
-    "Soybeans",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "250",
-    "horsepower",
-    "5",
-    "0",
-    "0",
-    "125",
-    "0",
-    "0",
-    "18",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "155",
-    "horsepower",
-    "1",
-    "0",
-    "155",
-    "horsepower",
-    "1",
-    "0",
-    "155",
-    "horsepower",
-    "1",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "280",
-    "horsepower",
-    "8",
-    "0",
-    "1.6",
-    "0",
-    "0",
-    "14.5",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "0",
-    "80",
-    "R",
-    "C",
-    "None",
-    "Brown",
-    "Clay Loam",
-    "Minimum Till",
-    "Minimum Till",
-    "0",
-    "0",
-    "0",
-    "0",
-    "Annual >20 years",
-    "0",
-    "0",
-    "0",
-    "0",
-    "558",
-    "0",
-    "Huron east",
-    "ON",
-    "",
-    "4243",
-    "74243",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    [FieldState.fieldAddress, "UniqueID"],
+    [FieldState.id, "Farm_ID"],
+    [FieldState.name, "Field_Name"],
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    [CropyearState.crop.cropYear, "Crop_Year"],
+    [CropyearState.crop.cropThisYear, "Crop"],
+    ["", "NULL"], //
+    [CropyearState.crop.yield, "Yield"],
+    [CropyearState.crop.yieldUnits, "Yield_Units"],
+    [CropyearState.crop.previousCrop, "Prior_Crop"],
+    ["addHereMachineHP", "Cult1_Size"],
+    [defaultUnit, "Cult1_Units"],
+    [CropyearState.fieldOperations.cultivations[0].hoursUsed, "Cult1_Hrs"],
+    ["addHereAvgMachineACHR", "Cult1_AcHr"],
+    ["addHereMachineHP", "Cult2_Size"],
+    [defaultUnit, "Cult2_Units"],
+    [CropyearState.fieldOperations.cultivations[1].hoursUsed, "Cult2_Hrs"],
+    ["addHereAvgMachineACHR", "Cult2_AcHr"],
+    ["addHereMachineHP", "Cult3_Size"],
+    [defaultUnit, "Cult3_Units"],
+    [CropyearState.fieldOperations.cultivations[2].hoursUsed, "Cult3_Hrs"],
+    ["addHereAvgMachineACHR", "Cult3_AcHr"],
+    ["addHereMachineHP", "Cult4_Size"],
+    [defaultUnit, "Cult4_Units"],
+    [CropyearState.fieldOperations.cultivations[3].hoursUsed, "Cult4_Hrs"],
+    ["addHereAvgMachineACHR", "Cult4_AcHr"],
+    ["addHereMachineHP", "Seed_Size"],
+    [defaultUnit, "Seed_Units"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.seed.hoursUsed,
+      "Seed_Hrs",
+    ],
+    ["addHereAvgMachineACHR", "Seed_AcHr"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.seed.date,
+      "Seed_FertDate",
+    ],
+    [CropyearState.fieldOperations.fertilizerRates.N.withSeed, "Seed_N"],
+    [CropyearState.fieldOperations.fertilizerRates.P.withSeed, "Seed_P"],
+    [CropyearState.fieldOperations.fertilizerRates.K.withSeed, "Seed_K"],
+    [CropyearState.fieldOperations.fertilizerRates.S.withSeed, "Seed_S"],
+    [
+      CropyearState.fieldOperations.fertilizerRates.M.withSeed,
+      "Seed_OtherFert",
+    ],
+    ["addHereMachineHP", "PreSeed_Size"],
+    [defaultUnit, "PreSeed_Units"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.preSeed.hoursUsed,
+      "PreSeed_Hrs",
+    ],
+    ["addHereAvgMachineACHR", "PreSeed_AcHr"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.preSeed.date,
+      "PreSeed_FertDate",
+    ],
+    [CropyearState.fieldOperations.fertilizerRates.N.preSeed, "PreSeed_N"],
+    [CropyearState.fieldOperations.fertilizerRates.P.preSeed, "PreSeed_P"],
+    [CropyearState.fieldOperations.fertilizerRates.K.preSeed, "PreSeed_K"],
+    [CropyearState.fieldOperations.fertilizerRates.S.preSeed, "PreSeed_S"],
+    [
+      CropyearState.fieldOperations.fertilizerRates.M.preSeed,
+      "PreSeed_OtherFert",
+    ],
+    ["addHereMachineHP", "PostSeed_Size"],
+    [defaultUnit, "PostSeed_Units"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.postSeed.hoursUsed,
+      "PostSeed_Hrs",
+    ],
+    ["addHereAvgMachineACHR", "PostSeed_AcHr"],
+    [
+      CropyearState.fieldOperations.fertilizerApplications.postSeed.date,
+      "PostSeed_FertDate",
+    ],
+    [CropyearState.fieldOperations.fertilizerRates.N.postSeed, "PostSeed_N"],
+    [CropyearState.fieldOperations.fertilizerRates.P.postSeed, "PostSeed_P"],
+    [CropyearState.fieldOperations.fertilizerRates.K.postSeed, "PostSeed_K"],
+    [CropyearState.fieldOperations.fertilizerRates.S.postSeed, "PostSeed_S"],
+    [
+      CropyearState.fieldOperations.fertilizerRates.M.postSeed,
+      "PostSeed_OtherFert",
+    ],
+    ["addHereMachineHP", "Pest1_Size"],
+    [defaultUnit, "Pest1_Units"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[0].hoursUsed,
+      "Pest1_Hrs",
+    ],
+    ["addHereAvgMachineACHR", "Pest1_AcHr"],
+    ["addHereMachineHP", "Pest2_Size"],
+    [defaultUnit, "Pest2_Units"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[1].hoursUsed,
+      "Pest2_Hrs",
+    ],
+    ["addHereAvgMachineACHR", "Pest2_AcHr"],
+    ["addHereMachineHP", "Pest3_Size"],
+    [defaultUnit, "Pest3_Units"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[2].hoursUsed,
+      "Pest3_Hrs",
+    ],
+    ["addHereAvgMachineACHR", "Pest3_AcHr"],
+    ["addHereMachineHP", "Pest4_Size"],
+    [defaultUnit, "Pest4_Units"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[3].hoursUsed,
+      "Pest4_Hrs",
+    ],
+    ["addHereAvgMachineACHR", "Pest4_AcHr"],
+    ["addHereMachineHP", "Pest5_Size"],
+    [defaultUnit, "Pest5_Units"],
+    [
+      CropyearState.fieldOperations.pesticidesApplications[4].hoursUsed,
+      "Pest5_Hrs",
+    ],
+    ["addHereAvgMachineACHR", "Pest5_AcHr"],
+    ["addHereMachineHP", "Swath_Size"],
+    [defaultUnit, "Swath_Units"],
+    [CropyearState.harvest.swather.hoursUsed, "Swath_Hrs"],
+    ["addHereAvgMachineACHR", "Swath_AcHr"],
+    ["addHereMachineHP", "Comb_Size"],
+    [defaultUnit, "Comb_Units"],
+    [CropyearState.harvest.combine.hoursUsed, "Comb_Hrs"],
+    ["addHereAvgMachineACHR", "Comb_AcHr"],
+    [CropyearState.harvest.combine.avgSpeed, "Comb_Speed"],
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    [FieldState.fieldSize, "Field_Size"],
+    [FieldState.surfaceForm, "Surface_Form"],
+    [FieldState.slopeClass, "Slope"],
+    ["", "NULL"], //
+    [FieldState.soilType, "Soil_Type"],
+    [FieldState.surfaceSoilTexture, "Soil_Texture"],
+    [FieldState.tillageRegime, "Till_Previous"],
+    [FieldState.prevopusTillageRegime, "Till_Current"],
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["558", "Ecodistrict"], // WE NEED TO ADD ECO DISTRICT TO FIELD FORM
+    ["", "NULL"], //
+    ["Huron east", "Municipality"],
+    [FarmState.province, "Province"],
+    ["", "Advisor"],
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "Polygon"], // WE NEED TO ADD POLYGON ID
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
+    ["", "NULL"], //
   ];
-  return RowValues;
+
+  // Flatten and return RowValuesArray
+  return RowValues.map((valuePair) => valuePair[0]);
 }
 
 async function generateResults(
@@ -161,6 +204,7 @@ async function generateResults(
     FieldContextState,
     CropyearContextState
   );
+
   const sessionResponse = await axios.post(
     `https://graph.microsoft.com/v1.0/me/drive/root:/FieldprintCalculatorV.3-EXPERIMENT.xlsx:/workbook/createSession`,
     {
@@ -186,7 +230,7 @@ async function generateResults(
       headers: {
         Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
         "Content-Type": "application/json",
-        "Workbook-Session-Id": sessionResponse.data.id,
+        // "Workbook-Session-Id": sessionResponse.data.id,
       },
     }
   );
@@ -200,7 +244,7 @@ async function generateResults(
         headers: {
           Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
           "Content-Type": "application/json",
-          "Workbook-Session-Id": sessionResponse.data.id,
+          //   "Workbook-Session-Id": sessionResponse.data.id,
         },
       }
     );
@@ -220,7 +264,7 @@ async function generateResults(
       }
     );
 
-    const data = await response.data.values[0][0];
+    // const data = await response.data.values[0][0];
     setReportData(response.data.values);
     console.log(response.data.values);
   }, 10000);
