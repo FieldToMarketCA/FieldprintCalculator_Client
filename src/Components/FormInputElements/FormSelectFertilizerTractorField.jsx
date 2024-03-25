@@ -7,6 +7,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { useState } from "react";
+import dayjs from "dayjs";
 
 export default function FormSelectFertilizerTractorField({
   tractorsArray,
@@ -67,13 +68,23 @@ export default function FormSelectFertilizerTractorField({
           />
         )}
       </div>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          onChange={(t) => onChange(t, "date", seedStage)}
-          label="Date"
-          value={fieldState.date}
-        />
-      </LocalizationProvider>
+
+      {fieldState.date ? (
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            onChange={(t) => onChange(t, "date", seedStage)}
+            label="Date"
+            defaultValue={dayjs(fieldState.date)}
+          />
+        </LocalizationProvider>
+      ) : (
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            onChange={(t) => onChange(t, "date", seedStage)}
+            label="Date"
+          />
+        </LocalizationProvider>
+      )}
     </div>
   );
 }

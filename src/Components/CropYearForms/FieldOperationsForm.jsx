@@ -26,7 +26,6 @@ export default function FieldOperationsForm() {
     { ...cultivationOperationType },
     { ...cultivationOperationType },
     { ...cultivationOperationType },
-    { ...cultivationOperationType },
   ]);
   const [numberOfPesticide, setNumberOfPesticide] = useState(0);
   const [pesticideOperations, setPesticideOperations] = useState([
@@ -72,7 +71,8 @@ export default function FieldOperationsForm() {
     let newValue = {};
 
     if (key === "date") {
-      newValue[key] = event.$d.toISOString();
+      if (event && !isNaN(event.$d))
+        newValue[key] = event.$d.toISOString().slice(0, 10);
     } else {
       newValue[key] = event.target.value;
     }
@@ -203,6 +203,7 @@ export default function FieldOperationsForm() {
         <ul className="transition-all duration-500">
           {cultivationOperations.map((cultivation, index) => {
             if (index > numberOfCultivation - 1) return;
+
             return (
               <FormSelectCultivationTractorField
                 key={index}

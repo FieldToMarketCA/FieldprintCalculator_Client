@@ -37,7 +37,9 @@ export default function RotationForm() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           views={["year"]}
-          onChange={(e) => handleStateChange(e.$y, "cropYear")}
+          onChange={(e) => {
+            if (e !== null) handleStateChange(e.$y, "cropYear");
+          }}
           sx={{ marginBottom: 3 }}
           label="Crop Year"
         />

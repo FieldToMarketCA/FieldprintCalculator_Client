@@ -153,9 +153,13 @@ export default function AddFieldPage() {
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                onChange={(e) =>
-                  handleStateChange(e.$d.toISOString(), "regimeChangeDate")
-                }
+                onChange={(event) => {
+                  if (event && !isNaN(event.$d))
+                    handleStateChange(
+                      event.$d.toISOString(),
+                      "regimeChangeDate"
+                    );
+                }}
                 label="Regime Change Date"
               />
             </LocalizationProvider>
@@ -184,7 +188,9 @@ export default function AddFieldPage() {
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
-            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_API_KEY}&q=${addressQuery}&maptype=satellite`}
+            src={`https://www.google.com/maps/embed/v1/place?key=${
+              process.env.REACT_APP_MAPS_API_KEY
+            }&q=${addressQuery ? addressQuery : "Canada"}&maptype=satellite`}
             // src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_API_KEY}&q=Serecon Inc,Edmonton,+AB&maptype=satellite`}
           ></iframe>
         </div>
