@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.af622d80.css",
+    "main.js": "/static/js/main.af7de122.js",
+    "static/media/ftmc_logo.jpg": "/static/media/ftmc_logo.700b31590ebe490f535a.jpg",
+    "index.html": "/index.html",
+    "main.af622d80.css.map": "/static/css/main.af622d80.css.map",
+    "main.af7de122.js.map": "/static/js/main.af7de122.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.af622d80.css",
+    "static/js/main.af7de122.js"
+  ]
+}
