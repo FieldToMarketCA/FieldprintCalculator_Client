@@ -196,7 +196,7 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
         .defaultAcreHour,
       "Pest5_AcHr",
     ],
-    ["0", "Swath_Size"], // TO FIX BUG REPLACE
+    [CropyearState.harvest.swather.machineObj.HP, "Swath_Size"],
     [defaultUnit, "Swath_Units"],
     [CropyearState.harvest.swather.hoursUsed, "Swath_Hrs"],
     [CropyearState.harvest.swather.machineObj.defaultAcreHour, "Swath_AcHr"],
