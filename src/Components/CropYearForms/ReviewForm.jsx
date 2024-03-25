@@ -1,31 +1,53 @@
 import { Divider } from "@mui/material";
 import MainButton from "../Buttons/MainButton";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import { FarmContext, FieldContext, CropYearContext } from "../../App";
 import { generateResults } from "../WorkBookRequest";
+import LoadingButton from "../Buttons/LoadingButton";
 
 export default function ReviewForm() {
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [reportData, setReportData] = useState(null);
+
+  const navigate = useNavigate();
 
   const farmContext = useContext(FarmContext);
   const fieldContext = useContext(FieldContext);
   const cropYearContext = useContext(CropYearContext);
 
   function handleGenerateAnalysis() {
-    // console.log("farmContext: ", farmContext.state);
-    // console.log("fieldContext: ", fieldContext.state);
-    // console.log("cropYearContext: ", cropYearContext.state);
-    generateResults(
-      farmContext.state,
-      fieldContext.state,
-      cropYearContext.state,
-      setReportData
-    );
-    navigate("/analysis");
+    if (loading) return;
+    if (success) {
+      navigate("/analysis");
+      return;
+    }
+
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+
+      generateResults(
+        farmContext.state,
+        fieldContext.state,
+        cropYearContext.state,
+        setReportData
+      );
+    }
   }
+
+  useEffect(() => {
+    if (reportData !== null) {
+      setSuccess(true);
+      setLoading(false);
+      // setTimeout(() => {
+      //   navigate("/analysis");
+      // }, 2000);
+    }
+  }, [reportData]);
+
   return (
     <div className="w-full  text-[rgb(102,102,102)] h-full">
       <div>
@@ -58,9 +80,12 @@ export default function ReviewForm() {
             change the data status.
           </p>
           <div className="pl-[40px] pb-[24px] mt-4">
-            <MainButton
+            <LoadingButton
               text={"Generate Your Fieldprint Analysis"}
-              onClick={handleGenerateAnalysis}
+              successText={"Go to Analysis Page"}
+              handleButtonClick={handleGenerateAnalysis}
+              loading={loading}
+              success={success}
             />
           </div>
         </div>
