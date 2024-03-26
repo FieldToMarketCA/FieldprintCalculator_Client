@@ -6,6 +6,7 @@ import { useContext, useState, useEffect } from "react";
 import { FarmContext, FieldContext, CropYearContext } from "../../App";
 import { generateResults } from "../WorkBookRequest";
 import LoadingButton from "../Buttons/LoadingButton";
+import { SECRETS_CONTEXT } from "../../App";
 
 export default function ReviewForm() {
   const [loading, setLoading] = useState(false);
@@ -13,7 +14,7 @@ export default function ReviewForm() {
   const [reportData, setReportData] = useState(null);
 
   const navigate = useNavigate();
-
+  const SECRETS = useContext(SECRETS_CONTEXT);
   const farmContext = useContext(FarmContext);
   const fieldContext = useContext(FieldContext);
   const cropYearContext = useContext(CropYearContext);
@@ -24,7 +25,7 @@ export default function ReviewForm() {
       navigate("/analysis");
       return;
     }
-
+    console.log(SECRETS.SECRETS.token);
     if (!loading) {
       setSuccess(false);
       setLoading(true);
@@ -33,7 +34,8 @@ export default function ReviewForm() {
         farmContext.state,
         fieldContext.state,
         cropYearContext.state,
-        setReportData
+        setReportData,
+        SECRETS.SECRETS.token
       );
     }
   }

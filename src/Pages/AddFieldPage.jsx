@@ -16,9 +16,11 @@ import {
   SurfaceSoilTextureTypes,
   TillageRegimeTypes,
 } from "../Assets/DataTypes";
+
 import { useState } from "react";
 
 import { FieldContext } from "../App";
+import { SECRETS_CONTEXT } from "../App";
 
 import { useContext } from "react";
 
@@ -27,6 +29,7 @@ export default function AddFieldPage() {
   const navigate = useNavigate();
 
   const fieldContext = useContext(FieldContext);
+  const SECRETS = useContext(SECRETS_CONTEXT);
 
   function handleStateChange(target, key) {
     const newValue = {};
@@ -189,7 +192,7 @@ export default function AddFieldPage() {
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
             src={`https://www.google.com/maps/embed/v1/place?key=${
-              process.env.REACT_APP_MAPS_API_KEY
+              SECRETS.SECRETS.GOOGLE_APIKEY
             }&q=${addressQuery ? addressQuery : "Canada"}&maptype=satellite`}
             // src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_API_KEY}&q=Serecon Inc,Edmonton,+AB&maptype=satellite`}
           ></iframe>

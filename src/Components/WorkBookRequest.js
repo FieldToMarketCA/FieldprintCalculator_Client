@@ -266,7 +266,8 @@ async function generateResults(
   FarmContextState,
   FieldContextState,
   CropyearContextState,
-  setReportData
+  setReportData,
+  TOKEN
 ) {
   const RowValues = convertContextToRow(
     FarmContextState,
@@ -281,13 +282,11 @@ async function generateResults(
     },
     {
       headers: {
-        Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+        Authorization: "Bearer " + TOKEN,
         "Content-Type": "application/json",
       },
     }
   );
-
-  console.log(sessionResponse.data.id, "sessionResponseResult");
 
   // WRITE DOCUMENT
   await axios.patch(
@@ -297,9 +296,9 @@ async function generateResults(
     },
     {
       headers: {
-        Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+        Authorization: "Bearer " + TOKEN,
         "Content-Type": "application/json",
-        // "Workbook-Session-Id": sessionResponse.data.id,
+        "Workbook-Session-Id": sessionResponse.data.id,
       },
     }
   );
@@ -311,9 +310,9 @@ async function generateResults(
       `https://graph.microsoft.com/v1.0/me/drive/root:/FieldprintCalculatorV.3-EXPERIMENT.xlsx:/workbook/worksheets/Report Data/range(address='A1:AM2')`,
       {
         headers: {
-          Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+          Authorization: "Bearer " + TOKEN,
           "Content-Type": "application/json",
-          //   "Workbook-Session-Id": sessionResponse.data.id,
+          "Workbook-Session-Id": sessionResponse.data.id,
         },
       }
     );
@@ -326,7 +325,7 @@ async function generateResults(
       },
       {
         headers: {
-          Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+          Authorization: "Bearer " + TOKEN,
           "Content-Type": "application/json",
           "Workbook-Session-Id": sessionResponse.data.id,
         },
