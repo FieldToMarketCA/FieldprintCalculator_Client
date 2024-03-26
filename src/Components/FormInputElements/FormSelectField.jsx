@@ -9,12 +9,15 @@ export default function FormSelectField({
   helperText,
   modalTitle,
   onChange,
+
   modalDescription,
+  isDisabled = false,
   modalOff = false,
 }) {
   return (
     <div className="w-full flex mb-6">
       <TextField
+        disabled={isDisabled}
         id="outlined-select-currency"
         select
         sx={{ width: "100%", maxWidth: "300px" }}

@@ -62,6 +62,7 @@ export default function AnalysisPage({}) {
               Select Active Year for Data
             </h2>
             <FormSelectField
+              isDisabled={true}
               fieldLabel={"Active Year"}
               valuesArray={[{ value: 0, label: "Wheat - 2021" }]}
               helperText={"Active Crop Year Analysis"}
