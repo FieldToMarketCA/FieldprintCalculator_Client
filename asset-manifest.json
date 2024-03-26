@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.af622d80.css",
-    "main.js": "/static/js/main.af7de122.js",
-    "static/media/ftmc_logo.jpg": "/static/media/ftmc_logo.700b31590ebe490f535a.jpg",
-    "index.html": "/index.html",
-    "main.af622d80.css.map": "/static/css/main.af622d80.css.map",
-    "main.af7de122.js.map": "/static/js/main.af7de122.js.map"
+    "main.css": "/FieldprintCalculator_Client/static/css/main.af622d80.css",
+    "main.js": "/FieldprintCalculator_Client/static/js/main.7b37c662.js",
+    "static/media/ftmc_logo.jpg": "/FieldprintCalculator_Client/static/media/ftmc_logo.700b31590ebe490f535a.jpg",
+    "index.html": "/FieldprintCalculator_Client/index.html",
+    "main.af622d80.css.map": "/FieldprintCalculator_Client/static/css/main.af622d80.css.map",
+    "main.7b37c662.js.map": "/FieldprintCalculator_Client/static/js/main.7b37c662.js.map"
   },
   "entrypoints": [
     "static/css/main.af622d80.css",
-    "static/js/main.af7de122.js"
+    "static/js/main.7b37c662.js"
   ]
 }
