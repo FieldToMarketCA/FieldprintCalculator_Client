@@ -14,6 +14,11 @@ import FormSelectField from "../Components/FormInputElements/FormSelectField";
 import SwitchQuestion from "../Components/FormInputElements/SwitchQuestion";
 import OutlinedButton from "../Components/Buttons/OutlinedButton";
 
+import IndicatorLandUse from "../Components/Indicators/IndicatorLandUse";
+import IndicatorEnergyUse from "../Components/Indicators/IndicatorEnergyUse";
+import IndicatorGHG from "../Components/Indicators/IndicatorGHG";
+import IndicatorSoilErosion from "../Components/Indicators/IndicatorSoilErosion";
+
 export default function AnalysisPage({}) {
   return (
     <Page title={"New Field"} headerBorderColor={"border-[#34a853]"}>
@@ -81,6 +86,11 @@ export default function AnalysisPage({}) {
           <h2 className="text-[24px] text-[rgba(0,0,0,0.87)] mb-4">
             Fieldprint Data per Indicator
           </h2>
+
+          <IndicatorLandUse />
+          <IndicatorEnergyUse />
+          <IndicatorGHG />
+          <IndicatorSoilErosion />
         </div>
       </div>
     </Page>
