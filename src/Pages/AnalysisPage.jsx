@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useState, useContext } from "react";
 
 import {
   Radar,
@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+
 import Page from "../Components/Page";
 import FormSelectField from "../Components/FormInputElements/FormSelectField";
 import SwitchQuestion from "../Components/FormInputElements/SwitchQuestion";
@@ -19,7 +20,46 @@ import IndicatorEnergyUse from "../Components/Indicators/IndicatorEnergyUse";
 import IndicatorGHG from "../Components/Indicators/IndicatorGHG";
 import IndicatorSoilErosion from "../Components/Indicators/IndicatorSoilErosion";
 
+import { ReportDataContext } from "../App";
+
 export default function AnalysisPage({}) {
+  const reportDataConext = useContext(ReportDataContext);
+
+  const [spidergramData, setSpidergramData] = useState([
+    {
+      subject: "Land Use Efficiency",
+      A:
+        reportDataConext.state[1][16] <= 200
+          ? reportDataConext.state[1][16]
+          : 200,
+      fullMark: 200,
+    },
+    {
+      subject: "Energy Use",
+      A:
+        reportDataConext.state[1][19] <= 200
+          ? reportDataConext.state[1][19]
+          : 200,
+      fullMark: 200,
+    },
+    {
+      subject: "GHG Emissions",
+      A:
+        reportDataConext.state[1][22] <= 200
+          ? reportDataConext.state[1][22]
+          : 200,
+      fullMark: 200,
+    },
+    {
+      subject: "Soil Erosion Risk",
+      A:
+        reportDataConext.state[1][25] <= 200
+          ? reportDataConext.state[1][25]
+          : 200,
+      fullMark: 200,
+    },
+  ]);
+
   return (
     <Page title={"New Field"} headerBorderColor={"border-[#34a853]"}>
       <div>
@@ -46,7 +86,7 @@ export default function AnalysisPage({}) {
                 padding: "2rem",
               }}
             >
-              <Example />
+              <SpiderChart data={spidergramData} />
             </div>
             <p className="-mt-[200px]">
               Benchmarks represent an average based on USDA statistical data for
@@ -88,10 +128,32 @@ export default function AnalysisPage({}) {
             Fieldprint Data per Indicator
           </h2>
 
-          <IndicatorLandUse />
-          <IndicatorEnergyUse />
-          <IndicatorGHG />
-          <IndicatorSoilErosion />
+          <IndicatorLandUse
+            crop={reportDataConext.state[1][8]}
+            year={reportDataConext.state[1][7]}
+            fieldScore={reportDataConext.state[1][14]}
+            provincialScore={reportDataConext.state[1][15]}
+          />
+          <IndicatorEnergyUse
+            crop={reportDataConext.state[1][8]}
+            year={reportDataConext.state[1][7]}
+            fieldScore={reportDataConext.state[1][18]}
+            provincialScore={reportDataConext.state[1][19]}
+          />
+
+          <IndicatorGHG
+            crop={reportDataConext.state[1][8]}
+            year={reportDataConext.state[1][7]}
+            fieldScore={reportDataConext.state[1][20]}
+            provincialScore={reportDataConext.state[1][21]}
+          />
+
+          <IndicatorSoilErosion
+            crop={reportDataConext.state[1][8]}
+            year={reportDataConext.state[1][7]}
+            fieldScore={reportDataConext.state[1][23]}
+            provincialScore={reportDataConext.state[1][24]}
+          />
         </div>
       </div>
     </Page>
@@ -99,36 +161,37 @@ export default function AnalysisPage({}) {
 }
 
 // CHART
-const data = [
-  {
-    subject: "Land Use Efficiency",
-    A: 50,
-    fullMark: 100,
-  },
-  {
-    subject: "Energy Use",
-    A: 98,
-    fullMark: 100,
-  },
-  {
-    subject: "GHG Emissions",
-    A: 86,
-    fullMark: 100,
-  },
-  {
-    subject: "Soil Erosion Risk",
-    A: 99,
-    fullMark: 100,
-  },
-];
 
-class Example extends PureComponent {
+// const data = [
+//   {
+//     subject: "Land Use Efficiency",
+//     A: myObj.LandUseEfficiencyIndex,
+//     fullMark: 200,
+//   },
+//   {
+//     subject: "Energy Use",
+//     A: myObj.EnergyUseIndex,
+//     fullMark: 200,
+//   },
+//   {
+//     subject: "GHG Emissions",
+//     A: myObj.ClimateImpactIndex,
+//     fullMark: 200,
+//   },
+//   {
+//     subject: "Soil Erosion Risk",
+//     A: myObj.SoilErosionIndex,
+//     fullMark: 200,
+//   },
+// ];
+
+class SpiderChart extends PureComponent {
   static demoUrl = "https://codesandbox.io/s/simple-radar-chart-rjoc6";
 
   render() {
     return (
       <ResponsiveContainer width="100%" height="100%">
-        <RadarChart cx="55%" cy="30%" outerRadius="48%" data={data}>
+        <RadarChart cx="55%" cy="30%" outerRadius="48%" data={this.props.data}>
           <PolarGrid />
           <PolarAngleAxis dataKey="subject" />
           <PolarRadiusAxis />
@@ -146,3 +209,45 @@ class Example extends PureComponent {
     );
   }
 }
+
+const myObj = {
+  UniqueID: 0,
+  Ecodistrict: "#N/A",
+  Province: "#N/A",
+  SoilType: "#N/A",
+  SoilTexture: "#N/A",
+  SurfaceForm: "#N/A",
+  Slope: "#N/A",
+  Year: "#N/A",
+  Crop: "#N/A",
+  TotalNitrogen: "#N/A",
+  TotalPhosphorus: "#N/A",
+  TotalPotassium: "#N/A",
+  TotalSulfur: "#N/A",
+  TotalOtherFertilizer: "#N/A",
+  LandUseEfficiency: "#N/A",
+  ProvincialLandUseEfficiency: "#N/A",
+  LandUseEfficiencyIndex: "#N/A",
+  EnergyUseGJ: "#N/A",
+  ProvincialEnergyUse: "#N/A",
+  EnergyUseIndex: "#N/A",
+  GHGEmissions: "#N/A",
+  ProvincialGHGEmissions: "#N/A",
+  ClimateImpactIndex: "#N/A",
+  SoilErosionRisk: 0,
+  ProvincialSoilErosionRisk: "#N/A",
+  SoilErosionIndex: "#N/A",
+  ProvincialSoilLoss: "#N/A",
+  ProvincialYield: "#N/A",
+  ProvincialLandUse: "#N/A",
+  ProvincialEnergyUseCrop: "#N/A",
+  ProvincialClimateImpact: "#N/A",
+  ProvincialFieldworkClimateImpact: "#N/A",
+  ProvincialNonFieldworkClimateImpact: "#N/A",
+  ProvincialNFertilizer: "#N/A",
+  ProvincialCropResidue: "#N/A",
+  ProvincialLeaching: "#N/A",
+  ProvincialVolatilization: "#N/A",
+  TotalGHGemissions: 0,
+  Column1: "",
+};

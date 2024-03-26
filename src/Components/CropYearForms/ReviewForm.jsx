@@ -3,7 +3,13 @@ import MainButton from "../Buttons/MainButton";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 
-import { FarmContext, FieldContext, CropYearContext } from "../../App";
+import {
+  FarmContext,
+  FieldContext,
+  CropYearContext,
+  ReportDataContext,
+} from "../../App";
+
 import { generateResults } from "../WorkBookRequest";
 import LoadingButton from "../Buttons/LoadingButton";
 import { SECRETS_CONTEXT } from "../../App";
@@ -11,10 +17,13 @@ import { SECRETS_CONTEXT } from "../../App";
 export default function ReviewForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [reportData, setReportData] = useState(null);
+  // const [reportData, setReportData] = useState(null);
 
   const navigate = useNavigate();
   const SECRETS = useContext(SECRETS_CONTEXT);
+
+  const reportDataContext = useContext(ReportDataContext);
+
   const farmContext = useContext(FarmContext);
   const fieldContext = useContext(FieldContext);
   const cropYearContext = useContext(CropYearContext);
@@ -25,7 +34,7 @@ export default function ReviewForm() {
       navigate("/analysis");
       return;
     }
-    console.log(SECRETS.SECRETS.token);
+
     if (!loading) {
       setSuccess(false);
       setLoading(true);
@@ -34,21 +43,21 @@ export default function ReviewForm() {
         farmContext.state,
         fieldContext.state,
         cropYearContext.state,
-        setReportData,
+        reportDataContext.setter,
         SECRETS.SECRETS.token
       );
     }
   }
 
   useEffect(() => {
-    if (reportData !== null) {
+    if (reportDataContext.state) {
       setSuccess(true);
       setLoading(false);
       // setTimeout(() => {
       //   navigate("/analysis");
       // }, 2000);
     }
-  }, [reportData]);
+  }, [reportDataContext.state]);
 
   return (
     <div className="w-full  text-[rgb(102,102,102)] h-full">

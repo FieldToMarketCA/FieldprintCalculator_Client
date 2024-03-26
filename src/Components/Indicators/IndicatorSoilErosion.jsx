@@ -3,7 +3,12 @@ import soilErosionRiskIcon from "../../Assets/Icons/soilErosionRiskIcon.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-export default function IndicatorSoilErosion({ indicatorName, data }) {
+export default function IndicatorSoilErosion({
+  crop,
+  year,
+  fieldScore,
+  provincialScore,
+}) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const InvidividualResultTable = () => {
@@ -15,11 +20,11 @@ export default function IndicatorSoilErosion({ indicatorName, data }) {
               Soil Erosion Risk
             </p>
           </div>
-          <div className="text-[16px]">YYYY *Crop*</div>
+          <div className="text-[16px]">{`${year} ${crop}`}</div>
           <div className="text-[24px] text-[rgb(0,164,229)] font-light ">
-            0.0
+            {fieldScore}
           </div>
-          <div className="text-[16px]">measure / Unit</div>
+          <div className="text-[16px]">Mg / ha / yr</div>
         </div>
         <p className="bg-[rgb(238,238,238)] ml-8 p-3 border-[3px] border-[rgb(0,164,229)]">
           The Soil Conservation metric is expressed as soil erosion and is
@@ -50,7 +55,7 @@ export default function IndicatorSoilErosion({ indicatorName, data }) {
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] border-b-0">
-            <p className="mr-2">{"NAN"} ton / acre / year</p>
+            <p className="mr-2">{fieldScore}Mg / ha / yr</p>
           </div>
           <div className="border-[1px] content-center border-[rgb(204,204,204)] border-r-0 ">
             <div className="flex ml-2">
@@ -59,7 +64,7 @@ export default function IndicatorSoilErosion({ indicatorName, data }) {
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] ">
-            <p className="mr-2">{"NAN"} ton / acre / year</p>
+            <p className="mr-2">{provincialScore}Mg / ha / yr</p>
           </div>
         </div>
         {/* SUPPORTING TEXT */}

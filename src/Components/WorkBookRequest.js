@@ -288,20 +288,20 @@ async function generateResults(
     }
   );
 
-  // WRITE DOCUMENT
-  await axios.patch(
-    `https://graph.microsoft.com/v1.0/me/drive/root:/FieldprintCalculatorV.3-EXPERIMENT.xlsx:/workbook/worksheets/Data/range(address='A2:EJ2')`,
-    {
-      values: [RowValues],
-    },
-    {
-      headers: {
-        Authorization: "Bearer " + TOKEN,
-        "Content-Type": "application/json",
-        "Workbook-Session-Id": sessionResponse.data.id,
-      },
-    }
-  );
+  // // WRITE DOCUMENT
+  // await axios.patch(
+  //   `https://graph.microsoft.com/v1.0/me/drive/root:/FieldprintCalculatorV.3-EXPERIMENT.xlsx:/workbook/worksheets/Data/range(address='A2:EJ2')`,
+  //   {
+  //     values: [RowValues],
+  //   },
+  //   {
+  //     headers: {
+  //       Authorization: "Bearer " + TOKEN,
+  //       "Content-Type": "application/json",
+  //       "Workbook-Session-Id": sessionResponse.data.id,
+  //     },
+  //   }
+  // );
 
   // GET RESULTS AND CLOSE SESSION
   setTimeout(async () => {

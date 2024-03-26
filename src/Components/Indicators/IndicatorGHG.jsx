@@ -3,7 +3,12 @@ import GHG_Icon from "../../Assets/Icons/GHG_Icon.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-export default function IndicatorGHG({ indicatorName, data }) {
+export default function IndicatorGHG({
+  crop,
+  year,
+  fieldScore,
+  provincialScore,
+}) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const InvidividualResultTable = () => {
@@ -15,11 +20,11 @@ export default function IndicatorGHG({ indicatorName, data }) {
               Greenhouse Gas
             </p>
           </div>
-          <div className="text-[16px]">YYYY *Crop*</div>
+          <div className="text-[16px]">{`${year} ${crop}`}</div>
           <div className="text-[24px] text-[rgb(0,164,229)] font-light ">
-            0.0
+            {fieldScore}
           </div>
-          <div className="text-[16px]">measure / Unit</div>
+          <div className="text-[16px]">tCO2 / tonne</div>
         </div>
         <p className="bg-[rgb(238,238,238)] ml-8 p-3 border-[3px] border-[rgb(0,164,229)]">
           Greenhouse gas emissions are reported in the Fieldprint® Platform as
@@ -56,7 +61,7 @@ export default function IndicatorGHG({ indicatorName, data }) {
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] border-b-0">
-            <p className="mr-2">{"NAN"} lbs_co2e / bushel</p>
+            <p className="mr-2">{fieldScore} tCO2 / tonne</p>
           </div>
           <div className="border-[1px] content-center border-[rgb(204,204,204)] border-r-0 ">
             <div className="flex ml-2">
@@ -65,7 +70,7 @@ export default function IndicatorGHG({ indicatorName, data }) {
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] ">
-            <p className="mr-2">{"NAN"} lbs_co2e / bushel</p>
+            <p className="mr-2">{provincialScore} tCO2 / tonne</p>
           </div>
         </div>
         {/* SUPPORTING TEXT */}

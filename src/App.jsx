@@ -48,13 +48,19 @@ const theme = createTheme({
 const FarmContext = createContext();
 const FieldContext = createContext();
 const CropYearContext = createContext();
+
 const SECRETS_CONTEXT = createContext();
+
+const ReportDataContext = createContext();
 
 function App() {
   const [SECRETS, SET_SECRETS] = useState(false);
+
   const [farmState, setFarmState] = useState(FARM_CREATOR());
   const [fieldState, setFieldState] = useState(FIELD_CREATOR());
   const [cropyearState, setCropyearState] = useState(CROPYEAR_CREATOR());
+
+  const [reportData, setReportData] = useState(false);
 
   useEffect(() => {
     const getCredentials = async () => {
@@ -81,19 +87,23 @@ function App() {
             <CropYearContext.Provider
               value={{ state: cropyearState, setter: setCropyearState }}
             >
-              <div className="App">
-                <HashRouter>
-                  <Routes>
-                    <Route exact path="/" element={<AddFarmPage />} />
-                    {/* <Route exact path="/farm" element={<AddFarmPage />} /> */}
+              <ReportDataContext.Provider
+                value={{ state: reportData, setter: setReportData }}
+              >
+                <div className="App">
+                  <HashRouter>
+                    <Routes>
+                      <Route exact path="/" element={<AddFarmPage />} />
+                      {/* <Route exact path="/farm" element={<AddFarmPage />} /> */}
 
-                    {/* </Route> */}
-                    <Route path="/field" element={<AddFieldPage />} />
-                    <Route path="/cropyear" element={<AddCropYear />} />
-                    <Route path="/analysis" element={<AnalysisPage />} />
-                  </Routes>
-                </HashRouter>
-              </div>
+                      {/* </Route> */}
+                      <Route path="/field" element={<AddFieldPage />} />
+                      <Route path="/cropyear" element={<AddCropYear />} />
+                      <Route path="/analysis" element={<AnalysisPage />} />
+                    </Routes>
+                  </HashRouter>
+                </div>
+              </ReportDataContext.Provider>
             </CropYearContext.Provider>
           </FieldContext.Provider>
         </FarmContext.Provider>
@@ -102,6 +112,12 @@ function App() {
   );
 }
 
-export { FarmContext, FieldContext, CropYearContext, SECRETS_CONTEXT };
+export {
+  FarmContext,
+  FieldContext,
+  CropYearContext,
+  SECRETS_CONTEXT,
+  ReportDataContext,
+};
 
 export default App;
