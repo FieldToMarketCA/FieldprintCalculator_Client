@@ -25,7 +25,7 @@ import { SECRETS_CONTEXT } from "../App";
 import { useContext } from "react";
 
 export default function AddFieldPage() {
-  const [addressQuery, setAddressQuery] = useState("Serecon Inc,Edmonton,+AB");
+  const [addressQuery, setAddressQuery] = useState("Canada");
   const navigate = useNavigate();
 
   const fieldContext = useContext(FieldContext);
