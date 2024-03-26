@@ -1,6 +1,11 @@
 // import logo from "./logo.svg";
 // import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  HashRouter,
+} from "react-router-dom";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import ComponentGlossary from "./ComponentGlossary";
 import AddFarmPage from "./Pages/AddFarmPage";
@@ -58,7 +63,7 @@ function App() {
             value={{ state: cropyearState, setter: setCropyearState }}
           >
             <div className="App">
-              <Router>
+              <HashRouter>
                 <Routes>
                   <Route exact path="/" element={<AddFarmPage />} />
                   {/* <Route exact path="/farm" element={<AddFarmPage />} /> */}
@@ -68,7 +73,7 @@ function App() {
                   <Route path="/cropyear" element={<AddCropYear />} />
                   <Route path="/analysis" element={<AnalysisPage />} />
                 </Routes>
-              </Router>
+              </HashRouter>
             </div>
           </CropYearContext.Provider>
         </FieldContext.Provider>
