@@ -10,9 +10,9 @@ import {
 } from "../../Assets/DataTypes";
 
 import { CropYearContext } from "../../App";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
-export default function HarvestForm() {
+export default function HarvestForm({ LowerPanel, panelControls }) {
   const cropyearContext = useContext(CropYearContext);
 
   function handleMachineOperation(event, machineType, key) {
@@ -66,7 +66,10 @@ export default function HarvestForm() {
     });
     // console.log("mamichula", cropyearContext.state.harvest);
   }
-
+  useEffect(() => {
+    const element = document.getElementById("scrollableDiv");
+    element.scrollBy({ top: -1000, left: 0, behavior: "smooth" });
+  }, []);
   return (
     <div className=" w-full h-full ">
       <h3 className="text-[rgb(102,102,102)] text-[30px]">Harvest</h3>
@@ -155,6 +158,15 @@ export default function HarvestForm() {
           fieldState={cropyearContext.state.harvest.afterDrying}
         />
       </section>
+      <LowerPanel
+        activeStep={panelControls.activeStep}
+        handleBack={panelControls.handleBack}
+        handleNext={panelControls.handleNext}
+        steps={panelControls.steps}
+        handleComplete={panelControls.handleComplete}
+        completedSteps={panelControls.completedSteps}
+        totalSteps={panelControls.totalSteps}
+      />
     </div>
   );
 }

@@ -12,9 +12,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { CropYearContext } from "../../App";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
-export default function RotationForm() {
+export default function RotationForm({ LowerPanel, panelControls }) {
   const cropyearContext = useContext(CropYearContext);
 
   function handleStateChange(target, key) {
@@ -26,7 +26,10 @@ export default function RotationForm() {
 
     cropyearContext.setter({ ...cropyearContext.state, crop: updatedCrop });
   }
-  // console.log("xxx", cropyearContext.state.crop.cropThisYear);
+  useEffect(() => {
+    const element = document.getElementById("scrollableDiv");
+    element.scrollBy({ top: -1000, left: 0, behavior: "smooth" });
+  }, []);
   return (
     <div className=" w-full h-full">
       <h3 className="text-[rgb(102,102,102)] text-[30px]">
@@ -95,6 +98,16 @@ export default function RotationForm() {
         modalTitle={"Crop Prior Year"}
         modalDescription={"The crop for the previous year."}
         fieldState={cropyearContext.state.crop.previousCrop}
+      />
+
+      <LowerPanel
+        activeStep={panelControls.activeStep}
+        handleBack={panelControls.handleBack}
+        handleNext={panelControls.handleNext}
+        steps={panelControls.steps}
+        handleComplete={panelControls.handleComplete}
+        completedSteps={panelControls.completedSteps}
+        totalSteps={panelControls.totalSteps}
       />
     </div>
   );

@@ -16,7 +16,7 @@ import { useContext } from "react";
 
 const cultivationOperationType = { machineObj: "", hoursOfOperation: 0 };
 
-export default function FieldOperationsForm() {
+export default function FieldOperationsForm({ LowerPanel, panelControls }) {
   const cropyearContext = useContext(CropYearContext);
 
   const [usedFertilizer, setUsedFertilizer] = useState(false);
@@ -166,6 +166,11 @@ export default function FieldOperationsForm() {
     const element = document.getElementById("scrollableDiv");
     element.scrollBy({ top: 100, left: 0, behavior: "smooth" });
   }, [numberOfPesticide]);
+
+  useEffect(() => {
+    const element = document.getElementById("scrollableDiv");
+    element.scrollBy({ top: -1000, left: 0, behavior: "smooth" });
+  }, []);
 
   function handleCheckmark(event, key) {
     let entry = {};
@@ -347,6 +352,15 @@ export default function FieldOperationsForm() {
           })}
         </ul>
       </section>
+      <LowerPanel
+        activeStep={panelControls.activeStep}
+        handleBack={panelControls.handleBack}
+        handleNext={panelControls.handleNext}
+        steps={panelControls.steps}
+        handleComplete={panelControls.handleComplete}
+        completedSteps={panelControls.completedSteps}
+        totalSteps={panelControls.totalSteps}
+      />
     </div>
   );
 }

@@ -28,6 +28,11 @@ export default function ReviewForm() {
   const fieldContext = useContext(FieldContext);
   const cropYearContext = useContext(CropYearContext);
 
+  useEffect(() => {
+    const element = document.getElementById("scrollableDiv");
+    element.scrollBy({ top: -1000, left: 0, behavior: "smooth" });
+  }, []);
+
   function handleGenerateAnalysis() {
     if (loading) return;
     if (success) {
@@ -60,7 +65,7 @@ export default function ReviewForm() {
   }, [reportDataContext.state]);
 
   return (
-    <div className="w-full  text-[rgb(102,102,102)] h-full">
+    <div id="reviewFormId" className="w-full  text-[rgb(102,102,102)] ">
       <div>
         <h3 className="text-[30px]">Review and Calculate</h3>
         <Divider sx={{ marginBottom: 3 }} />

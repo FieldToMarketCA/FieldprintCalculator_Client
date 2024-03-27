@@ -45,6 +45,44 @@ export default function HorizontalNonLinearStepper({ steps }) {
     setActiveStep(step);
   };
 
+  const LowerPanelComponent = ({
+    activeStep,
+    handleBack,
+    handleNext,
+    steps,
+    handleComplete,
+    completedSteps,
+    totalSteps,
+  }) => {
+    return (
+      <Box sx={{ display: "flex", flexDirection: "row", pt: 2, pb: "75px" }}>
+        <Button
+          color="inherit"
+          disabled={activeStep === 0}
+          onClick={handleBack}
+          sx={{ mr: 1 }}
+        >
+          Back
+        </Button>
+        <Box sx={{ flex: "1 1 auto" }} />
+        <Button onClick={handleNext} sx={{ mr: 1 }}>
+          Next
+        </Button>
+        {activeStep !== steps.length &&
+          (completed[activeStep] ? (
+            <Typography variant="caption" sx={{ display: "inline-block" }}>
+              Step {activeStep + 1} already completed
+            </Typography>
+          ) : (
+            <Button onClick={handleComplete}>
+              {completedSteps() === totalSteps() - 1
+                ? "Finish"
+                : "Complete Step"}
+            </Button>
+          ))}
+      </Box>
+    );
+  };
   const handleComplete = () => {
     const newCompleted = completed;
     newCompleted[activeStep] = true;
@@ -122,11 +160,23 @@ export default function HorizontalNonLinearStepper({ steps }) {
           <React.Fragment>
             {/* FORM */}
             <div className="mt-2 mb-1 py-1 w-full h-full">
-              <CurrentForm />
+              <CurrentForm
+                LowerPanel={LowerPanelComponent}
+                panelControls={{
+                  activeStep: activeStep,
+                  handleBack: handleBack,
+                  handleNext: handleNext,
+                  steps: steps,
+                  handleComplete: handleComplete,
+                  completedSteps: completedSteps,
+                  totalSteps: totalSteps,
+                }}
+              />
             </div>
 
             {/* LOWER PANEL */}
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+
+            {/* <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
                 color="inherit"
                 disabled={activeStep === 0}
@@ -154,7 +204,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
                       : "Complete Step"}
                   </Button>
                 ))}
-            </Box>
+            </Box> */}
           </React.Fragment>
         )}
       </div>
