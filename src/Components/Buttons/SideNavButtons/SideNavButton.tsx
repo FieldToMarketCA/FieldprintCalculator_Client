@@ -18,12 +18,14 @@ export default function SideNavButton({
   text,
   icon,
   borderColor = "rgb(170,170,170)",
+  isDisabled = false,
 }: {
   isCollapsed: boolean;
   text: string;
   onClick: React.MouseEventHandler;
   icon: string;
   borderColor?: string;
+  isDisabled?: boolean;
 }) {
   const [isHover, setIsHover] = useState(false);
 
@@ -60,6 +62,7 @@ export default function SideNavButton({
 
   return (
     <Button
+      disabled={isDisabled}
       style={{
         paddingLeft: 0,
         paddingRight: 0,

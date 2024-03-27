@@ -131,28 +131,44 @@ export default function AnalysisPage({}) {
           <IndicatorLandUse
             crop={reportDataConext.state[1][8]}
             year={reportDataConext.state[1][7]}
-            fieldScore={reportDataConext.state[1][14]}
-            provincialScore={reportDataConext.state[1][15]}
+            fieldScore={Number.parseFloat(
+              reportDataConext.state[1][14]
+            ).toFixed(4)}
+            provincialScore={Number.parseFloat(
+              reportDataConext.state[1][15]
+            ).toFixed(4)}
           />
           <IndicatorEnergyUse
             crop={reportDataConext.state[1][8]}
             year={reportDataConext.state[1][7]}
-            fieldScore={reportDataConext.state[1][18]}
-            provincialScore={reportDataConext.state[1][19]}
+            fieldScore={Number.parseFloat(
+              reportDataConext.state[1][18]
+            ).toFixed(4)}
+            provincialScore={Number.parseFloat(
+              reportDataConext.state[1][19]
+            ).toFixed(4)}
           />
 
           <IndicatorGHG
             crop={reportDataConext.state[1][8]}
             year={reportDataConext.state[1][7]}
-            fieldScore={reportDataConext.state[1][20]}
-            provincialScore={reportDataConext.state[1][21]}
+            fieldScore={Number.parseFloat(
+              reportDataConext.state[1][20]
+            ).toFixed(4)}
+            provincialScore={Number.parseFloat(
+              reportDataConext.state[1][21]
+            ).toFixed(4)}
           />
 
           <IndicatorSoilErosion
             crop={reportDataConext.state[1][8]}
             year={reportDataConext.state[1][7]}
-            fieldScore={reportDataConext.state[1][23]}
-            provincialScore={reportDataConext.state[1][24]}
+            fieldScore={Number.parseFloat(
+              reportDataConext.state[1][23]
+            ).toFixed(4)}
+            provincialScore={Number.parseFloat(
+              reportDataConext.state[1][24]
+            ).toFixed(4)}
           />
         </div>
       </div>
