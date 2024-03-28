@@ -66,7 +66,7 @@ export default function IndicatorEnergyuse({
           <div className="border-[1px] content-center border-[rgb(204,204,204)] border-r-0 ">
             <div className="flex ml-2">
               <div className="w-[20px] h-[20px] bg-[rgb(255,125,50)] mr-2"></div>
-              <p className="truncate">National Benchmarks</p>
+              <p className="truncate">Province Benchmarks</p>
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] ">
@@ -76,11 +76,11 @@ export default function IndicatorEnergyuse({
         {/* SUPPORTING TEXT */}
         <p className="bg-[rgb(238,238,238)] p-3 border-[3px] border-[rgb(255,125,50)]">
           Energy Use score in comparison to available benchmarks. Benchmarks are
-          an average of USDA statistical data for the period 2008-2012, to
-          provide context for your scores. Benchmarks should not be interpreted
-          as a specific level of sustainability, or a performance target. State
-          and National benchmarks that are not shown in the table or on the
-          spidergram are not available for the applicable metric.
+          an average of provincial statistical data for the period 20011-2023,
+          to provide context for your scores. Benchmarks should not be
+          interpreted as a specific level of sustainability, or a performance
+          target. Provincial benchmarks not shown in the graphs are not
+          available for the applicable metric
         </p>
       </div>
     );

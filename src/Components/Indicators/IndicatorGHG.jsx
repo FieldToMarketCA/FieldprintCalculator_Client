@@ -35,10 +35,10 @@ export default function IndicatorGHG({
           emissions are converted to the equivalent amount of CO2, to provide a
           common unit of all emissions in one measure, which is comparable over
           time and influenced by all the actions a farmer takes. The Fieldprint®
-          Platform uses standard U.S. government assumptions regarding fuel use,
+          Platform uses standard AAFC government assumptions regarding fuel use,
           such as the 22.3 pounds of CO2e that are emitted per gallon of diesel
           combusted. Emissions also result from electricity and fuel usage as
-          well as from burning crop residues. <b>Low scores are desirable </b>
+          well as from burning crop residues. <b>Low scores are desirable</b>
           and indicate less greenhouse gas emitted per unit of crop produced.
         </p>
       </div>
@@ -68,7 +68,7 @@ export default function IndicatorGHG({
           <div className="border-[1px] content-center border-[rgb(204,204,204)] border-r-0 ">
             <div className="flex ml-2">
               <div className="w-[20px] h-[20px] bg-[rgb(255,125,50)] mr-2"></div>
-              <p className="truncate">National Benchmarks</p>
+              <p className="truncate">Province Benchmarks</p>
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] ">
@@ -78,11 +78,11 @@ export default function IndicatorGHG({
         {/* SUPPORTING TEXT */}
         <p className="bg-[rgb(238,238,238)] p-3 border-[3px] border-[rgb(255,125,50)]">
           Greenhouse Gas score in comparison to available benchmarks. Benchmarks
-          are an average of USDA statistical data for the period 2008-2012, to
-          provide context for your scores. Benchmarks should not be interpreted
-          as a specific level of sustainability, or a performance target. State
-          and National benchmarks that are not shown in the table or on the
-          spidergram are not available for the applicable metric.
+          are an average of provincial statistical data for the period
+          20011-2023, to provide context for your scores. Benchmarks should not
+          be interpreted as a specific level of sustainability, or a performance
+          target. Provincial benchmarks not shown in the graphs are not
+          available for the applicable metric
         </p>
       </div>
     );
@@ -113,11 +113,10 @@ export default function IndicatorGHG({
       >
         <p>
           The Greenhouse Gas (GHG) Emissions metric calculates the total
-          emissions from four main sources – energy use, nitrous oxide emissions
-          from soils, methane emissions (rice only) and emissions from residue
-          burning. It is an efficiency metric calculated using a series of
-          complex algorithms to determine the total GHG emissions per unit of
-          crop production.
+          emissions from three main sources – energy use, nitrous oxide
+          emissions from soils, and emissions from residue burning. It is an
+          efficiency metric calculated using a series of complex algorithms to
+          determine the total GHG emissions per unit of crop production.
         </p>
 
         {/* INVIDIVUAL RESULT TABLE */}

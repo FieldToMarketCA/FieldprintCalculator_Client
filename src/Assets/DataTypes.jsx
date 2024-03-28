@@ -77,12 +77,12 @@ const SurfaceFormTypes = [
 ];
 
 const SlopeClassTypes = [
-  { value: "A", label: "A = [0 - 0.5)" },
-  { value: "B", label: "B = [0.5 - 2.0)" },
-  { value: "C", label: "C = [2.0 - 5.0)" },
-  { value: "D", label: "D = [5.0 - 9.0)" },
-  { value: "E", label: "E = [9.0 - 15.0)" },
-  { value: "F", label: "F = [15.0 - 30.0)" },
+  { value: "A", label: "A = (0 - 0.5)" },
+  { value: "B", label: "B = (0.5 - 2.0)" },
+  { value: "C", label: "C = (2.0 - 5.0)" },
+  { value: "D", label: "D = (5.0 - 9.0)" },
+  { value: "E", label: "E = (9.0 - 15.0)" },
+  { value: "F", label: "F = (15.0 - 30.0)" },
 ];
 
 const ObservedWindErosionTypes = [

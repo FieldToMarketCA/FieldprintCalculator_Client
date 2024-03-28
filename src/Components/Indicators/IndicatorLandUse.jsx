@@ -29,12 +29,11 @@ export default function IndicatorLandUse({
           <div className="text-[16px]">ha / tonne</div>
         </div>
         <p className="bg-[rgb(238,238,238)] ml-8 p-3 border-[3px] border-[rgb(0,164,229)]">
-          Land use efficiency is a measure of the amount of land (acres) used to
-          produce a unit of crop (bushels, pounds, etc.) Examples: In corn, land
-          use is measured in acres/bushel; in cotton as acres/pound of lint.
-          This is an inverse of yield measures, which are expressed as bushels
-          per acre or pounds of lint per acre. Lower scores are desirable and
-          indicate greater land use efficiency.
+          Land use efficiency is a measure of the amount of land (hectares) used
+          to produce a unit of crop (bushels, pounds, etc.) This is an inverse
+          of yield measures, which are expressed as hectares of land per tonne
+          of crop produced. Lower scores are desirable and indicate greater land
+          use efficiency.
         </p>
       </div>
     );
@@ -63,7 +62,7 @@ export default function IndicatorLandUse({
           <div className="border-[1px] content-center border-[rgb(204,204,204)] border-r-0 ">
             <div className="flex ml-2">
               <div className="w-[20px] h-[20px] bg-[rgb(255,125,50)] mr-2"></div>
-              <p className="truncate">National Benchmarks</p>
+              <p className="truncate">Province Benchmarks</p>
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] ">
@@ -72,12 +71,11 @@ export default function IndicatorLandUse({
         </div>
         {/* SUPPORTING TEXT */}
         <p className="bg-[rgb(238,238,238)] p-3 border-[3px] border-[rgb(255,125,50)]">
-          Land use efficiency is a measure of the amount of land (acres) used to
-          produce a unit of crop (bushels, pounds, etc.) Examples: In corn, land
-          use is measured in acres/bushel; in cotton as acres/pound of lint.
-          This is an inverse of yield measures, which are expressed as bushels
-          per acre or pounds of lint per acre. Lower scores are desirable and
-          indicate greater land use efficiency.
+          Land use efficiency is a measure of the amount of land (hectares) used
+          to produce a unit of crop (bushels, pounds, etc.) This is an inverse
+          of yield measures, which are expressed as hectares of land per tonne
+          of crop produced. Lower scores are desirable and indicate greater land
+          use efficiency.
         </p>
       </div>
     );

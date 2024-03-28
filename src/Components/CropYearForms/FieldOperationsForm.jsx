@@ -368,7 +368,7 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
 const TRACTORS = [
   {
     type: "TRACTOR",
-    name: "Mate",
+    name: "Tractor 1",
     HP: 800,
     fuelUse: null,
     defaultAcreHour: 2,
@@ -377,7 +377,7 @@ const TRACTORS = [
 const SPRAYERS = [
   {
     type: "SPRAYER",
-    name: "Mosquito",
+    name: "Sprayer 1",
     HP: 150,
     fuelUse: null,
     defaultAcreHour: 30,

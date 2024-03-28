@@ -29,11 +29,17 @@ export default function IndicatorSoilErosion({
           <div className="text-[16px]">Mg / ha / yr</div>
         </div>
         <p className="bg-[rgb(238,238,238)] ml-8 p-3 border-[3px] border-[rgb(0,164,229)]">
-          The Soil Conservation metric is expressed as soil erosion and is
-          measured as tons of soil lost (T) per unit of land area (acre) per
-          year. Lower numbers are desirable and indicate less soil lost from
-          erosion per acre. A Soil Erosion Fieldprint Score of 0 would indicate
-          that no soil was lost in that year.
+          The Soil Erosion Risk metric is a measure of how at risk soil is to
+          erosion from tillage, water and wind, and is calculated using RUSLE2
+          models and reported to the user as milligrams of soil lost per acre.
+          It is an efficiency metric that uses a complex biophysical model to
+          simulate crop growth, water flow across the field, and sediment
+          runoff. The Soil Conservation metric is expressed as soil erosion and
+          is measured as potential milligrams of soil lost (Mg) per unit of land
+          area (hectare) per year. Lower numbers are desirable and indicate less
+          soil lost from erosion per hectare. A Soil Erosion Fieldprint Score of
+          0 would indicate that there is no potential for soil to be lost in
+          that year.
         </p>
       </div>
     );
@@ -62,7 +68,7 @@ export default function IndicatorSoilErosion({
           <div className="border-[1px] content-center border-[rgb(204,204,204)] border-r-0 ">
             <div className="flex ml-2">
               <div className="w-[20px] h-[20px] bg-[rgb(255,125,50)] mr-2"></div>
-              <p className="truncate">National Benchmarks</p>
+              <p className="truncate">Province Benchmarks</p>
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] ">
@@ -71,12 +77,12 @@ export default function IndicatorSoilErosion({
         </div>
         {/* SUPPORTING TEXT */}
         <p className="bg-[rgb(238,238,238)] p-3 border-[3px] border-[rgb(255,125,50)]">
-          Soil Conservation score in comparison to available benchmarks.
-          Benchmarks are an average of USDA statistical data for the period
-          2008-2012, to provide context for your scores. Benchmarks should not
-          be interpreted as a specific level of sustainability, or a performance
-          target. State and National benchmarks that are not shown in the table
-          or on the spidergram are not available for the applicable metric.
+          Soil Erosion Risk score in comparison to available benchmarks.
+          Benchmarks are an average of provincial statistical data for the
+          period 20011-2023, to provide context for your scores. Benchmarks
+          should not be interpreted as a specific level of sustainability, or a
+          performance target. Provincial benchmarks not shown in the graphs are
+          not available for the applicable metric
         </p>
       </div>
     );
@@ -112,11 +118,12 @@ export default function IndicatorSoilErosion({
         }`}
       >
         <p>
-          The Soil Conservation metric is a measure of soil lost to erosion from
-          water and wind, and is calculated using USDA NRCS models and reported
-          to the user as tons of soil lost per acre. It is an efficiency metric
-          that uses a complex biophysical model to simulate crop growth, water
-          flow across the field, and sediment runoff.
+          The Soil Erosion Risk metric is a measure of how at risk soil is to
+          erosion from tillage, water and wind, and is calculated using RUSLE2
+          models and reported to the user as milligrams (Mg) of soil lost per
+          hectare per year. It is an efficiency metric that uses a complex
+          biophysical model to simulate crop growth, water flow across the
+          field, and sediment runoff.
         </p>
 
         {/* INVIDIVUAL RESULT TABLE */}

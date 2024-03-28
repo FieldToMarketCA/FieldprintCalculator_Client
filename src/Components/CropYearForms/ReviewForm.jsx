@@ -92,7 +92,7 @@ export default function ReviewForm() {
           <p className="font-bold">2. Calculate Fieldprint Analysis</p>
           <p className="max-w-[700px]">
             Now that your data is complete, you can generate your Fieldprint
-            Analysi-s. You can return at any time to edit the crop year data or
+            Analysis. You can return at any time to edit the crop year data or
             change the data status.
           </p>
           <div className="pl-[40px] pb-[24px] mt-4">

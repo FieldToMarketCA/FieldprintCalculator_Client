@@ -21,14 +21,14 @@ export default function Footer() {
           href="https://fieldtomarketca.github.io/FieldprintCalculator_Client/"
           className="text-white no-underline text-[11px] hover:underline "
         >
-          support@fieldtomarketcanada.org
+          membership@fieldtomarket.ca
         </a>
         <p className="text-white mx-2">|</p>
         <a
           href="https://fieldtomarketca.github.io/FieldprintCalculator_Client/"
           className="text-white no-underline text-[11px] hover:underline "
         >
-          www.fieldtomarketcanada.org
+          www.fieldtomarket.ca
         </a>
       </div>
     </div>

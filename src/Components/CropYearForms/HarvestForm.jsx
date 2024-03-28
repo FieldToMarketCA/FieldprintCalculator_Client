@@ -174,7 +174,7 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
 const SWATHERS = [
   {
     type: "SWATHER",
-    name: "Mantis",
+    name: "Swather 1",
     HP: 800,
     fuelUse: null,
     defaultAcreHour: 2,
@@ -184,7 +184,7 @@ const SWATHERS = [
 const COMBINES = [
   {
     type: "COMBINE",
-    name: "Simba",
+    name: "Combine 1",
     HP: 800,
     fuelUse: null,
     defaultAcreHour: 2,
