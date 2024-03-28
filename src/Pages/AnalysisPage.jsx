@@ -146,10 +146,10 @@ export default function AnalysisPage({}) {
             crop={reportDataConext.state[1][8]}
             year={reportDataConext.state[1][7]}
             fieldScore={Number.parseFloat(
-              reportDataConext.state[1][18]
+              reportDataConext.state[1][17]
             ).toFixed(4)}
             provincialScore={Number.parseFloat(
-              reportDataConext.state[1][19]
+              reportDataConext.state[1][18]
             ).toFixed(4)}
           />
 
@@ -216,7 +216,7 @@ class SpiderChart extends PureComponent {
           <PolarAngleAxis dataKey="subject" />
           <PolarRadiusAxis />
           <Radar
-            name="Mike"
+            name="Your Score"
             dataKey="A"
             stroke="#008CC3"
             fill="#00A4E5"
