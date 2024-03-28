@@ -239,14 +239,14 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
     ["", "NULL"], //
     ["", "NULL"], //
     ["", "NULL"], //
-    ["558", "Ecodistrict"], // WE NEED TO ADD ECO DISTRICT TO FIELD FORM
+    [FieldState.Ecodistrict, "Ecodistrict"], // WE NEED TO ADD ECO DISTRICT TO FIELD FORM
     ["", "NULL"], //
     ["Huron east", "Municipality"],
     [FarmState.province, "Province"],
     ["", "Advisor"],
     ["", "NULL"], //
     ["", "NULL"], //
-    ["", "Polygon"], // WE NEED TO ADD POLYGON ID
+    [FieldState.SLCpolygon, "Polygon"], // WE NEED TO ADD POLYGON ID
     ["", "NULL"], //
     ["", "NULL"], //
     ["", "NULL"], //
@@ -289,19 +289,19 @@ async function generateResults(
   );
 
   // // WRITE DOCUMENT
-  // await axios.patch(
-  //   `https://graph.microsoft.com/v1.0/me/drive/root:/FieldprintCalculatorV.3-EXPERIMENT.xlsx:/workbook/worksheets/Data/range(address='A2:EJ2')`,
-  //   {
-  //     values: [RowValues],
-  //   },
-  //   {
-  //     headers: {
-  //       Authorization: "Bearer " + TOKEN,
-  //       "Content-Type": "application/json",
-  //       "Workbook-Session-Id": sessionResponse.data.id,
-  //     },
-  //   }
-  // );
+  await axios.patch(
+    `https://graph.microsoft.com/v1.0/me/drive/root:/FieldprintCalculatorV.3-EXPERIMENT.xlsx:/workbook/worksheets/Data/range(address='A2:EJ2')`,
+    {
+      values: [RowValues],
+    },
+    {
+      headers: {
+        Authorization: "Bearer " + TOKEN,
+        "Content-Type": "application/json",
+        // "Workbook-Session-Id": sessionResponse.data.id,
+      },
+    }
+  );
 
   // GET RESULTS AND CLOSE SESSION
   setTimeout(async () => {
@@ -312,7 +312,7 @@ async function generateResults(
         headers: {
           Authorization: "Bearer " + TOKEN,
           "Content-Type": "application/json",
-          "Workbook-Session-Id": sessionResponse.data.id,
+          // "Workbook-Session-Id": sessionResponse.data.id,
         },
       }
     );

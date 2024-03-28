@@ -28,6 +28,8 @@ function FIELD_CREATOR() {
     tillageRegime: "",
     previousTillageRegime: "",
     regimeChangeDate: "",
+    Ecodistrict: "",
+    SLCpolygon: "",
     cropYears: [], //"CROPYEAR"
   };
 }

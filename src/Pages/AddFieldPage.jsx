@@ -20,22 +20,59 @@ import {
 import { useState } from "react";
 
 import { FieldContext } from "../App";
+import { FarmContext } from "../App";
 import { SECRETS_CONTEXT } from "../App";
 
 import { useContext } from "react";
+import axios from "axios";
+import MapCoordinates from "../Assets/Map/Map_Dataset";
+import { getNearestCoordinate } from "../Assets/Map/getNearestCoordinates";
 
 export default function AddFieldPage() {
   const [addressQuery, setAddressQuery] = useState("Canada");
   const navigate = useNavigate();
 
   const fieldContext = useContext(FieldContext);
+  const farmContext = useContext(FarmContext);
   const SECRETS = useContext(SECRETS_CONTEXT);
 
   function handleStateChange(target, key) {
     const newValue = {};
     newValue[key] = target;
-
     fieldContext.setter({ ...fieldContext.state, ...newValue });
+  }
+
+  async function handleAddressChange(address) {
+    setAddressQuery(address);
+    //
+
+    if (!address) return;
+    try {
+      const geoData = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${SECRETS.SECRETS.GOOGLE_APIKEY}`
+      );
+      // console.log(geoData.data);
+
+      let lat = geoData.data.results[0].geometry.location.lat;
+      let lng = geoData.data.results[0].geometry.location.lng;
+
+      const SoilData = getNearestCoordinate(
+        farmContext.state.province,
+        lat,
+        lng,
+        MapCoordinates
+      );
+
+      const newValues = {};
+      newValues["surfaceForm"] = SoilData.LF_TYPE;
+      newValues["slopeClass"] = SoilData.LF_SLOPE;
+      newValues["Ecodistrict"] = SoilData.Ecodistrict;
+      newValues["SLCpolygon"] = SoilData.SLCpolygon;
+
+      fieldContext.setter({ ...fieldContext.state, ...newValues });
+    } catch (error) {
+      console.log("An error occurred while fetching map data");
+    }
   }
 
   return (
@@ -81,7 +118,7 @@ export default function AddFieldPage() {
               modalDescription={
                 "Enter the address  of your field. Please use the format [Street, City, Postal Code, Province]."
               }
-              onBlur={setAddressQuery}
+              onBlur={handleAddressChange}
             />
             {/* DIVIDER */}
             <Divider sx={{ marginBottom: 3 }} />
@@ -194,7 +231,6 @@ export default function AddFieldPage() {
             src={`https://www.google.com/maps/embed/v1/place?key=${
               SECRETS.SECRETS.GOOGLE_APIKEY
             }&q=${addressQuery ? addressQuery : "Canada"}&maptype=satellite`}
-            // src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_API_KEY}&q=Serecon Inc,Edmonton,+AB&maptype=satellite`}
           ></iframe>
         </div>
       </div>

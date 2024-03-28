@@ -23,7 +23,9 @@
     "tillageRegime": "Enum[String]",
     "previousTillageRegime": "Enum[String]",
     "regimeChangeDate": "Date",
-    "cropYears": ["CROPYEAR", "..."]
+    "cropYears": ["CROPYEAR", "..."],
+    "Ecodistrict": "String",
+    "SLCpolygon": "String"
   },
 
   {
