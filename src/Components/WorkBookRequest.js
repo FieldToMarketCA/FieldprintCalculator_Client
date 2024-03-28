@@ -335,7 +335,7 @@ async function generateResults(
     // const data = await response.data.values[0][0];
     setReportData(response.data.values);
     console.log(response.data.values);
-  }, 10000);
+  }, 5000);
 }
 
 export { generateResults };

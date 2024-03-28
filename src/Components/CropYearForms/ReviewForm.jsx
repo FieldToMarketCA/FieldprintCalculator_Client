@@ -37,6 +37,8 @@ export default function ReviewForm() {
     if (loading) return;
     if (success) {
       navigate("/analysis");
+      setLoading(false);
+      setSuccess(false);
       return;
     }
 

@@ -3,7 +3,7 @@ import MainButton from "../Components/Buttons/MainButton";
 import FormTextField from "../Components/FormInputElements/FormTextField";
 import FormSelectField from "../Components/FormInputElements/FormSelectField";
 import Divider from "@mui/material/Divider";
-import QuickFacts from "../Components/QuickFacts";
+// import QuickFacts from "../Components/QuickFacts";
 import Stepper from "../Components/Stepper";
 
 // CROP YEAR FORMS
@@ -21,12 +21,13 @@ const steps = [
 export default function AddCropYear({}) {
   return (
     <Page
+      showQuickFacts={true}
       title={"New Crop Year"}
       headerBorderColor={"border-[#34a853]"}
       padding="p-[0px]"
     >
       <div className="h-full w-full ">
-        <QuickFacts sectionColor={"#34a853"} />
+        {/* <QuickFacts sectionColor={"#34a853"} /> */}
 
         <Stepper steps={steps} />
       </div>

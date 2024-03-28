@@ -2,11 +2,13 @@ import { Children, useContext, createContext, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import SideNav from "./SideNav";
+import QuickFacts from "./QuickFacts";
 
 export default function Page({
   title,
   headerBorderColor,
   children,
+  showQuickFacts = false,
   padding = "p-[32px]",
 }) {
   return (
@@ -22,6 +24,8 @@ export default function Page({
           >
             {title}
           </header>
+          {/* QuickFacts  */}
+          {showQuickFacts && <QuickFacts sectionColor={"#34a853"} />}
 
           {/* PAGE BODY */}
           <main className={`flex flex-col h-full w-full ${padding} `}>

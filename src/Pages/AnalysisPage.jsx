@@ -75,12 +75,13 @@ export default function AnalysisPage({}) {
 
   return (
     <Page
+      showQuickFacts={true}
       title={`${fieldContext.state.name || "field"} on ${
         farmContext.state.name || "Demo Farm"
       }`}
       headerBorderColor={"border-[#34a853]"}
     >
-      <div className="w-full">
+      <div className="w-full h-full">
         <div className="w-full max-w-[950px]  flex flex-col min-[1100px]:flex-row ">
           <div className="text-[#666666] mr-10 overflow-hidden">
             <h2 className="text-[24px] text-[rgba(0,0,0,0.87)] mb-4">

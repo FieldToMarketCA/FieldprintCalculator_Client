@@ -1,6 +1,8 @@
 import { Collapse } from "@mui/material";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { CropYearContext, FarmContext, FieldContext } from "../App";
 
 function CollapseQuickFactsButton({ color, handleCollapse }) {
   return (
@@ -15,6 +17,23 @@ function CollapseQuickFactsButton({ color, handleCollapse }) {
 }
 
 export default function QuickFacts({ sectionColor }) {
+  const fieldContext = useContext(FieldContext);
+  const farmContext = useContext(FarmContext);
+  const cropyearContext = useContext(CropYearContext);
+
+  const QuickFactsDummyData = [
+    { label: "Farm", value: farmContext.state.name },
+    { label: "Partner", value: farmContext.state.partner },
+    { label: "Field Size", value: fieldContext.state.fieldSize },
+
+    { label: "Last Updated", value: "" },
+    { label: "Address", value: fieldContext.state.fieldAddress },
+    { label: "Tract Number", value: null },
+    { label: "Last Updated By", value: "membership@fieldtomarket.ca" },
+    { label: "Crop", value: cropyearContext.state.crop.cropThisYear },
+    { label: "Crop Year", value: cropyearContext.state.crop.cropYear },
+  ];
+
   const [isQuickFactsCollapsed, setIsQuickFactsCollapsed] = useState(true);
   const displayAs = isQuickFactsCollapsed ? "0px" : "145px";
 
@@ -51,15 +70,3 @@ export default function QuickFacts({ sectionColor }) {
     </div>
   );
 }
-
-const QuickFactsDummyData = [
-  { label: "FPP ID", value: "49570" },
-  { label: "Plantable Acres", value: "147.67 acre" },
-  { label: "Farm Serial Number", value: null },
-  { label: "Last Updated", value: "2/28/2024" },
-  { label: "Location", value: "Bingham County, ID" },
-  { label: "Tract Number", value: null },
-  { label: "Last Updated By", value: "engfelixreynoso@gmail.com" },
-  { label: "Crop Management Zone", value: "10" },
-  { label: "Field Number", value: null },
-];
