@@ -9,10 +9,10 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 export default function SideNavCollapseButton({
-  isCollapsed,
+  isOpen,
   onClick,
 }: {
-  isCollapsed: boolean;
+  isOpen: boolean;
   onClick: React.MouseEventHandler;
 }) {
   const [isHover, setIsHover] = useState(false);
@@ -43,13 +43,13 @@ export default function SideNavCollapseButton({
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
     >
-      {!isCollapsed ? (
+      {!isOpen ? (
         <KeyboardArrowRightIcon className="ml-4 mr-6" />
       ) : (
         <KeyboardArrowLeftIcon className="ml-4 mr-6" />
       )}
 
-      {isCollapsed && <p>Collapse Panel </p>}
+      {isOpen && <p>Collapse Panel </p>}
     </Button>
   );
 }

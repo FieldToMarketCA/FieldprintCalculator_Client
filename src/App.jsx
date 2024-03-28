@@ -54,6 +54,8 @@ const SECRETS_CONTEXT = createContext();
 
 const ReportDataContext = createContext();
 
+const GUI_CONTEXT = createContext();
+
 function App() {
   const [SECRETS, SET_SECRETS] = useState(false);
 
@@ -62,6 +64,8 @@ function App() {
   const [cropyearState, setCropyearState] = useState(CROPYEAR_CREATOR());
 
   const [reportData, setReportData] = useState(false);
+
+  const [GUI_STATE, setGUI] = useState({ isNavOpen: false });
 
   useEffect(() => {
     const getCredentials = async () => {
@@ -91,19 +95,23 @@ function App() {
               <ReportDataContext.Provider
                 value={{ state: reportData, setter: setReportData }}
               >
-                <div className="App">
-                  <HashRouter>
-                    <Routes>
-                      <Route exact path="/" element={<AddFarmPage />} />
-                      {/* <Route exact path="/farm" element={<AddFarmPage />} /> */}
+                <GUI_CONTEXT.Provider
+                  value={{ state: GUI_STATE, setter: setGUI }}
+                >
+                  <div className="App">
+                    <HashRouter>
+                      <Routes>
+                        <Route exact path="/" element={<AddFarmPage />} />
+                        {/* <Route exact path="/farm" element={<AddFarmPage />} /> */}
 
-                      {/* </Route> */}
-                      <Route path="/field" element={<AddFieldPage />} />
-                      <Route path="/cropyear" element={<AddCropYear />} />
-                      <Route path="/analysis" element={<AnalysisPage />} />
-                    </Routes>
-                  </HashRouter>
-                </div>
+                        {/* </Route> */}
+                        <Route path="/field" element={<AddFieldPage />} />
+                        <Route path="/cropyear" element={<AddCropYear />} />
+                        <Route path="/analysis" element={<AnalysisPage />} />
+                      </Routes>
+                    </HashRouter>
+                  </div>
+                </GUI_CONTEXT.Provider>
               </ReportDataContext.Provider>
             </CropYearContext.Provider>
           </FieldContext.Provider>
@@ -119,6 +127,7 @@ export {
   CropYearContext,
   SECRETS_CONTEXT,
   ReportDataContext,
+  GUI_CONTEXT,
 };
 
 export default App;

@@ -18,13 +18,13 @@ import SideNavButton from "./SideNavButton";
 import { useNavigate } from "react-router-dom";
 
 export default function SideNavDropDownButton({
-  isHorizontallyCollapsed,
+  isOpen,
   onClick,
   text,
   icon,
   borderColor = "rgb(170,170,170)",
 }: {
-  isHorizontallyCollapsed: boolean;
+  isOpen: boolean;
   text: string;
   onClick: React.MouseEventHandler;
   icon: string;
@@ -84,7 +84,7 @@ export default function SideNavDropDownButton({
         <div className="flex w-full justify-between items-center">
           <div className="flex">
             <SelectedIcon className="ml-4 mr-6" />
-            {isHorizontallyCollapsed && <p>{text} </p>}{" "}
+            {isOpen && <p>{text} </p>}{" "}
           </div>
           <KeyboardArrowDownIcon
             style={{ color: "#AAAAAA" }}
@@ -107,11 +107,11 @@ export default function SideNavDropDownButton({
         in={true}
         collapsedSize={100}
       > */}
-      {isHorizontallyCollapsed && (
+      {isOpen && (
         <ul className="w-full  pl-4">
           <li className="w-full">
             <SideNavButton
-              isCollapsed={true}
+              isOpen={true}
               text="Demo Farm"
               icon={"farmIcon"}
               onClick={() => console.log("x")}
@@ -119,7 +119,7 @@ export default function SideNavDropDownButton({
           </li>
           <li className="w-full">
             <SideNavButton
-              isCollapsed={true}
+              isOpen={true}
               text="Add Farm"
               icon={"addFarmFieldIcon"}
               onClick={() => navigate("/")}

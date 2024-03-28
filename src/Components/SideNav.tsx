@@ -7,22 +7,24 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import SideNavCollapseButton from "./Buttons/SideNavButtons/SideNavCollapseButton";
 import SideNavButton from "./Buttons/SideNavButtons/SideNavButton";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import FieldLibraryButton from "./Buttons/SideNavButtons/FieldLibraryButtonREFACTOR";
+import { GUI_CONTEXT } from "../App";
 
 export default function SideNav() {
-  const [isCollapsed, setIsCollapsed] = React.useState(true);
+  // const [isCollapsed, setIsCollapsed] = React.useState(true);
+  const GUI = useContext(GUI_CONTEXT);
 
   const handleCollapse = () => {
-    setIsCollapsed((prev) => !prev);
+    GUI.setter({ ...GUI.state, isNavOpen: !GUI.state.isNavOpen });
   };
 
   return (
     <div className="max-w-[325px] bg-[rgb(36,39,41)]">
       <Collapse
-        style={{ width: "325px" }}
+        style={{}}
         orientation="horizontal"
-        in={isCollapsed}
+        in={GUI.state.isNavOpen}
         collapsedSize={56}
       >
         <div
@@ -30,17 +32,17 @@ export default function SideNav() {
           className={`w-[325px] h-full flex flex-col`}
         >
           <SideNavButton
-            isCollapsed={isCollapsed}
+            isOpen={GUI.state.isNavOpen}
             text={"Dashboard"}
             borderColor="#00ADEE"
             icon={"dashBoardIcon"}
             onClick={() => console.log("Dashboard")}
           />
 
-          <FieldLibraryButton isCollapsed={isCollapsed} />
+          <FieldLibraryButton isOpen={GUI.state.isNavOpen} />
 
           <SideNavButton
-            isCollapsed={isCollapsed}
+            isOpen={GUI.state.isNavOpen}
             text={"Support"}
             borderColor="rgb(170,170,170)"
             icon={"supportIcon"}
@@ -48,7 +50,7 @@ export default function SideNav() {
           />
 
           <SideNavCollapseButton
-            isCollapsed={isCollapsed}
+            isOpen={GUI.state.isNavOpen}
             onClick={handleCollapse}
           />
         </div>

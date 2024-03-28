@@ -1,15 +1,11 @@
 import { useState } from "react";
 import SideNavDropDownButtonREFACTOR from "./SideNavDropDownButtonREFACTOR";
 
-export default function FieldLibraryButton({
-  isCollapsed,
-}: {
-  isCollapsed: boolean;
-}) {
+export default function FieldLibraryButton({ isOpen }: { isOpen: boolean }) {
   const [isLibraryClosed, setIsLibraryClosed] = useState(true);
   return (
     <SideNavDropDownButtonREFACTOR
-      isHorizontallyCollapsed={isCollapsed}
+      isOpen={isOpen}
       icon="fieldLibraryIcon"
       onClick={(isLibraryClosed) => {
         setIsLibraryClosed(!isLibraryClosed);

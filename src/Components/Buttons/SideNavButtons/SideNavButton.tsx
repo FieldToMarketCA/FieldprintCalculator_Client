@@ -13,14 +13,14 @@ import AddFarmFieldIcon from "../../../Assets/Icons/AddFarmFieldIcon";
 import DashBoardIcon from "../../../Assets/Icons/DashBoardIcon";
 
 export default function SideNavButton({
-  isCollapsed,
+  isOpen,
   onClick,
   text,
   icon,
   borderColor = "rgb(170,170,170)",
   isDisabled = false,
 }: {
-  isCollapsed: boolean;
+  isOpen: boolean;
   text: string;
   onClick: React.MouseEventHandler;
   icon: string;
@@ -84,7 +84,7 @@ export default function SideNavButton({
     >
       <SelectedIcon className="ml-4 mr-6" />
 
-      {isCollapsed && <p>{text} </p>}
+      {isOpen && <p>{text} </p>}
       <div
         style={{ backgroundColor: borderColor }}
         className={`absolute bottom-0 w-full ${
