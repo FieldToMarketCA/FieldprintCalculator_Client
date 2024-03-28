@@ -3,6 +3,8 @@ import landUseIcon from "../../Assets/Icons/landUseIcon.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
+import BarChart from "../Charts/BarChart";
+
 export default function IndicatorLandUse({
   crop,
   year,
@@ -111,16 +113,25 @@ export default function IndicatorLandUse({
           Outcomes are in units of planted land area per unit of production. A
           lower number indicates greater efficiency.
         </p>
-
         {/* INVIDIVUAL RESULT TABLE */}
         <InvidividualResultTable />
-
         {/* Provincial Comparison Table */}
         <ProvincialComparisonTable />
-
         {/* CHART */}
 
-        <div>Chart</div>
+        <div className="w-full mt-8 flex justify-center">
+          <BarChart
+            width={398}
+            height={331}
+            data={[
+              {
+                name: "Land Use",
+                fieldScore: fieldScore,
+                provincialScore: provincialScore,
+              },
+            ]}
+          />
+        </div>
       </div>
     </div>
   );

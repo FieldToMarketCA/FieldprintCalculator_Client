@@ -3,6 +3,8 @@ import GHG_Icon from "../../Assets/Icons/GHG_Icon.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
+import BarChart from "../Charts/BarChart";
+
 export default function IndicatorGHG({
   crop,
   year,
@@ -126,7 +128,19 @@ export default function IndicatorGHG({
 
         {/* CHART */}
 
-        <div>Chart</div>
+        <div className="w-full mt-8 flex justify-center">
+          <BarChart
+            width={398}
+            height={331}
+            data={[
+              {
+                name: "Greenhouse Gas",
+                fieldScore: fieldScore,
+                provincialScore: provincialScore,
+              },
+            ]}
+          />
+        </div>
       </div>
     </div>
   );

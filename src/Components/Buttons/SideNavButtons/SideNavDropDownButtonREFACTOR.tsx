@@ -122,7 +122,7 @@ export default function SideNavDropDownButton({
               isOpen={true}
               text="Add Farm"
               icon={"addFarmFieldIcon"}
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/farm")}
             />
           </li>
         </ul>

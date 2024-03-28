@@ -101,8 +101,8 @@ function App() {
                   <div className="App">
                     <HashRouter>
                       <Routes>
-                        <Route exact path="/" element={<AddFarmPage />} />
-                        {/* <Route exact path="/farm" element={<AddFarmPage />} /> */}
+                        <Route exact path="/" element={<AnalysisPage />} />
+                        <Route exact path="/farm" element={<AddFarmPage />} />
 
                         {/* </Route> */}
                         <Route path="/field" element={<AddFieldPage />} />

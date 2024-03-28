@@ -3,6 +3,8 @@ import soilErosionRiskIcon from "../../Assets/Icons/soilErosionRiskIcon.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
+import BarChart from "../Charts/BarChart";
+
 export default function IndicatorSoilErosion({
   crop,
   year,
@@ -125,7 +127,19 @@ export default function IndicatorSoilErosion({
 
         {/* CHART */}
 
-        <div>Chart</div>
+        <div className="w-full mt-8 flex justify-center">
+          <BarChart
+            width={398}
+            height={331}
+            data={[
+              {
+                name: "Soil Erosion Risk",
+                fieldScore: fieldScore,
+                provincialScore: provincialScore,
+              },
+            ]}
+          />
+        </div>
       </div>
     </div>
   );

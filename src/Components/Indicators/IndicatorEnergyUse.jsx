@@ -3,6 +3,8 @@ import energyUseIcon from "../../Assets/Icons/energyUseIcon.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
+import BarChart from "../Charts/BarChart";
+
 export default function IndicatorEnergyuse({
   crop,
   year,
@@ -123,7 +125,19 @@ export default function IndicatorEnergyuse({
 
         {/* CHART */}
 
-        <div>Chart</div>
+        <div className="w-full mt-8 flex justify-center">
+          <BarChart
+            width={398}
+            height={331}
+            data={[
+              {
+                name: "Energy",
+                fieldScore: fieldScore,
+                provincialScore: provincialScore,
+              },
+            ]}
+          />
+        </div>
       </div>
     </div>
   );
