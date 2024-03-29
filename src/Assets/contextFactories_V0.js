@@ -19,7 +19,7 @@ function FIELD_CREATOR() {
     id: uuidv4(),
     farmId: "",
     name: "",
-    fieldSize: 0,
+    fieldSize: "",
     fieldAddress: "",
     surfaceForm: "",
     slopeClass: "",

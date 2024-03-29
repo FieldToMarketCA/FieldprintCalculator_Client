@@ -28,7 +28,20 @@ import axios from "axios";
 import MapCoordinates from "../Assets/Map/Map_Dataset";
 import { getNearestCoordinate } from "../Assets/Map/getNearestCoordinates";
 
+var errorFields = {
+  name: false,
+  fieldSize: false,
+  fieldAddress: false,
+  surfaceForm: false,
+  slopeClass: false,
+  soilType: false,
+  surfaceSoilTexture: false,
+  tillageRegime: false,
+  previousTillageRegime: false,
+};
+
 export default function AddFieldPage() {
+  const [ErrorFound, setErrorFound] = useState(false);
   const [addressQuery, setAddressQuery] = useState("Canada");
   const navigate = useNavigate();
 
@@ -40,6 +53,7 @@ export default function AddFieldPage() {
     const newValue = {};
     newValue[key] = target;
     fieldContext.setter({ ...fieldContext.state, ...newValue });
+    errorFields[key] = false;
   }
 
   async function handleAddressChange(address) {
@@ -74,6 +88,42 @@ export default function AddFieldPage() {
     }
   }
 
+  function handleSaveAndAddFIeld() {
+    if (isInputValid()) navigate("/cropyear");
+  }
+
+  function isInputValid() {
+    errorFields.name = fieldContext.state.name.trim() === "";
+    errorFields.fieldSize = fieldContext.state.fieldSize.trim() === "";
+    errorFields.fieldAddress = fieldContext.state.fieldAddress.trim() === "";
+    errorFields.surfaceForm = fieldContext.state.surfaceForm.trim() === "";
+    errorFields.slopeClass = fieldContext.state.slopeClass.trim() === "";
+    errorFields.soilType = fieldContext.state.soilType.trim() === "";
+    errorFields.surfaceSoilTexture =
+      fieldContext.state.surfaceSoilTexture.trim() === "";
+    errorFields.tillageRegime = fieldContext.state.tillageRegime.trim() === "";
+    errorFields.previousTillageRegime =
+      fieldContext.state.previousTillageRegime.trim() === "";
+
+    if (
+      errorFields.name ||
+      errorFields.fieldSize ||
+      errorFields.fieldAddress ||
+      errorFields.surfaceForm ||
+      errorFields.slopeClass ||
+      errorFields.soilType ||
+      errorFields.surfaceSoilTexture ||
+      errorFields.tillageRegime ||
+      errorFields.previousTillageRegime
+    ) {
+      setErrorFound(true);
+      return false; // return false because input is invalid
+    } else {
+      setErrorFound(false);
+      return true;
+    }
+  }
+
   return (
     <Page
       title={"New Field"}
@@ -91,6 +141,7 @@ export default function AddFieldPage() {
             className="flex absolute flex-col  top-0 left-0 overflow-auto w-full p-4 "
           >
             <FormTextField
+              errorFound={errorFields.name}
               fieldState={fieldContext.state.name}
               fieldLabel={"Field Name"}
               modalTitle={"Field Name"}
@@ -100,6 +151,7 @@ export default function AddFieldPage() {
               }
             />
             <FormTextField
+              errorFound={errorFields.fieldSize}
               fieldState={fieldContext.state.fieldSize}
               fieldLabel={"Field Size [Acres]"}
               modalTitle={"Field Size"}
@@ -110,6 +162,7 @@ export default function AddFieldPage() {
               }
             />
             <FormTextField
+              errorFound={errorFields.fieldAddress}
               fieldState={fieldContext.state.fieldAddress}
               onChange={(t) => handleStateChange(t, "fieldAddress")}
               fieldLabel={"Field Address"}
@@ -122,6 +175,7 @@ export default function AddFieldPage() {
             {/* DIVIDER */}
             <Divider sx={{ marginBottom: 3 }} />
             <FormSelectField
+              errorFound={errorFields.surfaceForm}
               valuesArray={SurfaceFormTypes}
               onChange={(e) => handleStateChange(e.target.value, "surfaceForm")}
               fieldLabel={"Surface Form"}
@@ -133,6 +187,7 @@ export default function AddFieldPage() {
               }
             />
             <FormSelectField
+              errorFound={errorFields.slopeClass}
               valuesArray={SlopeClassTypes}
               fieldLabel={"Slope Class"}
               fieldState={fieldContext.state.slopeClass}
@@ -144,6 +199,7 @@ export default function AddFieldPage() {
               }
             />
             <FormSelectField
+              errorFound={errorFields.soilType}
               valuesArray={SoilTypes}
               fieldLabel={"Soil Type"}
               fieldState={fieldContext.state.soilType}
@@ -153,6 +209,7 @@ export default function AddFieldPage() {
               modalDescription={"Some helpful description."}
             />
             <FormSelectField
+              errorFound={errorFields.surfaceSoilTexture}
               valuesArray={SurfaceSoilTextureTypes}
               fieldLabel={"Surface Soil Texture"}
               fieldState={fieldContext.state.surfaceSoilTexture}
@@ -168,6 +225,7 @@ export default function AddFieldPage() {
             {/* DIVIDER */}
             <Divider sx={{ marginBottom: 3 }} />
             <FormSelectField
+              errorFound={errorFields.tillageRegime}
               valuesArray={TillageRegimeTypes}
               fieldLabel={"Tillage Regime"}
               fieldState={fieldContext.state.tillageRegime}
@@ -179,6 +237,7 @@ export default function AddFieldPage() {
               modalDescription={"Some helpful description."}
             />
             <FormSelectField
+              errorFound={errorFields.previousTillageRegime}
               valuesArray={TillageRegimeTypes}
               fieldLabel={"Previous Tillage Regime"}
               fieldState={fieldContext.state.previousTillageRegime}
@@ -205,10 +264,7 @@ export default function AddFieldPage() {
           </div>
 
           <div className=" p-[14px] flex flex-col justify-between w-full h-[124.5px] border-t border-[rgb(211,211,211)]">
-            <MainButton
-              text={"Save Field"}
-              onClick={() => navigate("/cropyear")}
-            />
+            <MainButton text={"Save Field"} onClick={handleSaveAndAddFIeld} />
             <MainButton
               text={"Cancel"}
               onClick={console.log}

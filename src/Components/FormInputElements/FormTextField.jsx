@@ -10,10 +10,12 @@ export default function FormTextField({
   isNumber = false,
   onBlur = () => null,
   modalOff = false,
+  errorFound = false,
 }) {
   return (
     <div className="w-full flex items-center mb-6">
       <TextField
+        error={errorFound}
         sx={{ color: "#666666" }}
         id="outlined-basic"
         label={fieldLabel}

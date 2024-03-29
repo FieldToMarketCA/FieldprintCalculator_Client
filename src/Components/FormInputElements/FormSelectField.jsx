@@ -9,14 +9,15 @@ export default function FormSelectField({
   helperText,
   modalTitle,
   onChange,
-
   modalDescription,
   isDisabled = false,
   modalOff = false,
+  errorFound = false,
 }) {
   return (
     <div className="w-full flex mb-6">
       <TextField
+        error={errorFound}
         disabled={isDisabled}
         id="outlined-select-currency"
         select
