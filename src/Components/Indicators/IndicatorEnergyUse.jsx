@@ -15,8 +15,8 @@ export default function IndicatorEnergyuse({
 
   const InvidividualResultTable = () => {
     return (
-      <div className="w-full flex mt-4">
-        <div className="w-[246px] min-w-[246px] max-h-[114px] border-[rgb(221,221,221)]  border-[1px] flex flex-col items-center">
+      <div className="w-full flex flex-col items-center md:flex-row  mt-4">
+        <div className="w-[246px] mb-8 md:mb-0 min-w-[246px] max-h-[114px] border-[rgb(221,221,221)]  border-[1px] flex flex-col items-center">
           <div className="text-center w-full bg-[rgb(0,164,229)]">
             <p className="py-[8px] text-[18px] text-white font-medium">
               Energy Use
@@ -28,7 +28,7 @@ export default function IndicatorEnergyuse({
           </div>
           <div className="text-[16px]">GJ / tonne</div>
         </div>
-        <p className="bg-[rgb(238,238,238)] ml-8 p-3 border-[3px] border-[rgb(0,164,229)]">
+        <p className="bg-[rgb(238,238,238)] md:ml-8 p-3 border-[3px] border-[rgb(0,164,229)]">
           The Energy Use metric includes direct energy used for operating
           equipment, pumping irrigation water, grain drying and transport as
           well as embedded energy, which is required to produce crop inputs like
@@ -45,9 +45,9 @@ export default function IndicatorEnergyuse({
 
   const ProvincialComparisonTable = () => {
     return (
-      <div className="w-full flex mt-8 flex-col md:flex-row ">
+      <div className="w-full flex mt-8 flex-col items-center min-[910px]:flex-row ">
         {/* TABLE */}
-        <div className="min-w-[400px] h-[126px] max-h-[126px] grid grid-cols-2 gap-0  mr-8 mb-8 md:mb-0">
+        <div className=" w-[300px] md:w-[400px] md:min-w-[400px] h-[126px] max-h-[126px] grid grid-cols-2 gap-0  min-[910px]:mr-8 mb-8 min-[910px]:mb-0">
           <div className="bg-[#FAA43A] content-center border-[1px] border-[rgb(204,204,204)] border-r-0 border-b-0">
             <p className="ml-2 text-[18px] text-white font-medium">Score</p>
           </div>
@@ -125,7 +125,7 @@ export default function IndicatorEnergyuse({
 
         {/* CHART */}
 
-        <div className="w-full mt-8 flex justify-center">
+        <div className="w-full mt-14 flex justify-center">
           <BarChart
             width={398}
             height={331}
