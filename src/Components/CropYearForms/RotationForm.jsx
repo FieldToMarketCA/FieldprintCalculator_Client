@@ -28,8 +28,9 @@ export default function RotationForm({ LowerPanel, panelControls }) {
   }
   useEffect(() => {
     const element = document.getElementById("scrollableDiv");
-    element.scrollBy({ top: -1000, left: 0, behavior: "smooth" });
+    element.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
+
   return (
     <div className=" w-full h-full">
       <h3 className="text-[rgb(102,102,102)] text-[30px]">

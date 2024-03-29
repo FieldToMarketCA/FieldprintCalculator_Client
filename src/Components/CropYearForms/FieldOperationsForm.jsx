@@ -169,7 +169,7 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
 
   useEffect(() => {
     const element = document.getElementById("scrollableDiv");
-    element.scrollBy({ top: -1000, left: 0, behavior: "smooth" });
+    element.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
 
   function handleCheckmark(event, key) {
