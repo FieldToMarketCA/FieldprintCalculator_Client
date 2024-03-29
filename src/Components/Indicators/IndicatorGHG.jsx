@@ -10,8 +10,9 @@ export default function IndicatorGHG({
   year,
   fieldScore,
   provincialScore,
+  isClosed = true,
 }) {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(isClosed);
 
   const InvidividualResultTable = () => {
     return (
@@ -38,7 +39,7 @@ export default function IndicatorGHG({
           Platform uses standard AAFC government assumptions regarding fuel use,
           such as the 22.3 pounds of CO2e that are emitted per gallon of diesel
           combusted. Emissions also result from electricity and fuel usage as
-          well as from burning crop residues. <b>Low scores are desirable</b>
+          well as from burning crop residues. <b>Low scores are desirable</b>{" "}
           and indicate less greenhouse gas emitted per unit of crop produced.
         </p>
       </div>

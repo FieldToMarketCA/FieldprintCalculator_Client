@@ -1,11 +1,11 @@
 import { useState } from "react";
-import energyUseIcon from "../../Assets/Icons/energyUseIcon.png";
+import soilErosionRiskIcon from "../../Assets/Icons/soilErosionRiskIcon.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import BarChart from "../Charts/BarChart";
 
-export default function IndicatorEnergyuse({
+export default function PDFIndicatorSoilErosion({
   crop,
   year,
   fieldScore,
@@ -16,29 +16,31 @@ export default function IndicatorEnergyuse({
 
   const InvidividualResultTable = () => {
     return (
-      <div className="w-full flex flex-col items-center md:flex-row  mt-4">
-        <div className="w-[246px] mb-8 md:mb-0 min-w-[246px] max-h-[114px] border-[rgb(221,221,221)]  border-[1px] flex flex-col items-center">
+      <div className="w-full flex flex-col items-center  mt-4">
+        <div className="w-[246px] mb-8 md:mb-0 min-w-[246px] h-[120px]  border-[rgb(221,221,221)]  border-[1px] flex flex-col items-center">
           <div className="text-center w-full bg-[rgb(0,164,229)]">
             <p className="py-[8px] text-[18px] text-white font-medium">
-              Energy Use
+              Soil Erosion Risk
             </p>
           </div>
           <div className="text-[16px]">{`${year} ${crop}`}</div>
           <div className="text-[24px] text-[rgb(0,164,229)] font-light ">
             {fieldScore}
           </div>
-          <div className="text-[16px]">GJ / tonne</div>
+          <div className="text-[16px]">Mg / ha / yr</div>
         </div>
-        <p className="bg-[rgb(238,238,238)] md:ml-8 p-3 border-[3px] border-[rgb(0,164,229)]">
-          The Energy Use metric includes direct energy used for operating
-          equipment, pumping irrigation water, grain drying and transport as
-          well as embedded energy, which is required to produce crop inputs like
-          seeds, fertilizers and crop protectants. Energy use is expressed as
-          British thermal units (BTU) per unit of crop production (i.e., bushel,
-          pound or hundred weight). It takes one BTU to raise the temperature of
-          one pound of water by 1°F. One gallon of diesel produces 137,452 BTU.
-          Lower numbers are desirable and indicate less energy used to produce a
-          unit of crop.
+        <p className="bg-[rgb(238,238,238)] mt-8  p-3 border-[3px] border-[rgb(0,164,229)]">
+          The Soil Erosion Risk metric is a measure of how at risk soil is to
+          erosion from tillage, water and wind, and is calculated using RUSLE2
+          models and reported to the user as milligrams of soil lost per acre.
+          It is an efficiency metric that uses a complex biophysical model to
+          simulate crop growth, water flow across the field, and sediment
+          runoff. The Soil Conservation metric is expressed as soil erosion and
+          is measured as potential milligrams of soil lost (Mg) per unit of land
+          area (hectare) per year. Lower numbers are desirable and indicate less
+          soil lost from erosion per hectare. A Soil Erosion Fieldprint Score of
+          0 would indicate that there is no potential for soil to be lost in
+          that year.
         </p>
       </div>
     );
@@ -46,9 +48,9 @@ export default function IndicatorEnergyuse({
 
   const ProvincialComparisonTable = () => {
     return (
-      <div className="w-full flex mt-8 flex-col items-center min-[910px]:flex-row ">
+      <div className="w-full flex mt-[300px] flex-col items-center ">
         {/* TABLE */}
-        <div className=" w-[300px] md:w-[400px] md:min-w-[400px] h-[126px] max-h-[126px] grid grid-cols-2 gap-0  min-[910px]:mr-8 mb-8 min-[910px]:mb-0">
+        <div className=" w-[300px] md:w-[400px] md:min-w-[400px] h-[126px] max-h-[126px] grid grid-cols-2 gap-0  mb-8">
           <div className="bg-[#FAA43A] content-center border-[1px] border-[rgb(204,204,204)] border-r-0 border-b-0">
             <p className="ml-2 text-[18px] text-white font-medium">Score</p>
           </div>
@@ -62,41 +64,47 @@ export default function IndicatorEnergyuse({
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] border-b-0">
-            <p className="mr-2">{fieldScore} GJ / tonne</p>
+            <p className="mr-2">{fieldScore}Mg / ha / yr</p>
           </div>
           <div className="border-[1px] content-center border-[rgb(204,204,204)] border-r-0 ">
             <div className="flex ml-2">
               <div className="w-[20px] h-[20px] bg-[rgb(255,125,50)] mr-2"></div>
-              <p className="truncate">Province Benchmarks</p>
+              <p className="">Province Benchmarks</p>
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] ">
-            <p className="mr-2">{provincialScore} GJ / tonne</p>
+            <p className="mr-2">{provincialScore}Mg / ha / yr</p>
           </div>
         </div>
         {/* SUPPORTING TEXT */}
         <p className="bg-[rgb(238,238,238)] p-3 border-[3px] border-[rgb(255,125,50)]">
-          Energy Use score in comparison to available benchmarks. Benchmarks are
-          an average of provincial statistical data for the period 20011-2023,
-          to provide context for your scores. Benchmarks should not be
-          interpreted as a specific level of sustainability, or a performance
-          target. Provincial benchmarks not shown in the graphs are not
-          available for the applicable metric
+          Soil Erosion Risk score in comparison to available benchmarks.
+          Benchmarks are an average of provincial statistical data for the
+          period 20011-2023, to provide context for your scores. Benchmarks
+          should not be interpreted as a specific level of sustainability, or a
+          performance target. Provincial benchmarks not shown in the graphs are
+          not available for the applicable metric
         </p>
       </div>
     );
   };
 
   return (
-    <div className="w-full px-4 mb-4 rounded border-[rgb(230,230,230)] border-[1px] shadow-md">
+    <div className="w-full px-4 mb-4 rounded ">
       {/* Header  */}
       <div
         className="h-[74px] w-full  flex items-center justify-between cursor-pointer"
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         <div className="flex items-center">
-          <img className="h-[50px] w-[50px]" src={energyUseIcon} alt="sup " />
-          <p className="text-[#666666] text-[18px] ml-[12px]">Energy Use </p>
+          <img
+            className="h-[50px] w-[50px]"
+            src={soilErosionRiskIcon}
+            alt="sup "
+          />
+          <p className="text-[#666666] text-[18px] ml-[12px]">
+            Soil Erosion Risk
+          </p>
         </div>
         <i>
           {isCollapsed ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
@@ -111,11 +119,12 @@ export default function IndicatorEnergyuse({
         }`}
       >
         <p>
-          The Energy Use Metric calculates all energy used in the production of
-          the crop in one year from pre-planting activities through to the first
-          point of sale. It is an efficiency metric, calculated using a series
-          of algorithms and designed to provide feedback on the energy used per
-          unit of crop production.
+          The Soil Erosion Risk metric is a measure of how at risk soil is to
+          erosion from tillage, water and wind, and is calculated using RUSLE2
+          models and reported to the user as milligrams (Mg) of soil lost per
+          hectare per year. It is an efficiency metric that uses a complex
+          biophysical model to simulate crop growth, water flow across the
+          field, and sediment runoff.
         </p>
 
         {/* INVIDIVUAL RESULT TABLE */}
@@ -126,13 +135,13 @@ export default function IndicatorEnergyuse({
 
         {/* CHART */}
 
-        <div className="w-full mt-14 flex justify-center">
+        <div className="w-full mt-10 flex justify-center">
           <BarChart
-            width={398}
-            height={331}
+            width={350}
+            height={300}
             data={[
               {
-                name: "Energy",
+                name: "Soil Erosion Risk",
                 fieldScore: fieldScore,
                 provincialScore: provincialScore,
               },

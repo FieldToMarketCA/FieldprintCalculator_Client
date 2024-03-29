@@ -10,8 +10,9 @@ export default function IndicatorSoilErosion({
   year,
   fieldScore,
   provincialScore,
+  isClosed = true,
 }) {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(isClosed);
 
   const InvidividualResultTable = () => {
     return (

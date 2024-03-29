@@ -5,7 +5,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import BarChart from "../Charts/BarChart";
 
-export default function IndicatorEnergyuse({
+export default function PDFIndicatorEnergyuse({
   crop,
   year,
   fieldScore,
@@ -16,8 +16,8 @@ export default function IndicatorEnergyuse({
 
   const InvidividualResultTable = () => {
     return (
-      <div className="w-full flex flex-col items-center md:flex-row  mt-4">
-        <div className="w-[246px] mb-8 md:mb-0 min-w-[246px] max-h-[114px] border-[rgb(221,221,221)]  border-[1px] flex flex-col items-center">
+      <div className="w-full flex flex-col items-center mt-4">
+        <div className="w-[246px] mb-6 md:mb-0 min-w-[246px] h-[120px]  border-[rgb(221,221,221)]  border-[1px] flex flex-col items-center">
           <div className="text-center w-full bg-[rgb(0,164,229)]">
             <p className="py-[8px] text-[18px] text-white font-medium">
               Energy Use
@@ -29,7 +29,7 @@ export default function IndicatorEnergyuse({
           </div>
           <div className="text-[16px]">GJ / tonne</div>
         </div>
-        <p className="bg-[rgb(238,238,238)] md:ml-8 p-3 border-[3px] border-[rgb(0,164,229)]">
+        <p className="bg-[rgb(238,238,238)] mt-6  p-3 border-[3px] border-[rgb(0,164,229)]">
           The Energy Use metric includes direct energy used for operating
           equipment, pumping irrigation water, grain drying and transport as
           well as embedded energy, which is required to produce crop inputs like
@@ -46,9 +46,9 @@ export default function IndicatorEnergyuse({
 
   const ProvincialComparisonTable = () => {
     return (
-      <div className="w-full flex mt-8 flex-col items-center min-[910px]:flex-row ">
+      <div className="w-full flex mt-6 flex-col items-center ">
         {/* TABLE */}
-        <div className=" w-[300px] md:w-[400px] md:min-w-[400px] h-[126px] max-h-[126px] grid grid-cols-2 gap-0  min-[910px]:mr-8 mb-8 min-[910px]:mb-0">
+        <div className=" w-[300px] md:w-[400px] md:min-w-[400px] h-[126px] max-h-[126px] grid grid-cols-2 gap-0   mb-8 ">
           <div className="bg-[#FAA43A] content-center border-[1px] border-[rgb(204,204,204)] border-r-0 border-b-0">
             <p className="ml-2 text-[18px] text-white font-medium">Score</p>
           </div>
@@ -67,7 +67,7 @@ export default function IndicatorEnergyuse({
           <div className="border-[1px] content-center border-[rgb(204,204,204)] border-r-0 ">
             <div className="flex ml-2">
               <div className="w-[20px] h-[20px] bg-[rgb(255,125,50)] mr-2"></div>
-              <p className="truncate">Province Benchmarks</p>
+              <p className="">Province Benchmarks</p>
             </div>
           </div>
           <div className="border-[1px] text-end content-center border-[rgb(204,204,204)] ">
@@ -88,7 +88,7 @@ export default function IndicatorEnergyuse({
   };
 
   return (
-    <div className="w-full px-4 mb-4 rounded border-[rgb(230,230,230)] border-[1px] shadow-md">
+    <div className="w-full px-4 mb-4 rounded">
       {/* Header  */}
       <div
         className="h-[74px] w-full  flex items-center justify-between cursor-pointer"
@@ -126,10 +126,10 @@ export default function IndicatorEnergyuse({
 
         {/* CHART */}
 
-        <div className="w-full mt-14 flex justify-center">
+        <div className="w-full mt-6 flex justify-center">
           <BarChart
-            width={398}
-            height={331}
+            width={350}
+            height={300}
             data={[
               {
                 name: "Energy",
