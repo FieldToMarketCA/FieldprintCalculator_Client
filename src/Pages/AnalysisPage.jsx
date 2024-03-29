@@ -1,5 +1,7 @@
-import React, { PureComponent, useState, useContext } from "react";
+import React, { PureComponent, useState, useContext, useEffect } from "react";
 import { Margin, usePDF, Options } from "react-to-pdf";
+
+import HelpModal from "../Components/HelpModal";
 
 import {
   Radar,
@@ -44,6 +46,11 @@ export default function AnalysisPage({}) {
       },
     },
   };
+  const [analysisError, setAnalysisErrorOpen] = useState(false);
+
+  const handleClose = () => {
+    window.location.reload();
+  };
 
   var reportDataConext = useContext(ReportDataContext);
 
@@ -55,6 +62,15 @@ export default function AnalysisPage({}) {
     reportDataConext = defaultFarmData;
   }
 
+  function handleNaNs() {
+    if (reportDataConext.state[1].find((cell) => cell === "#N/A")) {
+      setAnalysisErrorOpen(true);
+    }
+  }
+
+  useEffect(() => {
+    handleNaNs();
+  }, []);
   const [spidergramData, setSpidergramData] = useState([
     {
       subject: "Land Use Efficiency",
@@ -307,6 +323,12 @@ export default function AnalysisPage({}) {
           <PDF_ANALYSIS />
         </div>
       </div>
+      <HelpModal
+        title={"Error"}
+        description={"We ran into problems while processing your analyis."}
+        open={analysisError}
+        handleClose={handleClose}
+      />
     </Page>
   );
 }
