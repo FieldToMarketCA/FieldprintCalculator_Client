@@ -83,6 +83,8 @@ export default function AddFieldPage() {
       newValues["SLCpolygon"] = SoilData.SLCpolygon;
 
       fieldContext.setter({ ...fieldContext.state, ...newValues });
+      errorFields.surfaceForm = false;
+      errorFields.slopeClass = false;
     } catch (error) {
       console.log("An error occurred while fetching map data");
     }
