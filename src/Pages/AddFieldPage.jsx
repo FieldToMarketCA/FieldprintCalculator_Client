@@ -128,7 +128,7 @@ export default function AddFieldPage() {
 
   return (
     <Page
-      title={"New Field"}
+      title={"New Field" + " on " + farmContext.state.name}
       headerBorderColor={"border-[#34a853]"}
       padding={"p-[0px]"}
     >
