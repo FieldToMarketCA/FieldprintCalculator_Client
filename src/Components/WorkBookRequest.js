@@ -30,21 +30,21 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
     [defaultUnit, "Cult2_Units"],
     [CropyearState.fieldOperations.cultivations[1].hoursUsed, "Cult2_Hrs"],
     [
-      CropyearState.fieldOperations.cultivations[0].machineObj.defaultAcreHour,
+      CropyearState.fieldOperations.cultivations[1].machineObj.defaultAcreHour,
       "Cult2_AcHr",
     ],
     [CropyearState.fieldOperations.cultivations[2].machineObj.HP, "Cult3_Size"],
     [defaultUnit, "Cult3_Units"],
     [CropyearState.fieldOperations.cultivations[2].hoursUsed, "Cult3_Hrs"],
     [
-      CropyearState.fieldOperations.cultivations[0].machineObj.defaultAcreHour,
+      CropyearState.fieldOperations.cultivations[2].machineObj.defaultAcreHour,
       "Cult3_AcHr",
     ],
     [CropyearState.fieldOperations.cultivations[3].machineObj.HP, "Cult4_Size"],
     [defaultUnit, "Cult4_Units"],
     [CropyearState.fieldOperations.cultivations[3].hoursUsed, "Cult4_Hrs"],
     [
-      CropyearState.fieldOperations.cultivations[0].machineObj.defaultAcreHour,
+      CropyearState.fieldOperations.cultivations[3].machineObj.defaultAcreHour,
       "Cult4_AcHr",
     ],
     [
@@ -228,8 +228,8 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
     ["", "NULL"], //
     [FieldState.soilType, "Soil_Type"],
     [FieldState.surfaceSoilTexture, "Soil_Texture"],
-    [FieldState.tillageRegime, "Till_Previous"],
-    [FieldState.prevopusTillageRegime, "Till_Current"],
+    [FieldState.previousTillageRegime, "Till_Previous"],
+    [FieldState.tillageRegime, "Till_Current"],
     ["", "NULL"], //
     ["", "NULL"], //
     ["", "NULL"], //
