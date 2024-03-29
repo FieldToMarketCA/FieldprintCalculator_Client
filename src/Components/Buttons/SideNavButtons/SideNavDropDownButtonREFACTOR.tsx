@@ -124,7 +124,8 @@ export default function SideNavDropDownButton({
               }}
             />
           </li>
-          <li className="w-full">
+          <li className="w-full relative">
+            <div className="absolute w-1/2 h-1/2 top-3 left-[75px] bg-white duration-700  animate-ping"></div>
             <SideNavButton
               isOpen={true}
               text="Add Farm"
