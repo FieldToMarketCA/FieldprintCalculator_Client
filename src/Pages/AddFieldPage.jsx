@@ -51,7 +51,6 @@ export default function AddFieldPage() {
       const geoData = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${SECRETS.SECRETS.GOOGLE_APIKEY}`
       );
-      // console.log(geoData.data);
 
       let lat = geoData.data.results[0].geometry.location.lat;
       let lng = geoData.data.results[0].geometry.location.lng;
@@ -83,7 +82,7 @@ export default function AddFieldPage() {
     >
       <div className="flex w-full h-full">
         {/* LEFT PANEL | INPUT AREA */}
-        <div className="flex  relative flex-col justify-end h-full w-[336px] min-w-[336px] border-r border-[rgb(211,211,211)]">
+        <div className="flex  relative flex-col justify-end h-full w-full md:w-[336px] md:min-w-[336px] border-r border-[rgb(211,211,211)]">
           {/* FIELDS*/}
           <div
             style={{
@@ -219,7 +218,7 @@ export default function AddFieldPage() {
         </div>
 
         {/* MAP  */}
-        <div className="w-full h-full">
+        <div className="hidden md:block w-full h-full">
           <iframe
             title="Map"
             width="100%"

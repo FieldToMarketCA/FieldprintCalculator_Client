@@ -9,14 +9,16 @@ export default function Header() {
       elevation={3}
       className="flex w-full h-[64px] px-4 md:px-6 justify-between shadow-2xl z-50"
     >
-      <div>
-        <img className="h-full" src={ftmcLogo} alt="fmtc logo" />
+      <div className="h-full content-center">
+        <img className="h-5/6 md:h-full" src={ftmcLogo} alt="fmtc logo" />
       </div>
       <div className="my-auto flex items-center">
         <IconButton aria-label="delete" size="large">
           <AccountCircleIcon className="text-white" fontSize="inherit" />
         </IconButton>
-        <p className="text-white mr-10 text-[18px]">Hi, Guest</p>
+        <p className="text-white hidden min-[550px]:block mr-10 text-[18px]">
+          Hi, Guest
+        </p>
       </div>
     </Paper>
   );

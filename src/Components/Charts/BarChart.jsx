@@ -32,11 +32,13 @@ export default class Chart extends PureComponent {
           <Tooltip />
           <Legend />
           <Bar
+            name="Field Score"
             dataKey="fieldScore"
             fill="rgb(0,164,229)"
             activeBar={<Rectangle stroke="rgb(42 195 255)" strokeWidth={3} />}
           />
           <Bar
+            name="Provincial Score"
             dataKey="provincialScore"
             fill="rgb(250,164,58)"
             activeBar={<Rectangle stroke="rgb(255,125,50)" strokeWidth={3} />}

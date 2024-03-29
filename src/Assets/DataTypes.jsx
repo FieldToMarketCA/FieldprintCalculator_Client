@@ -119,10 +119,19 @@ const TillageRegimeTypes = [
 ];
 
 const CropYearCropTypes = [
-  { value: "Winter Wheat", label: "Winter Wheat" },
-  { value: "Soybeans", label: "Soybeans" },
+  { value: "Barley", label: "Barley" },
   { value: "Corn", label: "Corn" },
+  { value: "Durum Wheat", label: "Durum Wheat" },
+  { value: "Oats", label: "Oats" },
   { value: "Rye", label: "Rye" },
+  { value: "Spring Wheat", label: "Spring Wheat" },
+  { value: "Canola", label: "Canola" },
+  { value: "Mustard", label: "Mustard" },
+  { value: "Chickpeas", label: "Chickpeas" },
+  { value: "Lentils", label: "Lentils" },
+  { value: "Peas", label: "Peas" },
+  { value: "Soybeans", label: "Soybeans" },
+  { value: "Flax", label: "Flax" },
 ];
 
 const CropYearCropFrequencyTypes = [

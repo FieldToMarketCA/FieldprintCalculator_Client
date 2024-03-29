@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="w-full min-h-[32.5px] bg-[#333333] flex items-center flex-col md:flex-row md:justify-between px-[79px]">
+    <div className="w-full hidden min-[550px]:flex  bg-[#333333] flex items-center flex-col md:flex-row md:justify-between px-[79px]">
       <div className="flex items-center">
         <a
           href="https://fieldtomarketca.github.io/FieldprintCalculator_Client/"

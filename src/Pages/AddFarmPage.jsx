@@ -64,14 +64,14 @@ export default function AddFarmPage() {
         />
 
         {/* CONTROLS */}
-        <div className="w-full flex">
-          <div>
+        <div className="w-full  flex flex-col min-[550px]:flex-row">
+          <div className="mb-5">
             <MainButton
               text={"Save and Add Field"}
               onClick={handleSaveAndAddFIeld}
             />
           </div>
-          <div className="ml-4">
+          <div className="min-[550px]:ml-4">
             <MainButton text={"Cancel"} onClick={console.log} />
           </div>
         </div>
