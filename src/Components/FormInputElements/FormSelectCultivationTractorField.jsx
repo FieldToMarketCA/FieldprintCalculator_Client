@@ -11,6 +11,7 @@ export default function FormSelectCultivationTractorField({
   onChange,
   index,
   fieldState,
+  errorFound = { machineObj: false, machineHours: false },
 }) {
   const [selectedTractor, setSelectedTractor] = useState("");
   const [hoursUsed, setHoursUsed] = useState(0);
@@ -23,6 +24,7 @@ export default function FormSelectCultivationTractorField({
   return (
     <div className="w-full flex mb-6">
       <TextField
+        error={errorFound.machineObj}
         id="outlined-select-currency"
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
@@ -43,6 +45,7 @@ export default function FormSelectCultivationTractorField({
         </MenuItem>
       </TextField>
       <TextField
+        error={errorFound.machineHours}
         sx={{ color: "#666666", maxWidth: 130 }}
         onChange={(t) => onChange(t, "hoursUsed", index)}
         label={"Hours Used"}

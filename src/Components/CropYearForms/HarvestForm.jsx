@@ -10,10 +10,17 @@ import {
 } from "../../Assets/DataTypes";
 
 import { CropYearContext } from "../../App";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function HarvestForm({ LowerPanel, panelControls }) {
   const cropyearContext = useContext(CropYearContext);
+  const [errorFields, setErrorFields] = useState({
+    swather_machineObj: false,
+    swather_hoursUsed: false,
+    combine_machineObj: false,
+    combine_hoursUsed: false,
+    combine_avgSpeed: false,
+  });
 
   function handleMachineOperation(event, machineType, key) {
     const newValue = {};
@@ -32,6 +39,12 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
       ...cropyearContext.state,
       harvest: updatedHarvestOperation,
     });
+
+    let newErrorValue = {};
+    let errorKey = machineType + "_" + key;
+
+    newErrorValue[errorKey] = false;
+    setErrorFields({ ...errorFields, ...newErrorValue });
   }
 
   function handleCropDrying(target, key) {
@@ -66,6 +79,38 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
     });
     // console.log("mamichula", cropyearContext.state.harvest);
   }
+
+  function isInputValid() {
+    errorFields.swather_machineObj =
+      cropyearContext.state.harvest.swather.machineObj === "";
+    errorFields.swather_hoursUsed =
+      cropyearContext.state.harvest.swather.hoursUsed === "";
+    errorFields.combine_machineObj =
+      cropyearContext.state.harvest.combine.machineObj === "";
+    errorFields.combine_hoursUsed =
+      cropyearContext.state.harvest.combine.hoursUsed === "";
+    errorFields.combine_avgSpeed =
+      cropyearContext.state.harvest.combine.avgSpeed === "";
+
+    if (
+      errorFields.swather_machineObj ||
+      errorFields.swather_hoursUsed ||
+      errorFields.combine_machineObj ||
+      errorFields.combine_hoursUsed ||
+      errorFields.combine_avgSpeed
+    ) {
+      setErrorFields({
+        swather_machineObj: errorFields.swather_machineObj,
+        swather_hoursUsed: errorFields.swather_hoursUsed,
+        combine_machineObj: errorFields.combine_machineObj,
+        combine_hoursUsed: errorFields.combine_hoursUsed,
+        combine_avgSpeed: errorFields.combine_avgSpeed,
+      });
+      return false; // return false because input is invalid
+    } else {
+      return true;
+    }
+  }
   useEffect(() => {
     const element = document.getElementById("scrollableDiv");
     element.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -84,6 +129,10 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
         <div className="flex jusitify-start">
           <div className="w-[450px] mr-[25px]">
             <FormSelectMachineField
+              errorFound={{
+                machineObj: errorFields.swather_machineObj,
+                machineHours: errorFields.swather_hoursUsed,
+              }}
               fieldLabel={"Select Swather"}
               machineType={"swather"}
               machinesArray={SWATHERS}
@@ -96,6 +145,10 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
         <div className="flex jusitify-start">
           <div className="w-[450px] mr-[25px]">
             <FormSelectMachineField
+              errorFound={{
+                machineObj: errorFields.combine_machineObj,
+                machineHours: errorFields.combine_hoursUsed,
+              }}
               fieldLabel={"Select Combine"}
               machineType={"combine"}
               machinesArray={COMBINES}
@@ -104,6 +157,7 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
             />
           </div>
           <TextField
+            error={errorFields.combine_avgSpeed}
             type="number"
             label="Avg Speed Miles/Hr"
             sx={{ width: 200 }}
@@ -167,6 +221,7 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
         handleComplete={panelControls.handleComplete}
         completedSteps={panelControls.completedSteps}
         totalSteps={panelControls.totalSteps}
+        isInputValid={isInputValid}
       />
     </div>
   );

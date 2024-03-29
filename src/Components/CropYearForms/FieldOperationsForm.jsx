@@ -18,7 +18,10 @@ const cultivationOperationType = { machineObj: "", hoursOfOperation: 0 };
 
 export default function FieldOperationsForm({ LowerPanel, panelControls }) {
   const cropyearContext = useContext(CropYearContext);
-
+  const [errorFields, setErrorFields] = useState({
+    machineObj: false,
+    hoursUsed: false,
+  });
   const [usedFertilizer, setUsedFertilizer] = useState(false);
   const [numberOfCultivation, setNumberOfCultivation] = useState(1);
   const [cultivationOperations, setCultivationOperations] = useState([
@@ -65,6 +68,12 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
       ...cropyearContext.state,
       fieldOperations: updatedFieldOperations,
     });
+
+    // reset fields error state
+    let newErrorValue = {};
+
+    newErrorValue[key] = false;
+    setErrorFields({ ...errorFields, ...newErrorValue });
   }
 
   function handleFertilizerOperation(event, key, seedStage) {
@@ -182,6 +191,23 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
   function handleBooleanQuestion(e) {
     setFertilizerUsed(e.target.value === "true");
   }
+
+  function isInputValid() {
+    errorFields.machineObj =
+      cropyearContext.state.fieldOperations.cultivations[0].machineObj === "";
+    errorFields.hoursUsed =
+      cropyearContext.state.fieldOperations.cultivations[0].hoursUsed === "";
+
+    if (errorFields.machineObj || errorFields.hoursUsed) {
+      setErrorFields({
+        machineObj: errorFields.machineObj,
+        hoursUsed: errorFields.hoursUsed,
+      });
+      return false; // return false because input is invalid
+    } else {
+      return true;
+    }
+  }
   return (
     <div className=" w-full h-full">
       <h3 className="text-[rgb(102,102,102)] text-[30px]">Field Operations</h3>
@@ -211,6 +237,12 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
 
             return (
               <FormSelectCultivationTractorField
+                errorFound={
+                  index === 0 && {
+                    machineObj: errorFields.machineObj,
+                    machineHours: errorFields.hoursUsed,
+                  }
+                }
                 key={index}
                 fieldLabel={"Tractor Used in Cultivation #" + (index + 1)}
                 tractorsArray={TRACTORS}
@@ -360,6 +392,7 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
         handleComplete={panelControls.handleComplete}
         completedSteps={panelControls.completedSteps}
         totalSteps={panelControls.totalSteps}
+        isInputValid={isInputValid}
       />
     </div>
   );

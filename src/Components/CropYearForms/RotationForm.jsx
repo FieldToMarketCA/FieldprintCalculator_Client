@@ -14,15 +14,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { CropYearContext } from "../../App";
 import { useContext, useEffect, useState } from "react";
 
-// var errorFields = {
-//   cropYear: false,
-//   cropThisYear: false,
-//   cropFrequency: false,
-//   yield: false,
-//   yieldUnits: false,
-//   previousCrop: false,
-// };
-
 export default function RotationForm({ LowerPanel, panelControls }) {
   const cropyearContext = useContext(CropYearContext);
   const [errorFields, setErrorFields] = useState({
@@ -54,7 +45,6 @@ export default function RotationForm({ LowerPanel, panelControls }) {
   // }
 
   function isInputValid() {
-    console.log(cropyearContext.state.crop.cropYear, "sup");
     errorFields.cropYear = cropyearContext.state.crop.cropYear === "";
     errorFields.cropThisYear =
       cropyearContext.state.crop.cropThisYear.trim() === "";
