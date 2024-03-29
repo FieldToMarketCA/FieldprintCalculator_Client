@@ -125,6 +125,7 @@ const CropYearCropTypes = [
   { value: "Oats", label: "Oats" },
   { value: "Rye", label: "Rye" },
   { value: "Spring Wheat", label: "Spring Wheat" },
+  { value: "Winter Wheat", label: "Winter Wheat" },
   { value: "Canola", label: "Canola" },
   { value: "Mustard", label: "Mustard" },
   { value: "Chickpeas", label: "Chickpeas" },
