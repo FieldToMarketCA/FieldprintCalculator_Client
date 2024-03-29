@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Switch from "@mui/material/Switch";
@@ -17,6 +17,9 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import SideNavButton from "./SideNavButton";
 import { useNavigate } from "react-router-dom";
 
+import { GUI_CONTEXT } from "../../../App";
+// GUI.setter({ ...GUI.state, isNavOpen: !GUI.state.isNavOpen });
+
 export default function SideNavDropDownButton({
   isOpen,
   onClick,
@@ -30,6 +33,7 @@ export default function SideNavDropDownButton({
   icon: string;
   borderColor?: string;
 }) {
+  const GUI = useContext(GUI_CONTEXT);
   const [isHover, setIsHover] = useState(false);
   const navigate = useNavigate();
 
@@ -114,7 +118,10 @@ export default function SideNavDropDownButton({
               isOpen={true}
               text="Demo Farm"
               icon={"farmIcon"}
-              onClick={() => console.log("x")}
+              onClick={() => {
+                navigate("/");
+                GUI.setter({ ...GUI.state, isNavOpen: false });
+              }}
             />
           </li>
           <li className="w-full">
@@ -122,7 +129,10 @@ export default function SideNavDropDownButton({
               isOpen={true}
               text="Add Farm"
               icon={"addFarmFieldIcon"}
-              onClick={() => navigate("/farm")}
+              onClick={() => {
+                navigate("/farm");
+                GUI.setter({ ...GUI.state, isNavOpen: false });
+              }}
             />
           </li>
         </ul>
