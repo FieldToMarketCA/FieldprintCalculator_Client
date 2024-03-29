@@ -12,7 +12,6 @@ import { FieldContext } from "../App";
 
 var errorFields = {
   name: false,
-  partner: false,
   province: false,
 };
 
@@ -36,7 +35,6 @@ export default function AddFarmPage() {
 
   function isInputValid() {
     errorFields.name = farmContext.state.name.trim() === "";
-    errorFields.partner = farmContext.state.partner.trim() === "";
     errorFields.province = farmContext.state.province.trim() === "";
 
     if (errorFields.name || errorFields.partner || errorFields.province) {
@@ -64,7 +62,6 @@ export default function AddFarmPage() {
           }
         />
         <FormTextField
-          errorFound={errorFields.partner}
           fieldState={farmContext.state.partner}
           fieldLabel={"Partner Name"}
           modalTitle={"Partner Name"}

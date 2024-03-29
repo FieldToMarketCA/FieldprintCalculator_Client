@@ -12,10 +12,27 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { CropYearContext } from "../../App";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+
+// var errorFields = {
+//   cropYear: false,
+//   cropThisYear: false,
+//   cropFrequency: false,
+//   yield: false,
+//   yieldUnits: false,
+//   previousCrop: false,
+// };
 
 export default function RotationForm({ LowerPanel, panelControls }) {
   const cropyearContext = useContext(CropYearContext);
+  const [errorFields, setErrorFields] = useState({
+    cropYear: false,
+    cropThisYear: false,
+    cropFrequency: false,
+    yield: false,
+    yieldUnits: false,
+    previousCrop: false,
+  });
 
   function handleStateChange(target, key) {
     const newValue = {};
@@ -25,11 +42,51 @@ export default function RotationForm({ LowerPanel, panelControls }) {
     const updatedCrop = { ...cropyearContext.state.crop, ...newValue };
 
     cropyearContext.setter({ ...cropyearContext.state, crop: updatedCrop });
+    errorFields[key] = false;
   }
   useEffect(() => {
     const element = document.getElementById("scrollableDiv");
     element.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
+
+  // function handleSaveAndAddFIeld() {
+  //   if (isInputValid()) navigate("/field");
+  // }
+
+  function isInputValid() {
+    console.log(cropyearContext.state.crop.cropYear, "sup");
+    errorFields.cropYear = cropyearContext.state.crop.cropYear === "";
+    errorFields.cropThisYear =
+      cropyearContext.state.crop.cropThisYear.trim() === "";
+    errorFields.cropFrequency =
+      cropyearContext.state.crop.cropFrequency.trim() === "";
+    errorFields.yield = cropyearContext.state.crop.yield.trim() === "";
+    errorFields.yieldUnits =
+      cropyearContext.state.crop.yieldUnits.trim() === "";
+    errorFields.previousCrop =
+      cropyearContext.state.crop.previousCrop.trim() === "";
+
+    if (
+      errorFields.cropYear ||
+      errorFields.cropThisYear ||
+      errorFields.cropFrequency ||
+      errorFields.yield ||
+      errorFields.yieldUnits ||
+      errorFields.previousCrop
+    ) {
+      setErrorFields({
+        cropYear: errorFields.cropYear,
+        cropThisYear: errorFields.cropThisYear,
+        cropFrequency: errorFields.cropFrequency,
+        yield: errorFields.yield,
+        yieldUnits: errorFields.yieldUnits,
+        previousCrop: errorFields.previousCrop,
+      });
+      return false; // return false because input is invalid
+    } else {
+      return true;
+    }
+  }
 
   return (
     <div className=" w-full h-full">
@@ -44,12 +101,16 @@ export default function RotationForm({ LowerPanel, panelControls }) {
           onChange={(e) => {
             if (e !== null) handleStateChange(e.$y, "cropYear");
           }}
-          sx={{ marginBottom: 3 }}
+          sx={{
+            marginBottom: 3,
+            bgcolor: errorFields.cropYear ? "rgb(255,234,234)" : "white",
+          }}
           label="Crop Year"
         />
       </LocalizationProvider>
 
       <FormSelectField
+        errorFound={errorFields.cropThisYear}
         valuesArray={CropYearCropTypes}
         fieldLabel={"Crop This year"}
         fieldState={cropyearContext.state.crop.cropThisYear}
@@ -60,6 +121,7 @@ export default function RotationForm({ LowerPanel, panelControls }) {
       />
 
       <FormSelectField
+        errorFound={errorFields.cropFrequency}
         valuesArray={CropYearCropFrequencyTypes}
         fieldLabel={"Crop Frequency"}
         onChange={(e) => handleStateChange(e.target.value, "cropFrequency")}
@@ -72,6 +134,7 @@ export default function RotationForm({ LowerPanel, panelControls }) {
       <div className="flex justify-start">
         <div>
           <FormTextField
+            errorFound={errorFields.yield}
             isNumber={true}
             fieldState={cropyearContext.state.crop.yield}
             fieldLabel={""}
@@ -81,6 +144,7 @@ export default function RotationForm({ LowerPanel, panelControls }) {
         </div>
         <div className="w-36 ml-4">
           <FormSelectField
+            errorFound={errorFields.yieldUnits}
             valuesArray={CropYearCropYieldUnitTypes}
             fieldLabel={"Units"}
             onChange={(e) => handleStateChange(e.target.value, "yieldUnits")}
@@ -92,6 +156,7 @@ export default function RotationForm({ LowerPanel, panelControls }) {
         </div>
       </div>
       <FormSelectField
+        errorFound={errorFields.previousCrop}
         valuesArray={CropYearCropTypes}
         fieldLabel={"Crop Prior year"}
         onChange={(e) => handleStateChange(e.target.value, "previousCrop")}
@@ -109,6 +174,7 @@ export default function RotationForm({ LowerPanel, panelControls }) {
         handleComplete={panelControls.handleComplete}
         completedSteps={panelControls.completedSteps}
         totalSteps={panelControls.totalSteps}
+        isInputValid={isInputValid}
       />
     </div>
   );

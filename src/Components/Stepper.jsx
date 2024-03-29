@@ -53,6 +53,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
     handleComplete,
     completedSteps,
     totalSteps,
+    isInputValid,
   }) => {
     return (
       <Box sx={{ display: "flex", flexDirection: "row", pt: 2, pb: "75px" }}>
@@ -75,7 +76,12 @@ export default function HorizontalNonLinearStepper({ steps }) {
               Step {activeStep + 1} already completed
             </Typography>
           ) : (
-            <Button variant="contained" onClick={handleComplete}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                if (isInputValid()) handleComplete();
+              }}
+            >
               {completedSteps() === totalSteps() - 1
                 ? "Finish"
                 : "Complete Step"}
