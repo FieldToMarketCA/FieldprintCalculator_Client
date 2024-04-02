@@ -72,6 +72,7 @@ export default function FormSelectFertilizerTractorField({
       {fieldState.date ? (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
+            disableFuture
             onChange={(t) => onChange(t, "date", seedStage)}
             label="Date"
             defaultValue={dayjs(fieldState.date)}
@@ -80,6 +81,7 @@ export default function FormSelectFertilizerTractorField({
       ) : (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
+            disableFuture
             onChange={(t) => onChange(t, "date", seedStage)}
             label="Date"
           />

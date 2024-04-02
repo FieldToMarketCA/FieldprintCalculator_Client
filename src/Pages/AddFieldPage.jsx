@@ -253,6 +253,7 @@ export default function AddFieldPage() {
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
+                disableFuture
                 onChange={(event) => {
                   if (event && !isNaN(event.$d))
                     handleStateChange(

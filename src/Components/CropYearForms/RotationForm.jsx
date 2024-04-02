@@ -87,6 +87,7 @@ export default function RotationForm({ LowerPanel, panelControls }) {
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
+          disableFuture
           views={["year"]}
           onChange={(e) => {
             if (e !== null) handleStateChange(e.$y, "cropYear");

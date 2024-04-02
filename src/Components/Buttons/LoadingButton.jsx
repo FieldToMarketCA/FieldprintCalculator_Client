@@ -1,6 +1,9 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
+// import CircularProgress from "@mui/material/CircularProgress";
+import PropTypes from "prop-types";
+import LinearProgress from "@mui/material/LinearProgress";
+import Typography from "@mui/material/Typography";
 import { green } from "@mui/material/colors";
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
@@ -34,20 +37,8 @@ export default function LoadingButton({
         >
           {success ? <CheckIcon /> : <SaveIcon />}
         </Fab>
-        {loading && (
-          <CircularProgress
-            size={68}
-            sx={{
-              color: green[500],
-              position: "absolute",
-              top: -6,
-              left: -6,
-              zIndex: 1,
-            }}
-          />
-        )}
       </Box>
-      <Box sx={{ m: 1, position: "relative" }}>
+      <Box sx={{ m: 1, display: "flex", flexDirection: "column" }}>
         <Button
           variant="contained"
           sx={buttonSx}
@@ -56,20 +47,52 @@ export default function LoadingButton({
         >
           {success ? successText : text}
         </Button>
-        {loading && (
-          <CircularProgress
-            size={24}
-            sx={{
-              color: green[500],
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              marginTop: "-12px",
-              marginLeft: "-12px",
-            }}
-          />
-        )}
+        {loading && <LinearWithValueLabel />}
       </Box>
+    </Box>
+  );
+}
+
+function LinearProgressWithLabel(props) {
+  return (
+    <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ width: "100%", mr: 1, mt: 1 }}>
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box sx={{ minWidth: 35 }}>
+        <Typography variant="body2" color="text.secondary">{`${Math.round(
+          props.value
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
+
+LinearProgressWithLabel.propTypes = {
+  /**
+   * The value of the progress indicator for the determinate and buffer variants.
+   * Value between 0 and 100.
+   */
+  value: PropTypes.number.isRequired,
+};
+
+function LinearWithValueLabel() {
+  const [progress, setProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) =>
+        prevProgress >= 100 ? 0 : prevProgress + 3
+      );
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      <LinearProgressWithLabel value={progress} />
     </Box>
   );
 }
