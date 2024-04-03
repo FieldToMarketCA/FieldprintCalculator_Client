@@ -298,7 +298,7 @@ async function generateResults(
       headers: {
         Authorization: "Bearer " + TOKEN,
         "Content-Type": "application/json",
-        // "Workbook-Session-Id": sessionResponse.data.id,
+        "Workbook-Session-Id": sessionResponse.data.id,
       },
     }
   );
@@ -312,7 +312,7 @@ async function generateResults(
         headers: {
           Authorization: "Bearer " + TOKEN,
           "Content-Type": "application/json",
-          // "Workbook-Session-Id": sessionResponse.data.id,
+          "Workbook-Session-Id": sessionResponse.data.id,
         },
       }
     );
@@ -332,7 +332,7 @@ async function generateResults(
       }
     );
 
-    // const data = await response.data.values[0][0];
+
     setReportData(response.data.values);
     console.log(response.data.values);
   }, 5000);
