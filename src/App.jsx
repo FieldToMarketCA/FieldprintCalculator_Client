@@ -14,7 +14,7 @@ import AddFarmPage from "./Pages/AddFarmPage";
 import AddFieldPage from "./Pages/AddFieldPage";
 import AddCropYear from "./Pages/AddCropYear";
 import AnalysisPage from "./Pages/AnalysisPage";
-
+import {GoogleOAuthProvider} from '@react-oauth/google';
 import { createContext, useEffect, useState } from "react";
 
 import {
@@ -81,6 +81,8 @@ function App() {
   }, []);
 
   return (
+    <GoogleOAuthProvider clientId="820303429606-cgalocai2uava757at1m2ls2b1c4q5bh.apps.googleusercontent.com">
+
     <ThemeProvider theme={theme}>
       <SECRETS_CONTEXT.Provider value={{ SECRETS: SECRETS }}>
         <FarmContext.Provider
@@ -118,6 +120,7 @@ function App() {
         </FarmContext.Provider>
       </SECRETS_CONTEXT.Provider>
     </ThemeProvider>
+    </GoogleOAuthProvider>
   );
 }
 
