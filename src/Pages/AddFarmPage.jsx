@@ -10,6 +10,8 @@ import { useContext } from "react";
 import { FarmContext } from "../App";
 import { FieldContext } from "../App";
 
+import axios from "axios";
+
 var errorFields = {
   name: false,
   province: false,
@@ -30,7 +32,26 @@ export default function AddFarmPage() {
   }
 
   function handleSaveAndAddFIeld() {
-    if (isInputValid()) navigate("/field");
+    if (isInputValid()) {
+      axios
+        .post(process.env.REACT_APP_API_URL + "/farms", {
+          name: farmContext.state.name,
+          province: farmContext.state.province,
+          partner: farmContext.state.partner,
+          ownerId: "engfelixreynoso@gmail.com",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response.data.farmId);
+          farmContext.setter({
+            ...farmContext.state,
+            farmId: response.data.farmId,
+          });
+          navigate("/field");
+        });
+    }
   }
 
   function isInputValid() {

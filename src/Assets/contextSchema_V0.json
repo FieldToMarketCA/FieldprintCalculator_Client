@@ -1,7 +1,7 @@
 [
   {
     "_TYPE": "FARM",
-    "id": "UUID",
+    "farmId": "UUID",
     "name": "string",
     "ownerId": "UUID",
     "partner": "String",

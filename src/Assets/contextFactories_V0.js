@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 
 function FARM_CREATOR() {
   return {
-    id: uuidv4(),
+    farmId: "",
     name: "",
     ownerId: "",
     province: "",
