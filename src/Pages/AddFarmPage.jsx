@@ -44,10 +44,9 @@ export default function AddFarmPage() {
           },
         })
         .then((response) => {
-          console.log(response.data.farmId);
           farmContext.setter({
             ...farmContext.state,
-            farmId: response.data.farmId,
+            id: response.data.farmId,
           });
           navigate("/field");
         });

@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 
 function FARM_CREATOR() {
   return {
-    farmId: "",
+    id: "",
     name: "",
     ownerId: "",
     province: "",
@@ -16,7 +16,7 @@ function FARM_CREATOR() {
 
 function FIELD_CREATOR() {
   return {
-    id: uuidv4(),
+    id: "",
     farmId: "",
     name: "",
     fieldSize: "",

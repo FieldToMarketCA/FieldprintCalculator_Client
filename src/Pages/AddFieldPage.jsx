@@ -91,7 +91,41 @@ export default function AddFieldPage() {
   }
 
   function handleSaveAndAddFIeld() {
-    if (isInputValid()) navigate("/cropyear");
+    if (isInputValid()) {
+      axios
+        .post(
+          process.env.REACT_APP_API_URL +
+            `/farms/${farmContext.state.id}/fields`,
+          {
+            farmId: farmContext.state.id,
+            name: fieldContext.state.name,
+            fieldSize: fieldContext.state.fieldSize,
+            fieldAddress: fieldContext.state.fieldAddress,
+            surfaceForm: fieldContext.state.surfaceForm,
+            slopeClass: fieldContext.state.slopeClass,
+            soilType: fieldContext.state.soilType,
+            surfaceSoilTexture: fieldContext.state.surfaceSoilTexture,
+            tillageRegime: fieldContext.state.tillageRegime,
+            previousTillageRegime: fieldContext.state.previousTillageRegime,
+            regimeChangeDate: fieldContext.state.regimeChangeDate,
+            Ecodistrict: fieldContext.state.Ecodistrict,
+            SLCpolygon: fieldContext.state.SLCpolygon,
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data.fieldId);
+          fieldContext.setter({
+            ...fieldContext.state,
+            id: response.data.fieldId,
+          });
+
+          navigate("/cropyear");
+        });
+    }
   }
 
   function isInputValid() {
