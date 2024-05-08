@@ -6,7 +6,8 @@
     "ownerId": "UUID",
     "partner": "String",
     "province": "code",
-    "fields": ["FIELD", "..."]
+    "fields": ["FIELD", "..."],
+    "machines": ["MACHINE", "..."]
   },
 
   {

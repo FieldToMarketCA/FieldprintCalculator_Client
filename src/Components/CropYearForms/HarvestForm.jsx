@@ -10,10 +10,13 @@ import {
 } from "../../Assets/DataTypes";
 
 import { CropYearContext } from "../../App";
+import { FarmContext } from "../../App";
 import { useContext, useEffect, useState } from "react";
 
 export default function HarvestForm({ LowerPanel, panelControls }) {
   const cropyearContext = useContext(CropYearContext);
+  const farmContext = useContext(FarmContext);
+
   const [errorFields, setErrorFields] = useState({
     swather_machineObj: false,
     swather_hoursUsed: false,
@@ -27,13 +30,13 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
     newValue[key] = event.target.value;
 
     const updatedMachine = {
-      ...cropyearContext.state.harvest[machineType],
+      ...cropyearContext.state.harvest[machineType.toLowerCase()],
       ...newValue,
     };
 
     // Create a copy with updated value for the corresponding Fertilizer Rate Update
     const updatedHarvestOperation = { ...cropyearContext.state.harvest };
-    updatedHarvestOperation[machineType] = updatedMachine;
+    updatedHarvestOperation[machineType.toLowerCase()] = updatedMachine;
 
     cropyearContext.setter({
       ...cropyearContext.state,
@@ -134,8 +137,10 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
                 machineHours: errorFields.swather_hoursUsed,
               }}
               fieldLabel={"Select Swather"}
-              machineType={"swather"}
-              machinesArray={SWATHERS}
+              machineType={"SWATHER"}
+              machinesArray={farmContext.state.machines.filter(
+                (machineObj) => machineObj.type === "SWATHER"
+              )}
               onChange={handleMachineOperation}
               fieldState={cropyearContext.state.harvest.swather}
             />
@@ -150,8 +155,10 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
                 machineHours: errorFields.combine_hoursUsed,
               }}
               fieldLabel={"Select Combine"}
-              machineType={"combine"}
-              machinesArray={COMBINES}
+              machineType={"COMBINE"}
+              machinesArray={farmContext.state.machines.filter(
+                (machineObj) => machineObj.type === "COMBINE"
+              )}
               onChange={handleMachineOperation}
               fieldState={cropyearContext.state.harvest.combine}
             />
@@ -227,22 +234,22 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
   );
 }
 
-const SWATHERS = [
-  {
-    type: "SWATHER",
-    name: "Swather 1",
-    HP: 800,
-    fuelUse: null,
-    defaultAcreHour: 2,
-  },
-];
+// const SWATHERS = [
+//   {
+//     type: "SWATHER",
+//     name: "Swather 1",
+//     HP: 800,
+//     fuelUse: null,
+//     defaultAcreHour: 2,
+//   },
+// ];
 
-const COMBINES = [
-  {
-    type: "COMBINE",
-    name: "Combine 1",
-    HP: 800,
-    fuelUse: null,
-    defaultAcreHour: 2,
-  },
-];
+// const COMBINES = [
+//   {
+//     type: "COMBINE",
+//     name: "Combine 1",
+//     HP: 800,
+//     fuelUse: null,
+//     defaultAcreHour: 2,
+//   },
+// ];

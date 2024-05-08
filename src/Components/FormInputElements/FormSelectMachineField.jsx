@@ -3,8 +3,10 @@ import MenuItem from "@mui/material/MenuItem";
 import HelpIconButton from "../Buttons/Iconbuttons/HelpIconButton";
 // import NewTractorModal from "../NewTractorModal";
 import NewMachineModal from "../NewMachineModal";
-
-import { useState } from "react";
+import { FarmContext } from "../../App";
+import { CropYearContext } from "../../App";
+import { useState, useContext } from "react";
+import axios from "axios";
 
 export default function FormSelectMachineField({
   machinesArray,
@@ -14,12 +16,51 @@ export default function FormSelectMachineField({
   fieldState,
   errorFound = { machineObj: false, machineHours: false },
 }) {
+  const farmContext = useContext(FarmContext);
+  const cropyearContext = useContext(CropYearContext);
+
   const [selectedMachine, setSelectedMachine] = useState("");
   const [hoursUsed, setHoursUsed] = useState(0);
   const [isMachineModalOpen, setIsMachineModalOpen] = useState(false);
 
   async function handleAddNewMachine(newMachine) {
-    machinesArray.push(newMachine);
+    let farmId = farmContext.state.id;
+
+    const response = await axios.post(
+      process.env.REACT_APP_API_URL + `/farms/${farmId}/machines`,
+      {
+        ...newMachine,
+        farmId: farmId,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    farmContext.setter({
+      ...farmContext.state,
+      machines: [...farmContext.state.machines, response.data.machineObj],
+    });
+
+    // After Posting and pushing to the machines array. Now we have to update the cropyearCOntext so that the user
+    // doens't have to select from the dropdown again. But after posting, field will be auto populated with the new machine
+
+    const newValue = {};
+    newValue["machineObj"] = response.data.machineObj;
+
+    const updatedMachine = {
+      ...cropyearContext.state.harvest[machineType.toLowerCase()],
+      ...newValue,
+    };
+
+    // Create a copy with updated value for the corresponding Fertilizer Rate Update
+    const updatedHarvestOperation = { ...cropyearContext.state.harvest };
+    updatedHarvestOperation[machineType.toLowerCase()] = updatedMachine;
+
+    cropyearContext.setter({
+      ...cropyearContext.state,
+      harvest: updatedHarvestOperation,
+    });
   }
 
   return (

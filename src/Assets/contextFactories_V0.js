@@ -7,6 +7,22 @@ function FARM_CREATOR() {
     ownerId: "",
     province: "",
     fields: [],
+    machines: [
+      {
+        type: "SWATHER",
+        name: "Swather 1",
+        HP: 800,
+        fuelUse: null,
+        defaultAcreHour: 2,
+      },
+      {
+        type: "COMBINE",
+        name: "Combine 1",
+        HP: 800,
+        fuelUse: null,
+        defaultAcreHour: 2,
+      },
+    ],
     partner: "",
     addField() {
       this.fields.push(FIELD_CREATOR());
