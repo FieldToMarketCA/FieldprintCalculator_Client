@@ -119,20 +119,20 @@ const TillageRegimeTypes = [
 ];
 
 const CropYearCropTypes = [
-  { value: "Barley", label: "Barley" },
-  { value: "Corn", label: "Corn" },
-  { value: "Durum Wheat", label: "Durum Wheat" },
-  { value: "Oats", label: "Oats" },
-  { value: "Rye", label: "Rye" },
-  { value: "Spring Wheat", label: "Spring Wheat" },
-  { value: "Winter Wheat", label: "Winter Wheat" },
-  { value: "Canola", label: "Canola" },
-  { value: "Mustard", label: "Mustard" },
-  { value: "Chickpeas", label: "Chickpeas" },
-  { value: "Lentils", label: "Lentils" },
-  { value: "Peas", label: "Peas" },
-  { value: "Soybeans", label: "Soybeans" },
-  { value: "Flax", label: "Flax" },
+  { value: "BARLEY", label: "Barley" },
+  { value: "CORN", label: "Corn" },
+  { value: "DURUM_WHEAT", label: "Durum Wheat" },
+  { value: "OATS", label: "Oats" },
+  { value: "RYE", label: "Rye" },
+  { value: "SPRING_WHEAT", label: "Spring Wheat" },
+  { value: "WINTER_WHEAT", label: "Winter Wheat" },
+  { value: "CANOLA", label: "Canola" },
+  { value: "MUSTARD", label: "Mustard" },
+  { value: "CHICKPEAS", label: "Chickpeas" },
+  { value: "LENTILS", label: "Lentils" },
+  { value: "PEAS", label: "Peas" },
+  { value: "SOYBEANS", label: "Soybeans" },
+  { value: "FLAX", label: "Flax" },
 ];
 
 const CropYearCropFrequencyTypes = [

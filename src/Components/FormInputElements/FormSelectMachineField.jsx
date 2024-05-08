@@ -18,7 +18,7 @@ export default function FormSelectMachineField({
   const [hoursUsed, setHoursUsed] = useState(0);
   const [isMachineModalOpen, setIsMachineModalOpen] = useState(false);
 
-  function handleAddNewMachine(newMachine) {
+  async function handleAddNewMachine(newMachine) {
     machinesArray.push(newMachine);
   }
 

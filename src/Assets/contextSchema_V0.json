@@ -80,7 +80,7 @@
       "cropYear": "DATE[YYYY]",
       "cropThisYear": "Enum[String]",
       "cropFrequency": "Enum[String]",
-      "yield": "Float",
+      "yieldValue": "Float",
       "yieldUnits": "Enum[String]",
       "previousCrop": "Enum[String]"
     },
@@ -88,7 +88,7 @@
       "cultivations": ["type[CULTIVATION_OPERATION]", "..."],
       "fertilizerApplications": {
         "preSeed": "type[FERTILIZER_OPERATION]",
-        "seed": "type[FERTILIZER_OPERATION]",
+        "withSeed": "type[FERTILIZER_OPERATION]",
         "postSeed": "type[FERTILIZER_OPERATION]"
       },
       "fertilizerRates": {

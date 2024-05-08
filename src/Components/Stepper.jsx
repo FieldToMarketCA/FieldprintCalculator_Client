@@ -6,10 +6,19 @@ import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ReviewForm from "../Components/CropYearForms/ReviewForm";
+import { FieldContext } from "../App";
+import { FarmContext } from "../App";
+import { CropYearContext } from "../App";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function HorizontalNonLinearStepper({ steps }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
+
+  const fieldContext = React.useContext(FieldContext);
+  const farmContext = React.useContext(FarmContext);
+  const cropyearContext = React.useContext(CropYearContext);
 
   const totalSteps = () => {
     return steps.length;
@@ -45,6 +54,111 @@ export default function HorizontalNonLinearStepper({ steps }) {
     setActiveStep(step);
   };
 
+  const removeFactoryEmptyStringsFromCropYear = (cropyear) => {
+    console.log("before: ", cropyear);
+    var cropyearObj = {};
+    // [CROP]
+    cropyearObj.crop = cropyear.crop;
+
+    // [FIELD OPERATIONS]
+
+    /* Cultivations */
+    cropyearObj.fieldOperations = {};
+    cropyearObj.fieldOperations.cultivations = [];
+
+    for (const cultivation of cropyear.fieldOperations.cultivations) {
+      if (cultivation.machineObj !== "" && cultivation.hoursUsed !== "") {
+        cropyearObj.fieldOperations.cultivations.push({
+          machineId: cultivation.machineObj.name,
+          hoursUsed: cultivation.hoursUsed,
+        });
+      }
+    }
+
+    /* fertilizerApplications */
+
+    for (const key in cropyear.fieldOperations.fertilizerApplications) {
+      if (
+        cropyear.fieldOperations.fertilizerApplications[key].machineObj !==
+          "" &&
+        cropyear.fieldOperations.fertilizerApplications[key].hoursUsed !== "" &&
+        cropyear.fieldOperations.fertilizerApplications[key].date !== ""
+      ) {
+        // initialize fertilizerApplications object if it doesn't exist in cropyearObj
+        if ("fertilizerApplications" in cropyearObj.fieldOperations == false) {
+          cropyearObj.fieldOperations.fertilizerApplications = {};
+        }
+        let f = cropyear.fieldOperations.fertilizerApplications[key];
+
+        cropyearObj.fieldOperations.fertilizerApplications[key] = {
+          machineId: f.machineObj.name,
+          hoursUsed: f.hoursUsed,
+          date: f.date,
+        };
+      }
+    }
+
+    /* fertilizerRates */
+
+    for (const key in cropyear.fieldOperations.fertilizerRates) {
+      if (
+        cropyear.fieldOperations.fertilizerRates[key].preSeed !== "" &&
+        cropyear.fieldOperations.fertilizerRates[key].withSeed !== "" &&
+        cropyear.fieldOperations.fertilizerRates[key].postSeed !== ""
+      ) {
+        // initialize fertilizerRates object if it doesn't exist in cropyearObj
+        if ("fertilizerRates" in cropyearObj.fieldOperations == false) {
+          cropyearObj.fieldOperations.fertilizerRates = {};
+        }
+        cropyearObj.fieldOperations.fertilizerRates[key] =
+          cropyear.fieldOperations.fertilizerRates[key];
+      }
+    }
+
+    /* pesticidesApplications */
+
+    for (const pesticide of cropyear.fieldOperations.pesticidesApplications) {
+      if (pesticide.machineObj !== "" && pesticide.hoursUsed !== "") {
+        // initialize pesticidesApplications array if it doesn't exist in cropyearObj
+        if ("pesticidesApplications" in cropyearObj.fieldOperations == false) {
+          cropyearObj.fieldOperations.pesticidesApplications = [];
+        }
+        cropyearObj.fieldOperations.pesticidesApplications.push({
+          machineId: pesticide.machineObj.name,
+          hoursUsed: pesticide.hoursUsed,
+        });
+      }
+    }
+
+    // [HARVEST]
+    let s = cropyear.harvest.swather;
+    let c = cropyear.harvest.combine;
+    cropyearObj.harvest = {
+      swather: { machineId: s.machineObj.name, hoursUsed: s.hoursUsed }, // These two are required params
+      combine: {
+        machineId: c.machineObj.name,
+        hoursUsed: c.hoursUsed,
+        avgSpeed: c.avgSpeed,
+      }, // These two are required params
+    };
+    if (cropyear.harvest.cropDryingType !== "") {
+      cropyearObj.harvest.cropDryingType = cropyear.harvest.cropDryingType;
+    }
+    if (cropyear.harvest.cropDryingFuel !== "") {
+      cropyearObj.harvest.cropDryingFuel = cropyear.harvest.cropDryingFuel;
+    }
+
+    if (
+      cropyear.harvest.moisture.beforeDrying !== "" &&
+      cropyear.harvest.moisture.afterDrying !== ""
+    ) {
+      cropyearObj.harvest.moisture = cropyear.harvest.moisture;
+    }
+    console.log("after: ", cropyearObj);
+
+    return cropyearObj;
+  };
+
   const LowerPanelComponent = ({
     activeStep,
     handleBack,
@@ -55,6 +169,8 @@ export default function HorizontalNonLinearStepper({ steps }) {
     totalSteps,
     isInputValid,
   }) => {
+    const navigate = useNavigate();
+
     return (
       <Box sx={{ display: "flex", flexDirection: "row", pt: 2, pb: "75px" }}>
         <Button
@@ -79,11 +195,47 @@ export default function HorizontalNonLinearStepper({ steps }) {
             <Button
               variant="contained"
               onClick={() => {
-                if (isInputValid()) handleComplete();
+                if (isInputValid()) {
+                  // If it's the last step, then POST cropyear object to backend
+                  if (completedSteps() === totalSteps() - 1) {
+                    // let farmId = farmContext.state.id;
+                    // let fieldId = fieldContext.state.id;
+
+                    axios
+                      .post(
+                        process.env.REACT_APP_API_URL +
+                          // `/farms/${farmId}/fields/${fieldId}/cropyears`,
+                          `/farms/66395352b87a068f496bbafb/fields/66395352b87a068f496bbafb/cropyears`,
+                        {
+                          ...removeFactoryEmptyStringsFromCropYear(
+                            cropyearContext.state
+                          ),
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                        }
+                      )
+                      .then((response) => {
+                        console.log(response.data);
+                        // console.log(response.data.cropyearId);
+                        // CropYearContext.setter({
+                        //   ...cropyearContext.state,
+                        //   id: response.data.cropyearId,
+                        // });
+
+                        // navigate("/cropyear");
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                    return;
+                  }
+                  handleComplete();
+                }
               }}
             >
               {completedSteps() === totalSteps() - 1
-                ? "Finish"
+                ? "Save and Finish"
                 : "Complete Step"}
             </Button>
           ))}

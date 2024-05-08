@@ -20,7 +20,7 @@ export default function RotationForm({ LowerPanel, panelControls }) {
     cropYear: false,
     cropThisYear: false,
     cropFrequency: false,
-    yield: false,
+    yieldValue: false,
     yieldUnits: false,
     previousCrop: false,
   });
@@ -50,7 +50,8 @@ export default function RotationForm({ LowerPanel, panelControls }) {
       cropyearContext.state.crop.cropThisYear.trim() === "";
     errorFields.cropFrequency =
       cropyearContext.state.crop.cropFrequency.trim() === "";
-    errorFields.yield = cropyearContext.state.crop.yield.trim() === "";
+    errorFields.yieldValue =
+      cropyearContext.state.crop.yieldValue.trim() === "";
     errorFields.yieldUnits =
       cropyearContext.state.crop.yieldUnits.trim() === "";
     errorFields.previousCrop =
@@ -60,7 +61,7 @@ export default function RotationForm({ LowerPanel, panelControls }) {
       errorFields.cropYear ||
       errorFields.cropThisYear ||
       errorFields.cropFrequency ||
-      errorFields.yield ||
+      errorFields.yieldValue ||
       errorFields.yieldUnits ||
       errorFields.previousCrop
     ) {
@@ -68,7 +69,7 @@ export default function RotationForm({ LowerPanel, panelControls }) {
         cropYear: errorFields.cropYear,
         cropThisYear: errorFields.cropThisYear,
         cropFrequency: errorFields.cropFrequency,
-        yield: errorFields.yield,
+        yieldValue: errorFields.yieldValue,
         yieldUnits: errorFields.yieldUnits,
         previousCrop: errorFields.previousCrop,
       });
@@ -125,12 +126,12 @@ export default function RotationForm({ LowerPanel, panelControls }) {
       <div className="flex justify-start">
         <div>
           <FormTextField
-            errorFound={errorFields.yield}
+            errorFound={errorFields.yieldValue}
             isNumber={true}
-            fieldState={cropyearContext.state.crop.yield}
+            fieldState={cropyearContext.state.crop.yieldValue}
             fieldLabel={""}
             modalOff={true}
-            onChange={(t) => handleStateChange(t, "yield")}
+            onChange={(t) => handleStateChange(t, "yieldValue")}
           />
         </div>
         <div className="w-36 ml-4">

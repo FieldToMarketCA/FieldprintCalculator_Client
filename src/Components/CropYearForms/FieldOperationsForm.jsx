@@ -279,7 +279,7 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
           <p className="text-[#666666] mb-2">Tractors Used</p>
           {[
             { seedStage: "preSeed", label: "Pre Seed Tractor" },
-            { seedStage: "seed", label: "Seed Tractor" },
+            { seedStage: "withSeed", label: "Seed Tractor" },
             { seedStage: "postSeed", label: "Post Seed Tractor" },
           ].map((operation, index) => {
             return (

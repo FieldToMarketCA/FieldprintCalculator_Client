@@ -55,14 +55,14 @@ function FERTILIZER_RATE_CREATOR() {
 
 function CROPYEAR_CREATOR(fieldId, crop) {
   return {
-    id: uuidv4(),
+    id: "",
     fieldId: fieldId,
 
     crop: {
       cropYear: "",
       cropThisYear: "",
       cropFrequency: "",
-      yield: "",
+      yieldValue: "",
       yieldUnits: "",
       previousCrop: "",
     },
@@ -76,7 +76,7 @@ function CROPYEAR_CREATOR(fieldId, crop) {
       ],
       fertilizerApplications: {
         preSeed: FERTILIZER_OPERATION_CREATOR(),
-        seed: FERTILIZER_OPERATION_CREATOR(),
+        withSeed: FERTILIZER_OPERATION_CREATOR(),
         postSeed: FERTILIZER_OPERATION_CREATOR(),
       },
       fertilizerRates: {

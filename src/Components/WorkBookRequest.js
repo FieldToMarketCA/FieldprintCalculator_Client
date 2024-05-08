@@ -16,7 +16,7 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
     [CropyearState.crop.cropYear, "Crop_Year"],
     [CropyearState.crop.cropThisYear, "Crop"],
     ["", "NULL"], //
-    [CropyearState.crop.yield, "Yield"],
+    [CropyearState.crop.yieldValue, "Yield"],
     [CropyearState.crop.yieldUnits, "Yield_Units"],
     [CropyearState.crop.previousCrop, "Prior_Crop"],
     [CropyearState.fieldOperations.cultivations[0].machineObj.HP, "Cult1_Size"],
@@ -331,7 +331,6 @@ async function generateResults(
         },
       }
     );
-
 
     setReportData(response.data.values);
     console.log(response.data.values);
