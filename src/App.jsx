@@ -14,7 +14,7 @@ import AddFarmPage from "./Pages/AddFarmPage";
 import AddFieldPage from "./Pages/AddFieldPage";
 import AddCropYear from "./Pages/AddCropYear";
 import AnalysisPage from "./Pages/AnalysisPage";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+// import { GoogleOAuthProvider } from "@react-oauth/google";
 import { createContext, useEffect, useState } from "react";
 
 // Auth Imports
@@ -86,65 +86,68 @@ function App() {
   }, []);
 
   return (
-    <GoogleOAuthProvider clientId="820303429606-cgalocai2uava757at1m2ls2b1c4q5bh.apps.googleusercontent.com">
-      <ThemeProvider theme={theme}>
-        <SECRETS_CONTEXT.Provider value={{ SECRETS: SECRETS }}>
-          <FarmContext.Provider
-            value={{ state: farmState, setter: setFarmState }}
+    // <GoogleOAuthProvider clientId="820303429606-cgalocai2uava757at1m2ls2b1c4q5bh.apps.googleusercontent.com">
+    <ThemeProvider theme={theme}>
+      <SECRETS_CONTEXT.Provider value={{ SECRETS: SECRETS }}>
+        <FarmContext.Provider
+          value={{ state: farmState, setter: setFarmState }}
+        >
+          <FieldContext.Provider
+            value={{ state: fieldState, setter: setFieldState }}
           >
-            <FieldContext.Provider
-              value={{ state: fieldState, setter: setFieldState }}
+            <CropYearContext.Provider
+              value={{ state: cropyearState, setter: setCropyearState }}
             >
-              <CropYearContext.Provider
-                value={{ state: cropyearState, setter: setCropyearState }}
+              <ReportDataContext.Provider
+                value={{ state: reportData, setter: setReportData }}
               >
-                <ReportDataContext.Provider
-                  value={{ state: reportData, setter: setReportData }}
+                <GUI_CONTEXT.Provider
+                  value={{ state: GUI_STATE, setter: setGUI }}
                 >
-                  <GUI_CONTEXT.Provider
-                    value={{ state: GUI_STATE, setter: setGUI }}
-                  >
-                    <div className="App">
-                      <HashRouter>
-                        <AuthProvider>
-                          <Routes>
-                            <Route path="/login" element={<LoginPage />} />
+                  <div className="App">
+                    <HashRouter>
+                      <AuthProvider>
+                        <Routes>
+                          <Route path="/login" element={<LoginPage />} />
 
-                            <Route exact path="/" element={<LoginPage />} />
-                            {/* <Route exact path="/" element={<AnalysisPage />} /> */}
-                            <Route
-                              exact
-                              path="/farm"
-                              element={<AddFarmPage />}
-                            />
+                          <Route
+                            exact
+                            path="/"
+                            element={
+                              <ProtectedRoute>
+                                <AnalysisPage />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route exact path="/farm" element={<AddFarmPage />} />
 
-                            {/* </Route> */}
-                            <Route path="/field" element={<AddFieldPage />} />
-                            <Route path="/cropyear" element={<AddCropYear />} />
-                            {/* <Route
+                          {/* </Route> */}
+                          <Route path="/field" element={<AddFieldPage />} />
+                          <Route path="/cropyear" element={<AddCropYear />} />
+                          {/* <Route
                               path="/analysis"
                               element={<AnalysisPage />}
                             /> */}
-                            <Route
-                              path="/analysis"
-                              element={
-                                <ProtectedRoute>
-                                  <AnalysisPage />
-                                </ProtectedRoute>
-                              }
-                            />
-                          </Routes>
-                        </AuthProvider>
-                      </HashRouter>
-                    </div>
-                  </GUI_CONTEXT.Provider>
-                </ReportDataContext.Provider>
-              </CropYearContext.Provider>
-            </FieldContext.Provider>
-          </FarmContext.Provider>
-        </SECRETS_CONTEXT.Provider>
-      </ThemeProvider>
-    </GoogleOAuthProvider>
+                          <Route
+                            path="/analysis"
+                            element={
+                              <ProtectedRoute>
+                                <AnalysisPage />
+                              </ProtectedRoute>
+                            }
+                          />
+                        </Routes>
+                      </AuthProvider>
+                    </HashRouter>
+                  </div>
+                </GUI_CONTEXT.Provider>
+              </ReportDataContext.Provider>
+            </CropYearContext.Provider>
+          </FieldContext.Provider>
+        </FarmContext.Provider>
+      </SECRETS_CONTEXT.Provider>
+    </ThemeProvider>
+    // </GoogleOAuthProvider>
   );
 }
 
