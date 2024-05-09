@@ -28,6 +28,8 @@ import PDFIndicatorEnergyUse from "../Components/Indicators/PDFIndicatorEnergyUs
 import PDFIndicatorGHG from "../Components/Indicators/PDFIndicatorGHG";
 import PDFIndicatorSoilErosion from "../Components/Indicators/PDFIndicatorSoilErosion";
 
+import { useAuth } from "../Components/Auth/useAuth";
+
 import {
   FarmContext,
   FieldContext,
