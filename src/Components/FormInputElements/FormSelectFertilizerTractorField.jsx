@@ -1,12 +1,14 @@
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import HelpIconButton from "../Buttons/Iconbuttons/HelpIconButton";
-import NewTractorModal from "../NewTractorModal";
+import NewMachineModal from "../NewMachineModal";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { FarmContext } from "../../App";
+import axios from "axios";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import dayjs from "dayjs";
 
 export default function FormSelectFertilizerTractorField({
@@ -16,12 +18,25 @@ export default function FormSelectFertilizerTractorField({
   onChange,
   seedStage,
 }) {
+  const farmContext = useContext(FarmContext);
+
   const [selectedTractor, setSelectedTractor] = useState("");
   const [hoursUsed, setHoursUsed] = useState(0);
-  const [isTractorModalOpen, setIsTractorModalOpen] = useState(false);
+  const [isMachineModalOpen, setIsMachineModalOpen] = useState(false);
 
-  function handleAddNewTractor(newTractor) {
-    tractorsArray.push(newTractor);
+  async function handleAddNewMachine(newMachine) {
+    let farmId = farmContext.state.id;
+
+    const response = await axios.post(
+      process.env.REACT_APP_API_URL + `/farms/${farmId}/machines`,
+      {
+        ...newMachine,
+        farmId: farmId,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   }
 
   return (
@@ -42,7 +57,7 @@ export default function FormSelectFertilizerTractorField({
           ))}
           <MenuItem
             key={"addTractor"}
-            onClick={() => setIsTractorModalOpen(true)}
+            onClick={() => setIsMachineModalOpen(true)}
           >
             <p>Add New Tractor</p>
           </MenuItem>
@@ -60,11 +75,13 @@ export default function FormSelectFertilizerTractorField({
           value={fieldState.hoursUsed}
         />
 
-        {isTractorModalOpen && (
-          <NewTractorModal
-            open={isTractorModalOpen}
-            handleClose={setIsTractorModalOpen}
-            handleAddNewTractor={handleAddNewTractor}
+        {isMachineModalOpen && (
+          <NewMachineModal
+            machineLabel={"Tractor"}
+            machineType={"TRACTOR"}
+            open={isMachineModalOpen}
+            handleClose={setIsMachineModalOpen}
+            handleAddNewMachine={handleAddNewMachine}
           />
         )}
       </div>
