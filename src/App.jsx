@@ -14,6 +14,7 @@ import AddFarmPage from "./Pages/AddFarmPage";
 import AddFieldPage from "./Pages/AddFieldPage";
 import AddCropYear from "./Pages/AddCropYear";
 import AnalysisPage from "./Pages/AnalysisPage";
+import DashBoardPage from "./Pages/DashBoardPage";
 // import { GoogleOAuthProvider } from "@react-oauth/google";
 import { createContext, useEffect, useState } from "react";
 
@@ -79,7 +80,6 @@ function App() {
           "https://fieldprint-calculator-minimal-server.fly.dev/"
         );
         SET_SECRETS(response.data);
-        // console.log(response.data.token, response.data.GOOGLE_APIKEY, "lalala");
       }
     };
     getCredentials();
@@ -109,6 +109,10 @@ function App() {
                       <AuthProvider>
                         <Routes>
                           <Route path="/login" element={<LoginPage />} />
+                          <Route
+                            path="/dashboard"
+                            element={<DashBoardPage />}
+                          />
 
                           <Route
                             exact

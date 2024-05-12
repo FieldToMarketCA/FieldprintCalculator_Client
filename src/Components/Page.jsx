@@ -6,9 +6,10 @@ import QuickFacts from "./QuickFacts";
 
 export default function Page({
   title,
-  headerBorderColor,
+
   children,
   showQuickFacts = false,
+  headerBorderColor = "border-[#34a853]",
   padding = "p-[32px]",
 }) {
   return (
@@ -25,7 +26,9 @@ export default function Page({
             {title}
           </header>
           {/* QuickFacts  */}
-          {showQuickFacts && <QuickFacts sectionColor={"#34a853"} />}
+          {showQuickFacts && (
+            <QuickFacts sectionColor={headerBorderColor.slice(8, 15)} />
+          )}
 
           {/* PAGE BODY */}
           <main className={`flex flex-col h-full w-full ${padding} `}>
