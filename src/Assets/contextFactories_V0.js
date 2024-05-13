@@ -60,7 +60,97 @@ function FIELD_CREATOR() {
     regimeChangeDate: "",
     Ecodistrict: "",
     SLCpolygon: "",
-    cropYears: [], //"CROPYEAR"
+    cropYears: [
+      {
+        _id: {
+          $oid: "66426670ba452403761a24b2",
+        },
+        fieldId: "6639511970e53a04a416313f",
+        crop: {
+          cropYear: 0,
+          cropThisYear: "BARLEY",
+          cropFrequency: "Continuous",
+          yieldValue: 0,
+          yieldUnits: "bu/ac",
+          previousCrop: "BARLEY",
+        },
+        fieldOperations: {
+          cultivations: [
+            {
+              machineId: "string",
+              hoursUsed: 0,
+            },
+          ],
+          fertilizerApplications: {
+            preSeed: {
+              machineId: "string",
+              hoursUsed: 0,
+              date: "string",
+            },
+            withSeed: {
+              machineId: "string",
+              hoursUsed: 0,
+              date: "string",
+            },
+            postSeed: {
+              machineId: "string",
+              hoursUsed: 0,
+              date: "string",
+            },
+          },
+          fertilizerRates: {
+            N: {
+              preSeed: 0,
+              withSeed: 0,
+              postSeed: 0,
+            },
+            P: {
+              preSeed: 0,
+              withSeed: 0,
+              postSeed: 0,
+            },
+            K: {
+              preSeed: 0,
+              withSeed: 0,
+              postSeed: 0,
+            },
+            S: {
+              preSeed: 0,
+              withSeed: 0,
+              postSeed: 0,
+            },
+            M: {
+              preSeed: 0,
+              withSeed: 0,
+              postSeed: 0,
+            },
+          },
+          pesticidesApplications: [
+            {
+              machineId: "string",
+              hoursUsed: 0,
+            },
+          ],
+        },
+        harvest: {
+          swather: {
+            machineId: "string",
+            hoursUsed: 0,
+          },
+          combine: {
+            machineId: "string",
+            hoursUsed: 0,
+            avgSpeed: 0,
+          },
+          cropDryingType: "Batch-in-Bin",
+          cropDryingFuel: "Natural Gas",
+          moisture: {
+            beforeDrying: 0,
+            afterDrying: 0,
+          },
+        },
+      },
+    ], //"CROPYEAR"
   };
 }
 

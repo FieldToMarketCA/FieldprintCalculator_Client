@@ -29,7 +29,7 @@ export default function MainButton({
         color: fontColor,
         minWidth: "200px",
       }}
-      className="px-4  py-[6px]  rounded-sm"
+      className={`px-4  py-[6px]  rounded-sm ${grow && "grow"}`}
     >
       {text}
     </Button>

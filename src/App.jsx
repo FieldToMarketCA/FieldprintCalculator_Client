@@ -29,6 +29,7 @@ import {
   FIELD_CREATOR,
   CROPYEAR_CREATOR,
 } from "./Assets/contextFactories_V0";
+import FieldPage from "./Pages/FieldPage";
 
 const theme = createTheme({
   palette: {
@@ -115,6 +116,7 @@ function App() {
                             element={<DashBoardPage />}
                           />
                           <Route path="/farm" element={<FarmPage />} />
+                          <Route path="/field" element={<FieldPage />} />
 
                           <Route
                             exact

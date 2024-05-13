@@ -11,7 +11,7 @@ import { Avatar } from "@mui/material";
 
 import { useAuth } from "./Auth/useAuth";
 
-export default function Header() {
+export default function Header({ hideAvatar = false }) {
   const { user } = useAuth();
   // const [user, setUser] = useState(false);
 
@@ -44,7 +44,7 @@ export default function Header() {
       <div className="h-full content-center">
         <img className="h-5/6 md:h-full" src={ftmcLogo} alt="fmtc logo" />
       </div>
-      <div className="my-auto flex items-center">
+      <div className={"my-auto flex items-center" + hideAvatar && " hidden"}>
         <a href="#">
           <IconButton aria-label="delete" size="large">
             {user ? (
