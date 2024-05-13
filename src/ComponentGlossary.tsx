@@ -28,7 +28,7 @@ export default function ComponentGlossary() {
               secondary={true}
             />
           </li>
-          <li className="mb-3 flex">
+          {/* <li className="mb-3 flex">
             <ButtonIcon
               text={"Edit Farm"}
               onClick={testOnClick}
@@ -36,7 +36,7 @@ export default function ComponentGlossary() {
               grow={true}
               positionRight={true}
             />
-          </li>
+          </li> */}
           <li className="mb-3 flex">
             <GrayButton text={"Logout"} onClick={testOnClick} />
           </li>

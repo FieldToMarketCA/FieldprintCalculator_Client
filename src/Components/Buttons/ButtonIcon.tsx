@@ -3,7 +3,7 @@ import CheckIcon from "../../Assets/Icons/CheckIcon";
 
 type ButtonIconProps = {
   text: string;
-  icon: string;
+  Icon: any;
   onClick?: () => void;
   grow?: boolean;
   positionRight?: boolean;
@@ -11,8 +11,9 @@ type ButtonIconProps = {
 
 export default function ButtonIcon({
   text,
-  icon,
+
   onClick,
+  Icon = CheckIcon,
   grow = false,
   positionRight = false,
 }: ButtonIconProps) {
@@ -30,13 +31,13 @@ export default function ButtonIcon({
     >
       {!positionRight ? (
         <div className="flex">
-          <CheckIcon color="white" className="mt-[5px]" />
-          <p className="ml-4">{text}</p>
+          <Icon sx={{ color: "#FFF" }} color="white" className="mt-[5px]" />
+          <p className="ml-4 text-white">{text}</p>
         </div>
       ) : (
         <div className="flex">
-          <p className="mr-4">{text}</p>
-          <CheckIcon color="white" className="mt-[5px]" />
+          <p className="mr-4 text-white">{text}</p>
+          <Icon sx={{ color: "#FFF" }} color="white" className="mt-[5px]" />
         </div>
       )}
     </Button>

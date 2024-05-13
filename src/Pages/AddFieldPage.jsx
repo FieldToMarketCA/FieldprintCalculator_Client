@@ -123,7 +123,7 @@ export default function AddFieldPage() {
             id: response.data.fieldId,
           });
 
-          navigate("/cropyear");
+          navigate("/addcropyear");
         });
     }
   }

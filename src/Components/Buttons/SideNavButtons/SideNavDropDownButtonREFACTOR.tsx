@@ -131,7 +131,7 @@ export default function SideNavDropDownButton({
               text="Add Farm"
               icon={"addFarmFieldIcon"}
               onClick={() => {
-                navigate("/farm");
+                navigate("/addfarm");
                 GUI.setter({ ...GUI.state, isNavOpen: false });
               }}
             />

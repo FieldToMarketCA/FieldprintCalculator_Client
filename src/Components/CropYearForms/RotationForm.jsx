@@ -41,7 +41,7 @@ export default function RotationForm({ LowerPanel, panelControls }) {
   }, []);
 
   // function handleSaveAndAddFIeld() {
-  //   if (isInputValid()) navigate("/field");
+  //   if (isInputValid()) navigate("/addfield");
   // }
 
   function isInputValid() {

@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import axios from "axios";
 import ComponentGlossary from "./ComponentGlossary";
 import AddFarmPage from "./Pages/AddFarmPage";
+import FarmPage from "./Pages/FarmPage";
 import AddFieldPage from "./Pages/AddFieldPage";
 import AddCropYear from "./Pages/AddCropYear";
 import AnalysisPage from "./Pages/AnalysisPage";
@@ -113,6 +114,7 @@ function App() {
                             path="/dashboard"
                             element={<DashBoardPage />}
                           />
+                          <Route path="/farm" element={<FarmPage />} />
 
                           <Route
                             exact
@@ -123,15 +125,19 @@ function App() {
                               </ProtectedRoute>
                             }
                           />
-                          <Route exact path="/farm" element={<AddFarmPage />} />
+                          <Route
+                            exact
+                            path="/addfarm"
+                            element={<AddFarmPage />}
+                          />
 
                           {/* </Route> */}
-                          <Route path="/field" element={<AddFieldPage />} />
-                          <Route path="/cropyear" element={<AddCropYear />} />
-                          {/* <Route
-                              path="/analysis"
-                              element={<AnalysisPage />}
-                            /> */}
+                          <Route path="/addfield" element={<AddFieldPage />} />
+                          <Route
+                            path="/addcropyear"
+                            element={<AddCropYear />}
+                          />
+
                           <Route
                             path="/analysis"
                             element={
@@ -151,7 +157,6 @@ function App() {
         </FarmContext.Provider>
       </SECRETS_CONTEXT.Provider>
     </ThemeProvider>
-    // </GoogleOAuthProvider>
   );
 }
 

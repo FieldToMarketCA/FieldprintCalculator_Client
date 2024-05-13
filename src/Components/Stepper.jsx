@@ -223,7 +223,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
                         //   id: response.data.cropyearId,
                         // });
 
-                        // navigate("/cropyear");
+                        // navigate("/addcropyear");
                       })
                       .catch((err) => {
                         console.log(err);

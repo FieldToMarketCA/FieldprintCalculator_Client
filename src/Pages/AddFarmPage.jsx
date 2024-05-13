@@ -48,7 +48,7 @@ export default function AddFarmPage() {
             ...farmContext.state,
             id: response.data.farmId,
           });
-          navigate("/field");
+          navigate("/addfield");
         });
     }
   }
