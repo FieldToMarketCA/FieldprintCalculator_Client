@@ -6,9 +6,9 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import tractorSVG from "../Assets/Icons/tractorIcon.svg";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useContext } from "react";
 import { FarmContext } from "../App";
@@ -18,12 +18,39 @@ import axios from "axios";
 import MachinesTable from "../Components/Tables/MachinesTable";
 
 export default function FarmPage() {
+  let { farmId } = useParams();
   const farmContext = useContext(FarmContext);
   const fieldContext = useContext(FieldContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const getFarm = async () => {
+      const response = await axios.get(
+        process.env.REACT_APP_API_URL + "/farms/" + farmId
+      );
+
+      const fieldsResponse = await axios.get(
+        process.env.REACT_APP_API_URL + "/farms/" + farmId + "/fields"
+      );
+      const machinesResponse = await axios.get(
+        process.env.REACT_APP_API_URL + "/farms/" + farmId + "/machines"
+      );
+
+      let tmpFarm = {
+        ...response.data.data,
+        machines: machinesResponse.data,
+        fields: fieldsResponse.data,
+      };
+
+      console.log(tmpFarm);
+
+      farmContext.setter(tmpFarm);
+    };
+    getFarm();
+  }, []);
+
   return (
-    <Page title={"Farm Name (TO REPLACE)"} showQuickFacts={false}>
+    <Page title={farmContext.state.name} showQuickFacts={false}>
       {/* FARM NAME FIELD  */}
 
       <div className="w-full h-full text-[#666666]">
@@ -40,15 +67,15 @@ export default function FarmPage() {
 
         {/* Managed Acres */}
 
-        <ManagedAcresSection />
+        <ManagedAcresSection fields={farmContext.state.fields} />
 
-        <EquipmentSection />
+        <EquipmentSection machines={farmContext.state.machines} />
       </div>
     </Page>
   );
 }
 
-function ManagedAcresSection({}) {
+function ManagedAcresSection({ fields }) {
   const [managedAcresCollapsed, setManagedAcresCollapsed] = useState(false);
 
   return (
@@ -105,15 +132,14 @@ function ManagedAcresSection({}) {
           />
         </div>
         <div className="w-full overflow-x-scroll">
-          <ManagedAcresTable />
+          <ManagedAcresTable fields={fields} />
         </div>
       </div>
     </div>
   );
 }
 
-function EquipmentSection({}) {
-  const farmContext = useContext(FarmContext);
+function EquipmentSection({ machines }) {
   const [equipmentSectionCollapsed, setEquipmentSectionCollapsed] =
     useState(false);
 
@@ -160,7 +186,7 @@ function EquipmentSection({}) {
           />
         </div>
         <div className="w-full overflow-x-scroll">
-          <MachinesTable machines={farmContext.state.machines} />
+          <MachinesTable machines={machines} />
         </div>
       </div>
     </div>

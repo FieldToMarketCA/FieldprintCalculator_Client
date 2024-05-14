@@ -32,6 +32,7 @@ function TableRow({ row }) {
 }
 
 export default function MachinesTable({ machines }) {
+  // console.log(machines[0]._id.$oid, "jsjja");
   return (
     <div
       style={{ border: "0.5px solid #DDD" }}
@@ -53,11 +54,12 @@ export default function MachinesTable({ machines }) {
       {/* Body */}
       <ul className="w-full ">
         {machines.map((row) => {
-          return (
-            <li className="w-full" key={row.farm + row.field}>
-              <TableRow row={row} />
-            </li>
-          );
+          if (typeof row === "object")
+            return (
+              <li className="w-full" key={row._id.$oid}>
+                <TableRow row={row} />
+              </li>
+            );
         })}
       </ul>
     </div>

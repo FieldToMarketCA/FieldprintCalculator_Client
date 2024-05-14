@@ -15,28 +15,28 @@ function TableRow({ row }) {
         }
       </div>
       <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
-        {<Link to={"/dashboard"}>{row.field}</Link>}
+        {<Link to={"/dashboard"}>{row.name}</Link>}
       </div>
       <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
-        {<Link to={"/dashboard"}>{row.acres}</Link>}
+        {<Link to={"/dashboard"}>{row.fieldSize}</Link>}
       </div>
       <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
-        {row.address}
+        {row.fieldAddress}
       </div>
       <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
-        {row.tillage}
+        {row.tillageRegime}
       </div>
       <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
-        {row.previousRegime}
+        {row.previousTillageRegime}
       </div>
       <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
-        {row.changeDate}
+        {row.regimeChangeDate}
       </div>
     </div>
   );
 }
 
-export default function ManagedAcresTable({}) {
+export default function ManagedAcresTable({ fields }) {
   return (
     <div
       style={{ border: "0.5px solid #DDD" }}
@@ -63,36 +63,18 @@ export default function ManagedAcresTable({}) {
           Change Date
         </div>
       </div>
-
       {/* Body */}
       <ul className="w-full ">
-        {SampleRowData.map((row) => {
-          return (
-            <li className="w-full" key={row.farm + row.field}>
-              <TableRow row={row} />
-            </li>
-          );
+        {fields.map((row) => {
+          console.log(row);
+          if (typeof row === "object")
+            return (
+              <li className="w-full" key={row._id.$oid}>
+                <TableRow row={row} />
+              </li>
+            );
         })}
       </ul>
     </div>
   );
 }
-
-const SampleRowData = [
-  {
-    field: "42 Silicon Valley",
-    acres: "42",
-    address: "Calle Caracol 13",
-    tillage: "Zero Till",
-    previousRegime: "Minimum Till",
-    changeDate: "05/01/2024",
-  },
-  {
-    field: "Adeline's",
-    acres: "7",
-    address: "Calle 3ra #4",
-    tillage: "Zero Till",
-    previousRegime: "Minimum Till",
-    changeDate: "05/01/2022",
-  },
-];

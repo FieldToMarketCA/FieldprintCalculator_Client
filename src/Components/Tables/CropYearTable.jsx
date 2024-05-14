@@ -68,11 +68,12 @@ export default function CropYearTable({ cropYears }) {
       {/* Body */}
       <ul className="w-full ">
         {cropYears.map((cropyear) => {
-          return (
-            <li className="w-full" key={cropyear.id}>
-              <TableRow row={cropyear.crop} />
-            </li>
-          );
+          if (typeof cropyear === "object")
+            return (
+              <li className="w-full" key={cropyear._id.$oid}>
+                <TableRow row={cropyear.crop} />
+              </li>
+            );
         })}
       </ul>
     </div>

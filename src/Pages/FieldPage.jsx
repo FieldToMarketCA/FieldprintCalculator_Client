@@ -6,11 +6,11 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import tractorSVG from "../Assets/Icons/tractorIcon.svg";
 import CropYearTable from "../Components/Tables/CropYearTable.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useState } from "react";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { FarmContext } from "../App";
 import { FieldContext } from "../App";
 
@@ -18,9 +18,35 @@ import axios from "axios";
 import MachinesTable from "../Components/Tables/MachinesTable";
 
 export default function FieldPage() {
-  const farmContext = useContext(FarmContext);
+  let { farmId, fieldId } = useParams();
   const fieldContext = useContext(FieldContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getField = async () => {
+      const fieldResponse = await axios.get(
+        process.env.REACT_APP_API_URL +
+          "/farms/" +
+          farmId +
+          "/fields/" +
+          fieldId
+      );
+      const cropyearsResponse = await axios.get(
+        process.env.REACT_APP_API_URL +
+          "/farms/" +
+          farmId +
+          "/fields/" +
+          fieldId +
+          "/cropyears"
+      );
+      console.log(cropyearsResponse.data);
+      fieldContext.setter({
+        ...fieldResponse.data,
+        cropYears: cropyearsResponse.data,
+      });
+    };
+    getField();
+  }, []);
 
   return (
     <Page title={"fieldName on farmName (TO REPLACE)"} showQuickFacts={true}>

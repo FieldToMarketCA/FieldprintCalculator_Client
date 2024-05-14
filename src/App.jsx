@@ -115,8 +115,11 @@ function App() {
                             path="/dashboard"
                             element={<DashBoardPage />}
                           />
-                          <Route path="/farm" element={<FarmPage />} />
-                          <Route path="/field" element={<FieldPage />} />
+                          <Route path="/farm/:farmId" element={<FarmPage />} />
+                          <Route
+                            path="/farm/:farmId/field/:fieldId"
+                            element={<FieldPage />}
+                          />
 
                           <Route
                             exact

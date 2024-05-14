@@ -7,16 +7,16 @@ function TableRow({ row }) {
   return (
     <div className="grid grid-cols-7 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
       <div className="col-span-1 underline py-1 px-2 h-[45px] flex items-center">
-        {<Link to={"/dashboard"}>{row.farm}</Link>}
+        {<Link to={"/dashboard"}>{row.farmName}</Link>}
       </div>
       <div className="col-span-1 underline py-1 px-2 h-[45px] flex items-center">
-        {<Link to={"/dashboard"}>{row.field}</Link>}
+        {<Link to={"/dashboard"}>{row.fieldName}</Link>}
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
-        {row.acres}
+        {row.fieldSize}
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
-        {row.year}
+        {row.cropYear}
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
         {row.crop}
@@ -26,7 +26,8 @@ function TableRow({ row }) {
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
         <IconButton
-          disabled={!row.finalized}
+          // disabled={!row.finalized}
+          disabled
           sx={{ color: "rgb(241, 93, 34)" }}
           aria-label="View Cropyear Details"
           size="medium"
@@ -34,10 +35,11 @@ function TableRow({ row }) {
           <VisibilityIcon fontSize="inherit" />
         </IconButton>
         <IconButton
-          disabled={!row.finalized}
+          // disabled={!row.finalized}
+          disabled
           aria-label="delete"
           size="medium"
-          sx={{ color: row.view.analytics ? "green" : "rgb(241, 93, 34)" }}
+          // sx={{ color: row.view.analytics ? "green" : "rgb(241, 93, 34)" }}
         >
           <EqualizerIcon fontSize="inherit" />
         </IconButton>
@@ -46,7 +48,7 @@ function TableRow({ row }) {
   );
 }
 
-export default function DashboardTable({}) {
+export default function DashboardTable({ tableData }) {
   return (
     <div>
       {/*  Header */}
@@ -64,9 +66,9 @@ export default function DashboardTable({}) {
 
       {/* Body */}
       <ul className="w-full mb-2">
-        {SampleRowData.map((row) => {
+        {tableData.map((row) => {
           return (
-            <li className="w-full" key={row.farm + row.field}>
+            <li className="w-full" key={row.id}>
               <TableRow row={row} />
             </li>
           );
@@ -82,24 +84,3 @@ export default function DashboardTable({}) {
     </div>
   );
 }
-
-const SampleRowData = [
-  {
-    farm: "myCoolFarm",
-    field: "Omni",
-    acres: "147.67",
-    year: "2024",
-    crop: "Soybeans",
-    finalized: true,
-    view: { cropyearDetails: true, analytics: true },
-  },
-  {
-    farm: "My Grandpa's Farm",
-    field: "42",
-    acres: "37.93",
-    year: "2022",
-    crop: "Cocunut",
-    finalized: true,
-    view: { cropyearDetails: true, analytics: false },
-  },
-];
