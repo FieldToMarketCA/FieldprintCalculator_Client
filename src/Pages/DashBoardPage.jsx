@@ -11,8 +11,9 @@ import { CanadianProvinces } from "../Assets/DataTypes";
 import { useState, useEffect } from "react";
 
 import { useContext } from "react";
-// import { FarmContext } from "../App";
-// import { FieldContext } from "../App";
+import { FarmContext } from "../App";
+import { FieldContext } from "../App";
+import { CropYearContext } from "../App";
 
 import axios from "axios";
 
@@ -62,11 +63,11 @@ export default function DashBoardPage() {
       );
 
       for (const Farm of farmsResponse.data.data) {
-        console.log(Farm.name);
+        console.log(Farm._id.$oid);
         const fields = await getFieldsFromFarmId(Farm._id.$oid);
 
         for (const Field of fields) {
-          console.log(Field.name);
+          console.log(Field._id.$oid, "   ", Field.cropYears);
           const cropyears = await getCropYearsFromFieldId(
             Farm._id.$oid,
             Field._id.$oid
@@ -87,7 +88,8 @@ export default function DashBoardPage() {
 
             // Capture TABLE Data
             TMP.push({
-              id: Field._id.$oid,
+              farmId: Farm._id.$oid,
+              fieldId: Field._id.$oid,
               farmName: Farm.name,
               fieldName: Field.name,
               fieldSize: Field.fieldSize,

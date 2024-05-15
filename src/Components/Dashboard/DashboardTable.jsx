@@ -4,13 +4,18 @@ import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 
 function TableRow({ row }) {
+  console.log(row);
   return (
     <div className="grid grid-cols-7 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
       <div className="col-span-1 underline py-1 px-2 h-[45px] flex items-center">
-        {<Link to={"/dashboard"}>{row.farmName}</Link>}
+        {<Link to={`/farm/${row.farmId}`}>{row.farmName}</Link>}
       </div>
       <div className="col-span-1 underline py-1 px-2 h-[45px] flex items-center">
-        {<Link to={"/dashboard"}>{row.fieldName}</Link>}
+        {
+          <Link to={`/farm/${row.farmId}/field/${row.fieldId}`}>
+            {row.fieldName}
+          </Link>
+        }
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
         {row.fieldSize}

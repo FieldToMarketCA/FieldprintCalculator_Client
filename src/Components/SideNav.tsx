@@ -10,11 +10,12 @@ import SideNavButton from "./Buttons/SideNavButtons/SideNavButton";
 import { useState, useContext } from "react";
 import FieldLibraryButton from "./Buttons/SideNavButtons/FieldLibraryButtonREFACTOR";
 import { GUI_CONTEXT } from "../App";
+import { useNavigate } from "react-router-dom";
 
 export default function SideNav() {
   // const [isCollapsed, setIsCollapsed] = React.useState(true);
   const GUI = useContext(GUI_CONTEXT);
-
+  const navigate = useNavigate();
   const handleCollapse = () => {
     GUI.setter({ ...GUI.state, isNavOpen: !GUI.state.isNavOpen });
   };
@@ -36,7 +37,7 @@ export default function SideNav() {
             text={"Dashboard"}
             borderColor="#00ADEE"
             icon={"dashBoardIcon"}
-            onClick={() => console.log("Dashboard")}
+            onClick={() => navigate("/dashboard")}
           />
 
           <FieldLibraryButton isOpen={GUI.state.isNavOpen} />

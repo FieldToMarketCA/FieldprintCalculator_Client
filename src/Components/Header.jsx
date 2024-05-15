@@ -6,13 +6,20 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import React from "react";
-import { BrowserRouter as Router, Link, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { Avatar } from "@mui/material";
 
 import { useAuth } from "./Auth/useAuth";
 
 export default function Header({ hideAvatar = false }) {
+  const navigate = useNavigate();
   const { user } = useAuth();
+
   // const [user, setUser] = useState(false);
 
   // useEffect(() => {
@@ -41,22 +48,26 @@ export default function Header({ hideAvatar = false }) {
       elevation={3}
       className="flex w-full h-[64px] px-4 md:px-6 justify-between shadow-2xl z-50"
     >
-      <div className="h-full content-center">
-        <img className="h-5/6 md:h-full" src={ftmcLogo} alt="fmtc logo" />
-      </div>
-      <div className={"my-auto flex items-center" + hideAvatar && " hidden"}>
-        <a href="#">
-          <IconButton aria-label="delete" size="large">
-            {user ? (
-              <Avatar alt="profile picture" src={user.picture} />
-            ) : (
-              <AccountCircleIcon className="text-white" fontSize="inherit" />
-            )}
-          </IconButton>
-        </a>
+      <Link to="/dashboard">
+        <div className="h-full content-center">
+          <img className="h-5/6 md:h-full" src={ftmcLogo} alt="fmtc logo" />
+        </div>
+      </Link>
+      <div className={`my-auto flex items-center ${hideAvatar && "hidden"}`}>
+        <IconButton
+          aria-label="delete"
+          size="large"
+          onClick={() => navigate("/login")}
+        >
+          {user !== null ? (
+            <Avatar alt="profile picture" src={user.picture} />
+          ) : (
+            <AccountCircleIcon className="text-white" fontSize="inherit" />
+          )}
+        </IconButton>
 
         <p className="text-white hidden min-[550px]:block mr-10 text-[18px]">
-          Hi, Guest
+          {user !== null ? `Hi, ${user.name}` : "Hi, Guest"}
         </p>
       </div>
     </Paper>

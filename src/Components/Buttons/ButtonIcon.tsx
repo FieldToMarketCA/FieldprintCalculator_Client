@@ -7,22 +7,24 @@ type ButtonIconProps = {
   onClick?: () => void;
   grow?: boolean;
   positionRight?: boolean;
+  disabled: boolean;
 };
 
 export default function ButtonIcon({
   text,
-
   onClick,
   Icon = CheckIcon,
+  disabled = false,
   grow = false,
   positionRight = false,
 }: ButtonIconProps) {
   return (
     <Button
+      disabled={disabled}
       onClick={onClick}
       variant="contained"
       style={{
-        backgroundColor: "rgb(241,93,34)",
+        backgroundColor: disabled ? "" : "rgb(241,93,34)",
         textTransform: "none",
         fontSize: "18px",
         minWidth: "200px",

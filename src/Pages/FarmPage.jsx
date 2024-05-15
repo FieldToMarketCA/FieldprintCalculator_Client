@@ -56,7 +56,11 @@ export default function FarmPage() {
       <div className="w-full h-full text-[#666666]">
         <div className="mb-6 flex text-lg mb-4 justify-between">
           <p>FPP ID: 6020</p>
-          <MainButton text={"Edit Farm"} onClick={console.log} />
+          <MainButton
+            disabled
+            text={"Edit Farm"}
+            onClick={() => navigate("/editfarm")}
+          />
         </div>
 
         <p className="text-lg mb-4">

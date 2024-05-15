@@ -78,9 +78,7 @@ function App() {
   useEffect(() => {
     const getCredentials = async () => {
       if (SECRETS === false) {
-        const response = await axios.get(
-          "https://fieldprint-calculator-minimal-server.fly.dev/"
-        );
+        const response = await axios.get(process.env.REACT_APP_API_URL);
         SET_SECRETS(response.data);
       }
     };
@@ -92,13 +90,31 @@ function App() {
     <ThemeProvider theme={theme}>
       <SECRETS_CONTEXT.Provider value={{ SECRETS: SECRETS }}>
         <FarmContext.Provider
-          value={{ state: farmState, setter: setFarmState }}
+          value={{
+            state: farmState,
+            setter: setFarmState,
+            resetState: () => {
+              setFarmState(FARM_CREATOR());
+            },
+          }}
         >
           <FieldContext.Provider
-            value={{ state: fieldState, setter: setFieldState }}
+            value={{
+              state: fieldState,
+              setter: setFieldState,
+              resetState: () => {
+                setFieldState(FIELD_CREATOR());
+              },
+            }}
           >
             <CropYearContext.Provider
-              value={{ state: cropyearState, setter: setCropyearState }}
+              value={{
+                state: cropyearState,
+                setter: setCropyearState,
+                resetState: () => {
+                  setCropyearState(CROPYEAR_CREATOR());
+                },
+              }}
             >
               <ReportDataContext.Provider
                 value={{ state: reportData, setter: setReportData }}
@@ -113,12 +129,27 @@ function App() {
                           <Route path="/login" element={<LoginPage />} />
                           <Route
                             path="/dashboard"
-                            element={<DashBoardPage />}
+                            element={
+                              <ProtectedRoute>
+                                <DashBoardPage />
+                              </ProtectedRoute>
+                            }
                           />
-                          <Route path="/farm/:farmId" element={<FarmPage />} />
+                          <Route
+                            path="/farm/:farmId"
+                            element={
+                              <ProtectedRoute>
+                                <FarmPage />
+                              </ProtectedRoute>
+                            }
+                          />
                           <Route
                             path="/farm/:farmId/field/:fieldId"
-                            element={<FieldPage />}
+                            element={
+                              <ProtectedRoute>
+                                <FieldPage />
+                              </ProtectedRoute>
+                            }
                           />
 
                           <Route
@@ -126,21 +157,29 @@ function App() {
                             path="/"
                             element={
                               <ProtectedRoute>
-                                <AnalysisPage />
+                                <DashBoardPage />
                               </ProtectedRoute>
                             }
                           />
                           <Route
                             exact
                             path="/addfarm"
-                            element={<AddFarmPage />}
+                            element={
+                              <ProtectedRoute>
+                                <AddFarmPage />
+                              </ProtectedRoute>
+                            }
                           />
 
                           {/* </Route> */}
                           <Route path="/addfield" element={<AddFieldPage />} />
                           <Route
                             path="/addcropyear"
-                            element={<AddCropYear />}
+                            element={
+                              <ProtectedRoute>
+                                <AddCropYear />
+                              </ProtectedRoute>
+                            }
                           />
 
                           <Route

@@ -46,7 +46,7 @@ export default function AddFarmPage() {
         .then((response) => {
           farmContext.setter({
             ...farmContext.state,
-            id: response.data.farmId,
+            _id: { $oid: response.data.farmId },
           });
           navigate("/addfield");
         });

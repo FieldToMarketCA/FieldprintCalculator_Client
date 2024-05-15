@@ -19,12 +19,14 @@ export default function FormSelectMachineField({
   const farmContext = useContext(FarmContext);
   const cropyearContext = useContext(CropYearContext);
 
+  var farmId = farmContext.state._id.$oid;
+
   const [selectedMachine, setSelectedMachine] = useState("");
   const [hoursUsed, setHoursUsed] = useState(0);
   const [isMachineModalOpen, setIsMachineModalOpen] = useState(false);
 
   async function handleAddNewMachine(newMachine) {
-    let farmId = farmContext.state.id;
+    // let farmId = farmContext.state.id;
 
     const response = await axios.post(
       process.env.REACT_APP_API_URL + `/farms/${farmId}/machines`,
@@ -67,7 +69,7 @@ export default function FormSelectMachineField({
     <div className="w-full flex mb-6">
       <TextField
         error={errorFound.machineObj}
-        onChange={(t) => onChange(t, machineType, "machineId")}
+        onChange={(t) => onChange(t, machineType, "machineObj")}
         id="outlined-select-currency"
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}

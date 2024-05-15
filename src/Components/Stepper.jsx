@@ -55,7 +55,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
   };
 
   const removeFactoryEmptyStringsFromCropYear = (cropyear) => {
-    console.log("before: ", cropyear);
+    // console.log("before: ", cropyear);
     var cropyearObj = {};
     // [CROP]
     cropyearObj.crop = cropyear.crop;
@@ -69,7 +69,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
     for (const cultivation of cropyear.fieldOperations.cultivations) {
       if (cultivation.machineObj !== "" && cultivation.hoursUsed !== "") {
         cropyearObj.fieldOperations.cultivations.push({
-          machineId: cultivation.machineObj.name,
+          machineId: cultivation.machineObj.id,
           hoursUsed: cultivation.hoursUsed,
         });
       }
@@ -91,7 +91,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
         let f = cropyear.fieldOperations.fertilizerApplications[key];
 
         cropyearObj.fieldOperations.fertilizerApplications[key] = {
-          machineId: f.machineObj.name,
+          machineId: f.machineObj.id,
           hoursUsed: f.hoursUsed,
           date: f.date,
         };
@@ -124,7 +124,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
           cropyearObj.fieldOperations.pesticidesApplications = [];
         }
         cropyearObj.fieldOperations.pesticidesApplications.push({
-          machineId: pesticide.machineObj.name,
+          machineId: pesticide.machineObj.id,
           hoursUsed: pesticide.hoursUsed,
         });
       }
@@ -134,9 +134,9 @@ export default function HorizontalNonLinearStepper({ steps }) {
     let s = cropyear.harvest.swather;
     let c = cropyear.harvest.combine;
     cropyearObj.harvest = {
-      swather: { machineId: s.machineObj.name, hoursUsed: s.hoursUsed }, // These two are required params
+      swather: { machineId: s.machineObj.id, hoursUsed: s.hoursUsed }, // These two are required params
       combine: {
-        machineId: c.machineObj.name,
+        machineId: c.machineObj.id,
         hoursUsed: c.hoursUsed,
         avgSpeed: c.avgSpeed,
       }, // These two are required params
@@ -154,7 +154,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
     ) {
       cropyearObj.harvest.moisture = cropyear.harvest.moisture;
     }
-    console.log("after: ", cropyearObj);
+    // console.log("after: ", cropyearObj);
 
     return cropyearObj;
   };
@@ -204,8 +204,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
                     axios
                       .post(
                         process.env.REACT_APP_API_URL +
-                          // `/farms/${farmId}/fields/${fieldId}/cropyears`,
-                          `/farms/66395352b87a068f496bbafb/fields/66395352b87a068f496bbafb/cropyears`,
+                          `/farms/${farmContext.state._id.$oid}/fields/${fieldContext.state._id.$oid}/cropyears`,
                         {
                           ...removeFactoryEmptyStringsFromCropYear(
                             cropyearContext.state
@@ -216,14 +215,13 @@ export default function HorizontalNonLinearStepper({ steps }) {
                         }
                       )
                       .then((response) => {
-                        console.log(response.data);
-                        // console.log(response.data.cropyearId);
-                        // CropYearContext.setter({
-                        //   ...cropyearContext.state,
-                        //   id: response.data.cropyearId,
-                        // });
+                        cropyearContext.setter({
+                          ...cropyearContext.state,
+                          _id: { $oid: response.data.cropyearId },
+                        });
 
-                        // navigate("/addcropyear");
+                        // navigate("/dashboard");
+                        handleComplete();
                       })
                       .catch((err) => {
                         console.log(err);

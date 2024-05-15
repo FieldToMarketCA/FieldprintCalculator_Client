@@ -34,6 +34,7 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
       ...newValue,
     };
 
+    console.log(updatedMachine);
     // Create a copy with updated value for the corresponding Fertilizer Rate Update
     const updatedHarvestOperation = { ...cropyearContext.state.harvest };
     updatedHarvestOperation[machineType.toLowerCase()] = updatedMachine;

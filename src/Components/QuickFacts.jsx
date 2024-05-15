@@ -41,7 +41,16 @@ export default function QuickFacts({ sectionColor, dashboardData = false }) {
   }
 
   const [isQuickFactsCollapsed, setIsQuickFactsCollapsed] = useState(true);
-  const displayAs = isQuickFactsCollapsed ? "0px" : "145px";
+
+  var displayAs;
+  if (isQuickFactsCollapsed) {
+    displayAs = "0px";
+  } else {
+    if (dashboardData) displayAs = "95px";
+    else {
+      displayAs = "145px";
+    }
+  }
 
   function handleCollapse() {
     setIsQuickFactsCollapsed(!isQuickFactsCollapsed);

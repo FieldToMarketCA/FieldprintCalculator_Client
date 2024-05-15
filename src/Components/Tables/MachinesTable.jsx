@@ -7,10 +7,10 @@ function TableRow({ row }) {
   return (
     <div className="grid grid-cols-5 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
       <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
-        <IconButton>
+        <IconButton disabled>
           <EditIcon />
         </IconButton>
-        <IconButton>
+        <IconButton disabled>
           <DeleteIcon />
         </IconButton>
       </div>

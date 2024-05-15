@@ -4,23 +4,27 @@ import { Link } from "react-router-dom";
 
 function TableRow({ row }) {
   return (
-    <div className="grid grid-cols-7 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
+    <div className="grid grid-cols-10 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
       <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
         {
-          <Link to={"/addfield"}>
-            <IconButton>
-              <EditIcon sx={{ color: "#F15D22" }} />
-            </IconButton>
+          // <Link to={"/addfield"}>{/* </Link> */}
+          <IconButton disabled>
+            <EditIcon />
+            {/* <EditIcon sx={{ color: "#F15D22" }} /> */}
+          </IconButton>
+        }
+      </div>
+      <div className="col-span-2 underline py-1 px-3 h-[45px] flex items-center">
+        {
+          <Link to={`/farm/${row.farmId}/field/${row._id.$oid}`}>
+            {row.name}
           </Link>
         }
       </div>
-      <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
-        {<Link to={"/dashboard"}>{row.name}</Link>}
-      </div>
-      <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
-        {<Link to={"/dashboard"}>{row.fieldSize}</Link>}
-      </div>
       <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
+        {row.fieldSize}
+      </div>
+      <div className="col-span-2 py-1 px-3 h-[45px] flex items-center">
         {row.fieldAddress}
       </div>
       <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
@@ -29,8 +33,8 @@ function TableRow({ row }) {
       <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
         {row.previousTillageRegime}
       </div>
-      <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
-        {row.regimeChangeDate}
+      <div className="col-span-2 py-1 px-3 h-[45px] flex items-center">
+        {row.regimeChangeDate.slice(0, 10)}
       </div>
     </div>
   );
@@ -43,14 +47,14 @@ export default function ManagedAcresTable({ fields }) {
       className="overflow-hidden rounded-md shadow-md mb-4 min-w-[830px]"
     >
       {/*  Header */}
-      <div className="grid grid-cols-7 text-xs bg-[#EBEBEB] text-[#333] font-bold gap-4">
+      <div className="grid grid-cols-10 text-xs bg-[#EBEBEB] text-[#333] font-bold gap-4">
         <div className="col-span-1 py-1 px-3 h-10 flex items-center">
           Actions
         </div>
 
-        <div className="col-span-1 py-1 px-3 h-10 flex items-center">Field</div>
+        <div className="col-span-2 py-1 px-3 h-10 flex items-center">Field</div>
         <div className="col-span-1 py-1 px-3 h-10 flex items-center">Acres</div>
-        <div className="col-span-1 py-1 px-3 h-10 flex items-center">
+        <div className="col-span-2 py-2 px-3 h-10 flex items-center">
           Address
         </div>
         <div className="col-span-1 py-1 px-3 h-10 flex items-center">
@@ -59,14 +63,13 @@ export default function ManagedAcresTable({ fields }) {
         <div className="col-span-1 py-1 px-3 h-10 flex items-center">
           Previous Regime
         </div>
-        <div className="col-span-1 py-1 px-3 h-10 flex items-center">
+        <div className="col-span-2 py-1 px-3 h-10 flex items-center">
           Change Date
         </div>
       </div>
       {/* Body */}
       <ul className="w-full ">
         {fields.map((row) => {
-          console.log(row);
           if (typeof row === "object")
             return (
               <li className="w-full" key={row._id.$oid}>

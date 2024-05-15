@@ -170,7 +170,7 @@ function PESTICIDE_OPERATION_CREATOR() {
 }
 
 function FERTILIZER_RATE_CREATOR() {
-  return { preSeed: "", withSeed: "", postSeed: "" };
+  return { preSeed: "0", withSeed: "0", postSeed: "0" };
 }
 
 function CROPYEAR_CREATOR(fieldId, crop) {

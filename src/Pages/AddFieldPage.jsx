@@ -95,7 +95,7 @@ export default function AddFieldPage() {
       axios
         .post(
           process.env.REACT_APP_API_URL +
-            `/farms/${farmContext.state.id}/fields`,
+            `/farms/${farmContext.state._id.$oid}/fields`,
           {
             farmId: farmContext.state.id,
             name: fieldContext.state.name,
@@ -120,7 +120,7 @@ export default function AddFieldPage() {
           console.log(response.data.fieldId);
           fieldContext.setter({
             ...fieldContext.state,
-            id: response.data.fieldId,
+            _id: { $oid: response.data.fieldId },
           });
 
           navigate("/addcropyear");

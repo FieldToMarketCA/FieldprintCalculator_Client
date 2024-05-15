@@ -5,7 +5,7 @@ import NumberQuestion from "../FormInputElements/NumberQuestion";
 import { useState, useEffect } from "react";
 import FormSelectCultivationTractorField from "../FormInputElements/FormSelectCultivationTractorField";
 import FormSelectFertilizerTractorField from "../FormInputElements/FormSelectFertilizerTractorField";
-// import FormSelectSprayerField from "../FormInputElements/FormSelectSprayerField";
+import FormSelectSprayerField from "../FormInputElements/FormSelectSprayerField";
 
 import { FertilizerTypes } from "../../Assets/DataTypes";
 
@@ -24,7 +24,7 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
     hoursUsed: false,
   });
 
-  console.log(cropyearContext.state.fieldOperations);
+  console.log(farmContext.state);
   const [usedFertilizer, setUsedFertilizer] = useState(false);
   const [numberOfCultivation, setNumberOfCultivation] = useState(1);
   const [cultivationOperations, setCultivationOperations] = useState([

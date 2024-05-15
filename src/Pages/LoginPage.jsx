@@ -12,6 +12,7 @@ import GrayButton from "../Components/Buttons/GrayButton";
 
 export const LoginPage = () => {
   const { login, user, logout } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // let query = new URL(document.location.toString()).searchParams;
@@ -132,7 +133,7 @@ export const LoginPage = () => {
                   <div className="w-full flex justify-between">
                     <MainButton
                       text={"Continue to Calculator"}
-                      onClick={console.log}
+                      onClick={() => navigate("/dashboard")}
                     />
                     <GrayButton text={"Logout"} onClick={logout} />
                   </div>

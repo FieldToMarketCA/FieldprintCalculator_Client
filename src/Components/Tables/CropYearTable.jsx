@@ -9,16 +9,19 @@ function TableRow({ row }) {
   return (
     <div className="grid grid-cols-6 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
       <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
-        <Link to={"/addfield"}>
-          <IconButton sx={{ paddingRight: 0 }}>
-            <EditIcon sx={{ color: "#F15D22" }} />
-          </IconButton>
-        </Link>
-        <IconButton sx={{ paddingRight: 0 }}>
-          <EqualizerIcon sx={{ color: "#F15D22" }} />
+        {/* <Link to={"/addfield"}> */}
+        <IconButton disabled sx={{ paddingRight: 0 }}>
+          <EditIcon />
+          {/* <EditIcon sx={{ color: "#F15D22" }} /> */}
         </IconButton>
-        <IconButton>
-          <DeleteIcon sx={{ color: "#F15D22" }} />
+        {/* </Link> */}
+        <IconButton disabled sx={{ paddingRight: 0 }}>
+          <EqualizerIcon />
+          {/* <EqualizerIcon sx={{ color: "#F15D22" }} /> */}
+        </IconButton>
+        <IconButton disabled>
+          <DeleteIcon />
+          {/* <DeleteIcon sx={{ color: "#F15D22" }} /> */}
         </IconButton>
       </div>
 

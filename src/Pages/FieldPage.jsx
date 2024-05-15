@@ -20,6 +20,7 @@ import MachinesTable from "../Components/Tables/MachinesTable";
 export default function FieldPage() {
   let { farmId, fieldId } = useParams();
   const fieldContext = useContext(FieldContext);
+  const farmContext = useContext(FarmContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function FieldPage() {
           fieldId +
           "/cropyears"
       );
-      console.log(cropyearsResponse.data);
+      // console.log(cropyearsResponse.data);
       fieldContext.setter({
         ...fieldResponse.data,
         cropYears: cropyearsResponse.data,
@@ -49,10 +50,17 @@ export default function FieldPage() {
   }, []);
 
   return (
-    <Page title={"fieldName on farmName (TO REPLACE)"} showQuickFacts={true}>
+    <Page
+      title={fieldContext.state.name + " On " + farmContext.state.name}
+      showQuickFacts={true}
+    >
       <div className="w-full   h-full text-[#666666]">
         <div className="mb-6 flex mb-4 justify-end">
-          <MainButton text={"Edit Field"} onClick={console.log} />
+          <MainButton
+            disabled
+            text={"Edit Field"}
+            onClick={() => navigate("/editfield")}
+          />
         </div>
 
         <p className="mb-4">
@@ -70,6 +78,7 @@ export default function FieldPage() {
         </p>
         <div className="w-full flex mb-6">
           <ButtonIcon
+            disabled={true}
             text={"Add New Crop Year"}
             onClick={console.log}
             grow={true}

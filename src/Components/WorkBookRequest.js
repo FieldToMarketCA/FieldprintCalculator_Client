@@ -4,6 +4,7 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
   //   console.log(FarmState, FieldState, CropyearState);
   //   console.log(CropyearState.crop.yieldUnits, "watauba");
   //   return;
+  console.log(CropyearState, "felix");
   const RowValues = [
     [FieldState.fieldAddress, "UniqueID"],
     [FieldState.id, "Farm_ID"],
@@ -48,20 +49,22 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
       "Cult4_AcHr",
     ],
     [
-      CropyearState.fieldOperations.fertilizerApplications.seed.machineObj.HP,
+      CropyearState.fieldOperations.fertilizerApplications.withSeed.machineObj
+        .HP,
       "Seed_Size",
     ],
     [defaultUnit, "Seed_Units"],
     [
-      CropyearState.fieldOperations.fertilizerApplications.seed.hoursUsed,
+      CropyearState.fieldOperations.fertilizerApplications.withSeed.hoursUsed,
       "Seed_Hrs",
     ],
     [
-      CropyearState.fieldOperations.fertilizerApplications.seed.defaultAcreHour,
+      CropyearState.fieldOperations.fertilizerApplications.withSeed
+        .defaultAcreHour,
       "Seed_AcHr",
     ],
     [
-      CropyearState.fieldOperations.fertilizerApplications.seed.date,
+      CropyearState.fieldOperations.fertilizerApplications.withSeed.date,
       "Seed_FertDate",
     ],
     [CropyearState.fieldOperations.fertilizerRates.N.withSeed, "Seed_N"],

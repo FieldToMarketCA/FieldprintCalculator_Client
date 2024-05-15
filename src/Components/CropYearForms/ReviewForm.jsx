@@ -115,6 +115,19 @@ export default function ReviewForm() {
               loading={loading}
               success={success}
             />
+            {/* <button
+              onClick={() => {
+                generateResults(
+                  farmContext.state,
+                  fieldContext.state,
+                  cropYearContext.state,
+                  reportDataContext.setter,
+                  SECRETS.SECRETS.token
+                );
+              }}
+            >
+              lala
+            </button> */}
           </div>
         </div>
       </div>

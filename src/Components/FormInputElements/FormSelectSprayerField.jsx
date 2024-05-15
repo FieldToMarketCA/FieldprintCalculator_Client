@@ -1,3 +1,7 @@
+// import TextField from "@mui/material/TextField";
+// import MenuItem from "@mui/material/MenuItem";
+// import HelpIconButton from "../Buttons/Iconbuttons/HelpIconButton";
+// import NewMachineModal from "../NewTractorModal";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -11,25 +15,25 @@ import { CropYearContext } from "../../App";
 import { useState, useContext } from "react";
 import axios from "axios";
 
-export default function FormSelectCultivationTractorField({
-  tractorsArray,
+export default function FormSelectSprayerField({
+  sprayersArray,
   fieldLabel,
   onChange,
   index,
   fieldState,
-  errorFound = { machineObj: false, machineHours: false },
 }) {
-  const [isTractorModalOpen, setIsTractorModalOpen] = useState(false);
+  const [isSprayerModalOpen, setIsSprayerModalOpen] = useState(false);
   const farmContext = useContext(FarmContext);
   const cropyearContext = useContext(CropYearContext);
 
-  async function handleAddNewTractor(newTractor) {
+  async function handleAddNewSprayer(newSprayer) {
     let farmId = farmContext.state._id.$oid;
 
     const response = await axios.post(
       process.env.REACT_APP_API_URL + `/farms/${farmId}/machines`,
       {
-        ...newTractor,
+        ...newSprayer,
+        type: "SPRAYER",
         farmId: farmId,
         headers: {
           "Content-Type": "application/json",
@@ -41,38 +45,31 @@ export default function FormSelectCultivationTractorField({
       ...farmContext.state,
       machines: [...farmContext.state.machines, response.data.machineObj],
     });
-
-    // After Posting and pushing to the machines array. Now we have to update the cropyearCOntext so that the user
-    // doens't have to select from the dropdown again. But after posting, field will be auto populated with the new machine
   }
 
   return (
     <div className="w-full flex mb-6">
       <TextField
-        error={errorFound.machineObj}
         id="outlined-select-currency"
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}
+        onChange={(e) => onChange(e, "machineObj", index)}
         label={fieldLabel}
-        onChange={(t) => onChange(t, "machineObj", index)}
         value={fieldState.machineObj}
       >
-        {tractorsArray.map((tractorOption) => {
-          return (
-            <MenuItem key={tractorOption.name} value={tractorOption}>
-              <p>{tractorOption.name}</p>
-            </MenuItem>
-          );
-        })}
+        {sprayersArray.map((sprayerOption) => (
+          <MenuItem key={sprayerOption.name} value={sprayerOption}>
+            <p>{sprayerOption.name}</p>
+          </MenuItem>
+        ))}
         <MenuItem
-          key={"addTractor"}
-          onClick={() => setIsTractorModalOpen(true)}
+          key={"addSprayer"}
+          onClick={() => setIsSprayerModalOpen(true)}
         >
-          <p>Add New Tractor</p>
+          <p>Add New Sprayer</p>
         </MenuItem>
       </TextField>
       <TextField
-        error={errorFound.machineHours}
         sx={{ color: "#666666", maxWidth: 130 }}
         onChange={(t) => onChange(t, "hoursUsed", index)}
         label={"Hours Used"}
@@ -85,11 +82,11 @@ export default function FormSelectCultivationTractorField({
         value={fieldState.hoursUsed}
       />
 
-      {isTractorModalOpen && (
-        <NewTractorModal
-          open={isTractorModalOpen}
-          handleClose={setIsTractorModalOpen}
-          handleAddNewTractor={handleAddNewTractor}
+      {isSprayerModalOpen && (
+        <NewMachineModal
+          open={isSprayerModalOpen}
+          handleClose={setIsSprayerModalOpen}
+          handleAddNewMachine={handleAddNewSprayer}
         />
       )}
     </div>
