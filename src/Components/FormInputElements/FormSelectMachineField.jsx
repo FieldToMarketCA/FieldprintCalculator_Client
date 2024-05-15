@@ -67,7 +67,7 @@ export default function FormSelectMachineField({
     <div className="w-full flex mb-6">
       <TextField
         error={errorFound.machineObj}
-        onChange={(t) => onChange(t, machineType, "machineObj")}
+        onChange={(t) => onChange(t, machineType, "machineId")}
         id="outlined-select-currency"
         select
         sx={{ width: "100%", maxWidth: "300px", marginRight: 4 }}

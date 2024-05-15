@@ -3,17 +3,16 @@ import BooleanQuestion from "../FormInputElements/BooleanQuestion";
 import MultiChoiceQuestion from "../FormInputElements/MultiChoiceQuestion";
 import NumberQuestion from "../FormInputElements/NumberQuestion";
 import { useState, useEffect } from "react";
+import FormSelectCultivationTractorField from "../FormInputElements/FormSelectCultivationTractorField";
 import FormSelectFertilizerTractorField from "../FormInputElements/FormSelectFertilizerTractorField";
-import FormSelectMachineField from "../FormInputElements/FormSelectMachineField";
+// import FormSelectSprayerField from "../FormInputElements/FormSelectSprayerField";
 
 import { FertilizerTypes } from "../../Assets/DataTypes";
 
 import FertilizerTableField from "../../Components/FormInputElements/FertilizerTableField";
 
-import { CropYearContext } from "../../App";
+import { CropYearContext, FarmContext } from "../../App";
 import { useContext } from "react";
-
-import { FarmContext } from "../../App";
 
 const cultivationOperationType = { machineObj: "", hoursOfOperation: 0 };
 
@@ -24,6 +23,8 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
     machineObj: false,
     hoursUsed: false,
   });
+
+  console.log(cropyearContext.state.fieldOperations);
   const [usedFertilizer, setUsedFertilizer] = useState(false);
   const [numberOfCultivation, setNumberOfCultivation] = useState(1);
   const [cultivationOperations, setCultivationOperations] = useState([
@@ -238,7 +239,7 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
             if (index > numberOfCultivation - 1) return;
 
             return (
-              <FormSelectMachineField
+              <FormSelectCultivationTractorField
                 errorFound={
                   index === 0 && {
                     machineObj: errorFields.machineObj,
@@ -246,10 +247,9 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
                   }
                 }
                 key={index}
-                machineType={"TRACTOR"}
                 fieldLabel={"Tractor Used in Cultivation #" + (index + 1)}
-                machinesArray={farmContext.state.machines.filter(
-                  (machineObj) => machineObj.type === "TRACTOR"
+                tractorsArray={farmContext.state.machines.filter(
+                  (machine) => machine.type === "TRACTOR"
                 )}
                 onChange={handleCultivationOperation}
                 index={index}
@@ -292,7 +292,7 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
                 <FormSelectFertilizerTractorField
                   fieldLabel={operation.label}
                   tractorsArray={farmContext.state.machines.filter(
-                    (machineObj) => machineObj.type === "TRACTOR"
+                    (machine) => machine.type === "TRACTOR"
                   )}
                   fieldState={
                     cropyearContext.state.fieldOperations
@@ -375,12 +375,11 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
           {pesticideOperations.map((pesticide, index) => {
             if (index > numberOfPesticide - 1) return;
             return (
-              <FormSelectMachineField
+              <FormSelectSprayerField
                 key={index}
-                machineType={"SPRAYER"}
                 fieldLabel={"Sprayer in Fumigation #" + (index + 1)}
-                machinesArray={farmContext.state.machines.filter(
-                  (machineObj) => machineObj.type === "SPRAYER"
+                sprayersArray={farmContext.state.machines.filter(
+                  (machine) => machine.type === "SPRAYER"
                 )}
                 onChange={handlePesticideOperation}
                 index={index}
@@ -407,23 +406,3 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
     </div>
   );
 }
-
-// const TRACTORS = [
-//   {
-//     type: "TRACTOR",
-//     name: "Tractor 1",
-//     HP: 800,
-//     fuelUse: null,
-//     defaultAcreHour: 2,
-//   },
-
-// ];
-// const SPRAYERS = [
-// {
-//   type: "SPRAYER",
-//   name: "Sprayer 1",
-//   HP: 150,
-//   fuelUse: null,
-//   defaultAcreHour: 30,
-// },
-// ];
