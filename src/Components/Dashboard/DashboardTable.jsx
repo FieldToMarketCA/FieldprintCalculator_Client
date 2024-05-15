@@ -16,10 +16,10 @@ function TableRow({ row }) {
         {row.fieldSize}
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
-        {row.cropYear}
+        {row.crop}
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
-        {row.crop}
+        {row.cropYear}
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
         {row.finalized ? "Yes" : "No"}
@@ -66,9 +66,9 @@ export default function DashboardTable({ tableData }) {
 
       {/* Body */}
       <ul className="w-full mb-2">
-        {tableData.map((row) => {
+        {tableData.map((row, index) => {
           return (
-            <li className="w-full" key={row.id}>
+            <li className="w-full" key={row.id + index}>
               <TableRow row={row} />
             </li>
           );

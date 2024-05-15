@@ -8,6 +8,7 @@ export default function Page({
   title,
 
   children,
+  dashboardData = false,
   showQuickFacts = false,
   headerBorderColor = "border-[#34a853]",
   padding = "p-[32px]",
@@ -27,7 +28,10 @@ export default function Page({
           </header>
           {/* QuickFacts  */}
           {showQuickFacts && (
-            <QuickFacts sectionColor={headerBorderColor.slice(8, 15)} />
+            <QuickFacts
+              dashboardData={dashboardData}
+              sectionColor={headerBorderColor.slice(8, 15)}
+            />
           )}
 
           {/* PAGE BODY */}

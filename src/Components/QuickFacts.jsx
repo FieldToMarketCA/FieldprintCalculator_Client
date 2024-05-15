@@ -16,23 +16,29 @@ function CollapseQuickFactsButton({ color, handleCollapse }) {
   );
 }
 
-export default function QuickFacts({ sectionColor }) {
+export default function QuickFacts({ sectionColor, dashboardData = false }) {
   const fieldContext = useContext(FieldContext);
   const farmContext = useContext(FarmContext);
   const cropyearContext = useContext(CropYearContext);
 
-  const QuickFactsDummyData = [
-    { label: "Farm", value: farmContext.state.name },
-    { label: "Partner", value: farmContext.state.partner },
-    { label: "Field Size", value: fieldContext.state.fieldSize },
+  var QuickFactsDummyData;
 
-    { label: "Last Updated", value: "" },
-    { label: "Address", value: fieldContext.state.fieldAddress },
-    { label: "Tract Number", value: null },
-    { label: "Last Updated By", value: "membership@fieldtomarket.ca" },
-    { label: "Crop", value: cropyearContext.state.crop.cropThisYear },
-    { label: "Crop Year", value: cropyearContext.state.crop.cropYear },
-  ];
+  if (dashboardData === false) {
+    QuickFactsDummyData = [
+      { label: "Farm", value: farmContext.state.name },
+      { label: "Partner", value: farmContext.state.partner },
+      { label: "Field Size", value: fieldContext.state.fieldSize },
+
+      { label: "Last Updated", value: "" },
+      { label: "Address", value: fieldContext.state.fieldAddress },
+      { label: "Tract Number", value: null },
+      { label: "Last Updated By", value: "membership@fieldtomarket.ca" },
+      { label: "Crop", value: cropyearContext.state.crop.cropThisYear },
+      { label: "Crop Year", value: cropyearContext.state.crop.cropYear },
+    ];
+  } else {
+    QuickFactsDummyData = dashboardData;
+  }
 
   const [isQuickFactsCollapsed, setIsQuickFactsCollapsed] = useState(true);
   const displayAs = isQuickFactsCollapsed ? "0px" : "145px";

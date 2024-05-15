@@ -17,9 +17,12 @@ import { useContext } from "react";
 import axios from "axios";
 
 export default function DashBoardPage() {
-  // const farmContext = useContext(FarmContext);
-  // const fieldContext = useContext(FieldContext);
+  const [filters, setFilters] = useState(null);
   const [tableData, setTableData] = useState([]);
+  const [SummaryData, setSummaryData] = useState(false);
+
+  const [filteredData, setFilteredData] = useState(tableData);
+
   const navigate = useNavigate();
 
   const getFieldsFromFarmId = async (farmId) => {
@@ -39,23 +42,50 @@ export default function DashBoardPage() {
   useEffect(() => {
     const getDashboardData = async () => {
       const TMP = [];
+      const SummaryDataCopy = {
+        totalAcres: 0,
+        cropsSet: {},
+        fieldsSet: {},
+        farmsSet: {},
+        yearsArray: [],
+      };
+
+      const tmpFilters = {
+        farmsFilters: {},
+        fieldsFilters: {},
+        cropYearsFilters: {},
+        cropsFilters: {},
+      };
 
       const farmsResponse = await axios.get(
-        process.env.REACT_APP_API_URL + "/farms"
+        process.env.REACT_APP_API_URL + "/farms?max=100"
       );
 
       for (const Farm of farmsResponse.data.data) {
+        console.log(Farm.name);
         const fields = await getFieldsFromFarmId(Farm._id.$oid);
 
         for (const Field of fields) {
+          console.log(Field.name);
           const cropyears = await getCropYearsFromFieldId(
             Farm._id.$oid,
             Field._id.$oid
           );
 
-          console.log(cropyears);
-
           for (const CropYear of cropyears) {
+            tmpFilters["farmsFilters"][Farm.name] = true;
+            tmpFilters["fieldsFilters"][Field.name] = true;
+            tmpFilters["cropYearsFilters"][CropYear.crop.cropYear] = true;
+            tmpFilters["cropsFilters"][CropYear.crop.cropThisYear] = true;
+
+            // Capture Summary Data
+            SummaryDataCopy.totalAcres += Field.fieldSize;
+            SummaryDataCopy.cropsSet[CropYear.crop.cropThisYear] = true;
+            SummaryDataCopy.fieldsSet[Field.name] = true;
+            SummaryDataCopy.farmsSet[Farm.name] = true;
+            SummaryDataCopy.yearsArray.push(CropYear.crop.cropYear);
+
+            // Capture TABLE Data
             TMP.push({
               id: Field._id.$oid,
               farmName: Farm.name,
@@ -67,8 +97,31 @@ export default function DashBoardPage() {
           }
         }
       }
-
+      // console.log(Object.keys(SummaryDataCopy.farmsSet));
+      setSummaryData([
+        { label: "Acres", value: SummaryDataCopy.totalAcres },
+        {
+          label: "Crops",
+          value: Object.keys(SummaryDataCopy.cropsSet).join(", "),
+        },
+        {
+          label: "Total Fields",
+          value: Object.keys(SummaryDataCopy.fieldsSet).length,
+        },
+        {
+          label: "Total Farms",
+          value: Object.keys(SummaryDataCopy.farmsSet).length,
+        },
+        {
+          label: "Years",
+          value:
+            Math.min(...SummaryDataCopy.yearsArray) +
+            " - " +
+            Math.max(...SummaryDataCopy.yearsArray),
+        },
+      ]);
       setTableData(TMP);
+      setFilters(tmpFilters);
     };
 
     getDashboardData();
@@ -79,6 +132,7 @@ export default function DashBoardPage() {
       title={"Dashboard"}
       headerBorderColor={"border-[#00adee]"}
       showQuickFacts={true}
+      dashboardData={SummaryData}
     >
       {/* FARM NAME FIELD  */}
 
@@ -91,10 +145,14 @@ export default function DashBoardPage() {
         </p>
 
         <div className="w-full mb-6">
-          <DashBoardFilterPane />
+          <DashBoardFilterPane
+            filters={filters}
+            setFilteredData={setFilteredData}
+            tableData={tableData}
+          />
         </div>
 
-        <DashboardTable tableData={tableData} />
+        <DashboardTable tableData={filteredData} />
       </div>
     </Page>
   );
