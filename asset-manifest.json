@@ -1,19 +1,34 @@
 {
   "files": {
-    "main.css": "/FieldprintCalculator_Client/static/css/main.bb74d06b.css",
-    "main.js": "/FieldprintCalculator_Client/static/js/main.548e484e.js",
-    "static/js/213.90e06e6d.chunk.js": "/FieldprintCalculator_Client/static/js/213.90e06e6d.chunk.js",
+    "main.css": "/FieldprintCalculator_Client/static/css/main.5eab993e.css",
+    "main.js": "/FieldprintCalculator_Client/static/js/main.e5a6aae1.js",
+    "static/js/213.df1f477f.chunk.js": "/FieldprintCalculator_Client/static/js/213.df1f477f.chunk.js",
     "static/js/732.d48bad9d.chunk.js": "/FieldprintCalculator_Client/static/js/732.d48bad9d.chunk.js",
     "static/media/ftmc_logo.jpg": "/FieldprintCalculator_Client/static/media/ftmc_logo.0395131f44b0d7962cee.jpg",
+    "static/media/roboto-slab-latin-400-normal.woff": "/FieldprintCalculator_Client/static/media/roboto-slab-latin-400-normal.aa28d6af7efa170f410c.woff",
+    "static/media/roboto-slab-cyrillic-ext-400-normal.woff": "/FieldprintCalculator_Client/static/media/roboto-slab-cyrillic-ext-400-normal.a0a66d9ec14b8dae5b14.woff",
     "static/media/GHG_Icon.png": "/FieldprintCalculator_Client/static/media/GHG_Icon.8a35b12ca6d70f4871e4.png",
+    "static/media/roboto-slab-latin-400-normal.woff2": "/FieldprintCalculator_Client/static/media/roboto-slab-latin-400-normal.b38bdd22bfa35a662f38.woff2",
+    "static/media/roboto-slab-latin-ext-400-normal.woff": "/FieldprintCalculator_Client/static/media/roboto-slab-latin-ext-400-normal.71e34e756427eea023cb.woff",
+    "static/media/roboto-slab-cyrillic-ext-400-normal.woff2": "/FieldprintCalculator_Client/static/media/roboto-slab-cyrillic-ext-400-normal.5792875a00f05d75c852.woff2",
+    "static/media/roboto-slab-cyrillic-400-normal.woff": "/FieldprintCalculator_Client/static/media/roboto-slab-cyrillic-400-normal.5e5a73bd78efeb6f4a8e.woff",
+    "static/media/roboto-slab-latin-ext-400-normal.woff2": "/FieldprintCalculator_Client/static/media/roboto-slab-latin-ext-400-normal.b14eef19c9c0bbe4b76c.woff2",
+    "static/media/roboto-slab-cyrillic-400-normal.woff2": "/FieldprintCalculator_Client/static/media/roboto-slab-cyrillic-400-normal.e4f4b1ea4ca07278dbbb.woff2",
+    "static/media/roboto-slab-greek-400-normal.woff": "/FieldprintCalculator_Client/static/media/roboto-slab-greek-400-normal.003d7985c418a01298ce.woff",
+    "static/media/roboto-slab-vietnamese-400-normal.woff": "/FieldprintCalculator_Client/static/media/roboto-slab-vietnamese-400-normal.fb1433761e51b84c02f1.woff",
+    "static/media/roboto-slab-greek-400-normal.woff2": "/FieldprintCalculator_Client/static/media/roboto-slab-greek-400-normal.5bc0350f3fae84b92be6.woff2",
+    "static/media/roboto-slab-vietnamese-400-normal.woff2": "/FieldprintCalculator_Client/static/media/roboto-slab-vietnamese-400-normal.79c3d8a438c3a9803248.woff2",
+    "static/media/roboto-slab-greek-ext-400-normal.woff": "/FieldprintCalculator_Client/static/media/roboto-slab-greek-ext-400-normal.ff4d087ce923d84761d3.woff",
     "index.html": "/FieldprintCalculator_Client/index.html",
-    "main.bb74d06b.css.map": "/FieldprintCalculator_Client/static/css/main.bb74d06b.css.map",
-    "main.548e484e.js.map": "/FieldprintCalculator_Client/static/js/main.548e484e.js.map",
-    "213.90e06e6d.chunk.js.map": "/FieldprintCalculator_Client/static/js/213.90e06e6d.chunk.js.map",
+    "static/media/tractorIcon.svg": "/FieldprintCalculator_Client/static/media/tractorIcon.795c0ad6f655c647e69e68688baf3512.svg",
+    "static/media/roboto-slab-greek-ext-400-normal.woff2": "/FieldprintCalculator_Client/static/media/roboto-slab-greek-ext-400-normal.ab38b0d5c6cd5fbf22dc.woff2",
+    "main.5eab993e.css.map": "/FieldprintCalculator_Client/static/css/main.5eab993e.css.map",
+    "main.e5a6aae1.js.map": "/FieldprintCalculator_Client/static/js/main.e5a6aae1.js.map",
+    "213.df1f477f.chunk.js.map": "/FieldprintCalculator_Client/static/js/213.df1f477f.chunk.js.map",
     "732.d48bad9d.chunk.js.map": "/FieldprintCalculator_Client/static/js/732.d48bad9d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bb74d06b.css",
-    "static/js/main.548e484e.js"
+    "static/css/main.5eab993e.css",
+    "static/js/main.e5a6aae1.js"
   ]
 }
