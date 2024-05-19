@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { FarmContext } from "../App";
 import { FieldContext } from "../App";
+import { useAuth } from "../Components/Auth/useAuth";
 
 import axios from "axios";
 
@@ -18,6 +19,7 @@ var errorFields = {
 };
 
 export default function AddFarmPage() {
+  const { user } = useAuth();
   const [ErrorFound, setErrorFound] = useState(false);
   const farmContext = useContext(FarmContext);
   const fieldContext = useContext(FieldContext);
@@ -40,6 +42,7 @@ export default function AddFarmPage() {
           partner: farmContext.state.partner,
           ownerId: "engfelixreynoso@gmail.com",
           headers: {
+            token: "Bearer " + user.token,
             "Content-Type": "application/json",
           },
         })
