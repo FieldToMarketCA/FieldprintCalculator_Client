@@ -8,6 +8,7 @@ import tractorSVG from "../Assets/Icons/tractorIcon.svg";
 
 import { useNavigate, useParams } from "react-router-dom";
 
+import { useAuth } from "../Components/Auth/useAuth";
 import { useEffect, useState } from "react";
 
 import { useContext } from "react";
@@ -18,6 +19,7 @@ import axios from "axios";
 import MachinesTable from "../Components/Tables/MachinesTable";
 
 export default function FarmPage() {
+  const { user } = useAuth();
   let { farmId } = useParams();
   const farmContext = useContext(FarmContext);
   const fieldContext = useContext(FieldContext);
@@ -26,14 +28,32 @@ export default function FarmPage() {
   useEffect(() => {
     const getFarm = async () => {
       const response = await axios.get(
-        process.env.REACT_APP_API_URL + "/farms/" + farmId
+        process.env.REACT_APP_API_URL + "/farms/" + farmId,
+        {
+          headers: {
+            token: "Bearer " + user.token,
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       const fieldsResponse = await axios.get(
-        process.env.REACT_APP_API_URL + "/farms/" + farmId + "/fields"
+        process.env.REACT_APP_API_URL + "/farms/" + farmId + "/fields",
+        {
+          headers: {
+            token: "Bearer " + user.token,
+            "Content-Type": "application/json",
+          },
+        }
       );
       const machinesResponse = await axios.get(
-        process.env.REACT_APP_API_URL + "/farms/" + farmId + "/machines"
+        process.env.REACT_APP_API_URL + "/farms/" + farmId + "/machines",
+        {
+          headers: {
+            token: "Bearer " + user.token,
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       let tmpFarm = {

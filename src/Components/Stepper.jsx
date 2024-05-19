@@ -11,8 +11,10 @@ import { FarmContext } from "../App";
 import { CropYearContext } from "../App";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Components/Auth/useAuth";
 
 export default function HorizontalNonLinearStepper({ steps }) {
+  const { user } = useAuth();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 
@@ -210,6 +212,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
                             cropyearContext.state
                           ),
                           headers: {
+                            token: "Bearer " + user.token,
                             "Content-Type": "application/json",
                           },
                         }

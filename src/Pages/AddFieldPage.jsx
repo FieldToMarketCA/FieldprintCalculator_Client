@@ -28,6 +28,8 @@ import axios from "axios";
 import MapCoordinates from "../Assets/Map/Map_Dataset";
 import { getNearestCoordinate } from "../Assets/Map/getNearestCoordinates";
 
+import { useAuth } from "../Components/Auth/useAuth";
+
 var errorFields = {
   name: false,
   fieldSize: false,
@@ -41,6 +43,7 @@ var errorFields = {
 };
 
 export default function AddFieldPage() {
+  const { user } = useAuth();
   const [ErrorFound, setErrorFound] = useState(false);
   const [addressQuery, setAddressQuery] = useState("Canada");
   const navigate = useNavigate();
@@ -112,6 +115,7 @@ export default function AddFieldPage() {
             SLCpolygon: fieldContext.state.SLCpolygon,
 
             headers: {
+              token: "Bearer " + user.token,
               "Content-Type": "application/json",
             },
           }

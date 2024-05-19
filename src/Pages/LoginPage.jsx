@@ -12,6 +12,7 @@ import GrayButton from "../Components/Buttons/GrayButton";
 
 export const LoginPage = () => {
   const { login, user, logout } = useAuth();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +23,7 @@ export const LoginPage = () => {
 
     if (url.includes("token")) {
       token = document.location.toString().split("token=")[1];
+      console.log(token);
     }
 
     async function getUser() {
@@ -31,8 +33,8 @@ export const LoginPage = () => {
             process.env.REACT_APP_API_URL + "/authenticate",
             { params: { token: token } }
           );
-          console.log(response.data);
-          login(response.data);
+          // console.log(response.data);
+          login({ ...response.data, token: token });
         }
       } catch (e) {
         console.log(e);
@@ -42,6 +44,7 @@ export const LoginPage = () => {
       getUser();
     } else {
       // User is already loggedIn
+      console.log(user.token);
       console.log(user);
     }
   }, []);

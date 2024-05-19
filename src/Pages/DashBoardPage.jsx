@@ -17,7 +17,10 @@ import { CropYearContext } from "../App";
 
 import axios from "axios";
 
+import { useAuth } from "../Components/Auth/useAuth";
+
 export default function DashBoardPage() {
+  const { user } = useAuth();
   const [filters, setFilters] = useState(null);
   const [tableData, setTableData] = useState([]);
   const [SummaryData, setSummaryData] = useState(false);
@@ -28,14 +31,26 @@ export default function DashBoardPage() {
 
   const getFieldsFromFarmId = async (farmId) => {
     const response = await axios.get(
-      process.env.REACT_APP_API_URL + "/farms/" + farmId + "/fields"
+      process.env.REACT_APP_API_URL + "/farms/" + farmId + "/fields",
+      {
+        headers: {
+          token: "Bearer " + user.token,
+          "Content-Type": "application/json",
+        },
+      }
     );
     return response.data;
   };
   const getCropYearsFromFieldId = async (farmId, fieldId) => {
     const response = await axios.get(
       process.env.REACT_APP_API_URL +
-        `/farms/${farmId}/fields/${fieldId}/cropyears`
+        `/farms/${farmId}/fields/${fieldId}/cropyears`,
+      {
+        headers: {
+          token: "Bearer " + user.token,
+          "Content-Type": "application/json",
+        },
+      }
     );
     return response.data;
   };
@@ -59,7 +74,13 @@ export default function DashBoardPage() {
       };
 
       const farmsResponse = await axios.get(
-        process.env.REACT_APP_API_URL + "/farms?max=100"
+        process.env.REACT_APP_API_URL + "/farms?max=100",
+        {
+          headers: {
+            token: "Bearer " + user.token,
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       for (const Farm of farmsResponse.data.data) {

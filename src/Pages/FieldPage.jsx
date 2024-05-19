@@ -14,6 +14,7 @@ import { useContext, useEffect } from "react";
 import { FarmContext } from "../App";
 import { FieldContext } from "../App";
 
+import { useAuth } from "../Components/Auth/useAuth";
 import axios from "axios";
 import MachinesTable from "../Components/Tables/MachinesTable";
 
@@ -22,6 +23,7 @@ export default function FieldPage() {
   const fieldContext = useContext(FieldContext);
   const farmContext = useContext(FarmContext);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
     const getField = async () => {
@@ -30,7 +32,13 @@ export default function FieldPage() {
           "/farms/" +
           farmId +
           "/fields/" +
-          fieldId
+          fieldId,
+        {
+          headers: {
+            token: "Bearer " + user.token,
+            "Content-Type": "application/json",
+          },
+        }
       );
       const cropyearsResponse = await axios.get(
         process.env.REACT_APP_API_URL +
@@ -38,9 +46,15 @@ export default function FieldPage() {
           farmId +
           "/fields/" +
           fieldId +
-          "/cropyears"
+          "/cropyears",
+        {
+          headers: {
+            token: "Bearer " + user.token,
+            "Content-Type": "application/json",
+          },
+        }
       );
-      // console.log(cropyearsResponse.data);
+
       fieldContext.setter({
         ...fieldResponse.data,
         cropYears: cropyearsResponse.data,

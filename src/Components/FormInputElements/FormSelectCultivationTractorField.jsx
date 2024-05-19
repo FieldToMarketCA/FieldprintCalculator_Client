@@ -10,6 +10,7 @@ import { FarmContext } from "../../App";
 import { CropYearContext } from "../../App";
 import { useState, useContext } from "react";
 import axios from "axios";
+import { useAuth } from "../../Components/Auth/useAuth";
 
 export default function FormSelectCultivationTractorField({
   tractorsArray,
@@ -22,6 +23,7 @@ export default function FormSelectCultivationTractorField({
   const [isTractorModalOpen, setIsTractorModalOpen] = useState(false);
   const farmContext = useContext(FarmContext);
   const cropyearContext = useContext(CropYearContext);
+  const { user } = useAuth();
 
   async function handleAddNewTractor(newTractor) {
     let farmId = farmContext.state._id.$oid;
@@ -32,6 +34,7 @@ export default function FormSelectCultivationTractorField({
         ...newTractor,
         farmId: farmId,
         headers: {
+          token: "Bearer " + user.token,
           "Content-Type": "application/json",
         },
       }

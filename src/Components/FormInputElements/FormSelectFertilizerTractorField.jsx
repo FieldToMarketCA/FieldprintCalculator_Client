@@ -7,7 +7,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { FarmContext } from "../../App";
 import axios from "axios";
-
+import { useAuth } from "../../Components/Auth/useAuth";
 import { useState, useContext } from "react";
 import dayjs from "dayjs";
 
@@ -19,7 +19,7 @@ export default function FormSelectFertilizerTractorField({
   seedStage,
 }) {
   const farmContext = useContext(FarmContext);
-
+  const { user } = useAuth();
   const [selectedTractor, setSelectedTractor] = useState("");
   const [hoursUsed, setHoursUsed] = useState(0);
   const [isMachineModalOpen, setIsMachineModalOpen] = useState(false);
@@ -33,6 +33,7 @@ export default function FormSelectFertilizerTractorField({
         ...newMachine,
         farmId: farmId,
         headers: {
+          token: "Bearer " + user.token,
           "Content-Type": "application/json",
         },
       }
