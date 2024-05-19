@@ -33,6 +33,8 @@ export default function FormSelectCultivationTractorField({
       {
         ...newTractor,
         farmId: farmId,
+      },
+      {
         headers: {
           token: "Bearer " + user.token,
           "Content-Type": "application/json",

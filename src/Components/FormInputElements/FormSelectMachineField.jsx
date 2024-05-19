@@ -7,6 +7,7 @@ import { FarmContext } from "../../App";
 import { CropYearContext } from "../../App";
 import { useState, useContext } from "react";
 import axios from "axios";
+import { useAuth } from "../../Components/Auth/useAuth";
 
 export default function FormSelectMachineField({
   machinesArray,
@@ -16,6 +17,8 @@ export default function FormSelectMachineField({
   fieldState,
   errorFound = { machineObj: false, machineHours: false },
 }) {
+  const { user } = useAuth();
+
   const farmContext = useContext(FarmContext);
   const cropyearContext = useContext(CropYearContext);
 
@@ -33,7 +36,10 @@ export default function FormSelectMachineField({
       {
         ...newMachine,
         farmId: farmId,
+      },
+      {
         headers: {
+          token: "Bearer " + user.token,
           "Content-Type": "application/json",
         },
       }

@@ -36,16 +36,21 @@ export default function AddFarmPage() {
   function handleSaveAndAddFIeld() {
     if (isInputValid()) {
       axios
-        .post(process.env.REACT_APP_API_URL + "/farms", {
-          name: farmContext.state.name,
-          province: farmContext.state.province,
-          partner: farmContext.state.partner,
-          ownerId: "engfelixreynoso@gmail.com",
-          headers: {
-            token: "Bearer " + user.token,
-            "Content-Type": "application/json",
+        .post(
+          process.env.REACT_APP_API_URL + "/farms",
+          {
+            name: farmContext.state.name,
+            province: farmContext.state.province,
+            partner: farmContext.state.partner,
+            ownerId: "engfelixreynoso@gmail.com",
           },
-        })
+          {
+            headers: {
+              token: "Bearer " + user.token,
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((response) => {
           farmContext.setter({
             ...farmContext.state,

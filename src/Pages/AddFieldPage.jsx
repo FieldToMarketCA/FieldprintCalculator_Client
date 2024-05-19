@@ -113,7 +113,8 @@ export default function AddFieldPage() {
             regimeChangeDate: fieldContext.state.regimeChangeDate,
             Ecodistrict: fieldContext.state.Ecodistrict,
             SLCpolygon: fieldContext.state.SLCpolygon,
-
+          },
+          {
             headers: {
               token: "Bearer " + user.token,
               "Content-Type": "application/json",

@@ -32,6 +32,8 @@ export default function FormSelectFertilizerTractorField({
       {
         ...newMachine,
         farmId: farmId,
+      },
+      {
         headers: {
           token: "Bearer " + user.token,
           "Content-Type": "application/json",

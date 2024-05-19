@@ -14,6 +14,7 @@ import { FarmContext } from "../../App";
 import { CropYearContext } from "../../App";
 import { useState, useContext } from "react";
 import axios from "axios";
+import { useAuth } from "../../Components/Auth/useAuth";
 
 export default function FormSelectSprayerField({
   sprayersArray,
@@ -25,6 +26,7 @@ export default function FormSelectSprayerField({
   const [isSprayerModalOpen, setIsSprayerModalOpen] = useState(false);
   const farmContext = useContext(FarmContext);
   const cropyearContext = useContext(CropYearContext);
+  const { user } = useAuth();
 
   async function handleAddNewSprayer(newSprayer) {
     let farmId = farmContext.state._id.$oid;
@@ -35,7 +37,10 @@ export default function FormSelectSprayerField({
         ...newSprayer,
         type: "SPRAYER",
         farmId: farmId,
+      },
+      {
         headers: {
+          token: "Bearer " + user.token,
           "Content-Type": "application/json",
         },
       }

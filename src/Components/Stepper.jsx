@@ -211,6 +211,8 @@ export default function HorizontalNonLinearStepper({ steps }) {
                           ...removeFactoryEmptyStringsFromCropYear(
                             cropyearContext.state
                           ),
+                        },
+                        {
                           headers: {
                             token: "Bearer " + user.token,
                             "Content-Type": "application/json",
