@@ -18,11 +18,10 @@ var errorFields = {
   province: false,
 };
 
-export default function AddFarmPage() {
+export default function EditFarmPage() {
   const { user } = useAuth();
   const [ErrorFound, setErrorFound] = useState(false);
   const farmContext = useContext(FarmContext);
-  const fieldContext = useContext(FieldContext);
 
   const navigate = useNavigate();
 
@@ -36,8 +35,8 @@ export default function AddFarmPage() {
   function handleSaveAndAddFIeld() {
     if (isInputValid()) {
       axios
-        .post(
-          process.env.REACT_APP_API_URL + "/farms",
+        .patch(
+          `${process.env.REACT_APP_API_URL}/farms/${farmContext.state._id.$oid}`,
           {
             name: farmContext.state.name,
             province: farmContext.state.province,
@@ -52,11 +51,7 @@ export default function AddFarmPage() {
           }
         )
         .then((response) => {
-          farmContext.setter({
-            ...farmContext.state,
-            _id: { $oid: response.data.farmId },
-          });
-          navigate("/addfield");
+          navigate(`/farm/${farmContext.state._id.$oid}`);
         });
     }
   }
@@ -114,13 +109,14 @@ export default function AddFarmPage() {
         {/* CONTROLS */}
         <div className="w-full  flex flex-col min-[550px]:flex-row">
           <div className="mb-5">
-            <MainButton
-              text={"Save and Add Field"}
-              onClick={handleSaveAndAddFIeld}
-            />
+            <MainButton text={"Save Changes"} onClick={handleSaveAndAddFIeld} />
           </div>
           <div className="min-[550px]:ml-4">
-            <MainButton text={"Cancel"} onClick={console.log} />
+            <MainButton
+              secondary={true}
+              text={"Cancel"}
+              onClick={() => navigate(`/farm/${farmContext.state._id.$oid}`)}
+            />
           </div>
         </div>
       </div>

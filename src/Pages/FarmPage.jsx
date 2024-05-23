@@ -74,12 +74,10 @@ export default function FarmPage() {
       {/* FARM NAME FIELD  */}
 
       <div className="w-full h-full text-[#666666]">
-        <div className="mb-6 flex text-lg mb-4 justify-between">
-          <p>FPP ID: 6020</p>
+        <div className="mb-6 flex text-lg mb-4 justify-end">
           <MainButton
-            disabled
             text={"Edit Farm"}
-            onClick={() => navigate("/editfarm")}
+            onClick={() => navigate(`/editfarm/${farmContext.state._id.$oid}`)}
           />
         </div>
 

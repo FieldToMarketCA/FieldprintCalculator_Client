@@ -16,6 +16,9 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import SideNavButton from "./SideNavButton";
 import { useNavigate } from "react-router-dom";
+import { FarmContext } from "../../../App";
+import { FieldContext } from "../../../App";
+import { CropYearContext } from "../../../App";
 
 import { GUI_CONTEXT } from "../../../App";
 // GUI.setter({ ...GUI.state, isNavOpen: !GUI.state.isNavOpen });
@@ -34,6 +37,10 @@ export default function SideNavDropDownButton({
   borderColor?: string;
 }) {
   const GUI = useContext(GUI_CONTEXT);
+  const farmContext = useContext(FarmContext);
+  const fieldContext = useContext(FieldContext);
+  const cropYearContext = useContext(CropYearContext);
+
   const [isHover, setIsHover] = useState(false);
   const navigate = useNavigate();
 
@@ -131,6 +138,9 @@ export default function SideNavDropDownButton({
               text="Add Farm"
               icon={"addFarmFieldIcon"}
               onClick={() => {
+                farmContext.resetState();
+                fieldContext.resetState();
+                cropYearContext.resetState();
                 navigate("/addfarm");
                 GUI.setter({ ...GUI.state, isNavOpen: false });
               }}

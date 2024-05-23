@@ -3,14 +3,19 @@ import EditIcon from "@mui/icons-material/Edit";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function TableRow({ row }) {
+  const navigate = useNavigate();
+  // console.log(row, "this is hwo row looks like");
   return (
     <div className="grid grid-cols-6 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
       <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
         {/* <Link to={"/addfield"}> */}
-        <IconButton disabled sx={{ paddingRight: 0 }}>
+        <IconButton
+          onClick={() => navigate(`/editcropyear/${row.cropyearId}`)}
+          sx={{ paddingRight: 0 }}
+        >
           <EditIcon />
           {/* <EditIcon sx={{ color: "#F15D22" }} /> */}
         </IconButton>
@@ -74,7 +79,9 @@ export default function CropYearTable({ cropYears }) {
           if (typeof cropyear === "object")
             return (
               <li className="w-full" key={cropyear._id.$oid}>
-                <TableRow row={cropyear.crop} />
+                <TableRow
+                  row={{ ...cropyear.crop, cropyearId: cropyear._id.$oid }}
+                />
               </li>
             );
         })}

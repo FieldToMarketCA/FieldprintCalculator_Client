@@ -50,7 +50,7 @@ export default function FormSelectCultivationTractorField({
     // After Posting and pushing to the machines array. Now we have to update the cropyearCOntext so that the user
     // doens't have to select from the dropdown again. But after posting, field will be auto populated with the new machine
   }
-
+  console.log("watauba", fieldState);
   return (
     <div className="w-full flex mb-6">
       <TextField
@@ -61,6 +61,8 @@ export default function FormSelectCultivationTractorField({
         label={fieldLabel}
         onChange={(t) => onChange(t, "machineObj", index)}
         value={fieldState.machineObj}
+        // value={"the rock"}
+        // defaultValue={"lipis"}
       >
         {tractorsArray.map((tractorOption) => {
           return (

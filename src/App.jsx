@@ -11,9 +11,15 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import axios from "axios";
 import ComponentGlossary from "./ComponentGlossary";
 import AddFarmPage from "./Pages/AddFarmPage";
+// Adition Pages
 import FarmPage from "./Pages/FarmPage";
 import AddFieldPage from "./Pages/AddFieldPage";
 import AddCropYear from "./Pages/AddCropYear";
+// Edition Pages
+import EditFarmPage from "./Pages/EditFarmPage";
+import EditFieldPage from "./Pages/EditFieldPage";
+import EditCropYear from "./Pages/EditCropYear";
+
 import AnalysisPage from "./Pages/AnalysisPage";
 import DashBoardPage from "./Pages/DashBoardPage";
 // import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -161,6 +167,8 @@ function App() {
                               </ProtectedRoute>
                             }
                           />
+
+                          {/* Addition Routes */}
                           <Route
                             exact
                             path="/addfarm"
@@ -171,8 +179,14 @@ function App() {
                             }
                           />
 
-                          {/* </Route> */}
-                          <Route path="/addfield" element={<AddFieldPage />} />
+                          <Route
+                            path="/addfield"
+                            element={
+                              <ProtectedRoute>
+                                <AddFieldPage />
+                              </ProtectedRoute>
+                            }
+                          />
                           <Route
                             path="/addcropyear"
                             element={
@@ -181,7 +195,33 @@ function App() {
                               </ProtectedRoute>
                             }
                           />
+                          {/* Edition Routes */}
+                          <Route
+                            exact
+                            path="/editfarm/:farmId"
+                            element={
+                              <ProtectedRoute>
+                                <EditFarmPage />
+                              </ProtectedRoute>
+                            }
+                          />
 
+                          <Route
+                            path="/editfield/:fieldId"
+                            element={
+                              <ProtectedRoute>
+                                <EditFieldPage />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/editcropyear/:cropyearId"
+                            element={
+                              <ProtectedRoute>
+                                <EditCropYear />
+                              </ProtectedRoute>
+                            }
+                          />
                           <Route
                             path="/analysis"
                             element={

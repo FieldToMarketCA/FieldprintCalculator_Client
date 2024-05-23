@@ -68,12 +68,13 @@ export default function FieldPage() {
       title={fieldContext.state.name + " On " + farmContext.state.name}
       showQuickFacts={true}
     >
-      <div className="w-full   h-full text-[#666666]">
+      <div className="w-full h-full text-[#666666]">
         <div className="mb-6 flex mb-4 justify-end">
           <MainButton
-            disabled
             text={"Edit Field"}
-            onClick={() => navigate("/editfield")}
+            onClick={() =>
+              navigate(`/editfield/${fieldContext.state._id.$oid}`)
+            }
           />
         </div>
 
