@@ -145,6 +145,9 @@ async function mergeFieldOperationsWithFactory(
       }
     }
   }
+  // Fertilizer Rates
+  mergedFieldOperations.fertilizerRates = fieldOperationsData.fertilizerRates;
+
   // pesticidesApplications
   if (fieldOperationsData.pesticidesApplications !== null) {
     for (
@@ -156,8 +159,6 @@ async function mergeFieldOperationsWithFactory(
         fieldOperationsData.pesticidesApplications[i];
     }
   }
-
-  // console.log("xxXXxx", mergedFieldOperations);
 
   return mergedFieldOperations;
 }

@@ -1,5 +1,6 @@
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -16,7 +17,7 @@ function TableRow({ row }) {
           onClick={() => navigate(`/editcropyear/${row.cropyearId}`)}
           sx={{ paddingRight: 0 }}
         >
-          <EditIcon />
+          <VisibilityIcon />
           {/* <EditIcon sx={{ color: "#F15D22" }} /> */}
         </IconButton>
         {/* </Link> */}

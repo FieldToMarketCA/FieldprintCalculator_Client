@@ -199,50 +199,13 @@ export default function HorizontalNonLinearStepper({ steps }) {
             <Button
               variant="contained"
               onClick={() => {
-                if (isInputValid()) {
-                  // If it's the last step, then POST cropyear object to backend
-                  if (completedSteps() === totalSteps() - 1) {
-                    let farmId = farmContext.state._id.$oid;
-                    let fieldId = fieldContext.state._id.$oid;
+                let farmId = farmContext.state._id.$oid;
+                let fieldId = fieldContext.state._id.$oid;
 
-                    axios
-                      .patch(
-                        process.env.REACT_APP_API_URL +
-                          `/farms/${farmContext.state._id.$oid}/fields/${fieldContext.state._id.$oid}/cropyears/${cropyearContext.state._id.$oid}`,
-                        {
-                          ...removeFactoryEmptyStringsFromCropYear(
-                            cropyearContext.state
-                          ),
-                        },
-                        {
-                          headers: {
-                            token: "Bearer " + user.token,
-                            "Content-Type": "application/json",
-                          },
-                        }
-                      )
-                      .then((response) => {
-                        cropyearContext.setter({
-                          ...cropyearContext.state,
-                          _id: { $oid: response.data.cropyearId },
-                        });
-
-                        if (completedSteps() === totalSteps() - 1)
-                          navigate(`/farm/${farmId}/field/${fieldId}`);
-                        else handleComplete();
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      });
-                    return;
-                  }
-                  handleComplete();
-                }
+                navigate(`/farm/${farmId}/field/${fieldId}`);
               }}
             >
-              {completedSteps() === totalSteps() - 1
-                ? "Save Changes"
-                : "Complete Step"}
+              {"Return to Field"}
             </Button>
           ))}
       </Box>

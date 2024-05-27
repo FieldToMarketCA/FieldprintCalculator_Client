@@ -1,5 +1,6 @@
 import { Divider, TextField } from "@mui/material";
-import FormSelectMachineField from "../FormInputElements/FormSelectMachineField";
+// import FormSelectMachineField from "../FormInputElements/FormSelectMachineField";
+import ViewFieldOperationMachine from "./ViewFieldOperationMachine";
 
 import FormSelectField from "../FormInputElements/FormSelectField";
 import FormTextField from "../FormInputElements/FormTextField";
@@ -34,7 +35,6 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
       ...newValue,
     };
 
-    console.log(updatedMachine);
     // Create a copy with updated value for the corresponding Fertilizer Rate Update
     const updatedHarvestOperation = { ...cropyearContext.state.harvest };
     updatedHarvestOperation[machineType.toLowerCase()] = updatedMachine;
@@ -81,40 +81,8 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
       ...cropyearContext.state,
       harvest: updatedHarvest,
     });
-    // console.log("mamichula", cropyearContext.state.harvest);
   }
 
-  function isInputValid() {
-    errorFields.swather_machineObj =
-      cropyearContext.state.harvest.swather.machineObj === "";
-    errorFields.swather_hoursUsed =
-      cropyearContext.state.harvest.swather.hoursUsed === "";
-    errorFields.combine_machineObj =
-      cropyearContext.state.harvest.combine.machineObj === "";
-    errorFields.combine_hoursUsed =
-      cropyearContext.state.harvest.combine.hoursUsed === "";
-    errorFields.combine_avgSpeed =
-      cropyearContext.state.harvest.combine.avgSpeed === "";
-
-    if (
-      errorFields.swather_machineObj ||
-      errorFields.swather_hoursUsed ||
-      errorFields.combine_machineObj ||
-      errorFields.combine_hoursUsed ||
-      errorFields.combine_avgSpeed
-    ) {
-      setErrorFields({
-        swather_machineObj: errorFields.swather_machineObj,
-        swather_hoursUsed: errorFields.swather_hoursUsed,
-        combine_machineObj: errorFields.combine_machineObj,
-        combine_hoursUsed: errorFields.combine_hoursUsed,
-        combine_avgSpeed: errorFields.combine_avgSpeed,
-      });
-      return false; // return false because input is invalid
-    } else {
-      return true;
-    }
-  }
   useEffect(() => {
     const element = document.getElementById("scrollableDiv");
     element.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -132,36 +100,32 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
 
         <div className="flex jusitify-start">
           <div className="w-[450px] mr-[25px]">
-            <FormSelectMachineField
-              errorFound={{
-                machineObj: errorFields.swather_machineObj,
-                machineHours: errorFields.swather_hoursUsed,
-              }}
+            <ViewFieldOperationMachine
               fieldLabel={"Select Swather"}
-              machineType={"SWATHER"}
-              machinesArray={farmContext.state.machines.filter(
-                (machineObj) => machineObj.type === "SWATHER"
-              )}
-              onChange={handleMachineOperation}
-              fieldState={cropyearContext.state.harvest.swather}
+              fieldState={{
+                ...cropyearContext.state.harvest.swather,
+                machineObj: farmContext.state.machines.filter(
+                  (machineObj) =>
+                    machineObj._id.$oid ==
+                    cropyearContext.state.harvest.swather.machineId
+                )[0],
+              }}
             />
           </div>
         </div>
 
         <div className="flex jusitify-start">
           <div className="w-[450px] mr-[25px]">
-            <FormSelectMachineField
-              errorFound={{
-                machineObj: errorFields.combine_machineObj,
-                machineHours: errorFields.combine_hoursUsed,
-              }}
+            <ViewFieldOperationMachine
               fieldLabel={"Select Combine"}
-              machineType={"COMBINE"}
-              machinesArray={farmContext.state.machines.filter(
-                (machineObj) => machineObj.type === "COMBINE"
-              )}
-              onChange={handleMachineOperation}
-              fieldState={cropyearContext.state.harvest.combine}
+              fieldState={{
+                ...cropyearContext.state.harvest.combine,
+                machineObj: farmContext.state.machines.filter(
+                  (machineObj) =>
+                    machineObj._id.$oid ==
+                    cropyearContext.state.harvest.combine.machineId
+                )[0],
+              }}
             />
           </div>
           <TextField
@@ -200,26 +164,22 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
         <h4 className="text-[rgb(102,102,102)] font-extralight text-[36px] mb-4">
           Moisture Content
         </h4>
-        <FormTextField
-          fieldLabel={"% Before Drying"}
-          isNumber={true}
-          onChange={(t) => handleMouistureChange(t, "beforeDrying")}
-          modalTitle={"Moisture Content Before Drying"}
-          modalDescription={
-            "Please Enter the Percentage amount of Moisture in the soil before drying."
-          }
-          fieldState={cropyearContext.state.harvest.beforeDrying}
-        />
-        <FormTextField
-          fieldLabel={"% After Drying"}
-          isNumber={true}
-          onChange={(t) => handleMouistureChange(t, "afterDrying")}
-          modalTitle={"Moisture Content After Drying"}
-          modalDescription={
-            "Please Enter the Percentage amount of Moisture in the soil after drying."
-          }
-          fieldState={cropyearContext.state.harvest.afterDrying}
-        />
+        <div className="w-full flex items-center mb-6">
+          <TextField
+            sx={{ color: "#666666" }}
+            label={"% Before Drying"}
+            variant="outlined"
+            value={cropyearContext.state.harvest.moisture.beforeDrying}
+          />
+        </div>
+        <div className="w-full flex items-center mb-6">
+          <TextField
+            sx={{ color: "#666666" }}
+            label={"% Before Drying"}
+            variant="outlined"
+            value={cropyearContext.state.harvest.moisture.afterDrying}
+          />
+        </div>
       </section>
       <LowerPanel
         activeStep={panelControls.activeStep}
@@ -229,7 +189,7 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
         handleComplete={panelControls.handleComplete}
         completedSteps={panelControls.completedSteps}
         totalSteps={panelControls.totalSteps}
-        isInputValid={isInputValid}
+        isInputValid={() => true}
       />
     </div>
   );
