@@ -5,7 +5,7 @@ import ManagedAcresTable from "../Components/Tables/ManagedAcresTable";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import tractorSVG from "../Assets/Icons/tractorIcon.svg";
-
+import NewGenericMachineModal from "../Components/NewGenericMachineModal";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useAuth } from "../Components/Auth/useAuth";
@@ -25,7 +25,7 @@ export default function FarmPage() {
   const fieldContext = useContext(FieldContext);
   const navigate = useNavigate();
 
-  console.log(farmId);
+  // console.log(farmId);
   useEffect(() => {
     const getFarm = async () => {
       const response = await axios.get(
@@ -63,8 +63,6 @@ export default function FarmPage() {
         fields: fieldsResponse.data,
       };
 
-      console.log(tmpFarm);
-
       farmContext.setter(tmpFarm);
     };
     getFarm();
@@ -100,6 +98,7 @@ export default function FarmPage() {
 
 function ManagedAcresSection({ fields }) {
   const [managedAcresCollapsed, setManagedAcresCollapsed] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="w-full text-lg shadow-md">
@@ -149,7 +148,7 @@ function ManagedAcresSection({ fields }) {
         <div className="w-full flex mb-6">
           <ButtonIcon
             text={"Add New Field"}
-            onClick={console.log}
+            onClick={() => navigate("/addfield")}
             grow={true}
             Icon={AddCircleOutlineIcon}
           />
@@ -163,6 +162,32 @@ function ManagedAcresSection({ fields }) {
 }
 
 function EquipmentSection({ machines }) {
+  const { user } = useAuth();
+  let { farmId } = useParams();
+  const farmContext = useContext(FarmContext);
+  const [isNewMachineModalOpen, setIsNewMachineModalOpen] = useState(false);
+
+  async function handleAddNewMachine(newMachine) {
+    const response = await axios.post(
+      process.env.REACT_APP_API_URL + `/farms/${farmId}/machines`,
+      {
+        ...newMachine,
+        farmId: farmId,
+      },
+      {
+        headers: {
+          token: "Bearer " + user.token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    farmContext.setter({
+      ...farmContext.state,
+      machines: [...farmContext.state.machines, response.data.machineObj],
+    });
+  }
+
   const [equipmentSectionCollapsed, setEquipmentSectionCollapsed] =
     useState(false);
 
@@ -203,9 +228,16 @@ function EquipmentSection({ machines }) {
         <div className="w-full flex mb-6">
           <ButtonIcon
             text={"Add New Machine"}
-            onClick={console.log}
+            onClick={() => setIsNewMachineModalOpen(true)}
             grow={true}
             Icon={AddCircleOutlineIcon}
+          />
+
+          {/* ADD NEW GENERIC MACHINE */}
+          <NewGenericMachineModal
+            open={isNewMachineModalOpen}
+            handleClose={setIsNewMachineModalOpen}
+            handleAddNewMachine={handleAddNewMachine}
           />
         </div>
         <div className="w-full overflow-x-scroll">

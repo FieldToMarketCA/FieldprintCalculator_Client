@@ -93,9 +93,8 @@ export default function FieldPage() {
         </p>
         <div className="w-full flex mb-6">
           <ButtonIcon
-            disabled={true}
             text={"Add New Crop Year"}
-            onClick={console.log}
+            onClick={() => navigate("/addcropyear")}
             grow={true}
             Icon={AddCircleOutlineIcon}
           />

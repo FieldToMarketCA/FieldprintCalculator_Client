@@ -32,7 +32,6 @@ function TableRow({ row }) {
 }
 
 export default function MachinesTable({ machines }) {
-  // console.log(machines[0]._id.$oid, "jsjja");
   return (
     <div
       style={{ border: "0.5px solid #DDD" }}
