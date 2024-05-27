@@ -9,9 +9,8 @@ import NewGenericMachineModal from "../Components/NewGenericMachineModal";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useAuth } from "../Components/Auth/useAuth";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
-import { useContext } from "react";
 import { FarmContext } from "../App";
 import { FieldContext } from "../App";
 
