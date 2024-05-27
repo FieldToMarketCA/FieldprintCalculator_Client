@@ -5,8 +5,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { red } from "@mui/material/colors";
 import SupportIcon from "../Assets/Icons/SupportIcon";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
+import SecondaryButton from "../Components/Buttons/MainButton";
 
 const style = {
   position: "absolute",
@@ -19,11 +21,18 @@ const style = {
   //   border: "2px solid #000",
   boxShadow: 24,
   p: 0,
-  color: "red",
+  color: "#FFF",
   borderRadius: 1,
 };
 
-function DeleteResourceModal({ title, description, open, handleClose }) {
+function DeleteResourceModal({
+  title,
+  description,
+  open,
+  handleClose,
+  handleDelete,
+  machineId,
+}) {
   return (
     <Modal
       open={open}
@@ -33,13 +42,16 @@ function DeleteResourceModal({ title, description, open, handleClose }) {
     >
       <Box sx={style}>
         {/*  */}
-        <div className="flex items-center justify-center relative bg-[#00abec] px-[24px] py-[16px] h-[101px] w-full">
-          <SupportIcon color={"#FFFFFF"} width="60px" height="60px" />
+        <div className="flex items-center justify-center relative bg-[#ff7d32] px-[24px] py-[16px] h-[101px] w-full">
+          <ErrorOutlineIcon
+            color={"#FFFFFF"}
+            sx={{ width: "60px", height: "60px" }}
+          />
 
           {/*  Close Modal Button   */}
           <IconButton
             sx={{ position: "absolute", right: 2, top: 1, color: "#FFFFFF" }}
-            onClick={handleClose}
+            onClick={() => handleClose(false)}
           >
             <CloseIcon fontSize="large" />
           </IconButton>
@@ -47,28 +59,34 @@ function DeleteResourceModal({ title, description, open, handleClose }) {
 
         {/* Modal Body */}
         <div className="flex flex-col w-full px-6  py-5">
-          <h3 className="text-lg  font-medium text-[#00abec] mb-4">{title}</h3>
+          <h3 className="text-lg  font-medium text-[#ff7d32] mb-4">{title}</h3>
           <p className="font-normal text-[#00000099] mb-6">{description}</p>
           <div className="flex w-full justify-center">
             <Button
-              onClick={handleClose}
+              onClick={() => handleDelete(machineId)}
               variant="contained"
               sx={[
                 {
                   fontSize: "16px",
                   color: "white",
-                  backgroundColor: "#00abec",
+                  backgroundColor: "#F15D22",
                   textTransform: "none",
+                  mr: "3rem",
                 },
                 (theme) => ({
                   "&:hover": {
-                    backgroundColor: "#006d97",
+                    backgroundColor: "#D3460D",
                   },
                 }),
               ]}
             >
-              Ok
+              Delete Equipment
             </Button>
+            <SecondaryButton
+              text={"Do Not Delete"}
+              onClick={() => handleClose(false)}
+              secondary={true}
+            />
           </div>
         </div>
       </Box>
@@ -76,4 +94,4 @@ function DeleteResourceModal({ title, description, open, handleClose }) {
   );
 }
 
-export default HelpModal;
+export default DeleteResourceModal;

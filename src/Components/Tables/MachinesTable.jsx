@@ -8,15 +8,40 @@ import { FarmContext } from "../../App";
 import { useAuth } from "../../Components/Auth/useAuth";
 import { useContext, useState } from "react";
 import EditMachineModal from "../EditMachineModal";
+import DeleteResourceModal from "../DeleteResourceModal";
 
 function TableRow({ row }) {
   let { farmId } = useParams();
   const { user } = useAuth();
   const farmContext = useContext(FarmContext);
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  async function handleDeleteMachine(machineId) {
+    await axios.delete(
+      process.env.REACT_APP_API_URL +
+        `/farms/${farmId}/machines/${row._id.$oid}`,
+      {
+        headers: {
+          token: "Bearer " + user.token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // Create a copy and update the state in in the machines array within farmContext
+    let updatedMachines = farmContext.state.machines.filter(
+      (machine) => machineId != machine._id.$oid
+    );
+
+    farmContext.setter({
+      ...farmContext.state,
+      machines: [...updatedMachines],
+    });
+  }
 
   async function handleEditMachine(machineState) {
-    const response = await axios.patch(
+    await axios.patch(
       process.env.REACT_APP_API_URL +
         `/farms/${farmId}/machines/${row._id.$oid}`,
       {
@@ -50,7 +75,7 @@ function TableRow({ row }) {
         <IconButton onClick={() => setIsEditOpen(true)}>
           <EditIcon />
         </IconButton>
-        <IconButton disabled>
+        <IconButton onClick={() => setIsDeleteOpen(true)}>
           <DeleteIcon />
         </IconButton>
       </div>
@@ -72,6 +97,14 @@ function TableRow({ row }) {
         handleClose={setIsEditOpen}
         handleEditMachine={handleEditMachine}
         machineState={row}
+      />
+      <DeleteResourceModal
+        title={"Delete Equipment"}
+        description={`Are you sure you wish to permanently delete the ${row.name} ${row.type} equipment?`}
+        open={isDeleteOpen}
+        handleClose={setIsDeleteOpen}
+        handleDelete={handleDeleteMachine}
+        machineId={row._id.$oid}
       />
     </div>
   );
