@@ -79,7 +79,7 @@ function App() {
 
   const [reportData, setReportData] = useState(false);
 
-  const [GUI_STATE, setGUI] = useState({ isNavOpen: false });
+  const [GUI_STATE, setGUI] = useState({ isNavOpen: false, farms: [] });
 
   useEffect(() => {
     const getCredentials = async () => {

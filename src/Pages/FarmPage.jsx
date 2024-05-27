@@ -25,6 +25,7 @@ export default function FarmPage() {
   const fieldContext = useContext(FieldContext);
   const navigate = useNavigate();
 
+  console.log(farmId);
   useEffect(() => {
     const getFarm = async () => {
       const response = await axios.get(
@@ -67,7 +68,7 @@ export default function FarmPage() {
       farmContext.setter(tmpFarm);
     };
     getFarm();
-  }, []);
+  }, [farmId]);
 
   return (
     <Page title={farmContext.state.name} showQuickFacts={false}>

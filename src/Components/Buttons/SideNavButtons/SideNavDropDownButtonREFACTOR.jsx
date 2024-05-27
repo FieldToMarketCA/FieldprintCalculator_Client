@@ -29,12 +29,6 @@ export default function SideNavDropDownButton({
   text,
   icon,
   borderColor = "rgb(170,170,170)",
-}: {
-  isOpen: boolean;
-  text: string;
-  onClick: React.MouseEventHandler;
-  icon: string;
-  borderColor?: string;
 }) {
   const GUI = useContext(GUI_CONTEXT);
   const farmContext = useContext(FarmContext);
@@ -50,7 +44,7 @@ export default function SideNavDropDownButton({
   const handleMouseLeave = () => {
     setIsHover(false);
   };
-  var SelectedIcon: any;
+  var SelectedIcon;
 
   switch (icon) {
     case "fieldLibraryIcon": {
@@ -120,17 +114,21 @@ export default function SideNavDropDownButton({
       > */}
       {isOpen && (
         <ul className="w-full  pl-4">
-          <li className="w-full">
-            <SideNavButton
-              isOpen={true}
-              text="Demo Farm"
-              icon={"farmIcon"}
-              onClick={() => {
-                navigate("/");
-                GUI.setter({ ...GUI.state, isNavOpen: false });
-              }}
-            />
-          </li>
+          {GUI.state.farms.map((farm) => {
+            return (
+              <li className="w-full">
+                <SideNavButton
+                  isOpen={true}
+                  text={farm.name}
+                  icon={"farmIcon"}
+                  onClick={() => {
+                    navigate(`/farm/${farm._id.$oid}`);
+                    GUI.setter({ ...GUI.state, isNavOpen: false });
+                  }}
+                />
+              </li>
+            );
+          })}
           <li className="w-full relative">
             <div className="absolute w-1/2 h-1/2 top-3 left-[75px] bg-white duration-700  animate-ping"></div>
             <SideNavButton

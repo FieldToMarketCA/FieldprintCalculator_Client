@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SideNavDropDownButtonREFACTOR from "./SideNavDropDownButtonREFACTOR";
 
-export default function FieldLibraryButton({ isOpen }: { isOpen: boolean }) {
+export default function FieldLibraryButton({ isOpen }) {
   const [isLibraryClosed, setIsLibraryClosed] = useState(true);
   return (
     <SideNavDropDownButtonREFACTOR
