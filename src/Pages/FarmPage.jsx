@@ -1,6 +1,6 @@
 import Page from "../Components/Page";
 import ButtonIcon from "../Components/Buttons/ButtonIcon";
-import MainButton from "../Components/Buttons/MainButton";
+import EditFarmMenuButton from "../Components/EditFarmMenuButton";
 import ManagedAcresTable from "../Components/Tables/ManagedAcresTable";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -73,7 +73,7 @@ export default function FarmPage() {
 
       <div className="w-full h-full text-[#666666]">
         <div className="mb-6 flex text-lg mb-4 justify-end">
-          <MainButton
+          <EditFarmMenuButton
             text={"Edit Farm"}
             onClick={() => navigate(`/editfarm/${farmContext.state._id.$oid}`)}
           />

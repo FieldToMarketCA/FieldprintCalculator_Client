@@ -1,14 +1,16 @@
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function TableRow({ row }) {
+  const navigate = useNavigate();
   return (
     <div className="grid grid-cols-10 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
       <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
         {
           // <Link to={"/addfield"}>{/* </Link> */}
-          <IconButton disabled>
+          <IconButton onClick={() => navigate(`/editfield/${row._id.$oid}`)}>
             <EditIcon />
             {/* <EditIcon sx={{ color: "#F15D22" }} /> */}
           </IconButton>

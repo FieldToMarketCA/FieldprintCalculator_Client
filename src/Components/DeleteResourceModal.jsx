@@ -31,7 +31,7 @@ function DeleteResourceModal({
   open,
   handleClose,
   handleDelete,
-  machineId,
+  resourceId,
 }) {
   return (
     <Modal
@@ -63,7 +63,7 @@ function DeleteResourceModal({
           <p className="font-normal text-[#00000099] mb-6">{description}</p>
           <div className="flex w-full justify-center">
             <Button
-              onClick={() => handleDelete(machineId)}
+              onClick={() => handleDelete(resourceId)}
               variant="contained"
               sx={[
                 {
