@@ -1,6 +1,6 @@
 import Page from "../Components/Page";
 import ButtonIcon from "../Components/Buttons/ButtonIcon";
-import MainButton from "../Components/Buttons/MainButton";
+import EditFieldMenuButton from "../Components/EditFieldMenuButton";
 import ManagedAcresTable from "../Components/Tables/ManagedAcresTable";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -16,7 +16,6 @@ import { FieldContext } from "../App";
 
 import { useAuth } from "../Components/Auth/useAuth";
 import axios from "axios";
-import MachinesTable from "../Components/Tables/MachinesTable";
 
 export default function FieldPage() {
   let { farmId, fieldId } = useParams();
@@ -70,12 +69,7 @@ export default function FieldPage() {
     >
       <div className="w-full h-full text-[#666666]">
         <div className="mb-6 flex mb-4 justify-end">
-          <MainButton
-            text={"Edit Field"}
-            onClick={() =>
-              navigate(`/editfield/${fieldContext.state._id.$oid}`)
-            }
-          />
+          <EditFieldMenuButton text={"Edit Field"} />
         </div>
 
         <p className="mb-4">

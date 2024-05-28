@@ -80,7 +80,7 @@ function DeleteResourceModal({
                 }),
               ]}
             >
-              Delete Equipment
+              {title}
             </Button>
             <SecondaryButton
               text={"Do Not Delete"}
