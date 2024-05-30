@@ -1,4 +1,5 @@
 import axios from "axios";
+import { FERTILIZER_OPERATION_CREATOR } from "../Assets/contextFactories_V0";
 var defaultUnit = "horsepower";
 
 function getMachineObj(machineId, FarmState) {
@@ -47,6 +48,40 @@ function getCultivationOperations(CropyearState, FarmState) {
 function getFertilizerOperations(CropyearState, FarmState) {
   var machineObj;
 
+  if (!CropyearState.fieldOperations.fertilizerApplications) {
+    return [
+      ["", "Seed_Size"],
+      ["", "Seed_Units"],
+      ["", "Seed_Hrs"],
+      ["", "Seed_AcHr"],
+      ["", "Seed_FertDate"],
+      ["", "Seed_N"],
+      ["", "Seed_P"],
+      ["", "Seed_K"],
+      ["", "Seed_S"],
+      ["", "Seed_OtherFert"],
+      ["", "PreSeed_Size"],
+      ["", "PreSeed_Units"],
+      ["", "PreSeed_Hrs"],
+      ["", "PreSeed_AcHr"],
+      ["", "PreSeed_FertDate"],
+      ["", "PreSeed_N"],
+      ["", "PreSeed_P"],
+      ["", "PreSeed_K"],
+      ["", "PreSeed_S"],
+      ["", "PreSeed_OtherFert"],
+      ["", "PostSeed_Size"],
+      ["", "PostSeed_Units"],
+      ["", "PostSeed_Hrs"],
+      ["", "PostSeed_AcHr"],
+      ["", "PostSeed_FertDate"],
+      ["", "PostSeed_N"],
+      ["", "PostSeed_P"],
+      ["", "PostSeed_K"],
+      ["", "PostSeed_S"],
+      ["", "PostSeed_OtherFert"],
+    ];
+  }
   // WITH SEED
   machineObj = getMachineObj(
     CropyearState.fieldOperations.fertilizerApplications.withSeed.machineId,
@@ -134,6 +169,16 @@ function getFertilizerOperations(CropyearState, FarmState) {
 
 function getPesticideOperations(CropyearState, FarmState) {
   var output = [];
+
+  if (!CropyearState.fieldOperations.pesticidesApplications) {
+    for (var i = 0; i < 5; i++) {
+      output.push(["", `Pest${i + 1}_Size`]);
+      output.push(["", `Pest${i + 1}_Units`]);
+      output.push(["", `Pest${i + 1}_Hrs`]);
+      output.push(["", `Pest${i + 1}_AcHr`]);
+    }
+    return output;
+  }
   let size = CropyearState.fieldOperations.pesticidesApplications.length;
 
   for (var i = 0; i < size; i++) {
@@ -264,6 +309,7 @@ function convertContextToRow(FarmState, FieldState, CropyearState) {
   ];
 
   // Flatten and return RowValuesArray
+  console.log(RowValues);
   return RowValues.map((valuePair) => valuePair[0]);
 }
 

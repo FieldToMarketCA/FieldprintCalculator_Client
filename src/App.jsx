@@ -232,7 +232,7 @@ function App() {
                             }
                           />
                           <Route
-                            path="/analysis"
+                            path="/farm/:farmId/field/:fieldId/cropyear/:cropyearId/analysis"
                             element={
                               <ProtectedRoute>
                                 <AnalysisPage />

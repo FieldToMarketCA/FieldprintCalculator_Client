@@ -162,7 +162,7 @@ function CULTIVATION_OPERATION_CREATOR() {
 }
 
 function FERTILIZER_OPERATION_CREATOR() {
-  return { machineObj: "", hoursUsed: "", date: "" };
+  return { machineId: "", machineObj: "", hoursUsed: "", date: "" };
 }
 
 function PESTICIDE_OPERATION_CREATOR() {
@@ -227,4 +227,9 @@ function CROPYEAR_CREATOR(fieldId, crop) {
     },
   };
 }
-export { FARM_CREATOR, FIELD_CREATOR, CROPYEAR_CREATOR };
+export {
+  FARM_CREATOR,
+  FIELD_CREATOR,
+  CROPYEAR_CREATOR,
+  FERTILIZER_OPERATION_CREATOR,
+};
