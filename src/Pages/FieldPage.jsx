@@ -11,9 +11,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 
 import { useContext, useEffect } from "react";
-import { FarmContext } from "../App";
-import { FieldContext } from "../App";
-
+import { FarmContext, FieldContext, CropYearContext } from "../App";
+import {} from "../App";
+import {
+  GetSetField,
+  GetSetFieldWithCropYears,
+} from "../Components/axiosFetchers";
 import { useAuth } from "../Components/Auth/useAuth";
 import axios from "axios";
 
@@ -21,45 +24,12 @@ export default function FieldPage() {
   let { farmId, fieldId } = useParams();
   const fieldContext = useContext(FieldContext);
   const farmContext = useContext(FarmContext);
+  const cropYearContext = useContext(CropYearContext);
   const navigate = useNavigate();
   const { user } = useAuth();
 
   useEffect(() => {
-    const getField = async () => {
-      const fieldResponse = await axios.get(
-        process.env.REACT_APP_API_URL +
-          "/farms/" +
-          farmId +
-          "/fields/" +
-          fieldId,
-        {
-          headers: {
-            token: "Bearer " + user.token,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const cropyearsResponse = await axios.get(
-        process.env.REACT_APP_API_URL +
-          "/farms/" +
-          farmId +
-          "/fields/" +
-          fieldId +
-          "/cropyears",
-        {
-          headers: {
-            token: "Bearer " + user.token,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      fieldContext.setter({
-        ...fieldResponse.data,
-        cropYears: cropyearsResponse.data,
-      });
-    };
-    getField();
+    GetSetFieldWithCropYears(farmId, fieldId, user, fieldContext);
   }, []);
 
   return (

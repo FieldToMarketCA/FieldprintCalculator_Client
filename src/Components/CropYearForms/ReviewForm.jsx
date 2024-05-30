@@ -10,12 +10,14 @@ import {
   ReportDataContext,
 } from "../../App";
 
-import { generateResults } from "../WorkBookRequest";
+import { generateResults } from "../WorkBookRequestV2";
 import LoadingButton from "../Buttons/LoadingButton";
 import { SECRETS_CONTEXT } from "../../App";
 import axios from "axios";
+import { useAuth } from "../Auth/useAuth";
 
 export default function ReviewForm() {
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   // const [reportData, setReportData] = useState(null);
@@ -37,16 +39,18 @@ export default function ReviewForm() {
   function handleGenerateAnalysis() {
     if (loading) return;
     if (success) {
-      axios.post("https://fieldprint-calculator-minimal-server.fly.dev/", {
-        input: {
-          farm: { ...farmContext.state },
-          field: { ...fieldContext.state },
-          cropyear: { ...cropYearContext.state },
-        },
-        output: reportDataContext.state,
-      });
+      // axios.post("https://fieldprint-calculator-minimal-server.fly.dev/", {
+      //   input: {
+      //     farm: { ...farmContext.state },
+      //     field: { ...fieldContext.state },
+      //     cropyear: { ...cropYearContext.state },
+      //   },
+      //   output: reportDataContext.state,
+      // });
 
-      navigate("/analysis");
+      navigate(
+        `/farm/${farmContext.state._id.$oid}/field/${fieldContext.state._id.$oid}/cropyear/${cropYearContext.state._id.$oid}/analysis`
+      );
       setLoading(false);
       setSuccess(false);
       return;
@@ -61,13 +65,14 @@ export default function ReviewForm() {
         fieldContext.state,
         cropYearContext.state,
         reportDataContext.setter,
-        SECRETS.SECRETS.token
+        SECRETS.SECRETS.token,
+        user
       );
     }
   }
 
   useEffect(() => {
-    if (reportDataContext.state) {
+    if (reportDataContext.state[1][0] !== "") {
       setSuccess(true);
       setLoading(false);
       // setTimeout(() => {

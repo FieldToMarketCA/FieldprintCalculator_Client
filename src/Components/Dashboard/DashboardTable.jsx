@@ -1,10 +1,10 @@
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import { IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function TableRow({ row }) {
-  console.log(row);
+  const navigate = useNavigate();
   return (
     <div className="grid grid-cols-7 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
       <div className="col-span-1 underline py-1 px-2 h-[45px] flex items-center">
@@ -31,20 +31,33 @@ function TableRow({ row }) {
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
         <IconButton
-          // disabled={!row.finalized}
-          disabled
-          sx={{ color: "rgb(241, 93, 34)" }}
+          onClick={() =>
+            navigate(
+              `/farm/${row.farmId}/field/${row.fieldId}/cropyear/${row.cropyearId}`
+            )
+          }
+          // sx={{ color: "rgb(241, 93, 34)" }}
           aria-label="View Cropyear Details"
           size="medium"
         >
           <VisibilityIcon fontSize="inherit" />
         </IconButton>
         <IconButton
-          // disabled={!row.finalized}
-          disabled
           aria-label="delete"
           size="medium"
-          // sx={{ color: row.view.analytics ? "green" : "rgb(241, 93, 34)" }}
+          sx={{
+            color: row.analysisId !== false ? "green" : "",
+          }}
+          onClick={() => {
+            if (row.analysisId === false)
+              navigate(
+                `/farm/${row.farmId}/field/${row.fieldId}/cropyear/${row.cropyearId}/addanalysis`
+              );
+            else
+              navigate(
+                `/farm/${row.farmId}/field/${row.fieldId}/cropyear/${row.cropyearId}/analysis`
+              );
+          }}
         >
           <EqualizerIcon fontSize="inherit" />
         </IconButton>

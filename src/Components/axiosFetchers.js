@@ -37,6 +37,35 @@ async function GetSetField(farmId, fieldId, user, fieldContext) {
   );
   fieldContext.setter(response.data);
 }
+async function GetSetFieldWithCropYears(farmId, fieldId, user, fieldContext) {
+  const fieldResponse = await axios.get(
+    process.env.REACT_APP_API_URL + "/farms/" + farmId + "/fields/" + fieldId,
+    {
+      headers: {
+        token: "Bearer " + user.token,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const cropyearsResponse = await axios.get(
+    process.env.REACT_APP_API_URL +
+      "/farms/" +
+      farmId +
+      "/fields/" +
+      fieldId +
+      "/cropyears",
+    {
+      headers: {
+        token: "Bearer " + user.token,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  fieldContext.setter({
+    ...fieldResponse.data,
+    cropYears: cropyearsResponse.data,
+  });
+}
 
 async function GetSetCropYear(
   farmId,
@@ -71,4 +100,10 @@ async function GetSetAnalysis(cropyearId, user, reportDataConext) {
   reportDataConext.setter(response.data);
 }
 
-export { GetSetFarm, GetSetField, GetSetCropYear, GetSetAnalysis };
+export {
+  GetSetFarm,
+  GetSetField,
+  GetSetFieldWithCropYears,
+  GetSetCropYear,
+  GetSetAnalysis,
+};

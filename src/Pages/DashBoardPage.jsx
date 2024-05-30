@@ -111,6 +111,9 @@ export default function DashBoardPage() {
             TMP.push({
               farmId: Farm._id.$oid,
               fieldId: Field._id.$oid,
+              cropyearId: CropYear._id.$oid,
+              analysisId:
+                "analysisId" in CropYear ? CropYear.analysisId : false,
               farmName: Farm.name,
               fieldName: Field.name,
               fieldSize: Field.fieldSize,

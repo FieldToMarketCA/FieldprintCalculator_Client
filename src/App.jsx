@@ -19,6 +19,7 @@ import AddCropYear from "./Pages/AddCropYear";
 import EditFarmPage from "./Pages/EditFarmPage";
 import EditFieldPage from "./Pages/EditFieldPage";
 import EditCropYear from "./Pages/EditCropYear";
+import ViewCropYear from "./Pages/ViewCropYear";
 import ReviewPage from "./Pages/ReviewPage";
 
 import AnalysisPage from "./Pages/AnalysisPage";
@@ -221,6 +222,14 @@ function App() {
                             element={
                               <ProtectedRoute>
                                 <EditCropYear />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/farm/:farmId/field/:fieldId/cropyear/:cropyearId"
+                            element={
+                              <ProtectedRoute>
+                                <ViewCropYear />
                               </ProtectedRoute>
                             }
                           />

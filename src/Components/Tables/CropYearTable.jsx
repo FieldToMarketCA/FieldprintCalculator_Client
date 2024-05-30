@@ -17,7 +17,7 @@ function TableRow({ row }) {
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
 
   async function handleDeleteCropYear() {
-    console.log(fieldContext.state.cropYears);
+    // console.log(fieldContext.state.cropYears);
     await axios.delete(
       `${process.env.REACT_APP_API_URL}/farms/${farmId}/fields/${fieldId}/cropyears/${row.cropyearId}`,
       {
@@ -50,12 +50,20 @@ function TableRow({ row }) {
         </IconButton>
         {/* </Link> */}
         <IconButton
-          onClick={() =>
-            navigate(
-              `/farm/${farmId}/field/${fieldId}/cropyear/${row.cropyearId}/addanalysis`
-            )
-          }
-          sx={{ paddingRight: 0 }}
+          onClick={() => {
+            if (row.analysisId === false)
+              navigate(
+                `/farm/${farmId}/field/${fieldId}/cropyear/${row.cropyearId}/addanalysis`
+              );
+            else
+              navigate(
+                `/farm/${farmId}/field/${fieldId}/cropyear/${row.cropyearId}/analysis`
+              );
+          }}
+          sx={{
+            paddingRight: 0,
+            color: row.analysisId !== false ? "green" : "",
+          }}
         >
           <EqualizerIcon />
           {/* <EqualizerIcon sx={{ color: "#F15D22" }} /> */}
@@ -128,7 +136,12 @@ export default function CropYearTable({ cropYears }) {
             return (
               <li className="w-full" key={cropyear._id.$oid}>
                 <TableRow
-                  row={{ ...cropyear.crop, cropyearId: cropyear._id.$oid }}
+                  row={{
+                    ...cropyear.crop,
+                    cropyearId: cropyear._id.$oid,
+                    analysisId:
+                      "analysisId" in cropyear ? cropyear.analysisId : false,
+                  }}
                 />
               </li>
             );
