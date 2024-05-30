@@ -49,7 +49,14 @@ function TableRow({ row }) {
           {/* <EditIcon sx={{ color: "#F15D22" }} /> */}
         </IconButton>
         {/* </Link> */}
-        <IconButton disabled sx={{ paddingRight: 0 }}>
+        <IconButton
+          onClick={() =>
+            navigate(
+              `/farm/${farmId}/field/${fieldId}/cropyear/${row.cropyearId}/addanalysis`
+            )
+          }
+          sx={{ paddingRight: 0 }}
+        >
           <EqualizerIcon />
           {/* <EqualizerIcon sx={{ color: "#F15D22" }} /> */}
         </IconButton>
