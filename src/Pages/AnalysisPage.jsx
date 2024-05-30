@@ -28,7 +28,14 @@ import PDFIndicatorEnergyUse from "../Components/Indicators/PDFIndicatorEnergyUs
 import PDFIndicatorGHG from "../Components/Indicators/PDFIndicatorGHG";
 import PDFIndicatorSoilErosion from "../Components/Indicators/PDFIndicatorSoilErosion";
 
+import {
+  GetSetFarm,
+  GetSetField,
+  GetSetCropYear,
+  GetSetAnalysis,
+} from "../Components/axiosFetchers";
 import { useAuth } from "../Components/Auth/useAuth";
+import { useParams } from "react-router-dom";
 
 import {
   FarmContext,
@@ -38,7 +45,10 @@ import {
 } from "../App";
 
 export default function AnalysisPage({}) {
+  const { user } = useAuth();
+  const { farmId, fieldId, cropyearId } = useParams();
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
+
   const options = {
     overrides: {
       canvas: {
@@ -60,53 +70,134 @@ export default function AnalysisPage({}) {
   const fieldContext = useContext(FieldContext);
   const cropYearContext = useContext(CropYearContext);
 
-  if (!reportDataConext.state) {
-    reportDataConext = defaultFarmData;
-  }
+  // if (!reportDataConext.state) {
+  //   reportDataConext = defaultFarmData;
+  // }
 
   function handleNaNs() {
     if (reportDataConext.state[1].find((cell) => cell === "#N/A")) {
       setAnalysisErrorOpen(true);
     }
   }
+  const [spidergramData, setSpidergramData] = useState([]);
 
   useEffect(() => {
-    handleNaNs();
+    async function analysisPageStartUp() {
+      // await GetSetFarm(farmId, user, farmContext);
+      // await GetSetField(farmId, fieldId, user, fieldContext);
+      // await GetSetCropYear(farmId, fieldId, cropyearId, user, cropYearContext);
+      await GetSetAnalysis(cropyearId, user, reportDataConext);
+      // setSpidergramData([
+      //   {
+      //     subject: "Land Use Efficiency",
+      //     A:
+      //       Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
+      //         ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
+      //         : 200,
+      //     fullMark: 200,
+      //   },
+      //   {
+      //     subject: "Energy Use",
+      //     A:
+      //       Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
+      //         ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
+      //         : 200,
+      //     fullMark: 200,
+      //   },
+      //   {
+      //     subject: "GHG Emissions",
+      //     A:
+      //       Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
+      //         ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
+      //         : 200,
+      //     fullMark: 200,
+      //   },
+      //   {
+      //     subject: "Soil Erosion Risk",
+      //     A:
+      //       Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
+      //         ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
+      //         : 200,
+      //     fullMark: 200,
+      //   },
+      // ]);
+      handleNaNs();
+    }
+    analysisPageStartUp();
   }, []);
-  const [spidergramData, setSpidergramData] = useState([
-    {
-      subject: "Land Use Efficiency",
-      A:
-        Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
-          ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
-          : 200,
-      fullMark: 200,
-    },
-    {
-      subject: "Energy Use",
-      A:
-        Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
-          ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
-          : 200,
-      fullMark: 200,
-    },
-    {
-      subject: "GHG Emissions",
-      A:
-        Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
-          ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
-          : 200,
-      fullMark: 200,
-    },
-    {
-      subject: "Soil Erosion Risk",
-      A:
-        Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
-          ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
-          : 200,
-      fullMark: 200,
-    },
-  ]);
+
+  useEffect(() => {
+    setSpidergramData([
+      {
+        subject: "Land Use Efficiency",
+        A:
+          Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
+            ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
+            : 200,
+        fullMark: 200,
+      },
+      {
+        subject: "Energy Use",
+        A:
+          Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
+            ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
+            : 200,
+        fullMark: 200,
+      },
+      {
+        subject: "GHG Emissions",
+        A:
+          Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
+            ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
+            : 200,
+        fullMark: 200,
+      },
+      {
+        subject: "Soil Erosion Risk",
+        A:
+          Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
+            ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
+            : 200,
+        fullMark: 200,
+      },
+    ]);
+    console.log("CALLED ");
+  }, [reportDataConext.state]);
+  // }, [reportDataConext]);
+  // const [spidergramData, setSpidergramData] = useState([
+  //   {
+  //     subject: "Land Use Efficiency",
+  //     A:
+  //       Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
+  //         ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
+  //         : 200,
+  //     fullMark: 200,
+  //   },
+  //   {
+  //     subject: "Energy Use",
+  //     A:
+  //       Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
+  //         ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
+  //         : 200,
+  //     fullMark: 200,
+  //   },
+  //   {
+  //     subject: "GHG Emissions",
+  //     A:
+  //       Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
+  //         ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
+  //         : 200,
+  //     fullMark: 200,
+  //   },
+  //   {
+  //     subject: "Soil Erosion Risk",
+  //     A:
+  //       Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
+  //         ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
+  //         : 200,
+  //     fullMark: 200,
+  //   },
+  // ]);
 
   const PDF_ANALYSIS = () => {
     return (
@@ -233,31 +324,6 @@ export default function AnalysisPage({}) {
             </p>
             <OutlinedButton text={"Fieldprint Report (PDF)"} onClick={toPDF} />
           </div>
-          {/* <div className="text-[#666666] max-w-[384px]  py-6 min-[1100px]:pt-0 ">
-            <h2 className="text-[24px] text-[rgba(0,0,0,0.87)] mb-4">
-              Select Active Year for Data
-            </h2>
-            <FormSelectField
-              isDisabled={true}
-              fieldLabel={"Active Year"}
-              valuesArray={[{ value: 0, label: "Wheat - 2021" }]}
-              helperText={"Active Crop Year Analysis"}
-              modalOff={true}
-            />
-            <h2 className="text-[24px] text-[rgba(0,0,0,0.87)] mb-4">
-              Display Benchmarks
-            </h2>
-            <SwitchQuestion questionText={"Province Benchmarks"} />
-            <SwitchQuestion questionText={"National Benchmarks"} />
-            <p className="mt-6 mb-6">
-              Use the buttons indicated to plot the provincial benchmarks
-              relevant for this Fieldprint.
-            </p>
-            <OutlinedButton
-              text={"Fieldprint Report (PDF)"}
-              onClick={console.log}
-            />
-          </div> */}
         </div>
         <div className="w-full py-8 text-[#666666]">
           <h2 className="text-[24px] text-[rgba(0,0,0,0.87)] mb-4">
@@ -336,7 +402,7 @@ export default function AnalysisPage({}) {
 }
 
 class SpiderChart extends PureComponent {
-  static demoUrl = "https://codesandbox.io/s/simple-radar-chart-rjoc6";
+  // static demoUrl = "https://codesandbox.io/s/simple-radar-chart-rjoc6";
 
   render() {
     return (
@@ -359,90 +425,3 @@ class SpiderChart extends PureComponent {
     );
   }
 }
-
-const defaultFarmData = {
-  state: [
-    [
-      "Unique ID",
-      "Ecodistrict",
-      "Province",
-      "Soil Type",
-      "Soil Texture",
-      "Surface Form",
-      "Slope",
-      "Year",
-      "Crop",
-      "Total Nitrogen (kg/ha)",
-      "Total Phosphorus (kg/ha)",
-      "Total Potassium (kg/ha)",
-      "Total Sulfur (kg/ha)",
-      "Total Other Fertilizer (kg/ha)",
-      "Land Use Efficiency (ha/tonne)",
-      "Provincial Land Use Efficiency (ha/tonne)",
-      "Land Use Efficiency Index",
-      "Energy Use GJ/tonne",
-      "Provincial Energy Use (GJ/tonne)",
-      "Energy Use Index",
-      "GHG Emissions (tCO2/tonne)",
-      "Provincial GHG Emissions (tCO2/tonne)",
-      "Climate Impact Index",
-      "Soil Erosion Risk Mg/ha/yr",
-      "Provincial Soil Erosion Risk Mg/ha/yr",
-      "Soil Erosion Index",
-      "Provincial Soil Loss",
-      "Provincial Yield (t/ha)",
-      "Provincial Land Use",
-      "Provincial Energy Use GJ/tonne crop",
-      "Provincial Climate Impact",
-      "Provincial Fieldwork Climate Impact (tCO2E/tcrop)",
-      "Provincial NonFieldwork Climate Impact (tCO2E/tcrop)",
-      "Provincial N-Fertilizer (tCO2e/tcrop)",
-      "Provincial Crop Residue (tCO2e/tcrop)",
-      "Provincial Leaching (tCO2e/tcrop)",
-      "Provincial Volatilization (tCO2e/tcrop)",
-      "Total GHG emissions (tCO2e/tcrop)",
-      "Column1",
-    ],
-    [
-      "12511:Home east:2021:Winter Wheat",
-      558,
-      "ON",
-      "Brown",
-      "Clay Loam",
-      "R",
-      "C",
-      2021,
-      "Winter Wheat",
-      140.106394524308,
-      0,
-      0,
-      20.1753208115003,
-      0,
-      0.135033185080399,
-      0.163612565445026,
-      82.5322827211401,
-      2.31784784075219,
-      2.38977850294503,
-      96.9900699121618,
-      1.07131442883849,
-      0.409483497873037,
-      261.625788194928,
-      325.96,
-      16.34995549,
-      1993.64457107767,
-      16.34995549,
-      6.112,
-      0.163612565445026,
-      2.38977850294503,
-      0.409483497873037,
-      0.0273082383835079,
-      0.109084426537958,
-      0.158620269960733,
-      0.0626546243455497,
-      0.0331967200589005,
-      0.0115183540575916,
-      0.402382633344241,
-      "",
-    ],
-  ],
-};

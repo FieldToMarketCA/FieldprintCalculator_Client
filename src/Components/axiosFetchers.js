@@ -57,4 +57,18 @@ async function GetSetCropYear(
   cropYearContext.setter(response.data);
 }
 
-export { GetSetFarm, GetSetField, GetSetCropYear };
+async function GetSetAnalysis(cropyearId, user, reportDataConext) {
+  const response = await axios.get(
+    `${process.env.REACT_APP_API_URL}/cropyears/${cropyearId}/analysis`,
+    {
+      headers: {
+        token: "Bearer " + user.token,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  reportDataConext.setter(response.data);
+}
+
+export { GetSetFarm, GetSetField, GetSetCropYear, GetSetAnalysis };

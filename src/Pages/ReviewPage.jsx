@@ -49,7 +49,9 @@ export default function ReviewForm() {
       //   output: reportDataContext.state,
       // });
 
-      navigate("/analysis");
+      navigate(
+        `/farm/${farmId}/field/${fieldId}/cropyear/${cropyearId}/analysis`
+      );
       setLoading(false);
       setSuccess(false);
       return;
@@ -64,7 +66,8 @@ export default function ReviewForm() {
         fieldContext.state,
         cropYearContext.state,
         reportDataContext.setter,
-        SECRETS.SECRETS.token
+        SECRETS.SECRETS.token,
+        user
       );
     }
   }
@@ -76,7 +79,9 @@ export default function ReviewForm() {
   }, []);
 
   useEffect(() => {
-    if (reportDataContext.state) {
+    console.log(reportDataContext.state[0][0]);
+    // UPDATE THIS CONDITION
+    if (reportDataContext.state[1][0] !== "") {
       setSuccess(true);
       setLoading(false);
       // setTimeout(() => {

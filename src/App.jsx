@@ -35,6 +35,7 @@ import {
   FARM_CREATOR,
   FIELD_CREATOR,
   CROPYEAR_CREATOR,
+  EmptyReportData,
 } from "./Assets/contextFactories_V0";
 import FieldPage from "./Pages/FieldPage";
 
@@ -78,7 +79,7 @@ function App() {
   const [fieldState, setFieldState] = useState(FIELD_CREATOR());
   const [cropyearState, setCropyearState] = useState(CROPYEAR_CREATOR());
 
-  const [reportData, setReportData] = useState(false);
+  const [reportData, setReportData] = useState(EmptyReportData);
 
   const [GUI_STATE, setGUI] = useState({ isNavOpen: false, farms: [] });
 

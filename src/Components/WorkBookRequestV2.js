@@ -238,7 +238,7 @@ function getHarvestOpeations(CropyearState, FarmState) {
 function convertContextToRow(FarmState, FieldState, CropyearState) {
   const RowValues = [
     [FieldState.fieldAddress, "UniqueID"],
-    [FieldState.id, "Farm_ID"],
+    [FieldState._id.$oid, "Farm_ID"], // TO CHECK
     [FieldState.name, "Field_Name"],
     ["", "NULL"], //
     ["", "NULL"], //
@@ -318,7 +318,8 @@ async function generateResults(
   FieldContextState,
   CropyearContextState,
   setReportData,
-  TOKEN
+  TOKEN,
+  user
 ) {
   const RowValues = convertContextToRow(
     FarmContextState,
@@ -379,6 +380,19 @@ async function generateResults(
           Authorization: "Bearer " + TOKEN,
           "Content-Type": "application/json",
           "Workbook-Session-Id": sessionResponse.data.id,
+        },
+      }
+    );
+    axios.post(
+      `${process.env.REACT_APP_API_URL}/cropyears/${CropyearContextState._id.$oid}/analysis`,
+      {
+        labels: response.data.values[0],
+        values: response.data.values[1],
+      },
+      {
+        headers: {
+          token: "Bearer " + user.token,
+          "Content-Type": "application/json",
         },
       }
     );
