@@ -14,7 +14,7 @@ import { useEffect, useState, useContext } from "react";
 import { FarmContext } from "../App";
 import { FieldContext } from "../App";
 
-import axios from "axios";
+import { axiosInstance } from "../Components/axiosFetchers";
 import MachinesTable from "../Components/Tables/MachinesTable";
 
 export default function FarmPage() {
@@ -27,7 +27,7 @@ export default function FarmPage() {
   // console.log(farmId);
   useEffect(() => {
     const getFarm = async () => {
-      const response = await axios.get(
+      const response = await axiosInstance.get(
         process.env.REACT_APP_API_URL + "/farms/" + farmId,
         {
           headers: {
@@ -37,7 +37,7 @@ export default function FarmPage() {
         }
       );
 
-      const fieldsResponse = await axios.get(
+      const fieldsResponse = await axiosInstance.get(
         process.env.REACT_APP_API_URL + "/farms/" + farmId + "/fields",
         {
           headers: {
@@ -46,7 +46,7 @@ export default function FarmPage() {
           },
         }
       );
-      const machinesResponse = await axios.get(
+      const machinesResponse = await axiosInstance.get(
         process.env.REACT_APP_API_URL + "/farms/" + farmId + "/machines",
         {
           headers: {
@@ -167,7 +167,7 @@ function EquipmentSection({ machines }) {
   const [isNewMachineModalOpen, setIsNewMachineModalOpen] = useState(false);
 
   async function handleAddNewMachine(newMachine) {
-    const response = await axios.post(
+    const response = await axiosInstance.post(
       process.env.REACT_APP_API_URL + `/farms/${farmId}/machines`,
       {
         ...newMachine,

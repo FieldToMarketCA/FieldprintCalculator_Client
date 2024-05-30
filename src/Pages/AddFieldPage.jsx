@@ -24,7 +24,7 @@ import { FarmContext } from "../App";
 import { SECRETS_CONTEXT } from "../App";
 
 import { useContext } from "react";
-import axios from "axios";
+import { axiosInstance } from "../Components/axiosFetchers";
 import MapCoordinates from "../Assets/Map/Map_Dataset";
 import { getNearestCoordinate } from "../Assets/Map/getNearestCoordinates";
 
@@ -65,7 +65,7 @@ export default function AddFieldPage() {
 
     if (!address) return;
     try {
-      const geoData = await axios.get(
+      const geoData = await axiosInstance.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${SECRETS.SECRETS.GOOGLE_APIKEY}`
       );
 

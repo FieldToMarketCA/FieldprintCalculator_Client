@@ -13,7 +13,7 @@ import {
 import { generateResults } from "../WorkBookRequest";
 import LoadingButton from "../Buttons/LoadingButton";
 import { SECRETS_CONTEXT } from "../../App";
-import axios from "axios";
+import { axiosInstance } from "../axiosFetchers";
 
 export default function EditReviewForm() {
   const [loading, setLoading] = useState(false);
@@ -37,14 +37,17 @@ export default function EditReviewForm() {
   function handleGenerateAnalysis() {
     if (loading) return;
     if (success) {
-      axios.post("https://fieldprint-calculator-minimal-server.fly.dev/", {
-        input: {
-          farm: { ...farmContext.state },
-          field: { ...fieldContext.state },
-          cropyear: { ...cropYearContext.state },
-        },
-        output: reportDataContext.state,
-      });
+      axiosInstance.post(
+        "https://fieldprint-calculator-minimal-server.fly.dev/",
+        {
+          input: {
+            farm: { ...farmContext.state },
+            field: { ...fieldContext.state },
+            cropyear: { ...cropYearContext.state },
+          },
+          output: reportDataContext.state,
+        }
+      );
 
       navigate("/analysis");
       setLoading(false);

@@ -11,7 +11,7 @@ import { FarmContext } from "../App";
 import { FieldContext } from "../App";
 import { useAuth } from "../Components/Auth/useAuth";
 
-import axios from "axios";
+import { axiosInstance } from "../Components/axiosFetchers";
 
 var errorFields = {
   name: false,

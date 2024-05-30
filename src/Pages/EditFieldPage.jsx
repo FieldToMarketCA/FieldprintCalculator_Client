@@ -24,7 +24,7 @@ import { FarmContext } from "../App";
 import { SECRETS_CONTEXT } from "../App";
 
 import { useContext, useEffect } from "react";
-import axios from "axios";
+import { axiosInstance } from "../Components/axiosFetchers";
 import MapCoordinates from "../Assets/Map/Map_Dataset";
 import { getNearestCoordinate } from "../Assets/Map/getNearestCoordinates";
 
@@ -55,7 +55,7 @@ export default function EditFieldPage() {
 
   useEffect(() => {
     async function getFarm() {
-      const response = await axios.get(
+      const response = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/farms/${fieldContext.state.farmId}`,
         {
           headers: {
@@ -84,7 +84,7 @@ export default function EditFieldPage() {
 
     if (!address) return;
     try {
-      const geoData = await axios.get(
+      const geoData = await axiosInstance.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${SECRETS.SECRETS.GOOGLE_APIKEY}`
       );
 

@@ -13,7 +13,7 @@ import EditHarvestForm from "../Components/EditCropYearForms/EditHarvestForm";
 import EditReviewForm from "../Components/EditCropYearForms/EditReviewForm";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useContext } from "react";
-import axios from "axios";
+import { axiosInstance } from "../Components/axiosFetchers";
 import { useAuth } from "../Components/Auth/useAuth";
 import { FarmContext } from "../App";
 import { FieldContext } from "../App";
@@ -51,7 +51,7 @@ export default function ViewCropYear({}) {
       // const FARM_ID = farmContext.state._id.$oid;
       // const FIELD_ID = fieldContext.state._id.$oid;
 
-      const response = await axios.get(
+      const response = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/farms/${farmId}/fields/${fieldId}/cropyears/${cropyearId}`,
         {
           headers: {
@@ -120,7 +120,7 @@ async function mergeFieldOperationsWithFactory(
         fieldOperationsData.cultivations[i].machineId in MachinesSet ===
         false
       ) {
-        const response = await axios.get(
+        const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/farms/${farmId}/machines/${fieldOperationsData.cultivations[i].machineId}`,
           {
             headers: {

@@ -6,7 +6,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { FarmContext } from "../../App";
-import axios from "axios";
+import { axiosInstance } from "../axiosFetchers";
 import { useAuth } from "../../Components/Auth/useAuth";
 import { useState, useContext } from "react";
 import dayjs from "dayjs";

@@ -10,7 +10,7 @@ import Divider from "@mui/material/Divider";
 import DeleteResourceModal from "./DeleteResourceModal";
 import { FarmContext } from "../App";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import { axiosInstance } from "./axiosFetchers";
 import { GUI_CONTEXT } from "../App";
 import { useAuth } from "./Auth/useAuth";
 
@@ -25,7 +25,7 @@ export default function EditFieldButton({ text, disabled = false }) {
   const navigate = useNavigate();
 
   const handleDeleteField = async () => {
-    await axios.delete(
+    await axiosInstance.delete(
       `${process.env.REACT_APP_API_URL}/farms/${farmId}/fields/${fieldId}`,
       {
         headers: {

@@ -11,7 +11,7 @@ import { useState, useContext, useEffect } from "react";
 import FieldLibraryButton from "./Buttons/SideNavButtons/FieldLibraryButtonREFACTOR";
 import { GUI_CONTEXT } from "../App";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { axiosInstance } from "./axiosFetchers";
 import { useAuth } from "../Components/Auth/useAuth";
 
 export default function SideNav() {
@@ -25,7 +25,7 @@ export default function SideNav() {
 
   useEffect(() => {
     async function getFarms() {
-      const response = await axios.get(
+      const response = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/farms`,
         {
           headers: {

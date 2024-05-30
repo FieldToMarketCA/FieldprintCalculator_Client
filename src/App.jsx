@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-import axios from "axios";
+import { axiosInstance } from "./Components/axiosFetchers";
 import ComponentGlossary from "./ComponentGlossary";
 import AddFarmPage from "./Pages/AddFarmPage";
 // Adition Pages
@@ -87,7 +87,7 @@ function App() {
   useEffect(() => {
     const getCredentials = async () => {
       if (SECRETS === false) {
-        const response = await axios.get(process.env.REACT_APP_API_URL);
+        const response = await axiosInstance.get(process.env.REACT_APP_API_URL);
         SET_SECRETS(response.data);
       }
     };

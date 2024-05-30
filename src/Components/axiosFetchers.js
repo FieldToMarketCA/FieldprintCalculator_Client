@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 async function GetSetFarm(farmId, user, farmContext) {
   const response = await axios.get(
@@ -100,10 +101,38 @@ async function GetSetAnalysis(cropyearId, user, reportDataConext) {
   reportDataConext.setter(response.data);
 }
 
+// axiosInstance.js
+// myLogOut
+const logout = () => {
+  localStorage.setItem("user", null);
+  // Navigate("/", { replace: true });
+  window.location.href = "/";
+  window.location.reload();
+};
+
+const axiosInstance = axios.create({
+  // baseURL: 'https://your-api-url.com',
+  // You can add other default settings here if needed
+});
+
+axiosInstance.interceptors.response.use(
+  (response) => response, // If the response is successful, just return the response
+  (error) => {
+    if (error.response) {
+      const { status } = error.response;
+      if (status === 401 || (status >= 400 && status < 500)) {
+        logout(); // Call the logout function
+      }
+    }
+    return Promise.reject(error); // Always reject the error to handle it in your components
+  }
+);
+
 export {
   GetSetFarm,
   GetSetField,
   GetSetFieldWithCropYears,
   GetSetCropYear,
   GetSetAnalysis,
+  axiosInstance,
 };

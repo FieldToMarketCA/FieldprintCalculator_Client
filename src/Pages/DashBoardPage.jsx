@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 // import { FieldContext } from "../App";
 // import { CropYearContext } from "../App";
 
-import axios from "axios";
+import { axiosInstance } from "../Components/axiosFetchers";
 
 import { useAuth } from "../Components/Auth/useAuth";
 
@@ -30,7 +30,7 @@ export default function DashBoardPage() {
   const navigate = useNavigate();
 
   const getFieldsFromFarmId = async (farmId) => {
-    const response = await axios.get(
+    const response = await axiosInstance.get(
       process.env.REACT_APP_API_URL + "/farms/" + farmId + "/fields",
       {
         headers: {
@@ -42,7 +42,7 @@ export default function DashBoardPage() {
     return response.data;
   };
   const getCropYearsFromFieldId = async (farmId, fieldId) => {
-    const response = await axios.get(
+    const response = await axiosInstance.get(
       process.env.REACT_APP_API_URL +
         `/farms/${farmId}/fields/${fieldId}/cropyears`,
       {
@@ -73,7 +73,7 @@ export default function DashBoardPage() {
         cropsFilters: {},
       };
 
-      const farmsResponse = await axios.get(
+      const farmsResponse = await axiosInstance.get(
         process.env.REACT_APP_API_URL + "/farms?max=100",
         {
           headers: {

@@ -18,7 +18,7 @@ import {
   GetSetFieldWithCropYears,
 } from "../Components/axiosFetchers";
 import { useAuth } from "../Components/Auth/useAuth";
-import axios from "axios";
+import { axiosInstance } from "../Components/axiosFetchers";
 
 export default function FieldPage() {
   let { farmId, fieldId } = useParams();

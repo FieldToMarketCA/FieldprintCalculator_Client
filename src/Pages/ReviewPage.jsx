@@ -20,7 +20,7 @@ import {
   GetSetField,
   GetSetCropYear,
 } from "../Components/axiosFetchers";
-import axios from "axios";
+import { axiosInstance } from "../Components/axiosFetchers";
 
 export default function ReviewForm() {
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ export default function ReviewForm() {
     if (loading) return;
     if (success) {
       // THis was provisional
-      // axios.post("https://fieldprint-calculator-minimal-server.fly.dev/", {
+      // axiosInstance.post("https://fieldprint-calculator-minimal-server.fly.dev/", {
       //   input: {
       //     farm: { ...farmContext.state },
       //     field: { ...fieldContext.state },

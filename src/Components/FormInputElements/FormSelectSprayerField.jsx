@@ -13,7 +13,7 @@ import NewMachineModal from "../NewMachineModal";
 import { FarmContext } from "../../App";
 import { CropYearContext } from "../../App";
 import { useState, useContext } from "react";
-import axios from "axios";
+import { axiosInstance } from "../axiosFetchers";
 import { useAuth } from "../../Components/Auth/useAuth";
 
 export default function FormSelectSprayerField({
@@ -31,7 +31,7 @@ export default function FormSelectSprayerField({
   async function handleAddNewSprayer(newSprayer) {
     let farmId = farmContext.state._id.$oid;
 
-    const response = await axios.post(
+    const response = await axiosInstance.post(
       process.env.REACT_APP_API_URL + `/farms/${farmId}/machines`,
       {
         ...newSprayer,

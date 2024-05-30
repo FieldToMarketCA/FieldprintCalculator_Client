@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosInstance } from "./axiosFetchers";
 var defaultUnit = "horsepower";
 function convertContextToRow(FarmState, FieldState, CropyearState) {
   //   console.log(FarmState, FieldState, CropyearState);
@@ -278,7 +278,7 @@ async function generateResults(
     CropyearContextState
   );
 
-  const sessionResponse = await axios.post(
+  const sessionResponse = await axiosInstance.post(
     `https://graph.microsoft.com/v1.0/me/drive/root:/FieldprintCalculatorV.3-EXPERIMENT.xlsx:/workbook/createSession`,
     {
       persistChanges: false,
@@ -292,7 +292,7 @@ async function generateResults(
   );
 
   // WRITE DOCUMENT
-  await axios.patch(
+  await axiosInstance.patch(
     `https://graph.microsoft.com/v1.0/me/drive/root:/FieldprintCalculatorV.3-EXPERIMENT.xlsx:/workbook/worksheets/Data/range(address='A2:EJ2')`,
     {
       values: [RowValues],
@@ -309,7 +309,7 @@ async function generateResults(
   // GET RESULTS AND CLOSE SESSION
   setTimeout(async () => {
     // GET
-    const response = await axios.get(
+    const response = await axiosInstance.get(
       `https://graph.microsoft.com/v1.0/me/drive/root:/FieldprintCalculatorV.3-EXPERIMENT.xlsx:/workbook/worksheets/Report Data/range(address='A1:AM2')`,
       {
         headers: {
@@ -321,7 +321,7 @@ async function generateResults(
     );
 
     //  CLOSE SESSION
-    axios.post(
+    axiosInstance.post(
       `https://graph.microsoft.com/v1.0/me/drive/root:/FieldprintCalculatorV.3-EXPERIMENT.xlsx:/workbook/closeSession`,
       {
         persistChanges: false,

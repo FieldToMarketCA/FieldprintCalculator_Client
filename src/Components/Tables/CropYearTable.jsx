@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useState } from "react";
 import { FieldContext } from "../../App";
 import { useAuth } from "../Auth/useAuth";
-import axios from "axios";
+import { axiosInstance } from "../axiosFetchers";
 
 function TableRow({ row }) {
   const { user } = useAuth();
@@ -18,7 +18,7 @@ function TableRow({ row }) {
 
   async function handleDeleteCropYear() {
     // console.log(fieldContext.state.cropYears);
-    await axios.delete(
+    await axiosInstance.delete(
       `${process.env.REACT_APP_API_URL}/farms/${farmId}/fields/${fieldId}/cropyears/${row.cropyearId}`,
       {
         headers: {

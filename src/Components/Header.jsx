@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Paper from "@mui/material/Paper";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { axiosInstance } from "./axiosFetchers";
 import { useGoogleLogin } from "@react-oauth/google";
 import React from "react";
 import {
@@ -28,7 +28,7 @@ export default function Header({ hideAvatar = false }) {
 
   //     try {
   //       if (query.get("token")) {
-  //         const response = await axios.get(
+  //         const response = await axiosInstance.get(
   //           "http://127.0.0.1:8000/authenticate",
   //           { params: { token: query.get("token") } }
   //         );

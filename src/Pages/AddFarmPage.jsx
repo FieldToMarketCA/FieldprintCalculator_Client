@@ -11,7 +11,7 @@ import { FarmContext } from "../App";
 import { FieldContext } from "../App";
 import { useAuth } from "../Components/Auth/useAuth";
 
-import axios from "axios";
+import { axiosInstance } from "../Components/axiosFetchers";
 
 var errorFields = {
   name: false,
@@ -35,7 +35,7 @@ export default function AddFarmPage() {
 
   function handleSaveAndAddFIeld() {
     if (isInputValid()) {
-      axios
+      axiosInstance
         .post(
           process.env.REACT_APP_API_URL + "/farms",
           {

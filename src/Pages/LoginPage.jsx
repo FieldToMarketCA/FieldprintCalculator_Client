@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "../Components/Header";
 
 import "@fontsource/roboto-slab";
-import axios from "axios";
+import { axiosInstance } from "../Components/axiosFetchers";
 import MainButton from "../Components/Buttons/MainButton";
 
 import Footer from "../Components/Footer";
@@ -29,7 +29,7 @@ export const LoginPage = () => {
     async function getUser() {
       try {
         if (token) {
-          const response = await axios.get(
+          const response = await axiosInstance.get(
             process.env.REACT_APP_API_URL + "/authenticate",
             { params: { token: token } }
           );

@@ -2,7 +2,7 @@ import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { axiosInstance } from "../axiosFetchers";
 import { useParams } from "react-router-dom";
 import { FarmContext } from "../../App";
 import { useAuth } from "../../Components/Auth/useAuth";
@@ -18,7 +18,7 @@ function TableRow({ row }) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   async function handleDeleteMachine(machineId) {
-    await axios.delete(
+    await axiosInstance.delete(
       process.env.REACT_APP_API_URL +
         `/farms/${farmId}/machines/${row._id.$oid}`,
       {
@@ -41,7 +41,7 @@ function TableRow({ row }) {
   }
 
   async function handleEditMachine(machineState) {
-    await axios.patch(
+    await axiosInstance.patch(
       process.env.REACT_APP_API_URL +
         `/farms/${farmId}/machines/${row._id.$oid}`,
       {
