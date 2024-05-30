@@ -203,7 +203,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
                     // let farmId = farmContext.state.id;
                     // let fieldId = fieldContext.state.id;
 
-                    axios
+                    axiosInstance
                       .post(
                         process.env.REACT_APP_API_URL +
                           `/farms/${farmContext.state._id.$oid}/fields/${fieldContext.state._id.$oid}/cropyears`,

@@ -34,7 +34,7 @@ export default function EditFarmPage() {
 
   function handleSaveAndAddFIeld() {
     if (isInputValid()) {
-      axios
+      axiosInstance
         .patch(
           `${process.env.REACT_APP_API_URL}/farms/${farmContext.state._id.$oid}`,
           {

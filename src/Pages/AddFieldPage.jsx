@@ -95,7 +95,7 @@ export default function AddFieldPage() {
 
   function handleSaveAndAddFIeld() {
     if (isInputValid()) {
-      axios
+      axiosInstance
         .post(
           process.env.REACT_APP_API_URL +
             `/farms/${farmContext.state._id.$oid}/fields`,
