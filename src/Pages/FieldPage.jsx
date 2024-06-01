@@ -30,11 +30,12 @@ export default function FieldPage() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
+  document.title = "Field Page - Field To Market Canada";
+
   useEffect(() => {
     async function startupPage() {
       await GetSetFarm(farmId, user, farmContext);
-
-      // GetSetFieldWithCropYears(farmId, fieldId, user, fieldContext);
+      await GetSetField(farmId, fieldId, user, fieldContext);
       const cropyearsResponse = await axiosInstance.get(
         process.env.REACT_APP_API_URL +
           "/farms/" +
@@ -82,7 +83,9 @@ export default function FieldPage() {
         <div className="w-full flex mb-6">
           <ButtonIcon
             text={"Add New Crop Year"}
-            onClick={() => navigate("/addcropyear")}
+            onClick={() =>
+              navigate(`/farm/${farmId}/field/${fieldId}/addcropyear`)
+            }
             grow={true}
             Icon={AddCircleOutlineIcon}
           />

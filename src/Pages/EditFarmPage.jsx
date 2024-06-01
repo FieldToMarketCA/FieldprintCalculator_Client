@@ -27,6 +27,8 @@ export default function EditFarmPage() {
 
   const navigate = useNavigate();
 
+  document.title = "Edit Farm Page - Field To Market Canada";
+
   useEffect(() => {
     GetSetFarm(farmId, user, farmContext);
   }, []);

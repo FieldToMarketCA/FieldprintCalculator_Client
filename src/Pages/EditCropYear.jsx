@@ -40,6 +40,8 @@ export default function EditCropYear({}) {
   const cropyearContext = useContext(CropYearContext);
   let { cropyearId } = useParams();
 
+  document.title = "Edit Crop Year Page - Field To Market Canada";
+
   useEffect(() => {
     async function getCropYear() {
       const FARM_ID = farmContext.state._id.$oid;

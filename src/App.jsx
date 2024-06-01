@@ -183,7 +183,7 @@ function App() {
                           />
 
                           <Route
-                            path="/addfield"
+                            path="/farm/:farmId/addfield"
                             element={
                               <ProtectedRoute>
                                 <AddFieldPage />
@@ -191,7 +191,7 @@ function App() {
                             }
                           />
                           <Route
-                            path="/addcropyear"
+                            path="/farm/:farmId/field/:fieldId/addcropyear"
                             element={
                               <ProtectedRoute>
                                 <AddCropYear />

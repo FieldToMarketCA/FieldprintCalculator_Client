@@ -49,6 +49,8 @@ export default function AnalysisPage({}) {
   const { farmId, fieldId, cropyearId } = useParams();
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
 
+  document.title = "Analysis Results Page - Field To Market Canada";
+
   const options = {
     overrides: {
       canvas: {

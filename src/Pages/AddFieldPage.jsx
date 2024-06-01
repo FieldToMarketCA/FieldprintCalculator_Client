@@ -7,7 +7,7 @@ import Divider from "@mui/material/Divider";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   SurfaceFormTypes,
@@ -17,11 +17,12 @@ import {
   TillageRegimeTypes,
 } from "../Assets/DataTypes";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FieldContext } from "../App";
 import { FarmContext } from "../App";
 import { SECRETS_CONTEXT } from "../App";
+import { GetSetFarm } from "../Components/axiosFetchers";
 
 import { useContext } from "react";
 import { axiosInstance } from "../Components/axiosFetchers";
@@ -47,10 +48,18 @@ export default function AddFieldPage() {
   const [ErrorFound, setErrorFound] = useState(false);
   const [addressQuery, setAddressQuery] = useState("Canada");
   const navigate = useNavigate();
+  const { farmId } = useParams();
 
   const fieldContext = useContext(FieldContext);
   const farmContext = useContext(FarmContext);
   const SECRETS = useContext(SECRETS_CONTEXT);
+
+  document.title = "Add Field Page - Field To Market Canada";
+
+  useEffect(() => {
+    GetSetFarm(farmId, user, farmContext);
+    fieldContext.resetState();
+  }, [farmId]);
 
   function handleStateChange(target, key) {
     const newValue = {};
@@ -309,7 +318,7 @@ export default function AddFieldPage() {
             <MainButton text={"Save Field"} onClick={handleSaveAndAddFIeld} />
             <MainButton
               text={"Cancel"}
-              onClick={console.log}
+              onClick={() => navigate(`/farm/${farmId}`)}
               secondary={true}
             />
           </div>

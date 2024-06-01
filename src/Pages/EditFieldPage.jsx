@@ -54,6 +54,8 @@ export default function EditFieldPage() {
 
   const SECRETS = useContext(SECRETS_CONTEXT);
 
+  document.title = "Edit Field Page - Field To Market Canada";
+
   useEffect(() => {
     async function startupPage() {
       await GetSetFarm(farmId, user, farmContext);

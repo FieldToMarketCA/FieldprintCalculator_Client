@@ -120,7 +120,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response) {
       const { status } = error.response;
-      if (status === 401 || (status >= 400 && status < 500)) {
+      if (status === 401) {
         logout(); // Call the logout function
       }
     }

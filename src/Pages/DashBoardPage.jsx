@@ -138,6 +138,8 @@ export default function DashBoardPage() {
     getDashboardData();
   }, []);
 
+  document.title = "Dashboard Page - Field To Market Canada";
+
   return (
     <Page
       title={"Dashboard"}

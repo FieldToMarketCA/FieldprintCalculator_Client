@@ -41,6 +41,8 @@ export default function ViewCropYear({}) {
   const cropyearContext = useContext(CropYearContext);
   let { farmId, fieldId, cropyearId } = useParams();
 
+  document.title = "Crop Year Page - Field To Market Canada";
+
   useEffect(() => {
     async function getCropYear() {
       // Fetch

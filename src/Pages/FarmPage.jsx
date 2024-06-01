@@ -21,10 +21,11 @@ export default function FarmPage() {
   const { user } = useAuth();
   let { farmId } = useParams();
   const farmContext = useContext(FarmContext);
-  // const fieldContext = useContext(FieldContext);
   const navigate = useNavigate();
   const [farmFields, setFarmFields] = useState([]);
   const [farmMachines, setFarmMachines] = useState([]);
+
+  document.title = "Farm Page - Field To Market Canada";
 
   useEffect(() => {
     const startupFarmPage = async () => {
@@ -103,6 +104,7 @@ export default function FarmPage() {
 function ManagedAcresSection({ fields }) {
   const [managedAcresCollapsed, setManagedAcresCollapsed] = useState(false);
   const navigate = useNavigate();
+  let { farmId } = useParams();
 
   return (
     <div className="w-full text-lg shadow-md">
@@ -152,7 +154,7 @@ function ManagedAcresSection({ fields }) {
         <div className="w-full flex mb-6">
           <ButtonIcon
             text={"Add New Field"}
-            onClick={() => navigate("/addfield")}
+            onClick={() => navigate(`/farm/${farmId}/addfield`)}
             grow={true}
             Icon={AddCircleOutlineIcon}
           />

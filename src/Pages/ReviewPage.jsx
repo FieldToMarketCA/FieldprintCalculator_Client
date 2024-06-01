@@ -36,6 +36,8 @@ export default function ReviewForm() {
   const fieldContext = useContext(FieldContext);
   const cropYearContext = useContext(CropYearContext);
 
+  document.title = "Review Page - Field To Market Canada";
+
   function handleGenerateAnalysis() {
     if (loading) return;
     if (success) {

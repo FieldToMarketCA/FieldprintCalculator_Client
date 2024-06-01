@@ -42,12 +42,10 @@ export const LoginPage = () => {
     }
     if (user === null) {
       getUser();
-    } else {
-      // User is already loggedIn
-      console.log(user.token);
-      console.log(user);
     }
   }, []);
+
+  document.title = "Login Page - Field To Market Canada";
 
   return (
     <div className="w-screen relative text-lg  text-[#666] h-screen overflow-scroll">

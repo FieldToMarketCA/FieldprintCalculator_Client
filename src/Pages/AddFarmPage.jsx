@@ -4,7 +4,7 @@ import FormSelectField from "../Components/FormInputElements/FormSelectField";
 import MainButton from "../Components/Buttons/MainButton";
 import { useNavigate } from "react-router-dom";
 import { CanadianProvinces } from "../Assets/DataTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useContext } from "react";
 import { FarmContext } from "../App";
@@ -24,6 +24,8 @@ export default function AddFarmPage() {
   const farmContext = useContext(FarmContext);
   const fieldContext = useContext(FieldContext);
 
+  document.title = "Add Farm Page - Field To Market Canada";
+
   const navigate = useNavigate();
 
   function handleStateChange(target, key) {
@@ -32,6 +34,10 @@ export default function AddFarmPage() {
     farmContext.setter({ ...farmContext.state, ...newValue });
     errorFields[key] = false;
   }
+
+  useEffect(() => {
+    farmContext.resetState();
+  }, []);
 
   function handleSaveAndAddFIeld() {
     if (isInputValid()) {
@@ -120,7 +126,7 @@ export default function AddFarmPage() {
             />
           </div>
           <div className="min-[550px]:ml-4">
-            <MainButton text={"Cancel"} onClick={console.log} />
+            <MainButton text={"Cancel"} onClick={() => navigate("/")} />
           </div>
         </div>
       </div>
