@@ -82,7 +82,7 @@ export default function EditFieldButton({ text, disabled = false }) {
         <MenuItem
           onClick={() => {
             handleClose();
-            navigate(`/editfield/${fieldId}`);
+            navigate(`/farm/${farmId}/field/${fieldId}/editfield/`);
           }}
         >
           <ListItemIcon>

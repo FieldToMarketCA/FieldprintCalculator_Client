@@ -36,7 +36,6 @@ function TableRow({ row }) {
               `/farm/${row.farmId}/field/${row.fieldId}/cropyear/${row.cropyearId}`
             )
           }
-          // sx={{ color: "rgb(241, 93, 34)" }}
           aria-label="View Cropyear Details"
           size="medium"
         >
@@ -86,7 +85,7 @@ export default function DashboardTable({ tableData }) {
       <ul className="w-full mb-2">
         {tableData.map((row, index) => {
           return (
-            <li className="w-full" key={row.id + index}>
+            <li className="w-full" key={row.cropyearId}>
               <TableRow row={row} />
             </li>
           );

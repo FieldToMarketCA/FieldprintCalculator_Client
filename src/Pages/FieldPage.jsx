@@ -14,6 +14,7 @@ import { useContext, useEffect } from "react";
 import { FarmContext, FieldContext, CropYearContext } from "../App";
 import {} from "../App";
 import {
+  GetSetFarm,
   GetSetField,
   GetSetFieldWithCropYears,
 } from "../Components/axiosFetchers";
@@ -25,12 +26,35 @@ export default function FieldPage() {
   const fieldContext = useContext(FieldContext);
   const farmContext = useContext(FarmContext);
   const cropYearContext = useContext(CropYearContext);
+  const [fieldCropYears, setFieldCropYears] = useState([]);
   const navigate = useNavigate();
   const { user } = useAuth();
 
   useEffect(() => {
-    GetSetFieldWithCropYears(farmId, fieldId, user, fieldContext);
-  }, []);
+    async function startupPage() {
+      await GetSetFarm(farmId, user, farmContext);
+
+      // GetSetFieldWithCropYears(farmId, fieldId, user, fieldContext);
+      const cropyearsResponse = await axiosInstance.get(
+        process.env.REACT_APP_API_URL +
+          "/farms/" +
+          farmId +
+          "/fields/" +
+          fieldId +
+          "/cropyears",
+        {
+          headers: {
+            token: "Bearer " + user.token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setFieldCropYears(cropyearsResponse.data);
+    }
+
+    startupPage();
+  }, [fieldId]);
 
   return (
     <Page
@@ -64,7 +88,10 @@ export default function FieldPage() {
           />
         </div>
 
-        <CropYearTable cropYears={fieldContext.state.cropYears} />
+        <CropYearTable
+          fieldCropYears={fieldCropYears}
+          setFieldCropYears={setFieldCropYears}
+        />
       </div>
     </Page>
   );

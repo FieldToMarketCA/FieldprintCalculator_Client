@@ -47,10 +47,6 @@ export default function ViewCropYear({}) {
       await GetSetFarm(farmId, user, farmContext);
       await GetSetField(farmId, fieldId, user, fieldContext);
 
-      // console.log(farmContext.state);
-      // const FARM_ID = farmContext.state._id.$oid;
-      // const FIELD_ID = fieldContext.state._id.$oid;
-
       const response = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/farms/${farmId}/fields/${fieldId}/cropyears/${cropyearId}`,
         {
@@ -74,7 +70,6 @@ export default function ViewCropYear({}) {
         ),
         harvest: { ...cropyearContext.state.harvest, ...response.data.harvest },
       });
-      console.log(cropyearContext);
     }
     getCropYear();
   }, []);

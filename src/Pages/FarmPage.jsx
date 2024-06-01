@@ -14,28 +14,31 @@ import { useEffect, useState, useContext } from "react";
 import { FarmContext } from "../App";
 import { FieldContext } from "../App";
 
-import { axiosInstance } from "../Components/axiosFetchers";
+import { axiosInstance, GetSetFarm } from "../Components/axiosFetchers";
 import MachinesTable from "../Components/Tables/MachinesTable";
 
 export default function FarmPage() {
   const { user } = useAuth();
   let { farmId } = useParams();
   const farmContext = useContext(FarmContext);
-  const fieldContext = useContext(FieldContext);
+  // const fieldContext = useContext(FieldContext);
   const navigate = useNavigate();
+  const [farmFields, setFarmFields] = useState([]);
+  const [farmMachines, setFarmMachines] = useState([]);
 
-  // console.log(farmId);
   useEffect(() => {
-    const getFarm = async () => {
-      const response = await axiosInstance.get(
-        process.env.REACT_APP_API_URL + "/farms/" + farmId,
-        {
-          headers: {
-            token: "Bearer " + user.token,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    const startupFarmPage = async () => {
+      await GetSetFarm(farmId, user, farmContext);
+
+      // const response = await axiosInstance.get(
+      //   process.env.REACT_APP_API_URL + "/farms/" + farmId,
+      //   {
+      //     headers: {
+      //       token: "Bearer " + user.token,
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
 
       const fieldsResponse = await axiosInstance.get(
         process.env.REACT_APP_API_URL + "/farms/" + farmId + "/fields",
@@ -55,16 +58,18 @@ export default function FarmPage() {
           },
         }
       );
+      setFarmFields(fieldsResponse.data);
+      setFarmMachines(machinesResponse.data);
 
-      let tmpFarm = {
-        ...response.data.data,
-        machines: machinesResponse.data,
-        fields: fieldsResponse.data,
-      };
+      // let tmpFarm = {
+      //   ...response.data.data,
+      //   machines: machinesResponse.data,
+      //   fields: fieldsResponse.data,
+      // };
 
-      farmContext.setter(tmpFarm);
+      // farmContext.setter(tmpFarm);
     };
-    getFarm();
+    startupFarmPage();
   }, [farmId]);
 
   return (
@@ -75,7 +80,7 @@ export default function FarmPage() {
         <div className="mb-6 flex text-lg mb-4 justify-end">
           <EditFarmMenuButton
             text={"Edit Farm"}
-            onClick={() => navigate(`/editfarm/${farmContext.state._id.$oid}`)}
+            onClick={() => navigate(`/farm/${farmId}/editfarm`)}
           />
         </div>
 
@@ -87,9 +92,9 @@ export default function FarmPage() {
 
         {/* Managed Acres */}
 
-        <ManagedAcresSection fields={farmContext.state.fields} />
+        <ManagedAcresSection fields={farmFields} />
 
-        <EquipmentSection machines={farmContext.state.machines} />
+        <EquipmentSection machines={farmMachines} />
       </div>
     </Page>
   );

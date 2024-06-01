@@ -9,10 +9,12 @@ function TableRow({ row }) {
     <div className="grid grid-cols-10 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
       <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
         {
-          // <Link to={"/addfield"}>{/* </Link> */}
-          <IconButton onClick={() => navigate(`/editfield/${row._id.$oid}`)}>
+          <IconButton
+            onClick={() =>
+              navigate(`/farm/${row.farmId}/field/${row._id.$oid}/editfield/`)
+            }
+          >
             <EditIcon />
-            {/* <EditIcon sx={{ color: "#F15D22" }} /> */}
           </IconButton>
         }
       </div>
@@ -36,6 +38,7 @@ function TableRow({ row }) {
         {row.previousTillageRegime}
       </div>
       <div className="col-span-2 py-1 px-3 h-[45px] flex items-center">
+        {/* {row.regimeChangeDate} */}
         {row.regimeChangeDate.slice(0, 10)}
       </div>
     </div>
@@ -70,14 +73,14 @@ export default function ManagedAcresTable({ fields }) {
         </div>
       </div>
       {/* Body */}
-      <ul className="w-full ">
+      <ul className="w-full">
         {fields.map((row) => {
-          if (typeof row === "object")
-            return (
-              <li className="w-full" key={row._id.$oid}>
-                <TableRow row={row} />
-              </li>
-            );
+          if (typeof row === "object") console.log(row, "EL REAL");
+          return (
+            <li className="w-full" key={"_id" in row ? row._id.$oid : row.$oid}>
+              <TableRow row={row} />
+            </li>
+          );
         })}
       </ul>
     </div>

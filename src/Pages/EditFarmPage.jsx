@@ -2,9 +2,9 @@ import Page from "../Components/Page";
 import FormTextField from "../Components/FormInputElements/FormTextField";
 import FormSelectField from "../Components/FormInputElements/FormSelectField";
 import MainButton from "../Components/Buttons/MainButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CanadianProvinces } from "../Assets/DataTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useContext } from "react";
 import { FarmContext } from "../App";
@@ -12,6 +12,7 @@ import { FieldContext } from "../App";
 import { useAuth } from "../Components/Auth/useAuth";
 
 import { axiosInstance } from "../Components/axiosFetchers";
+import { GetSetFarm } from "../Components/axiosFetchers";
 
 var errorFields = {
   name: false,
@@ -20,10 +21,15 @@ var errorFields = {
 
 export default function EditFarmPage() {
   const { user } = useAuth();
+  const { farmId } = useParams();
   const [ErrorFound, setErrorFound] = useState(false);
   const farmContext = useContext(FarmContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    GetSetFarm(farmId, user, farmContext);
+  }, []);
 
   function handleStateChange(target, key) {
     const newValue = {};

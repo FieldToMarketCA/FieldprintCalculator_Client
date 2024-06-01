@@ -7,7 +7,7 @@ import Divider from "@mui/material/Divider";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   SurfaceFormTypes,
@@ -27,7 +27,7 @@ import { useContext, useEffect } from "react";
 import { axiosInstance } from "../Components/axiosFetchers";
 import MapCoordinates from "../Assets/Map/Map_Dataset";
 import { getNearestCoordinate } from "../Assets/Map/getNearestCoordinates";
-
+import { GetSetFarm, GetSetField } from "../Components/axiosFetchers";
 import { useAuth } from "../Components/Auth/useAuth";
 
 var errorFields = {
@@ -43,6 +43,7 @@ var errorFields = {
 };
 
 export default function EditFieldPage() {
+  const { farmId, fieldId } = useParams();
   const { user } = useAuth();
   const [ErrorFound, setErrorFound] = useState(false);
   const [addressQuery, setAddressQuery] = useState("Canada");
@@ -54,21 +55,11 @@ export default function EditFieldPage() {
   const SECRETS = useContext(SECRETS_CONTEXT);
 
   useEffect(() => {
-    async function getFarm() {
-      const response = await axiosInstance.get(
-        `${process.env.REACT_APP_API_URL}/farms/${fieldContext.state.farmId}`,
-        {
-          headers: {
-            token: "Bearer " + user.token,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const { machines, fields, ...fetchedFarm } = response.data.data;
-
-      farmContext.setter({ ...farmContext.state, ...fetchedFarm });
+    async function startupPage() {
+      await GetSetFarm(farmId, user, farmContext);
+      await GetSetField(farmId, fieldId, user, fieldContext);
     }
-    getFarm();
+    startupPage();
   }, []);
 
   function handleStateChange(target, key) {
@@ -148,7 +139,6 @@ export default function EditFieldPage() {
   }
 
   function isInputValid() {
-    console.log(fieldContext.state.fieldSize, "trukito");
     errorFields.name = fieldContext.state.name.trim() === "";
     errorFields.fieldSize =
       fieldContext.state.fieldSize.toString().trim() === "";

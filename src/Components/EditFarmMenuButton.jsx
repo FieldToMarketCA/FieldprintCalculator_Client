@@ -93,7 +93,7 @@ export default function EditFarmButton({
         <MenuItem
           onClick={() => {
             handleClose();
-            navigate(`/editfarm/${farmId}`);
+            navigate(`/farm/${farmId}/editfarm/`);
           }}
         >
           <ListItemIcon>

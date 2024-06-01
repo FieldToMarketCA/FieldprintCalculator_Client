@@ -201,7 +201,7 @@ function App() {
                           {/* Edition Routes */}
                           <Route
                             exact
-                            path="/editfarm/:farmId"
+                            path="/farm/:farmId/editfarm"
                             element={
                               <ProtectedRoute>
                                 <EditFarmPage />
@@ -210,7 +210,7 @@ function App() {
                           />
 
                           <Route
-                            path="/editfield/:fieldId"
+                            path="/farm/:farmId/field/:fieldId/editfield"
                             element={
                               <ProtectedRoute>
                                 <EditFieldPage />
@@ -218,7 +218,7 @@ function App() {
                             }
                           />
                           <Route
-                            path="/editcropyear/:cropyearId"
+                            path="/farm/:farmId/field/:fieldId/cropyear/:cropyearId/editcropyear"
                             element={
                               <ProtectedRoute>
                                 <EditCropYear />

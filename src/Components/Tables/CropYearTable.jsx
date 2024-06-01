@@ -9,7 +9,7 @@ import { FieldContext } from "../../App";
 import { useAuth } from "../Auth/useAuth";
 import { axiosInstance } from "../axiosFetchers";
 
-function TableRow({ row }) {
+function TableRow({ row, fieldCropYears, setFieldCropYears }) {
   const { user } = useAuth();
   const navigate = useNavigate();
   const fieldContext = useContext(FieldContext);
@@ -27,14 +27,11 @@ function TableRow({ row }) {
         },
       }
     );
-    let filteredCropYears = fieldContext.state.cropYears.filter(
+    let filteredCropYears = fieldCropYears.filter(
       (cropYear) => cropYear._id.$oid !== row.cropyearId
     );
 
-    fieldContext.setter({
-      ...fieldContext.state,
-      cropYears: filteredCropYears,
-    });
+    setFieldCropYears(filteredCropYears);
   }
 
   return (
@@ -42,7 +39,11 @@ function TableRow({ row }) {
       <div className="col-span-1 underline py-1 px-3 h-[45px] flex items-center">
         {/* <Link to={"/addfield"}> */}
         <IconButton
-          onClick={() => navigate(`/editcropyear/${row.cropyearId}`)}
+          onClick={() =>
+            navigate(
+              `/farm/${farmId}/field/${fieldId}/cropyear/${row.cropyearId}/`
+            )
+          }
           sx={{ paddingRight: 0 }}
         >
           <VisibilityIcon />
@@ -106,7 +107,7 @@ function TableRow({ row }) {
   );
 }
 
-export default function CropYearTable({ cropYears }) {
+export default function CropYearTable({ fieldCropYears, setFieldCropYears }) {
   return (
     <div
       style={{ border: "0.5px solid #DDD" }}
@@ -131,7 +132,7 @@ export default function CropYearTable({ cropYears }) {
 
       {/* Body */}
       <ul className="w-full ">
-        {cropYears.map((cropyear) => {
+        {fieldCropYears.map((cropyear) => {
           if (typeof cropyear === "object")
             return (
               <li className="w-full" key={cropyear._id.$oid}>
@@ -142,6 +143,8 @@ export default function CropYearTable({ cropYears }) {
                     analysisId:
                       "analysisId" in cropyear ? cropyear.analysisId : false,
                   }}
+                  fieldCropYears={fieldCropYears}
+                  setFieldCropYears={setFieldCropYears}
                 />
               </li>
             );
