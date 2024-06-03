@@ -13,6 +13,7 @@ export default function DashBoardPage() {
   const [tableData, setTableData] = useState([]);
   const [SummaryData, setSummaryData] = useState(false);
   const [filteredData, setFilteredData] = useState(tableData);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getFieldsFromFarmId = async (farmId) => {
     const response = await axiosInstance.get(
@@ -133,6 +134,7 @@ export default function DashBoardPage() {
       ]);
       setTableData(TMP);
       setFilters(tmpFilters);
+      setIsLoading(false);
     };
 
     getDashboardData();
@@ -165,7 +167,7 @@ export default function DashBoardPage() {
           />
         </div>
 
-        <DashboardTable tableData={filteredData} />
+        <DashboardTable tableData={filteredData} isLoading={isLoading} />
       </div>
     </Page>
   );

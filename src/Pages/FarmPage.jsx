@@ -24,22 +24,13 @@ export default function FarmPage() {
   const navigate = useNavigate();
   const [farmFields, setFarmFields] = useState([]);
   const [farmMachines, setFarmMachines] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   document.title = "Farm Page - Field To Market Canada";
 
   useEffect(() => {
     const startupFarmPage = async () => {
       await GetSetFarm(farmId, user, farmContext);
-
-      // const response = await axiosInstance.get(
-      //   process.env.REACT_APP_API_URL + "/farms/" + farmId,
-      //   {
-      //     headers: {
-      //       token: "Bearer " + user.token,
-      //       "Content-Type": "application/json",
-      //     },
-      //   }
-      // );
 
       const fieldsResponse = await axiosInstance.get(
         process.env.REACT_APP_API_URL + "/farms/" + farmId + "/fields",
@@ -61,14 +52,7 @@ export default function FarmPage() {
       );
       setFarmFields(fieldsResponse.data);
       setFarmMachines(machinesResponse.data);
-
-      // let tmpFarm = {
-      //   ...response.data.data,
-      //   machines: machinesResponse.data,
-      //   fields: fieldsResponse.data,
-      // };
-
-      // farmContext.setter(tmpFarm);
+      setIsLoading(false);
     };
     startupFarmPage();
   }, [farmId]);
@@ -93,15 +77,19 @@ export default function FarmPage() {
 
         {/* Managed Acres */}
 
-        <ManagedAcresSection fields={farmFields} />
+        <ManagedAcresSection fields={farmFields} isLoading={isLoading} />
 
-        <EquipmentSection machines={farmMachines} />
+        <EquipmentSection
+          machines={farmMachines}
+          setFarmMachines={setFarmMachines}
+          isLoading={isLoading}
+        />
       </div>
     </Page>
   );
 }
 
-function ManagedAcresSection({ fields }) {
+function ManagedAcresSection({ fields, isLoading }) {
   const [managedAcresCollapsed, setManagedAcresCollapsed] = useState(false);
   const navigate = useNavigate();
   let { farmId } = useParams();
@@ -160,14 +148,14 @@ function ManagedAcresSection({ fields }) {
           />
         </div>
         <div className="w-full overflow-x-scroll">
-          <ManagedAcresTable fields={fields} />
+          <ManagedAcresTable fields={fields} isLoading={isLoading} />
         </div>
       </div>
     </div>
   );
 }
 
-function EquipmentSection({ machines }) {
+function EquipmentSection({ machines, isLoading, setFarmMachines }) {
   const { user } = useAuth();
   let { farmId } = useParams();
   const farmContext = useContext(FarmContext);
@@ -188,10 +176,7 @@ function EquipmentSection({ machines }) {
       }
     );
 
-    farmContext.setter({
-      ...farmContext.state,
-      machines: [...farmContext.state.machines, response.data.machineObj],
-    });
+    setFarmMachines([...machines, response.data.machineObj]);
   }
 
   const [equipmentSectionCollapsed, setEquipmentSectionCollapsed] =
@@ -247,7 +232,11 @@ function EquipmentSection({ machines }) {
           />
         </div>
         <div className="w-full overflow-x-scroll">
-          <MachinesTable machines={machines} />
+          <MachinesTable
+            machines={machines}
+            setMachines={setFarmMachines}
+            isLoading={isLoading}
+          />
         </div>
       </div>
     </div>

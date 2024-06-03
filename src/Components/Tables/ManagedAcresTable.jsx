@@ -2,6 +2,7 @@ import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function TableRow({ row }) {
   const navigate = useNavigate();
@@ -45,7 +46,15 @@ function TableRow({ row }) {
   );
 }
 
-export default function ManagedAcresTable({ fields }) {
+export default function ManagedAcresTable({ fields, isLoading }) {
+  const noDataDefaultRow =
+    isLoading === false && fields.length === 0 ? (
+      <p className="my-4">
+        There are no fields in this farm yet. Please add a field with the
+        controls above.{" "}
+      </p>
+    ) : null;
+
   return (
     <div
       style={{ border: "0.5px solid #DDD" }}
@@ -72,6 +81,7 @@ export default function ManagedAcresTable({ fields }) {
           Change Date
         </div>
       </div>
+      {isLoading && <LinearProgress />}
       {/* Body */}
       <ul className="w-full">
         {fields.map((row) => {
@@ -82,6 +92,7 @@ export default function ManagedAcresTable({ fields }) {
             </li>
           );
         })}
+        <li className="w-full text-center">{noDataDefaultRow}</li>
       </ul>
     </div>
   );

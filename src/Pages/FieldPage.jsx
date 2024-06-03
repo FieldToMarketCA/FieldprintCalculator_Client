@@ -29,6 +29,7 @@ export default function FieldPage() {
   const [fieldCropYears, setFieldCropYears] = useState([]);
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
 
   document.title = "Field Page - Field To Market Canada";
 
@@ -52,6 +53,7 @@ export default function FieldPage() {
       );
 
       setFieldCropYears(cropyearsResponse.data);
+      setIsLoading(false);
     }
 
     startupPage();
@@ -94,6 +96,7 @@ export default function FieldPage() {
         <CropYearTable
           fieldCropYears={fieldCropYears}
           setFieldCropYears={setFieldCropYears}
+          isLoading={isLoading}
         />
       </div>
     </Page>

@@ -1,3 +1,4 @@
+import LinearProgress from "@mui/material/LinearProgress";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import { IconButton } from "@mui/material";
@@ -65,7 +66,15 @@ function TableRow({ row }) {
   );
 }
 
-export default function DashboardTable({ tableData }) {
+export default function DashboardTable({ tableData, isLoading }) {
+  const noDataDefaultRow =
+    isLoading === false && tableData.length === 0 ? (
+      <p className="my-4">
+        There is not enough farm data to display. Try adding a new crop year, or
+        clearing the filters.{" "}
+      </p>
+    ) : null;
+
   return (
     <div>
       {/*  Header */}
@@ -80,7 +89,7 @@ export default function DashboardTable({ tableData }) {
         </div>
         <div className="col-span-1 py-1 px-2 h-10 flex items-center">View</div>
       </div>
-
+      {isLoading && <LinearProgress />}
       {/* Body */}
       <ul className="w-full mb-2">
         {tableData.map((row, index) => {
@@ -90,6 +99,7 @@ export default function DashboardTable({ tableData }) {
             </li>
           );
         })}
+        <li className="w-full text-center">{noDataDefaultRow}</li>
       </ul>
       <p className="text-[11px] text-[#0000008A]">
         * Fieldprint Data in the Platform has two states - provisional and

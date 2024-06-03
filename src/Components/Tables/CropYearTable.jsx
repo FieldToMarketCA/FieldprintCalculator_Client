@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import { FieldContext } from "../../App";
 import { useAuth } from "../Auth/useAuth";
 import { axiosInstance } from "../axiosFetchers";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function TableRow({ row, fieldCropYears, setFieldCropYears }) {
   const { user } = useAuth();
@@ -107,7 +108,18 @@ function TableRow({ row, fieldCropYears, setFieldCropYears }) {
   );
 }
 
-export default function CropYearTable({ fieldCropYears, setFieldCropYears }) {
+export default function CropYearTable({
+  fieldCropYears,
+  setFieldCropYears,
+  isLoading,
+}) {
+  const noDataDefaultRow =
+    isLoading === false && fieldCropYears.length === 0 ? (
+      <p className="my-4">
+        There are no crop years to display. Please try adding a new crop year.{" "}
+      </p>
+    ) : null;
+
   return (
     <div
       style={{ border: "0.5px solid #DDD" }}
@@ -129,7 +141,7 @@ export default function CropYearTable({ fieldCropYears, setFieldCropYears }) {
           Previous Crop
         </div>
       </div>
-
+      {isLoading && <LinearProgress />}
       {/* Body */}
       <ul className="w-full ">
         {fieldCropYears.map((cropyear) => {
@@ -149,6 +161,7 @@ export default function CropYearTable({ fieldCropYears, setFieldCropYears }) {
               </li>
             );
         })}
+        <li className="w-full text-center">{noDataDefaultRow}</li>
       </ul>
     </div>
   );
