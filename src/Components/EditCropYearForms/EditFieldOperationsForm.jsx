@@ -53,7 +53,6 @@ export default function EditFieldOperationsForm({ LowerPanel, panelControls }) {
     ...FertilizerUserdInitialState,
   });
 
-  console.log(FertilizerUserdInitialState);
   useEffect(() => {
     const element = document.getElementById("scrollableDiv");
     element.scrollTo({ top: 0, left: 0, behavior: "smooth" });

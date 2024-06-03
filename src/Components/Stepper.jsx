@@ -71,7 +71,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
     for (const cultivation of cropyear.fieldOperations.cultivations) {
       if (cultivation.machineObj !== "" && cultivation.hoursUsed !== "") {
         cropyearObj.fieldOperations.cultivations.push({
-          machineId: cultivation.machineObj.id,
+          machineId: cultivation.machineObj._id.$oid,
           hoursUsed: cultivation.hoursUsed,
         });
       }
@@ -93,7 +93,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
         let f = cropyear.fieldOperations.fertilizerApplications[key];
 
         cropyearObj.fieldOperations.fertilizerApplications[key] = {
-          machineId: f.machineObj.id,
+          machineId: f.machineObj._id.$oid,
           hoursUsed: f.hoursUsed,
           date: f.date,
         };
@@ -126,7 +126,7 @@ export default function HorizontalNonLinearStepper({ steps }) {
           cropyearObj.fieldOperations.pesticidesApplications = [];
         }
         cropyearObj.fieldOperations.pesticidesApplications.push({
-          machineId: pesticide.machineObj.id,
+          machineId: pesticide.machineObj._id.$oid,
           hoursUsed: pesticide.hoursUsed,
         });
       }
@@ -136,9 +136,9 @@ export default function HorizontalNonLinearStepper({ steps }) {
     let s = cropyear.harvest.swather;
     let c = cropyear.harvest.combine;
     cropyearObj.harvest = {
-      swather: { machineId: s.machineObj.id, hoursUsed: s.hoursUsed }, // These two are required params
+      swather: { machineId: s.machineObj._id.$oid, hoursUsed: s.hoursUsed }, // These two are required params
       combine: {
-        machineId: c.machineObj.id,
+        machineId: c.machineObj._id.$oid,
         hoursUsed: c.hoursUsed,
         avgSpeed: c.avgSpeed,
       }, // These two are required params

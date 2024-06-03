@@ -208,7 +208,7 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
           modalDescription={
             "Please Enter the Percentage amount of Moisture in the soil before drying."
           }
-          fieldState={cropyearContext.state.harvest.beforeDrying}
+          fieldState={cropyearContext.state.harvest.moisture.beforeDrying}
         />
         <FormTextField
           fieldLabel={"% After Drying"}
@@ -218,7 +218,7 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
           modalDescription={
             "Please Enter the Percentage amount of Moisture in the soil after drying."
           }
-          fieldState={cropyearContext.state.harvest.afterDrying}
+          fieldState={cropyearContext.state.harvest.moisture.afterDrying}
         />
       </section>
       <LowerPanel
@@ -234,23 +234,3 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
     </div>
   );
 }
-
-// const SWATHERS = [
-//   {
-//     type: "SWATHER",
-//     name: "Swather 1",
-//     HP: 800,
-//     fuelUse: null,
-//     defaultAcreHour: 2,
-//   },
-// ];
-
-// const COMBINES = [
-//   {
-//     type: "COMBINE",
-//     name: "Combine 1",
-//     HP: 800,
-//     fuelUse: null,
-//     defaultAcreHour: 2,
-//   },
-// ];

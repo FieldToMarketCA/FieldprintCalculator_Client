@@ -131,13 +131,9 @@ export default function AddFieldPage() {
           }
         )
         .then((response) => {
-          console.log(response.data.fieldId);
-          fieldContext.setter({
-            ...fieldContext.state,
-            _id: { $oid: response.data.fieldId },
-          });
-
-          navigate("/addcropyear");
+          navigate(
+            `/farm/${farmId}/field/${response.data.fieldId}/addcropyear`
+          );
         });
     }
   }

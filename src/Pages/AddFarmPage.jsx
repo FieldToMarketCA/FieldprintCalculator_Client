@@ -58,11 +58,11 @@ export default function AddFarmPage() {
           }
         )
         .then((response) => {
-          farmContext.setter({
-            ...farmContext.state,
-            _id: { $oid: response.data.farmId },
-          });
-          navigate("/addfield");
+          // farmContext.setter({
+          //   ...farmContext.state,
+          //   _id: { $oid: response.data.farmId },
+          // });
+          navigate(`/farm/${response.data.farmId}/addfield`);
         });
     }
   }

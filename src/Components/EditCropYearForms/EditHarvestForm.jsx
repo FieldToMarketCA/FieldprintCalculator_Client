@@ -169,7 +169,11 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
             sx={{ color: "#666666" }}
             label={"% Before Drying"}
             variant="outlined"
-            value={cropyearContext.state.harvest.moisture.beforeDrying}
+            value={
+              cropyearContext.state.harvest.moisture
+                ? cropyearContext.state.harvest.moisture.beforeDrying
+                : 0
+            }
           />
         </div>
         <div className="w-full flex items-center mb-6">
@@ -177,7 +181,11 @@ export default function HarvestForm({ LowerPanel, panelControls }) {
             sx={{ color: "#666666" }}
             label={"% Before Drying"}
             variant="outlined"
-            value={cropyearContext.state.harvest.moisture.afterDrying}
+            value={
+              cropyearContext.state.harvest.moisture
+                ? cropyearContext.state.harvest.moisture.afterDrying
+                : 0
+            }
           />
         </div>
       </section>

@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import { useAuth } from "../Components/Auth/useAuth";
 import { GetSetFarm, GetSetField } from "../Components/axiosFetchers";
-import { FarmContext, FieldContext } from "../App";
+import { CropYearContext, FarmContext, FieldContext } from "../App";
 
 const steps = [
   { label: "Rotation", formComponent: RotationForm },
@@ -21,14 +21,19 @@ const steps = [
 export default function AddCropYear({}) {
   const farmContext = useContext(FarmContext);
   const fieldContext = useContext(FieldContext);
+  const cropyearContext = useContext(CropYearContext);
   const { farmId, fieldId } = useParams();
   const { user } = useAuth();
 
   document.title = "Add Crop Year Page - Field To Market Canada";
 
   useEffect(() => {
-    GetSetFarm(farmId, user, farmContext);
-    GetSetField(farmId, fieldId, user, fieldContext);
+    async function startup() {
+      await GetSetFarm(farmId, user, farmContext);
+      await GetSetField(farmId, fieldId, user, fieldContext);
+      cropyearContext.resetState();
+    }
+    startup();
   }, [farmId, fieldId]);
   return (
     <Page
