@@ -85,121 +85,86 @@ export default function AnalysisPage({}) {
 
   useEffect(() => {
     async function analysisPageStartUp() {
-      // await GetSetFarm(farmId, user, farmContext);
-      // await GetSetField(farmId, fieldId, user, fieldContext);
-      // await GetSetCropYear(farmId, fieldId, cropyearId, user, cropYearContext);
-      await GetSetAnalysis(cropyearId, user, reportDataConext);
-      // setSpidergramData([
-      //   {
-      //     subject: "Land Use Efficiency",
-      //     A:
-      //       Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
-      //         ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
-      //         : 200,
-      //     fullMark: 200,
-      //   },
-      //   {
-      //     subject: "Energy Use",
-      //     A:
-      //       Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
-      //         ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
-      //         : 200,
-      //     fullMark: 200,
-      //   },
-      //   {
-      //     subject: "GHG Emissions",
-      //     A:
-      //       Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
-      //         ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
-      //         : 200,
-      //     fullMark: 200,
-      //   },
-      //   {
-      //     subject: "Soil Erosion Risk",
-      //     A:
-      //       Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
-      //         ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
-      //         : 200,
-      //     fullMark: 200,
-      //   },
-      // ]);
+      await GetSetFarm(farmId, user, farmContext);
+      await GetSetField(farmId, fieldId, user, fieldContext);
+      await GetSetCropYear(farmId, fieldId, cropyearId, user, cropYearContext);
+      // await GetSetAnalysis(cropyearId, user, reportDataConext);
+
+      setSpidergramData([
+        {
+          subject: "Land Use Efficiency",
+          A:
+            Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
+              ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
+              : 200,
+          fullMark: 200,
+        },
+        {
+          subject: "Energy Use",
+          A:
+            Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
+              ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
+              : 200,
+          fullMark: 200,
+        },
+        {
+          subject: "GHG Emissions",
+          A:
+            Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
+              ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
+              : 200,
+          fullMark: 200,
+        },
+        {
+          subject: "Soil Erosion Risk",
+          A:
+            Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
+              ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
+              : 200,
+          fullMark: 200,
+        },
+      ]);
       handleNaNs();
     }
     analysisPageStartUp();
   }, []);
 
-  useEffect(() => {
-    setSpidergramData([
-      {
-        subject: "Land Use Efficiency",
-        A:
-          Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
-            ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
-            : 200,
-        fullMark: 200,
-      },
-      {
-        subject: "Energy Use",
-        A:
-          Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
-            ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
-            : 200,
-        fullMark: 200,
-      },
-      {
-        subject: "GHG Emissions",
-        A:
-          Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
-            ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
-            : 200,
-        fullMark: 200,
-      },
-      {
-        subject: "Soil Erosion Risk",
-        A:
-          Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
-            ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
-            : 200,
-        fullMark: 200,
-      },
-    ]);
-    console.log("CALLED ");
-  }, [reportDataConext.state]);
-  // }, [reportDataConext]);
-  // const [spidergramData, setSpidergramData] = useState([
-  //   {
-  //     subject: "Land Use Efficiency",
-  //     A:
-  //       Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
-  //         ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
-  //         : 200,
-  //     fullMark: 200,
-  //   },
-  //   {
-  //     subject: "Energy Use",
-  //     A:
-  //       Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
-  //         ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
-  //         : 200,
-  //     fullMark: 200,
-  //   },
-  //   {
-  //     subject: "GHG Emissions",
-  //     A:
-  //       Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
-  //         ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
-  //         : 200,
-  //     fullMark: 200,
-  //   },
-  //   {
-  //     subject: "Soil Erosion Risk",
-  //     A:
-  //       Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
-  //         ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
-  //         : 200,
-  //     fullMark: 200,
-  //   },
-  // ]);
+  // useEffect(() => {
+  //   setSpidergramData([
+  //     {
+  //       subject: "Land Use Efficiency",
+  //       A:
+  //         Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
+  //           ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
+  //           : 200,
+  //       fullMark: 200,
+  //     },
+  //     {
+  //       subject: "Energy Use",
+  //       A:
+  //         Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
+  //           ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
+  //           : 200,
+  //       fullMark: 200,
+  //     },
+  //     {
+  //       subject: "GHG Emissions",
+  //       A:
+  //         Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
+  //           ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
+  //           : 200,
+  //       fullMark: 200,
+  //     },
+  //     {
+  //       subject: "Soil Erosion Risk",
+  //       A:
+  //         Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
+  //           ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
+  //           : 200,
+  //       fullMark: 200,
+  //     },
+  //   ]);
+  // }, [reportDataConext.state]);
 
   const PDF_ANALYSIS = () => {
     return (
@@ -378,7 +343,7 @@ export default function AnalysisPage({}) {
       </div>
     );
   };
-
+  console.log("x");
   return (
     <Page
       showQuickFacts={true}

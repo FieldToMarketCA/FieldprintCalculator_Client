@@ -92,6 +92,8 @@ export default function FormSelectSprayerField({
           open={isSprayerModalOpen}
           handleClose={setIsSprayerModalOpen}
           handleAddNewMachine={handleAddNewSprayer}
+          machineType={"SPRAYER"}
+          machineLabel={"Sprayer"}
         />
       )}
     </div>

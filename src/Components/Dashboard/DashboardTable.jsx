@@ -28,7 +28,7 @@ function TableRow({ row }) {
         {row.cropYear}
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
-        {row.finalized ? "Yes" : "No"}
+        {row.analysisId ? "Yes" : "No"}
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
         <IconButton
@@ -82,8 +82,8 @@ export default function DashboardTable({ tableData, isLoading }) {
         <div className="col-span-1 py-1 px-2 h-10 flex items-center">Farm</div>
         <div className="col-span-1 py-1 px-2 h-10 flex items-center">Field</div>
         <div className="col-span-1 py-1 px-2 h-10 flex items-center">Acres</div>
-        <div className="col-span-1 py-1 px-2 h-10 flex items-center">Year</div>
         <div className="col-span-1 py-1 px-2 h-10 flex items-center">Crop</div>
+        <div className="col-span-1 py-1 px-2 h-10 flex items-center">Year</div>
         <div className="col-span-1 py-1 px-2 h-10 flex items-center">
           Finalized
         </div>

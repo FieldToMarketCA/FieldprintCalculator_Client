@@ -24,7 +24,7 @@ export default function FieldOperationsForm({ LowerPanel, panelControls }) {
     hoursUsed: false,
   });
 
-  console.log(farmContext.state);
+  // console.log(farmContext.state);
   const [usedFertilizer, setUsedFertilizer] = useState(false);
   const [numberOfCultivation, setNumberOfCultivation] = useState(1);
   const [cultivationOperations, setCultivationOperations] = useState([

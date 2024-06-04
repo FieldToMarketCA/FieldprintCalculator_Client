@@ -108,7 +108,6 @@ const SurfaceSoilTextureTypes = [
   { value: "Silty Clay Loam", label: "Silty Clay Loam" },
   { value: "Clay Loam", label: "Clay Loam" },
   { value: "Silt Loam", label: "Silt Loam" },
-  { value: "Sandy Loam", label: "Sandy Loam" },
   { value: "Loamy Sand", label: "Loamy Sand" },
 ];
 

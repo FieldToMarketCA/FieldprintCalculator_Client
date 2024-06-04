@@ -60,24 +60,25 @@ export default function ReviewForm() {
       setSuccess(false);
       setLoading(true);
 
-      generateResults(
-        farmContext.state,
-        fieldContext.state,
-        cropYearContext.state,
-        reportDataContext.setter,
-        SECRETS.SECRETS.token,
-        user
-      );
+      // generateResults(
+      //   farmContext.state,
+      //   fieldContext.state,
+      //   cropYearContext.state,
+      //   reportDataContext.setter,
+      //   SECRETS.SECRETS.token,
+      //   user
+      // );
     }
   }
 
   useEffect(() => {
     if (reportDataContext.state[1][0] !== "") {
-      setSuccess(true);
-      setLoading(false);
-      // setTimeout(() => {
-      //   navigate("/analysis");
-      // }, 2000);
+      // setSuccess(true);
+      // setLoading(false);
+      setTimeout(() => {
+        setSuccess(true);
+        setLoading(false);
+      }, 2000);
     }
   }, [reportDataContext.state]);
 
