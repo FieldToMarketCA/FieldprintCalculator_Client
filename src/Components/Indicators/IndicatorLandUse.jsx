@@ -119,7 +119,7 @@ export default function IndicatorLandUse({
         <ProvincialComparisonTable />
         {/* CHART */}
 
-        <div className="w-full mt-14 flex flex-col md:flex-row  md:items-between">
+        <div className="w-full mt-14 flex  flex-col items-center md:flex-row  md:justify-center">
           <BarChart
             width={398}
             height={331}
