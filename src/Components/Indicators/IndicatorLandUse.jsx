@@ -4,6 +4,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import BarChart from "../Charts/BarChart";
+import PieChart from "../Charts/PieChart";
 
 export default function IndicatorLandUse({
   crop,
@@ -118,7 +119,7 @@ export default function IndicatorLandUse({
         <ProvincialComparisonTable />
         {/* CHART */}
 
-        <div className="w-full mt-14 flex justify-center">
+        <div className="w-full mt-14 flex flex-col md:flex-row  md:items-between">
           <BarChart
             width={398}
             height={331}
@@ -130,6 +131,7 @@ export default function IndicatorLandUse({
               },
             ]}
           />
+          <PieChart />
         </div>
       </div>
     </div>

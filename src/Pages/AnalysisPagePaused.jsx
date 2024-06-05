@@ -1,6 +1,6 @@
 import React, { PureComponent, useState, useContext, useEffect } from "react";
 import { Margin, usePDF, Options } from "react-to-pdf";
-import LineChart from "../Components/Charts/LineChart";
+
 import HelpModal from "../Components/HelpModal";
 
 import {
@@ -289,9 +289,7 @@ export default function AnalysisPage({}) {
               performance target. Provincial benchmarks not shown in the graphs
               are not available for the applicable metric
             </p>
-            <div className="w-full mb-14 overflow-x-scroll">
-              <LineChart />
-            </div>
+            <div className=""></div>
             <OutlinedButton text={"Fieldprint Report (PDF)"} onClick={toPDF} />
           </div>
         </div>
