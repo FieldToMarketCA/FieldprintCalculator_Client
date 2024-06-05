@@ -93,11 +93,13 @@ export default function FieldPage() {
           />
         </div>
 
-        <CropYearTable
-          fieldCropYears={fieldCropYears}
-          setFieldCropYears={setFieldCropYears}
-          isLoading={isLoading}
-        />
+        <div className="w-full overflow-x-scroll">
+          <CropYearTable
+            fieldCropYears={fieldCropYears}
+            setFieldCropYears={setFieldCropYears}
+            isLoading={isLoading}
+          />
+        </div>
       </div>
     </Page>
   );

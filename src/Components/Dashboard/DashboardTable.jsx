@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 function TableRow({ row }) {
   const navigate = useNavigate();
   return (
-    <div className="grid grid-cols-7 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD]">
+    <div className="grid grid-cols-8 text-sm  text-[#666]  hover:bg-[#f9f9f9] font-medium gap-4 border-b-[1px] border-[#DDD] ">
       <div className="col-span-1 underline py-1 px-2 h-[45px] flex items-center">
         {<Link to={`/farm/${row.farmId}`}>{row.farmName}</Link>}
       </div>
@@ -21,7 +21,7 @@ function TableRow({ row }) {
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
         {row.fieldSize}
       </div>
-      <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
+      <div className="col-span-2 py-1 px-2 h-[45px] flex items-center">
         {row.crop}
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
@@ -76,38 +76,53 @@ export default function DashboardTable({ tableData, isLoading }) {
     ) : null;
 
   return (
-    <div>
-      {/*  Header */}
-      <div className="grid grid-cols-7 text-xs bg-[#EBEBEB] text-[#333] font-bold gap-4">
-        <div className="col-span-1 py-1 px-2 h-10 flex items-center">Farm</div>
-        <div className="col-span-1 py-1 px-2 h-10 flex items-center">Field</div>
-        <div className="col-span-1 py-1 px-2 h-10 flex items-center">Acres</div>
-        <div className="col-span-1 py-1 px-2 h-10 flex items-center">Crop</div>
-        <div className="col-span-1 py-1 px-2 h-10 flex items-center">Year</div>
-        <div className="col-span-1 py-1 px-2 h-10 flex items-center">
-          Finalized
+    <div className="w-full overflow-x-scroll">
+      <div className="w-full min-w-[750px]">
+        {/*  Header */}
+        <div className="grid grid-cols-8 text-xs bg-[#EBEBEB] text-[#333] font-bold gap-4">
+          <div className="col-span-1 py-1 px-2 h-10 flex items-center">
+            Farm
+          </div>
+          <div className="col-span-1 py-1 px-2 h-10 flex items-center">
+            Field
+          </div>
+          <div className="col-span-1 py-1 px-2 h-10 flex items-center">
+            Acres
+          </div>
+          <div className="col-span-2 py-1 px-2 h-10 flex items-center">
+            Crop
+          </div>
+          <div className="col-span-1 py-1 px-2 h-10 flex items-center">
+            Year
+          </div>
+          <div className="col-span-1 py-1 px-2 h-10 flex items-center">
+            Finalized
+          </div>
+          <div className="col-span-1 py-1 px-2 h-10 flex items-center">
+            View
+          </div>
         </div>
-        <div className="col-span-1 py-1 px-2 h-10 flex items-center">View</div>
+        {isLoading && <LinearProgress />}
+        {/* Body */}
+        <ul className="w-full mb-2">
+          {tableData.map((row, index) => {
+            return (
+              <li className="w-full" key={row.cropyearId}>
+                <TableRow row={row} />
+              </li>
+            );
+          })}
+          <li className="w-full text-center">{noDataDefaultRow}</li>
+        </ul>
+        <p className="text-[11px] text-[#0000008A]">
+          * Fieldprint Data in the Platform has two states - provisional and
+          finalized. Until a Field is finalized (options available on the
+          Analysis page for a given field), data is provisional and changes can
+          be made. Once finalized, Fieldprint Data can be reported. You should
+          finalize a Field once all data has been entered, finalized, and
+          validated.
+        </p>
       </div>
-      {isLoading && <LinearProgress />}
-      {/* Body */}
-      <ul className="w-full mb-2">
-        {tableData.map((row, index) => {
-          return (
-            <li className="w-full" key={row.cropyearId}>
-              <TableRow row={row} />
-            </li>
-          );
-        })}
-        <li className="w-full text-center">{noDataDefaultRow}</li>
-      </ul>
-      <p className="text-[11px] text-[#0000008A]">
-        * Fieldprint Data in the Platform has two states - provisional and
-        finalized. Until a Field is finalized (options available on the Analysis
-        page for a given field), data is provisional and changes can be made.
-        Once finalized, Fieldprint Data can be reported. You should finalize a
-        Field once all data has been entered, finalized, and validated.
-      </p>
     </div>
   );
 }
