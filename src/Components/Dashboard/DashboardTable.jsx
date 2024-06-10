@@ -4,6 +4,21 @@ import EqualizerIcon from "@mui/icons-material/Equalizer";
 import { IconButton } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
+function transformString(inputString) {
+  // Split the input string on the "_" character
+  let tokens = inputString.split("_");
+
+  // Capitalize each token
+  let capitalizedTokens = tokens.map(
+    (token) => token.charAt(0) + token.slice(1).toLowerCase()
+  );
+
+  // Join the tokens back on the space character
+  let result = capitalizedTokens.join(" ");
+
+  return result;
+}
+
 function TableRow({ row }) {
   const navigate = useNavigate();
   return (
@@ -22,7 +37,7 @@ function TableRow({ row }) {
         {row.fieldSize}
       </div>
       <div className="col-span-2 py-1 px-2 h-[45px] flex items-center">
-        {row.crop}
+        {transformString(row.crop)}
       </div>
       <div className="col-span-1 py-1 px-2 h-[45px] flex items-center">
         {row.cropYear}

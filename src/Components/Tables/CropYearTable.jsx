@@ -17,6 +17,21 @@ function TableRow({ row, fieldCropYears, setFieldCropYears }) {
   const { farmId, fieldId } = useParams();
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
 
+  function transformString(inputString) {
+    // Split the input string on the "_" character
+    let tokens = inputString.split("_");
+
+    // Capitalize each token
+    let capitalizedTokens = tokens.map(
+      (token) => token.charAt(0) + token.slice(1).toLowerCase()
+    );
+
+    // Join the tokens back on the space character
+    let result = capitalizedTokens.join(" ");
+
+    return result;
+  }
+
   async function handleDeleteCropYear() {
     // console.log(fieldContext.state.cropYears);
     await axiosInstance.delete(
@@ -92,7 +107,7 @@ function TableRow({ row, fieldCropYears, setFieldCropYears }) {
         {row.cropYear}
       </div>
       <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
-        {row.cropThisYear}
+        {transformString(row.cropThisYear)}
       </div>
       <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
         {row.cropFrequency}
@@ -102,7 +117,7 @@ function TableRow({ row, fieldCropYears, setFieldCropYears }) {
       </div>
 
       <div className="col-span-1 py-1 px-3 h-[45px] flex items-center">
-        {row.previousCrop}
+        {transformString(row.previousCrop)}
       </div>
     </div>
   );
