@@ -2,6 +2,9 @@ import ftmcLogo from "../Assets/Images/ftmc_logo.jpg";
 import IconButton from "@mui/material/IconButton";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Paper from "@mui/material/Paper";
+
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "./axiosFetchers";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -18,7 +21,15 @@ import { useAuth } from "./Auth/useAuth";
 
 export default function Header({ hideAvatar = false }) {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   // const [user, setUser] = useState(false);
 
@@ -54,11 +65,7 @@ export default function Header({ hideAvatar = false }) {
         </div>
       </Link>
       <div className={`my-auto flex items-center ${hideAvatar && "hidden"}`}>
-        <IconButton
-          aria-label="delete"
-          size="large"
-          onClick={() => navigate("/login")}
-        >
+        <IconButton aria-label="delete" size="large" onClick={handleClick}>
           {user !== null ? (
             <Avatar alt="profile picture" src={user.picture} />
           ) : (
@@ -69,6 +76,32 @@ export default function Header({ hideAvatar = false }) {
         <p className="text-white hidden min-[550px]:block mr-10 text-[18px]">
           {user !== null ? `Hi, ${user.name}` : "Hi, Guest"}
         </p>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              navigate("/profile");
+            }}
+          >
+            Profile
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              logout();
+            }}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
       </div>
     </Paper>
   );

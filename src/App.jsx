@@ -24,6 +24,7 @@ import ReviewPage from "./Pages/ReviewPage";
 
 import AnalysisPage from "./Pages/AnalysisPage";
 import DashBoardPage from "./Pages/DashBoardPage";
+import ProfilePage from "./Pages/ProfilePage";
 // import { GoogleOAuthProvider } from "@react-oauth/google";
 import { createContext, useEffect, useState } from "react";
 
@@ -95,7 +96,6 @@ function App() {
   }, []);
 
   return (
-    // <GoogleOAuthProvider clientId="820303429606-cgalocai2uava757at1m2ls2b1c4q5bh.apps.googleusercontent.com">
     <ThemeProvider theme={theme}>
       <SECRETS_CONTEXT.Provider value={{ SECRETS: SECRETS }}>
         <FarmContext.Provider
@@ -136,6 +136,14 @@ function App() {
                       <AuthProvider>
                         <Routes>
                           <Route path="/login" element={<LoginPage />} />
+                          <Route
+                            path="/profile"
+                            element={
+                              <ProtectedRoute>
+                                <ProfilePage />
+                              </ProtectedRoute>
+                            }
+                          />
                           <Route
                             path="/dashboard"
                             element={
