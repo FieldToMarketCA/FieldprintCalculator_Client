@@ -31,6 +31,7 @@ export default function MainButton({
         fontSize: "18px",
         color: fontColor,
         minWidth: "200px",
+
         "&:hover": {
           backgroundColor: hoverBackGroundColor,
         },

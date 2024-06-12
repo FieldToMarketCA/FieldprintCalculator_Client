@@ -79,7 +79,7 @@ export default function DashBoardPage() {
 
   return (
     <Page
-      title={"Dashboard"}
+      title={"Profile Page"}
       headerBorderColor={"border-[#00adee]"}
       showQuickFacts={false}
     >
@@ -273,13 +273,14 @@ export default function DashBoardPage() {
 
                         <Box className="w-full " direction="row" spacing={1}>
                           {selectedProjects.map((project) => {
-                            return (
-                              <Chip
-                                className="m-1"
-                                label={project.title}
-                                variant="outlined"
-                              />
-                            );
+                            if (project.id !== "fx")
+                              return (
+                                <Chip
+                                  className="m-1"
+                                  label={project.title}
+                                  variant="outlined"
+                                />
+                              );
                           })}
                         </Box>
                       </div>

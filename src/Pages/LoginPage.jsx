@@ -131,7 +131,7 @@ export const LoginPage = () => {
                   >
                     Welcome Back {user.name}!
                   </p>
-                  <div className="w-full flex justify-between">
+                  <div className="w-full flex flex-col min-[550px]:flex-row min-[550px]:justify-between">
                     <MainButton
                       text={"Continue to Calculator"}
                       onClick={() => navigate("/dashboard")}
