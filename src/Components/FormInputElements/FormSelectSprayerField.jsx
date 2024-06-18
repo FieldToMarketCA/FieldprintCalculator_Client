@@ -32,7 +32,7 @@ export default function FormSelectSprayerField({
     let farmId = farmContext.state._id.$oid;
 
     const response = await axiosInstance.post(
-      process.env.REACT_APP_API_URL + `/farms/${farmId}/machines`,
+      process.env.REACT_APP_API_URL + `/machines`,
       {
         ...newSprayer,
         type: "SPRAYER",

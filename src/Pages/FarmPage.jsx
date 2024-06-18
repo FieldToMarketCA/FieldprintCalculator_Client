@@ -42,7 +42,7 @@ export default function FarmPage() {
         }
       );
       const machinesResponse = await axiosInstance.get(
-        process.env.REACT_APP_API_URL + "/farms/" + farmId + "/machines",
+        process.env.REACT_APP_API_URL + "/machines",
         {
           headers: {
             token: "Bearer " + user.token,
@@ -163,10 +163,9 @@ function EquipmentSection({ machines, isLoading, setFarmMachines }) {
 
   async function handleAddNewMachine(newMachine) {
     const response = await axiosInstance.post(
-      process.env.REACT_APP_API_URL + `/farms/${farmId}/machines`,
+      process.env.REACT_APP_API_URL + `/machines`,
       {
         ...newMachine,
-        farmId: farmId,
       },
       {
         headers: {

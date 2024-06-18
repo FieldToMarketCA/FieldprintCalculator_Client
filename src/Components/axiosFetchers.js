@@ -12,7 +12,7 @@ async function GetSetFarm(farmId, user, farmContext) {
     }
   );
   const machinesResponse = await axios.get(
-    `${process.env.REACT_APP_API_URL}/farms/${farmId}/machines`,
+    `${process.env.REACT_APP_API_URL}/machines`,
     {
       headers: {
         token: "Bearer " + user.token,

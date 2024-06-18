@@ -118,7 +118,7 @@ async function mergeFieldOperationsWithFactory(
         false
       ) {
         const response = await axiosInstance.get(
-          `${process.env.REACT_APP_API_URL}/farms/${farmId}/machines/${fieldOperationsData.cultivations[i].machineId}`,
+          `${process.env.REACT_APP_API_URL}/machines/${fieldOperationsData.cultivations[i].machineId}`,
           {
             headers: {
               token: "Bearer " + user.token,
