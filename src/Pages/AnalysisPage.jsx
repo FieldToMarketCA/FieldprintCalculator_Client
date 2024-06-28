@@ -2,6 +2,8 @@ import React, { PureComponent, useState, useContext, useEffect } from "react";
 import { Margin, usePDF, Options } from "react-to-pdf";
 import LineChart from "../Components/Charts/LineChart";
 import HelpModal from "../Components/HelpModal";
+import axios from "axios";
+import * as Base64 from "js-base64";
 
 import {
   Radar,
@@ -33,6 +35,7 @@ import {
   GetSetField,
   GetSetCropYear,
   GetSetAnalysis,
+  axiosInstance,
 } from "../Components/axiosFetchers";
 import { useAuth } from "../Components/Auth/useAuth";
 import { useParams } from "react-router-dom";
@@ -78,7 +81,8 @@ export default function AnalysisPage({}) {
 
   function handleNaNs() {
     if (reportDataConext.state[1].find((cell) => cell === "#N/A")) {
-      setAnalysisErrorOpen(true);
+      // setAnalysisErrorOpen(true);
+      //
     }
   }
   const [spidergramData, setSpidergramData] = useState([]);
@@ -88,83 +92,110 @@ export default function AnalysisPage({}) {
       await GetSetFarm(farmId, user, farmContext);
       await GetSetField(farmId, fieldId, user, fieldContext);
       await GetSetCropYear(farmId, fieldId, cropyearId, user, cropYearContext);
-      // await GetSetAnalysis(cropyearId, user, reportDataConext);
+      await GetSetAnalysis(cropyearId, user, reportDataConext);
 
-      setSpidergramData([
-        {
-          subject: "Land Use Efficiency",
-          A:
-            Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
-              ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
-              : 200,
-          fullMark: 200,
-        },
-        {
-          subject: "Energy Use",
-          A:
-            Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
-              ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
-              : 200,
-          fullMark: 200,
-        },
-        {
-          subject: "GHG Emissions",
-          A:
-            Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
-              ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
-              : 200,
-          fullMark: 200,
-        },
-        {
-          subject: "Soil Erosion Risk",
-          A:
-            Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
-              ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
-              : 200,
-          fullMark: 200,
-        },
-      ]);
+      // setSpidergramData([
+      //   {
+      //     subject: "Land Use Efficiency",
+      //     A:
+      //       Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
+      //         ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
+      //         : 200,
+      //     fullMark: 200,
+      //   },
+      //   {
+      //     subject: "Energy Use",
+      //     A:
+      //       Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
+      //         ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
+      //         : 200,
+      //     fullMark: 200,
+      //   },
+      //   {
+      //     subject: "GHG Emissions",
+      //     A:
+      //       Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
+      //         ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
+      //         : 200,
+      //     fullMark: 200,
+      //   },
+      //   {
+      //     subject: "Soil Erosion Risk",
+      //     A:
+      //       Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
+      //         ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
+      //         : 200,
+      //     fullMark: 200,
+      //   },
+      // ]);
       handleNaNs();
     }
     analysisPageStartUp();
   }, []);
 
-  // useEffect(() => {
-  //   setSpidergramData([
-  //     {
-  //       subject: "Land Use Efficiency",
-  //       A:
-  //         Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
-  //           ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
-  //           : 200,
-  //       fullMark: 200,
-  //     },
-  //     {
-  //       subject: "Energy Use",
-  //       A:
-  //         Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
-  //           ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
-  //           : 200,
-  //       fullMark: 200,
-  //     },
-  //     {
-  //       subject: "GHG Emissions",
-  //       A:
-  //         Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
-  //           ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
-  //           : 200,
-  //       fullMark: 200,
-  //     },
-  //     {
-  //       subject: "Soil Erosion Risk",
-  //       A:
-  //         Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
-  //           ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
-  //           : 200,
-  //       fullMark: 200,
-  //     },
-  //   ]);
-  // }, [reportDataConext.state]);
+  useEffect(() => {
+    setSpidergramData([
+      {
+        subject: "Land Use Efficiency",
+        A:
+          Number.parseFloat(reportDataConext.state[1][16]).toFixed(2) <= 200
+            ? Number.parseFloat(reportDataConext.state[1][16]).toFixed(2)
+            : 200,
+        fullMark: 200,
+      },
+      {
+        subject: "Energy Use",
+        A:
+          Number.parseFloat(reportDataConext.state[1][19]).toFixed(2) <= 200
+            ? Number.parseFloat(reportDataConext.state[1][19]).toFixed(2)
+            : 200,
+        fullMark: 200,
+      },
+      {
+        subject: "GHG Emissions",
+        A:
+          Number.parseFloat(reportDataConext.state[1][22]).toFixed(2) <= 200
+            ? Number.parseFloat(reportDataConext.state[1][22]).toFixed(2)
+            : 200,
+        fullMark: 200,
+      },
+      {
+        subject: "Soil Erosion Risk",
+        A:
+          Number.parseFloat(reportDataConext.state[1][25]).toFixed(2) <= 200
+            ? Number.parseFloat(reportDataConext.state[1][25]).toFixed(2)
+            : 200,
+        fullMark: 200,
+      },
+    ]);
+  }, [reportDataConext.state]);
+
+  async function getReportPDF() {
+    const response = await axiosInstance.get(
+      `${process.env.REACT_APP_API_URL}/cropyears/${cropyearId}/analysisPDF`,
+      {
+        headers: {
+          token: "Bearer " + user.token,
+        },
+        responseType: "blob",
+      }
+    );
+
+    const blob = new Blob([response.data], { type: "application/pdf" });
+
+    const url = window.URL.createObjectURL(blob);
+
+    // Create an anchor element and click it to trigger the download
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `analysis.pdf`; // Set the file name
+    document.body.appendChild(a);
+    a.click();
+
+    // Clean up
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }
 
   const PDF_ANALYSIS = () => {
     return (
@@ -292,7 +323,10 @@ export default function AnalysisPage({}) {
             <div className="w-full mb-14 overflow-x-scroll">
               <LineChart />
             </div>
-            <OutlinedButton text={"Fieldprint Report (PDF)"} onClick={toPDF} />
+            <OutlinedButton
+              text={"Fieldprint Report (PDF)"}
+              onClick={getReportPDF}
+            />
           </div>
         </div>
         <div className="w-full py-8 text-[#666666]">
@@ -346,7 +380,7 @@ export default function AnalysisPage({}) {
       </div>
     );
   };
-  console.log("x");
+
   return (
     <Page
       showQuickFacts={true}

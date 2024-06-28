@@ -38,19 +38,9 @@ export default function ReviewForm() {
 
   document.title = "Review Page - Field To Market Canada";
 
-  function handleGenerateAnalysis() {
+  async function handleGenerateAnalysis() {
     if (loading) return;
     if (success) {
-      // THis was provisional
-      // axiosInstance.post("https://fieldprint-calculator-minimal-server.fly.dev/", {
-      //   input: {
-      //     farm: { ...farmContext.state },
-      //     field: { ...fieldContext.state },
-      //     cropyear: { ...cropYearContext.state },
-      //   },
-      //   output: reportDataContext.state,
-      // });
-
       navigate(
         `/farm/${farmId}/field/${fieldId}/cropyear/${cropyearId}/analysis`
       );
@@ -62,19 +52,24 @@ export default function ReviewForm() {
     if (!loading) {
       setSuccess(false);
       setLoading(true);
+      // Send Post Request to Backend
 
-      generateResults(
-        farmContext.state,
-        fieldContext.state,
-        cropYearContext.state,
-        reportDataContext.setter,
-        SECRETS.SECRETS.token,
-        user
+      const response = await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/cropyears/${cropyearId}/analysis`,
+        {},
+        {
+          headers: {
+            token: "Bearer " + user.token,
+            "Content-Type": "application/json",
+          },
+        }
       );
+      setSuccess(true);
+      setLoading(false);
     }
   }
-
-  useEffect(() => {
+  //localhost:8000/cropyears/667c8471cf5d1b22e5b1cd60/analysis
+  http: useEffect(() => {
     GetSetFarm(farmId, user, farmContext);
     GetSetField(farmId, fieldId, user, fieldContext);
     GetSetCropYear(farmId, fieldId, cropyearId, user, cropYearContext);
