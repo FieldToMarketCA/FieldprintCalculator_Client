@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/FieldprintCalculator_Client/static/css/main.56077eb9.css",
-    "main.js": "/FieldprintCalculator_Client/static/js/main.cb601339.js",
+    "main.css": "/FieldprintCalculator_Client/static/css/main.35877b31.css",
+    "main.js": "/FieldprintCalculator_Client/static/js/main.c44e76d6.js",
     "static/js/213.df1f477f.chunk.js": "/FieldprintCalculator_Client/static/js/213.df1f477f.chunk.js",
     "static/js/455.117014e3.chunk.js": "/FieldprintCalculator_Client/static/js/455.117014e3.chunk.js",
     "static/media/ftmc_logo.jpg": "/FieldprintCalculator_Client/static/media/ftmc_logo.0395131f44b0d7962cee.jpg",
@@ -22,13 +22,13 @@
     "index.html": "/FieldprintCalculator_Client/index.html",
     "static/media/tractorIcon.svg": "/FieldprintCalculator_Client/static/media/tractorIcon.795c0ad6f655c647e69e68688baf3512.svg",
     "static/media/roboto-slab-greek-ext-400-normal.woff2": "/FieldprintCalculator_Client/static/media/roboto-slab-greek-ext-400-normal.ab38b0d5c6cd5fbf22dc.woff2",
-    "main.56077eb9.css.map": "/FieldprintCalculator_Client/static/css/main.56077eb9.css.map",
-    "main.cb601339.js.map": "/FieldprintCalculator_Client/static/js/main.cb601339.js.map",
+    "main.35877b31.css.map": "/FieldprintCalculator_Client/static/css/main.35877b31.css.map",
+    "main.c44e76d6.js.map": "/FieldprintCalculator_Client/static/js/main.c44e76d6.js.map",
     "213.df1f477f.chunk.js.map": "/FieldprintCalculator_Client/static/js/213.df1f477f.chunk.js.map",
     "455.117014e3.chunk.js.map": "/FieldprintCalculator_Client/static/js/455.117014e3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.56077eb9.css",
-    "static/js/main.cb601339.js"
+    "static/css/main.35877b31.css",
+    "static/js/main.c44e76d6.js"
   ]
 }
